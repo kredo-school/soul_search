@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Soul Search') }}</title>
+    <title>{{ config('app.name') }}| @yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -46,6 +46,7 @@
 
     {{-- not showing in login or register pages --}}
     @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') )
+    @else
             </div>
         </div>
     @endif

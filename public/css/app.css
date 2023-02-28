@@ -10819,3 +10819,36 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.text-orange {
+    color:#FFB84D;
+}
+.bg-orange {
+    background:#FFB84D;
+}
+
+.icon-lg {
+    font-size: 5rem;
+}
+
+.text-divider {
+    display: flex;
+    align-items: center;
+  }
+  .text-divider::before,
+  .text-divider::after {
+    content: '';
+    border-bottom:1px solid #bbb;
+    background-color: #6c757d;
+    flex-grow: 1;
+  }
+  .text-divider::before {
+    margin-right: 1rem;
+  }
+  .text-divider::after {
+    margin-left: 1rem;
+  }
+
+  .icon-sm {
+    width: 60px;
+    height: 36px;
+}

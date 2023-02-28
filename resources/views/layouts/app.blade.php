@@ -46,6 +46,7 @@
 
     {{-- not showing in login or register pages --}}
     @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') )
+    @else
             </div>
         </div>
     @endif

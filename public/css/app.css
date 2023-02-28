@@ -10872,3 +10872,7 @@ textarea.form-control-lg {
     bottom: 20px;
     left: 20px;
 }
+
+ul {
+    list-style: none;
+}

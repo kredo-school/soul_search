@@ -10849,7 +10849,7 @@ textarea.form-control-lg {
   }
 
   .icon-sm {
-    width: 60px;
+    width: 40px;
     height: 36px;
 }
 
@@ -10890,4 +10890,23 @@ ul {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #FFB84D;
   --bs-btn-disabled-border-color: #FFB84D;
+}
+
+.logo-center {
+    text-align: center;
+}
+
+btn-white {
+    background:#fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fff;
+  --bs-btn-active-border-color: #fff;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #fff;
+  --bs-btn-disabled-border-color: #fff;
 }

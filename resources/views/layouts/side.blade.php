@@ -28,6 +28,7 @@
         </a>
     </li>
 </ul>
+
 @guest
 @if (Route::has('login'))
     <li class="dropdown-item">
@@ -60,6 +61,7 @@
     </div>
 </li>
 @endguest
+
 <div class="dropdown login-icon">
     <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa-solid fa-unlock"></i>

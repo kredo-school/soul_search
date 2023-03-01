@@ -10849,7 +10849,7 @@ textarea.form-control-lg {
   }
 
   .icon-sm {
-    width: 60px;
+    width: 40px;
     height: 36px;
 }
 
@@ -10890,4 +10890,8 @@ ul {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #FFB84D;
   --bs-btn-disabled-border-color: #FFB84D;
+}
+
+.logo-center {
+    text-align: center;
 }

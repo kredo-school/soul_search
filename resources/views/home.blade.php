@@ -13,15 +13,15 @@
         {{-- Tags --}}
         {{-- Chats --}}
         <div class="row">
-            {{-- Title --}}
+            {{-- Header --}}
             <div>
                 <i class="fa-regular fa-hashtag"></i>
                 <a href="#" class="text-decoration-none text-dark">{{  }}</a>
             </div>
             {{-- Body --}}
             <div class="ms-3">
-                {{-- @include(chats.title) --}}
-                {{-- @include(chats.body) --}}
+                @include('contents.title')
+                @include('contents.body')
             </div>
         </div>
     </div>

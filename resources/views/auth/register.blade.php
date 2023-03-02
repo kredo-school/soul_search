@@ -5,32 +5,34 @@
     <img src="{{ asset('img/logo.png')}}" class="float-left mt-2">
 </div>
 
-<div class="container"><h1 class="text-center fw-bold mb-3">Crate Your Account</h1></div>
+<div class="container"><h1 class="text-center fw-bold mb-3">Create Your Account</h1></div>
 
 {{--  Card body  --}}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
 
                     <div class="row justify-content-center">
-                        <div class="col-8 mb-3 btn btn-orange">
-                            <span class="text-white">Profile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <span class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tags</span>
+                        <div class="col-8 mb-3 rounded-box btn-orange">
+                            <span class="col-5 text-center text-orange rounded-box btn-white">Profile</span>
+                            <span class="col-5 text-end text-white rounded-box">Tags</span>
                         </div>
                     </div>
 
-                    <h2 class="text-center fw-bold">Your Profile</h2>
-                    <p class="text-muted text-center">Enter the login information for your accoun.<br>You can edit it after registering.</p>
+                    <h2 class="text-center fw-bold mt-2">Your Profile</h2>
+                    <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                    <div class="container">
+                        <form action="">
                         {{--  Username  --}}
                         <div class="row mb-3 justify-content-center">
                             <div>
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
-                        </div>
+                                 <label for="name" class="text-position">{{ __('Username') }}</label>
+                            </div>
 
                             <div class="col-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -44,8 +46,10 @@
                         </div>
 
                         {{--  Email  --}}
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
+                        <div class="row mb-3 justify-content-center">
+                            <div>
+                                <label for="email" class="text-position">{{ __('Email') }}</label>
+                            </div>
 
                             <div class="col-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -59,8 +63,10 @@
                         </div>
 
                         {{--  Password  --}}
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                        <div class="row mb-3 justify-content-center">
+                            <div>
+                                <label for="password" class="text-position">{{ __('Password') }}</label>
+                            </div>
 
                             <div class="col-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -74,13 +80,16 @@
                         </div>
 
                         {{--  Password confirmation  --}}
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Password Confirmation') }}</label>
+                        <div class="row mb-3 justify-content-center">
+                            <div>
+                                <label for="password-confirm" class="text-position">{{ __('Password Confirmation') }}</label>
+                            </div>
 
                             <div class="col-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+
 
                         {{--  Next button  --}}
                         <div class="row mb-0 justify-content-center">
@@ -90,6 +99,8 @@
                                 </button>
                             </div>
                         </div>
+                    </form>
+                    </div>
 
                         {{--  Horizontal line  --}}
                         <div class="text-divider text-muted">or</div>

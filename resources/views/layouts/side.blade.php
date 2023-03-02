@@ -2,31 +2,52 @@
     <img src="{{ asset('img/logo.png')}}" class="my-3">
 </a>
 <ul class="ms-0 mb-auto mt-4">
-    <li class="my-3">
-        <a href="#" class="nav-link active" aria-current="page">
-            <i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home
-        </a>
-    </li>
-    <li class="my-3">
+
+    {{-- orange icon, bold text, gray backcround @ home page --}}
+    @if ( request()->is('*home*'))
+        <li class="py-2 ps-3 bg-light">
+            <a href="#" class="nav-link active" aria-current="page">
+                <i class="fa-solid fa-house text-orange"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">Home</span>
+            </a>
+        </li>
+    @else
+        <li class="py-2 ps-3">
+            <a href="#" class="nav-link active" aria-current="page">
+                <i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home
+            </a>
+        </li>
+    @endif
+
+    <li class="py-2 ps-3">
         <a href="#" class="nav-link link-dark">
             <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile
         </a>
     </li>
-    <li class="my-3">
+    <li class="py-2 ps-3">
         <a href="#" class="nav-link link-dark">
             <i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message
         </a>
     </li>
-    <li class="my-3">
+    <li class="py-2 ps-3">
         <a href="#" class="nav-link link-dark">
             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search
         </a>
     </li>
-    <li class="my-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us
-        </a>
-    </li>
+
+    {{-- orange icon, bold text, gray backcround @ contact page --}}
+    @if ( request()->is('*contact*'))
+        <li class="py-2 ps-3 bg-light">
+            <a href="#" class="nav-link link-dark">
+                <i class="fa-solid fa-circle-question text-orange"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">Contact Us</span>
+            </a>
+        </li>
+    @else
+        <li class="py-2 ps-3">
+            <a href="#" class="nav-link link-dark">
+                <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us
+            </a>
+        </li>
+    @endif
 </ul>
 
 

@@ -19,11 +19,11 @@
             <p class="text-muted">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</p>
         </div>
         {{-- A Heart Button and Number of Likes --}}
-        <div class="col-auto">
+        <div class="col-auto text-end">
             <i class="fa-regular fa-heart"></i>
         </div>
         {{-- A Ellipsis button for Report Chat --}}
-        <div class="col-auto">
+        <div class="col-auto text-end">
             <button class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>

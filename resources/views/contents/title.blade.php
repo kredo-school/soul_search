@@ -3,7 +3,7 @@
         {{-- User Avatar --}}
         <div class="col-auto">
             <a href="#">
-                @if ($post->user->avatar)
+                @if ($chat->user->avatar)
                     <img src="{{ asset('storage/avatars/' . $chat->user->avatar) }}" alt="{{ $chat->user->avatar }}" class="rounded-circle">
                 @else
                     <i class="fa-solid fa-circle-user text-secondary"></i>

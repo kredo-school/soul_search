@@ -1,5 +1,5 @@
 <a href="#" class="text-decoration-none ms-3">
-    <img src="{{ asset('img/logo.png')}}" class="my-3">
+    <img src="{{ asset('img/logo.svg')}}" class="my-3">
 </a>
 <ul class="ms-0 mb-auto mt-4">
 

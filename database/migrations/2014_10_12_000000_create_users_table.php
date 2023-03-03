@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
                     ->default(0)
                     ->comment('1:admin 0:user');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

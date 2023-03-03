@@ -18,11 +18,21 @@
         </li>
     @endif
 
-    <li class="py-2 ps-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile
-        </a>
-    </li>
+    {{-- orange icon, bold text, gray backcround @ profile page --}}
+    @if ( request()->is('*profile*'))
+        <li class="py-2 ps-3 bg-light">
+            <a href="#" class="nav-link active" aria-current="page">
+                <i class="fa-solid fa-user text-orange"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">My Profile</span>
+            </a>
+        </li>
+    @else
+        <li class="py-2 ps-3">
+            <a href="#" class="nav-link active" aria-current="page">
+                <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile
+            </a>
+        </li>
+    @endif
+
     <li class="py-2 ps-3">
         <a href="#" class="nav-link link-dark">
             <i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message
@@ -43,7 +53,7 @@
         </li>
     @else
         <li class="py-2 ps-3">
-            <a href="#" class="nav-link link-dark">
+            <a href="{{ route('contact.index') }}" class="nav-link link-dark">
                 <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us
             </a>
         </li>

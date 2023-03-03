@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -25,5 +25,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(["middleware" => "auth"], function(){
+    Route::resource('/user', UserController::class);
     Route::resource('/contact', ContactController::class);
 });

@@ -5,24 +5,29 @@
 @section('content')
 <div class="container">
     <div class="row">
-        {{-- Navbar --}}
+        <!-- Navbar -->
         <div class="h-100">
             @include('layouts.side')
         </div>
 
-        {{-- Tags --}}
-        {{-- Chats --}}
+        <!-- Tags' bar -->
+        <!-- Chats -->
         <div class="row">
-            {{-- Header --}}
-            <div>
-                <i class="fa-regular fa-hashtag"></i>
-                <a href="#" class="text-decoration-none text-dark">{{  }}</a>
+            <!-- Header -->
+            <div class="w-100">
+                <i class="fa-regular fa-hashtag text-primary"></i>
+                <a href="#" class="text-decoration-none text-dark">{{ $tag->tag }}</a>
             </div>
-            {{-- Body --}}
+            <!-- Body -->
             <div class="ms-3">
-                @include('contents.title')
-                @include('contents.body')
+                <div class="col-2">
+                    @include('contents.title')
+                </div>
+                <div class="col">
+                    @include('contents.body')
+                </div>
             </div>
+            <!-- Send bar -->
         </div>
     </div>
 </div>

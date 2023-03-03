@@ -10895,3 +10895,17 @@ ul {
 .logo-center {
     text-align: center;
 }
+
+.back-color {
+    background-color: #F4F7FC;
+}
+
+.icon-md {
+    width: 100px;
+    height: 50px;
+}
+
+.icon-position {
+    padding-right: 40px;
+}
+

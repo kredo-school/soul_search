@@ -12,18 +12,20 @@
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col-md-9">
-                                <p class="text-muted text-sm px-5 mb-3">Don't hesitate to contact us if you have any questions.<br>We'd love to hear from you. We'll respond as soon as possible.</p>
+                                <p class="text-muted text-sm mb-3">Don't hesitate to contact us if you have any questions.<br>We'd love to hear from you. We'll respond as soon as possible.</p>
                             </div>
                         </div>
 
                         <form action="{{ route('contact.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="mt-3 mx-5">
-                                <label for="message" class="form-label mt-3">message</label>
-                                <textarea name="message" class="form-control" id="message" cols="30" rows="4">{{ old('message') }}</textarea>
-                                @error('message')
-                                    <p class="text-danger small">{{ $message }}</p>
-                                @enderror
+                            <div class="mt-3 row justify-content-center">
+                                <div class="col-md-9">
+                                    <label for="message" class="form-label mt-3">message</label>
+                                    <textarea name="message" class="form-control" id="message" cols="30" rows="4">{{ old('message') }}</textarea>
+                                    @error('message')
+                                        <p class="text-danger small">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="my-5 text-center">

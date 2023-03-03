@@ -48,5 +48,9 @@ class User extends Authenticatable
         return $this->hasMany(Chat::class)->latest();
     }
 
+    public function tag(){
+        return $this->hasMany(Tag::class);
+    }
+
     // Add the functions about following/followed later
 }

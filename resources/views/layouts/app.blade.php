@@ -27,7 +27,7 @@
 <body>
 
     {{-- not showing in login or register pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') )
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password/reset*') || request()->is('*password/email*') || request()->is('*password/confirm*'))
     @else
         <div class="ss-container">
             {{-- side bar --}}
@@ -45,7 +45,7 @@
                 </div>
 
     {{-- not showing in login or register pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') )
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password/reset*') || request()->is('*password/email*') || request()->is('*password/confirm*'))
     @else
             </div>
         </div>

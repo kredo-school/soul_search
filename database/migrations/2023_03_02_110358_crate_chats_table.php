@@ -15,11 +15,15 @@ class CrateChatsTable extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->string('chat', 255);
+            $table->string('chat');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('tag_id');
             $table->string('image', 255);
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 

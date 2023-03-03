@@ -15,13 +15,17 @@ class CrateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('tag', 30);
+            $table->string('tag');
+            $table->unsignedBigInteger('user_id');
             $table->boolean('is_main')
                      ->default(0);
             $table->boolean('is_added')
                     ->default(0);
             $table->timestamp('last_access')->useCurrent();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

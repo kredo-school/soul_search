@@ -15,10 +15,13 @@ class CratePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('body', 255);
+            $table->string('body');
             $table->unsignedBigInteger('user_id');
             $table->string('image', 255);
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

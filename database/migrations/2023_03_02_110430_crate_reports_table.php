@@ -20,6 +20,15 @@ class CrateReportsTable extends Migration
             $table->enum('source', ['user','post','comment','tag','chat','message']);
             $table->enum('violation_type', ['communication','name','threat']);
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('reporter_id')->references('id')->on('users');
+            $table->foreign('source_id')->references('id')->on('users');
+            $table->foreign('source_id')->references('id')->on('posts');
+            $table->foreign('source_id')->references('id')->on('comments');
+            $table->foreign('source_id')->references('id')->on('tags');
+            $table->foreign('source_id')->references('id')->on('chats');
+            $table->foreign('source_id')->references('id')->on('messages');
         });
     }
 

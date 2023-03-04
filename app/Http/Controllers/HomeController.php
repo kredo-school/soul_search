@@ -31,10 +31,14 @@ class HomeController extends Controller
     public function index(){
         $all_chats = $this->chat->latest()->get();
 
-        $tag_chats = [];
-
         //need to update to show only tagged chats a user wants
 
-        return view('index');
+        return view('home');
+    }
+
+    public function showUser($id){
+        $user = $this->user->findOrFail($id);
+
+        return view('home');
     }
 }

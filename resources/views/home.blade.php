@@ -18,7 +18,7 @@
                 <i class="fa-regular fa-hashtag text-primary"></i>
                 <a href="{{ route('tag.store', $tag->id) }}" class="text-decoration-none text-dark">{{ $tag->tag }}</a>
             </div>
-            <!-- Body -->
+            <!-- Body (Need to update to show chats the user wants) -->
             <div class="ms-3">
                 <div class="col-2">
                     @include('contents.title')

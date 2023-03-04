@@ -2,7 +2,7 @@
     <div class="row align-items-center">
         <!-- Username -->
         <div class="col ps-0">
-            <a href="#" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
+            <a href="{{ route('profile.show', $chat->user->id) }}" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
         </div>
         <!-- Date -->
         <div class="col">
@@ -18,11 +18,11 @@
             <button class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>
-            <div class="dropdown-menu">
+            {{-- <div class="dropdown-menu">
                 <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#report-chat-{{ $chat-id }}">
                     Report Chat
                 </button>
-            </div>
+            </div> --}}
             {{-- @include(for Report) --}}
         </div>
     </div>

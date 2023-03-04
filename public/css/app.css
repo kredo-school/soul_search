@@ -10853,6 +10853,7 @@ textarea.form-control-lg {
     height: 36px;
 }
 
+/* sidebar display setting */
 .ss-container {
 	display: flex;
 	width: 100%;
@@ -10862,19 +10863,31 @@ textarea.form-control-lg {
 	width: 20%;
     background-color: white;
 }
+@media screen and (max-width: 700px) {
+	.ss-sidebar {
+		width: 45px;
+	}
+}
 .ss-main {
 	width: 80%;
 	margin: 10px;
 }
-
+/* set login-icon position at left-bottom */
 .login-icon {
     position: absolute;
     bottom: 20px;
     left: 20px;
 }
+@media screen and (max-width: 700px) {
+	.login-icon {
+		left: 5px;
+	}
+}
 
+/* remove the left space of ul list */
 ul {
     list-style: none;
+    padding-left: 0
 }
 
 .btn-orange {
@@ -10894,4 +10907,36 @@ ul {
 
 .logo-center {
     text-align: center;
+}
+
+btn-white {
+    background:#fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fff;
+  --bs-btn-active-border-color: #fff;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #fff;
+  --bs-btn-disabled-border-color: #fff;
+}
+
+/* hide when the display width is <= 700px */
+@media screen and (max-width: 700px) {
+	.hide-700 {
+		display: none;
+	}
+}
+
+/* show when the display width is <= 700px */
+.show-700 {
+    display: none;
+}
+@media screen and (max-width: 700px) {
+	.show-700 {
+		display: block;
+	}
 }

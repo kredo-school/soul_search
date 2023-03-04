@@ -7,8 +7,8 @@
         @csrf
 
         <div class="mb-3">
-            <label for="body" class="form-label">Body</label>
-            <textarea name="body" class="form-control" id="body" cols="30" rows="4">{{ old('body') }}</textarea>
+            <label for="body" class="form-label">Message</label>
+            <textarea name="body" class="form-control" id="body" cols="30" rows="3">{{ old('body') }}</textarea>
             @error('body')
             <p class="text-danger small">{{ $body }}</p>
             @enderror
@@ -24,7 +24,7 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary px-5">Post</button>
+        <button type="submit" class="btn btn-orange btn-sm px-5">Post</button>
     </form>
 
 @endsection

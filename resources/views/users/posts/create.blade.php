@@ -10,7 +10,7 @@
             <label for="body" class="form-label">Body</label>
             <textarea name="body" class="form-control" id="body" cols="30" rows="4">{{ old('body') }}</textarea>
             @error('body')
-            <p class="text-danger small">{{ $message }}</p>
+            <p class="text-danger small">{{ $body }}</p>
             @enderror
         </div>
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -49,7 +49,7 @@ class PostController extends Controller
             'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
-        // save data to post table
+        // // save data to post table
         $this->post->image    = $this->saveImage($request);
 
         $this->post->user_id  = Auth::user()->id;

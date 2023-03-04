@@ -52,5 +52,14 @@ class User extends Authenticatable
         return $this->hasMany(Tag::class);
     }
 
+    // To get all the tags that the user has
+    public function isMain(){
+        return $this->hasMany(Tag::class, 'is_main');
+    }
+
+    public function isAdded(){
+        return $this->hasMany(Tag::class, 'is_added');
+    }
+
     // Add the functions about following/followed later
 }

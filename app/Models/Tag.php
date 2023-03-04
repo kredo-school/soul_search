@@ -18,4 +18,13 @@ class Tag extends Model
     public function user(){
         return $this->belongsTo(User::class)->withTrashed();
     }
+
+    // To get all the tags that the user has
+    public function isMain(){
+        return $this->belongsTo(User::class, 'is_main');
+    }
+
+    public function isAdded(){
+        return $this->belongsTo(User::class, 'is_added');
+    }
 }

@@ -10895,3 +10895,11 @@ ul {
 .fa-hashtag {
     color: #6A9DFF;
 }
+
+.tag-header {
+    --bs-text-opacity: .7;
+}
+
+.tag-bar {
+    --bs-text-opacity: .5;
+}

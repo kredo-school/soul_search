@@ -11,7 +11,7 @@
         <!-- A Heart Button and Number of Likes -->
         <div class="col-auto text-end">
             <i class="fa-regular fa-heart"></i>
-            {{-- <span>{{ $chat->likes->count() }}</span> --}}
+            <span>{{ $chat->likes->count() }}</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
         <div class="col-auto text-end">

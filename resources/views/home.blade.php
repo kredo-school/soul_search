@@ -28,6 +28,18 @@
                 </div>
             </div>
             <!-- Send bar -->
+            <form action="{{ route('chat.store') }}" method="post" class="">
+                @csrf
+                <div class="input-group">
+                    <textarea name="chat" id="chat" rows="3" class="form-control" placeholder="Type your message #{{ $tag->tag }}">
+                        {{ old('chat') }}
+                    </textarea>
+                    <button type="submit" class="btn">Send</button>
+                </div>
+                @error('chat')
+                    <div class="text-danger small">{{ $message }}</div>
+                @enderror
+            </form>
         </div>
     </div>
 </div>

@@ -25,8 +25,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')
                     ->default(0)
                     ->comment('1:admin 0:user');
-            $table->timestamps();
-        });
+            $table->timestamps();        });
     }
 
     /**

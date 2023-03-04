@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'ContactUs')
+@section('title', 'Profile')
 
 @section('content')
     <div class="container mb-3 mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card border-0">
-                    <h1 class="text-center mt-5">Contact Us</h1>
+                    <h1 class="text-center mt-5">Profile</h1>
 
                     <div class="card-body">
                         <div class="row justify-content-center">

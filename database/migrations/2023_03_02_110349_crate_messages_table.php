@@ -15,11 +15,15 @@ class CrateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('message', 255);
+            $table->string('message');
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
-            $table->string('image', 255);
+            $table->string('image', 50);
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('sender_id')->references('id')->on('users');
+            $table->foreign('receiver_id')->references('id')->on('users');
         });
     }
 

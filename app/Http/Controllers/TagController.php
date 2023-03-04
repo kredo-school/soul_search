@@ -24,5 +24,7 @@ class TagController extends Controller
         $this->tag->tag = $request->tag;
         $this->tag->user_id = Auth::user()->id;
         $this->save();
+
+        return redirect()->back();
     }
 }

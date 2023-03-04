@@ -26,6 +26,9 @@ Route::group(['middleware' => 'auth'], function(){
     #CHAT
     Route::post('/tag/{tag_id}/chats', [ChatController::class, 'store'])->name('chat.store');
 
+    #TAG
+    Route::post('/tag/{tag_id}/store', [TagController::class, 'store'])->name('tag.store');
+
     #LIKE
     Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');

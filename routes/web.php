@@ -23,3 +23,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tag_register',[TagRegisterController::class, 'index'])->name('tag_register');
+Route::post('/store',[TagRegisterController::class, 'store'])->name('tag.store');

@@ -20,9 +20,13 @@ class TagRegisterController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'tag' => 'required|min:1|max:255'
+            'tag_name' => 'required|min:1|max:255'
         ]);
 
         $this->tag->user_id = Auth::user()->id;
+        $this->tag->tag_name = $request->tag_name;
+        $this->tag->save();
+
+        return redirect()->route('home');
     }
 }

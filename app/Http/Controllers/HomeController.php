@@ -33,6 +33,8 @@ class HomeController extends Controller
 
         $tag_chats = [];
 
+        //need to update to show only tagged chats a user wants
+
         return view('index');
     }
 }

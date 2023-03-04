@@ -27,12 +27,26 @@ class ChatController extends Controller
 
         #Save the chat
         $this->chat->user_id = Auth::user()->id;
-        $this->chat->tag_id = $request->tag;
+        $this->chat->tag_id = $tag_id;
         $this->chat->chat = $request->chat;
         $this->chat->image = $this->saveImage($request);
         $this->chat->save();
 
-        return redirect()->route('index');
+        return redirect()->back();
+    }
 
+    public function saveImage($request){
+        $image_name = time() . "." . $request->image->extension();
+
+        $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
+        return $image_name;
+    }
+
+    public function deleteImage($image_name){
+        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
+
+        if(Storage::disk('local')->exists($image_path)){
+            Storage::disk('local')->delete($image_path);
+        }
     }
 }

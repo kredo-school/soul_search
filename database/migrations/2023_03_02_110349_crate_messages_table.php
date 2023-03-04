@@ -18,7 +18,7 @@ class CrateMessagesTable extends Migration
             $table->string('message');
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
-            $table->string('image', 255);
+            $table->string('image', 50);
             $table->timestamps();
             $table->softDeletes();
 

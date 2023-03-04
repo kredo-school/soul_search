@@ -17,7 +17,7 @@ class CratePostsTable extends Migration
             $table->id();
             $table->string('body');
             $table->unsignedBigInteger('user_id');
-            $table->string('image', 255);
+            $table->string('image', 50);
             $table->timestamps();
             $table->softDeletes();
 

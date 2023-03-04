@@ -16,7 +16,7 @@
             <!-- Header -->
             <div class="w-100">
                 <i class="fa-regular fa-hashtag text-primary"></i>
-                <a href="#" class="text-decoration-none text-dark">{{ $tag->tag }}</a>
+                <a href="{{ route('tag.store', $tag->id) }}" class="text-decoration-none text-dark">{{ $tag->tag }}</a>
             </div>
             <!-- Body -->
             <div class="ms-3">

@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
+@section('title','Create Account')
+
 @section('content')
 <div class="container">
-    <img src="{{ asset('img/logo.png')}}" class="float-left mt-2">
+    <img src="{{ asset('img/logo.svg')}}" class="float-left mt-2">
 </div>
 
-<div class="container"><h1 class="text-center fw-bold mb-3">Create Your Account</h1></div>
+<div class="container">
+    <h1 class="text-center fw-bold mb-3">
+        Create Your Account
+    </h1>
+</div>
 
 {{--  Card body  --}}
 <div class="container">
@@ -13,7 +19,6 @@
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
-
                     <div class="row justify-content-center">
                         <div class="col-8 mb-3 rounded-box btn-orange">
                             <span class="col-5 text-center text-orange rounded-box btn-white">Profile</span>
@@ -26,8 +31,6 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                    <div class="container">
-                        <form action="">
                         {{--  Username  --}}
                         <div class="row mb-3 justify-content-center">
                             <div>
@@ -99,11 +102,14 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
-                    </div>
+                </div>
 
                         {{--  Horizontal line  --}}
-                        <div class="text-divider text-muted">or</div>
+                        <div class="text-divider text-muted">
+                            or
+                        </div>
 
                         {{--  Facebook Logo  --}}
                         <div class="container justify-content-center logo-center">
@@ -112,11 +118,13 @@
                             </a>
                         </div>
                         {{--  Message  --}}
-                        <p class="mt-3 mb-4 text-center">Already have an account?
-                            <a href="{{ route('login') }}" class="text-center text-orange text-decoration-none">Login here!</a>
+                        <p class="mt-3 mb-4 text-center">
+                            Already have an account?
+                            <a href="{{ route('login') }}" class="text-center text-orange text-decoration-none">
+                                Login here!
+                            </a>
                         </p>
 
-                    </form>
                 </div>
             </div>
         </div>

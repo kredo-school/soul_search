@@ -10934,4 +10934,26 @@ ul {
     border-radius: var(--bs-btn-border-radius);
   }
 
+.back-color {
+    background-color: #F4F7FC;
+}
 
+.btn-white-right {
+    background:#fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fff;
+  --bs-btn-active-border-color: #fff;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #fff;
+  --bs-btn-disabled-border-color: #fff;
+    box-align: right;
+}
+
+.box-right {
+    margin-left: 15.555%;
+}

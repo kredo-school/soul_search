@@ -3,7 +3,7 @@
 @section('title', 'Post')
 
 @section('content')
-    <div class="row shadow">
+    <div class="row w-100">
 
         <div class="col-8 p-0">
             @include('users.posts.contents.photo')

@@ -10940,3 +10940,11 @@ btn-white {
 		display: block;
 	}
 }
+
+
+/* image in post/show page */
+.post-image {
+    width: 100%;
+    object-fit: contain;
+    background: #505050;
+}

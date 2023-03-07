@@ -8,13 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
-    private $contact;
-
-    public function __construct(Contact $contact)
-    {
-        $this->contact = $contact;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -43,9 +36,10 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $this->contact->user_id   = Auth::user()->id;
-        $this->contact->message   = $request->message;
-        $this->contact->save();
+        Contact::create([
+            'user_id' => Auth::id(),
+            'message' => $request->message,
+        ]);
 
         return redirect()->route('contact.index');
     }
@@ -90,10 +84,10 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contact $contact)
     {
-    $this->contact->destroy($id);
+        contact->delete();
 
-    return redirect()->back();
+        return redirect()->back();
     }
 }

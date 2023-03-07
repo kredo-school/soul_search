@@ -26,7 +26,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
     #CHAT
     Route::post('/tag/{tag_id}/chats', [ChatController::class, 'store'])->name('chat.store');

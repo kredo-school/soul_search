@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+<link href="{{ mix('css/login.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <img src="{{ asset('img/logo.svg')}}" class="float-left mt-4 icon-md icon-position">
 

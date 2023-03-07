@@ -57,8 +57,8 @@ class User extends Authenticatable
         return $this->hasMany(Tag::class, 'is_main');
     }
 
-    public function isAdded(){
-        return $this->hasMany(Tag::class, 'is_added');
+    public function isFAv(){
+        return $this->hasMany(Tag::class, 'is_fav');
     }
 
     // Add the functions about following/followed later

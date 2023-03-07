@@ -32,7 +32,7 @@
             <div class="row">
                 <p class="text-dark fw-bold tag-bar">Fav</p>
             </div>
-            @foreach ($added_tags as $tag)
+            @foreach ($fav_tags as $tag)
                 <div class="row align-items-center m-3">
                     <div class="col-auto">
                         <a href="#">

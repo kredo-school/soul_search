@@ -24,7 +24,7 @@ class Tag extends Model
         return $this->belongsTo(User::class, 'is_main');
     }
 
-    public function isAdded(){
-        return $this->belongsTo(User::class, 'is_added');
+    public function isFav(){
+        return $this->belongsTo(User::class, 'is_fav');
     }
 }

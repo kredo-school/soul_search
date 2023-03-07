@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class TagRegisterController extends Controller
 {
-    private $tag;
+    private $start_tag;
 
-    public function __construct(Tag $tag){
-        $this->tag = $tag;
+    public function __construct(Tag $start_tag){
+        $this->start_tag = $start_tag;
     }
 
     public function index(){
@@ -23,10 +23,14 @@ class TagRegisterController extends Controller
             'tag_name' => 'required|min:1|max:255'
         ]);
 
-        $this->tag->user_id = Auth::user()->id;
-        $this->tag->tag_name = $request->tag_name;
-        $this->tag->save();
-
+        foreach($request->tag_name as $tag) {
+            $data = [
+                'is_main' => 1,
+                'tag' => $tag,
+                'user_id' => Auth::id()
+            ];
+            Tag::create($data);
+        }
         return redirect()->route('home');
     }
 }

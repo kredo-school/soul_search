@@ -37,8 +37,8 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         Contact::create([
-            'user_id' => Auth::id(),
             'message' => $request->message,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('contact.index');
@@ -86,7 +86,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        contact->delete();
+        $contact->delete();
 
         return redirect()->back();
     }

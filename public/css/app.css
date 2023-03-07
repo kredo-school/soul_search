@@ -10849,7 +10849,7 @@ textarea.form-control-lg {
   }
 
   .icon-sm {
-    width: 60px;
+    width: 40px;
     height: 36px;
 }
 
@@ -10902,4 +10902,8 @@ ul {
 
 .tag-bar {
     --bs-text-opacity: .5;
+}
+
+.logo-center {
+    text-align: center;
 }

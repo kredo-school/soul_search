@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-<link href="{{ mix('css/login.css') }}" rel="stylesheet">
+<link href="{{ mix('css/register.css') }}" rel="stylesheet">
 @endsection
 
 @section('title','Create Account')
@@ -40,33 +40,43 @@
                                 <div>
                                     <label for="tag_name" class="text-position">Tag1</label>
                                 </div>
-
                                 <div class="col-6">
-                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control">
+                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
+                                    @error('tag_name')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+
 
                             {{--  Tag2  --}}
                             <div class="row mb-3 justify-content-center">
                                 <div>
                                     <label for="tag_name" class="text-position">Tag2</label>
                                 </div>
-
                                 <div class="col-6">
-                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control">
+                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
+                                    @error('tag_name')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+
 
                             {{--  Tag3  --}}
                             <div class="row mb-3 justify-content-center">
                                 <div>
                                     <label for="tag_name" class="text-position">Tag3</label>
                                 </div>
-
                                 <div class="col-6">
-                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control">
+                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
+                                    @error('tag_name')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
                                 </div>
+
                             </div>
+
 
                             {{--  Create button  --}}
                                 <div class="row mb-0 justify-content-center">

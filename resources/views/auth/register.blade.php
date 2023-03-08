@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+<link href="{{ mix('css/register.css') }}" rel="stylesheet">
+@endsection
+
 @section('title','Create Account')
 
 @section('content')

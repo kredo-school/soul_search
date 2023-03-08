@@ -10901,6 +10901,10 @@ ul {
 }
 
 .tag-bar {
+    height: 100%;
+}
+
+.tag-name {
     --bs-text-opacity: .5;
 }
 

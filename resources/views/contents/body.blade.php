@@ -2,16 +2,16 @@
     <div class="row align-items-center">
         <!-- Username -->
         <div class="col ps-0">
-            <a href="{{ route('profile.show', $chat->user->id) }}" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
+            <a href="#" class="text-decoration-none text-dark fw-bold">Username</a>
         </div>
         <!-- Date -->
         <div class="col">
-            <p class="text-muted fw-light">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</p>
+            <p class="text-muted fw-light">8/3/2023</p>
         </div>
         <!-- A Heart Button and Number of Likes -->
         <div class="col-auto text-end">
             <i class="fa-regular fa-heart"></i>
-            <span>{{ $chat->likes->count() }}</span>
+            <span>5</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
         <div class="col-auto text-end">
@@ -28,9 +28,7 @@
     </div>
 
     <div class="row align-items-center">
-        <p class="d-inline fw-light">{{ $chat->chat }}</p>
-        @if ($chat->image)
-            <img src="{{ asset('storage/images/' . $chat->image) }}" alt="{{ $chat->image }}">
-        @endif
+        <p class="d-inline fw-light">Show chats</p>
+            {{-- <img src="#" alt=""> --}}
     </div>
 </div>

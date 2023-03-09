@@ -29,24 +29,15 @@
 
                     <div class="mb-3">
                         <label for="tag" class="form-label">Tags(up to 3)</label>
-                        <input name="tag1" type="text" class="form-control" id="tag1" placeholder="{{ old('tag1') }}">
-                        @error('tag1')
-                        <p class="text-danger small">{{ $tag1 }}</p>
-                        @enderror
+                        <input name="tag[]" type="text" class="form-control" id="tag[]" placeholder="{{ old('tag[]') }}">
                     </div>
 
                     <div class="mb-3">
-                        <input name="tag2" type="text" class="form-control" id="tag2" placeholder="{{ old('tag2') }}">
-                        @error('tag2')
-                        <p class="text-danger small">{{ $tag2 }}</p>
-                        @enderror
+                        <input name="tag[]" type="text" class="form-control" id="tag[]" placeholder="{{ old('tag[]') }}">
                     </div>
 
                     <div class="mb-3">
-                        <input name="tag3" type="text" class="form-control" id="tag3" placeholder="{{ old('tag3') }}">
-                        @error('tag3')
-                        <p class="text-danger small">{{ $tag3 }}</p>
-                        @enderror
+                        <input name="tag[]" type="text" class="form-control" id="tag[]" placeholder="{{ old('tag[]') }}">
                     </div>
 
                     <div class="text-center">

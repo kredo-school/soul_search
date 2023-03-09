@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = ['body','user_id', 'image'];
 
     public function user()
     {
@@ -28,5 +29,10 @@ class Post extends Model
     public function isLiked($user_id)
     {
         return $this->likes()->where('user_id', '=',  $user_id)->exists();
+    }
+
+    public function postTags()
+    {
+        return $this->hasMany(PostTag::class)->latest();
     }
 }

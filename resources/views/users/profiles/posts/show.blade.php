@@ -6,11 +6,11 @@
     <div class="row w-100">
 
         <div class="col-8 p-0">
-            @include('users.posts.contents.photo')
+            @include('users.profiles.posts.contents.photo')
         </div>
         <div class="col-4 p-0">
-            @include('users.posts.contents.body')
-            @include('users.posts.contents.comment')
+            @include('users.profiles.posts.contents.body')
+            @include('users.profiles.posts.contents.comment')
         </div>
     </div>
 

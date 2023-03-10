@@ -1,151 +1,93 @@
 @extends('layouts.app')
 
+
+
 @section('title', 'Home')
 
 @section('content')
 <div class="container d-flex justify-content-center">
     <!-- Tags' bar -->
-    <div class="col-2 bg-white tag-bar">
+    <div class="col-2 bg-white tag-bar border h-100">
         <div class="mt-5">
-            <p class="text-dark fw-bold mb-0 tag-name">Recent</p>
-            <table class="table table-hover">
+            <p class="text-dark fw-bold mb-1 ms-3 tag-name">Recent</p>
+            <ul class="nav nav-pills flex-column px-0">
                 {{-- @foreach ($recent_tags as $tag) --}}
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Music
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Politics
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Food
-                            </a>
-                        </td>
-                    </tr>
-                {{-- @endforeach --}}
-            </table>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Music</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Politics</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Food</span>
+                    </a>
+                </li>
+            {{-- @endforeach --}}
+            </ul>
         </div>
         <div class="mt-5">
-            <p class="text-dark fw-bold mb-0 tag-name">Main</p>
-            <table class="table table-hover">
+            <p class="text-dark fw-bold mb-1 ms-3 tag-name">Main</p>
+            <ul class="nav nav-pills flex-column px-0">
                 {{-- @foreach ($recent_tags as $tag) --}}
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Movie
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Music
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Travel
-                            </a>
-                        </td>
-                    </tr>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Movie</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link" >
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Music</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link active" aria-current="page" style="background-color: #F4F7FC;">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Travel</span>
+                    </a>
+                </li>
                 {{-- @endforeach --}}
-            </table>
+            </ul>
         </div>
         <div class="my-5">
-            <p class="text-dark fw-bold mb-0 tag-name">Fav</p>
-            <table class="table table-hover">
+            <p class="text-dark fw-bold mb-1 ms-3 tag-name">Fav</p>
+            <ul class="nav nav-pills flex-column px-0">
                 {{-- @foreach ($recent_tags as $tag) --}}
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Book
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Health
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Technology
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <i class="fa-regular fa-hashtag"></i>
-                            </a>
-                        </td>
-                        <td class="ps-0">
-                            <a href="#" class="text-decoration-none text-dark tag-name">
-                                Education
-                            </a>
-                        </td>
-                    </tr>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Book</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Health</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Technology</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="flex-fill nav-link">
+                        <i class="fa-regular fa-hashtag"></i>
+                        <span class="text-dark tag-name">Education</span>
+                    </a>
+                </li>
                 {{-- @endforeach --}}
-            </table>
+            </ul>
         </div>
     </div>
     <!-- Chats -->
@@ -169,9 +111,7 @@
             <form action="#" method="post">
                 @csrf
                 <div class="input-group">
-                    <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm" placeholder="Type your message #Travel">
-
-                    </textarea>
+                    <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm" placeholder="Type your message #Travel"></textarea>
                     <button type="submit" class="btn btn-orange">Send</button>
                 </div>
                 @error('chat')

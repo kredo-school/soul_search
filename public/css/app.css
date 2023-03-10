@@ -10864,7 +10864,7 @@ textarea.form-control-lg {
 }
 .ss-main {
 	width: 80%;
-	margin: 10px;
+	margin:0 10px;
 }
 
 .login-icon {
@@ -10901,7 +10901,7 @@ ul {
 }
 
 .tag-bar {
-    height: 100%;
+    height: 100vh!important;
 }
 
 .tag-name {
@@ -10910,4 +10910,8 @@ ul {
 
 .logo-center {
     text-align: center;
+}
+
+.textarea {
+    resize: none;
 }

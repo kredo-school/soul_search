@@ -79,9 +79,9 @@
             @endif
 
             @if (Route::has('register'))
-                <li>
+                <li class="ps-3">
                     <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li class="ps-3">
+                </li>
             @endif
         @else
         <li class="ps-3">

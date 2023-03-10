@@ -3,18 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    private $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.profiles.index');
+        $posts = Post::where('user_id', Auth::id())->latest()->get();
+        return view('users.profiles.index', compact('posts'));
     }
 
     /**

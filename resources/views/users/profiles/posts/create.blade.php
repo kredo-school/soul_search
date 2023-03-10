@@ -1,4 +1,4 @@
-
+{{-- modal in profile index page --}}
 <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">

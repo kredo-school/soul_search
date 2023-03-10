@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\PostTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -45,6 +46,7 @@ class PostController extends Controller
             'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
+        // create data in posts table
         Post::create([
             'body'    => $request->body,
             'user_id' => Auth::id(),
@@ -54,32 +56,33 @@ class PostController extends Controller
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
         foreach($request->tag as $tag){
-            // create data in tags table if it is new
-            $db_tags = Tag::get();
-            $is_new = true;
-            foreach($db_tags as $db_tag){
-                if($db_tag->tag === $tag){
-                    $is_new = false;
+            if(!is_Null($tag)){
+                $db_tags = Tag::get();
+                $is_new = true;
+                foreach($db_tags as $db_tag){
+                    if($db_tag->tag === $tag){
+                        $is_new = false;
+                        // create data in post_tags table
+                        PostTag::create([
+                            'post_id' => Post::latest()->first()->id,
+                            'tag_id'  => $db_tag->id,
+                        ]);
+                        break;
+                    }
+                }
+                if($is_new){
+                    // create data in tags table if it is new
+                    Tag::create([
+                        'tag' => $tag,
+                    ]);
                     // create data in post_tags table
                     PostTag::create([
                         'post_id' => Post::latest()->first()->id,
-                        'tag_id'  => $db_tag->id,
+                        'tag_id'  => $new_tag_id,
                     ]);
-                    break;
+                    $new_tag_id++;
                 }
             }
-            if($is_new){
-                Tag::create([
-                    'tag' => $tag,
-                ]);
-                // create data in post_tags table
-                PostTag::create([
-                    'post_id' => Post::latest()->first()->id,
-                    'tag_id'  => $new_tag_id,
-                ]);
-                $new_tag_id++;
-            }
-
         }
 
         return redirect()->route('profile.index');
@@ -104,7 +107,12 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('users.profiles.posts.show', compact('post'));
+        $post_tags = PostTag::where('post_id', $id)->get();
+        $tags      = [];
+        foreach($post_tags as $post_tag){
+            $tags[] = Tag::find($post_tag->tag_id);
+        }
+        return view('users.profiles.posts.show', compact('post', 'post_tags', 'tags'));
     }
 
     /**
@@ -115,14 +123,21 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post      = Post::find($id);
+        $post_tags = PostTag::where('post_id', $id)->get();
+        $tags      = [];
+        $tag_count = 0;
+        foreach($post_tags as $post_tag){
+            $tags[] = Tag::find($post_tag->tag_id);
+            $tag_count++;
+        }
 
         // if not the owner of the post, redirect to homepage
-        if(Auth::user()->id != $post->user->id):
-          return redirect()->route('index');
+        if(Auth::id() !== $post->user->id):
+            return redirect()->route('index');
         endif;
 
-        return view('users.profiles.posts.edit', compact('post'));
+        return view('users.profiles.posts.edit', compact('post', 'post_tags', 'tags', 'tag_count'));
     }
 
     /**
@@ -135,21 +150,18 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'body'  => 'required|min:1|max:10000',
-            'image' => 'mimes:jpg,jpeg,png,gif|max:10000|file',
+            'body'  => 'min:1|max:10000',
+            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
-        // save data to post table
-        $post        = Post::find($id);
+        $post = Post::find($id);
 
         Post::where('id', $id)
             ->update([
                 'body'    => $request->body,
-                'user_id' => Auth::id(),
-                'image'   => $this->saveImage($request),
         ]);
 
-        // If there is a new image......
+        // If there is a new image
         if($request->image){
             // Delete the previous file from the local storage
             $this->deleteImage($post->image);
@@ -161,6 +173,41 @@ class PostController extends Controller
             ]);
         }
 
+
+        $latest_tag_id = Tag::max('id');
+        $new_tag_id    = $latest_tag_id + 1;
+        foreach($request->tag as $tag){
+            if(!is_Null($tag)){
+                $db_tags = Tag::get();
+                $is_new = true;
+                foreach($db_tags as $db_tag){
+                    if($db_tag->tag === $tag){
+                        $is_new = false;
+                        // create data in post_tags table
+                        PostTag::create([
+                            'post_id' => Post::latest()->first()->id,
+                            'tag_id'  => $db_tag->id,
+                        ]);
+                        break;
+                    }
+                }
+                if($is_new){
+                    // create data in tags table if it is new
+                    Tag::create([
+                        'tag' => $tag,
+                    ]);
+                    // create data in post_tags table
+                    PostTag::create([
+                        'post_id' => $id,
+                        'tag_id'  => $new_tag_id,
+                    ]);
+                    PostTag::where(tag()->tag, $tag)->delete();
+                    $new_tag_id++;
+                }
+            }
+        }
+
+
         return redirect()->route('post.show', $id);
     }
 
@@ -168,7 +215,7 @@ class PostController extends Controller
     {
         $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
 
-        if(storage::disk('local')->exists($image_path)){
+        if(Storage::disk('local')->exists($image_path)){
             Storage::disk('local')->delete($image_path);
         }
     }

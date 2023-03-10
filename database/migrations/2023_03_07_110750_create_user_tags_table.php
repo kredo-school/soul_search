@@ -17,7 +17,7 @@ class CreateUserTagsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('tag_id');
-            $table->enum('tag_category', ['main','favorite','recent']);
+            $table->enum('tag_category', ['main','favorite']);
             $table->timestamp('last_access');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

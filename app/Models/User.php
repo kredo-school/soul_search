@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -46,4 +48,23 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class)->latest();
     }
+
+    public function chats(){
+        return $this->hasMany(Chat::class)->latest();
+    }
+
+    public function tag(){
+        return $this->hasMany(Tag::class);
+    }
+
+    // To get all the tags that the user has
+    public function isMain(){
+        return $this->hasMany(Tag::class, 'is_main');
+    }
+
+    public function isFAv(){
+        return $this->hasMany(Tag::class, 'is_fav');
+    }
+
+    // Add the functions about following/followed later
 }

@@ -57,31 +57,7 @@ class PostController extends Controller
         $new_tag_id    = $latest_tag_id + 1;
         foreach($request->tag as $tag){
             if(!is_Null($tag)){
-                $db_tags = Tag::get();
-                $is_new = true;
-                foreach($db_tags as $db_tag){
-                    if($db_tag->tag === $tag){
-                        $is_new = false;
-                        // create data in post_tags table
-                        PostTag::create([
-                            'post_id' => Post::latest()->first()->id,
-                            'tag_id'  => $db_tag->id,
-                        ]);
-                        break;
-                    }
-                }
-                if($is_new){
-                    // create data in tags table if it is new
-                    Tag::create([
-                        'tag' => $tag,
-                    ]);
-                    // create data in post_tags table
-                    PostTag::create([
-                        'post_id' => Post::latest()->first()->id,
-                        'tag_id'  => $new_tag_id,
-                    ]);
-                    $new_tag_id++;
-                }
+                $new_tag_id = $this->storeTag(Post::latest()->first()->id, $tag, $new_tag_id);
             }
         }
 
@@ -98,6 +74,37 @@ class PostController extends Controller
         return $image_name;
     }
 
+    private function storeTag($id, $tag, $new_tag_id){
+        $db_tags = Tag::get();
+        $is_new = true;
+        foreach($db_tags as $db_tag){
+            if($db_tag->tag === $tag){
+                $is_new = false;
+                // create data in post_tags table
+                PostTag::create([
+                    'post_id' => Post::latest()->first()->id,
+                    'tag_id'  => $db_tag->id,
+                ]);
+                break;
+            }
+        }
+        if($is_new){
+            // create new Tag
+            Tag::create([
+                'tag' => $tag,
+            ]);
+
+            // create new PostTag
+            PostTag::create([
+                'post_id' => $id,
+                'tag_id'  => $new_tag_id,
+            ]);
+            $new_tag_id++;
+        }
+
+        return $new_tag_id;
+    }
+
     /**
      * Display the specified resource.
      *
@@ -112,7 +119,7 @@ class PostController extends Controller
         foreach($post_tags as $post_tag){
             $tags[] = Tag::find($post_tag->tag_id);
         }
-        return view('users.profiles.posts.show', compact('post', 'tags'));
+        return view('users.profiles.posts.show', compact('post', 'post_tags', 'tags'));
     }
 
     /**
@@ -173,46 +180,31 @@ class PostController extends Controller
             ]);
         }
 
-
+        // Tag and PostTag update
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
         $count         = 0;
         foreach($request->tag as $tag){
-            if(!is_Null($tag)){
-                $db_tags = Tag::get();
-                $is_new = true;
-                foreach($db_tags as $db_tag){
-                    if($db_tag->tag === $tag){
-                        $is_new = false;
-                        // create data in post_tags table
-                        PostTag::create([
-                            'post_id' => Post::latest()->first()->id,
-                            'tag_id'  => $db_tag->id,
-                        ]);
-                        break;
+            if($count < $request->old_tag_count){
+                // if old tag != new tag
+                if(Tag::where('id', $request->old_tag_id[$count])->first()->tag !== $tag){
+                    if(!is_Null($tag)){
+                        // both old and new exist
+                        $this->deleteTag($request, $count);
+                        $new_tag_id = $this->storeTag($id, $tag, $new_tag_id);
+                    }else{
+                        // only old exists
+                        $this->deleteTag($request, $count);
                     }
                 }
-                if($is_new){
-                    // create Tag if it is new
-                    Tag::create([
-                        'tag' => $tag,
-                    ]);
-                    // delete old PostTag
-                    PostTag::where('tag_id', $request->old_tag_id[$count])->delete();
-
-                    // create data in post_tags table
-                    PostTag::create([
-                        'post_id' => $id,
-                        'tag_id'  => $new_tag_id,
-                    ]);
-
-                    // delete old Tag if it has no users or no other posts
-                    $new_tag_id++;
+            }else{
+                if(!is_Null($tag)){
+                    // only new exists
+                    $new_tag_id = $this->storeTag($id, $tag, $new_tag_id);
                 }
             }
             $count++;
         }
-
 
         return redirect()->route('post.show', $id);
     }
@@ -224,6 +216,18 @@ class PostController extends Controller
         if(Storage::disk('local')->exists($image_path)){
             Storage::disk('local')->delete($image_path);
         }
+    }
+
+    private function deleteTag($request, $count){
+        // delete old Tag if it has no users or no other posts
+        $old_tag = Tag::where('id', $request->old_tag_id[$count])->first();
+        if(empty($old_tag->userTags()) && (count($old_tag->postTags()) == 1) && empty($old_tag->chats())){
+            Tag::where('id', $request->old_tag_id[$count])->delete();
+        }
+
+        // delete old PostTag
+        PostTag::where('tag_id', $request->old_tag_id[$count])->delete();
+
     }
 
     /**

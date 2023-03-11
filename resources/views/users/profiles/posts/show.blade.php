@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('styles')
+<link href="">
+
 @section('title', 'Post')
 
 @section('content')

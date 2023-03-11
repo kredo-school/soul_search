@@ -45,9 +45,10 @@
                                 <input name="tag[]" type="text" class="form-control" id="tag[]" value="{{ old('tag[]') }}">
                             @endfor
                         @endif
+                        <input name="old_tag_count" type="hidden" value="{{ $tag_count }}">
 
                     </div>
-                    <button type="submit" class="btn btn-sm btn-orange px-3">Update</button>
+                    <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
                     <a type="button" href="{{ route('post.show', $post->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 
                 </form>

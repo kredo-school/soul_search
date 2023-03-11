@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TagRegisterController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +24,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/register',[RegisterController::class, 'index'])->name('register');
 Route::get('/tag_register',[TagRegisterController::class, 'index'])->name('tag_register');
 Route::post('/tag_register/store',[TagRegisterController::class, 'store'])->name('tag.store');

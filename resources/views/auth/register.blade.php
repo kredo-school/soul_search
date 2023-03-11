@@ -32,81 +32,129 @@
 
                     <h2 class="text-center fw-bold mt-2">Your Profile</h2>
                     <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" class="contact-form">
                         @csrf
 
-                        {{--  Username  --}}
-                        <div class="row mb-3 justify-content-center">
-                            <div>
-                                 <label for="name" class="text-position">{{ __('Username') }}</label>
+                        <div class="form-section">
+                            {{--  Username  --}}
+                            <div class="row mb-3 justify-content-center">
+                                <div>
+                                    <label for="name" class="text-position">{{ __('Username') }}</label>
+                                </div>
+
+                                <div class="col-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
-                            <div class="col-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            {{--  Email  --}}
+                            <div class="row mb-3 justify-content-center">
+                                <div>
+                                    <label for="email" class="text-position">{{ __('Email') }}</label>
+                                </div>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                                <div class="col-6">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                        {{--  Email  --}}
-                        <div class="row mb-3 justify-content-center">
-                            <div>
-                                <label for="email" class="text-position">{{ __('Email') }}</label>
-                            </div>
-
-                            <div class="col-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        {{--  Password  --}}
-                        <div class="row mb-3 justify-content-center">
-                            <div>
-                                <label for="password" class="text-position">{{ __('Password') }}</label>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
-                            <div class="col-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            {{--  Password  --}}
+                            <div class="row mb-3 justify-content-center">
+                                <div>
+                                    <label for="password" class="text-position">{{ __('Password') }}</label>
+                                </div>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="col-6">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        {{--  Password confirmation  --}}
-                        <div class="row mb-3 justify-content-center">
-                            <div>
-                                <label for="password-confirm" class="text-position">{{ __('Password Confirmation') }}</label>
-                            </div>
+                            {{--  Password confirmation  --}}
+                            <div class="row mb-3 justify-content-center">
+                                <div>
+                                    <label for="password-confirm" class="text-position">{{ __('Password Confirmation') }}</label>
+                                </div>
 
-                            <div class="col-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-
-                        {{--  Next button  --}}
-                        <div class="row mb-0 justify-content-center">
-                            <div class="d-grid gap-2 mt-3 col-6 ">
-                                <button type="submit" class="btn btn-orange text-white mb-3">
-                                    {{ __('Next') }}
-                                </button>
+                                <div class="col-6">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                </div>
                             </div>
                         </div>
 
+                        <div class="form-section">
+                            {{--  Tag1  --}}
+                            <div class="row mb-3 justify-content-center">
+                                <div>
+                                    <label for="tag_name" class="text-position">Tag1</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
+                                    @error('tag_name')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            {{--  Tag2  --}}
+                            <div class="row mb-3 justify-content-center">
+                                <div>
+                                    <label for="tag_name" class="text-position">Tag2</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
+                                    @error('tag_name')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            {{--  Tag3  --}}
+                            <div class="row mb-3 justify-content-center">
+                                <div>
+                                    <label for="tag_name" class="text-position">Tag3</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
+                                    @error('tag_name')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+
+                            {{--  Button  --}}
+                            <div class="row mb-0 ">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="form-navigation">
+                                        <button class="previous btn btn-primary text-white mb-3 float-left">&gl; Previous</button>
+                                        <button class="next btn btn-orange text-white mb-3 float-right">Next &gt;</button>
+                                        <button type="submit" class="btn btn-orange text-white mb-3 float-right">
+                                            {{ __('Save') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                     </form>
                 </div>
 
@@ -134,4 +182,43 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function(){
+        var $sections = $('.form-section');
+
+        function navigateTo(index){
+            $sections.removeClass('current').eq(index).addClass('current');
+            $('.form-navigation .previous').toggle(index>0);
+            var atTheEnd = index >= $sections.length - 1;
+            $('.form-navigation .next').toggle(!atTheEnd);
+            $('.form-navigation [type=submit]').toggle(atTheEnd);
+        }
+
+        function curIndex(){
+            return $sections.index($sections.filter('.current'));
+        }
+
+        $('.form-navigation .previous').click(function(){
+            navigateTo(curIndex()-1);
+        });
+
+        $('.form-navigation .next').click(function(){
+            $('.contact-form').parsley().whenValidate({
+                group: 'block-' + curIndex()
+            }).done(function(){
+                navigateTo(curIndex()+1);
+            });
+        });
+
+        $sections.each(function(index,section){
+            $(section).find(':input').attr('data-parsley-group','block-'+index);
+        });
+
+        navigateTo(0);
+    });
+</script>
+
 @endsection
+
+

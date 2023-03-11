@@ -136,3 +136,34 @@ ul {
 .box-right {
     margin-left: 15.555%;
 }
+
+.parsley-errors-list {
+    margin: 2px 0 3px;
+    padding: 0;
+    list-style-type: none;
+    color:red;
+}
+
+.button-right {
+    text-align: right;
+}
+
+.ms-6 {
+    margin-left: 5.4rem;
+}
+
+.form-section{
+    padding-left: 15px;
+    display: none;
+}
+
+.form-section.current{
+    display: inherit;
+}
+
+.parsley-errors-list{
+    margin: 2px 0 3px;
+    padding: 0;
+    list-style-type: none;
+    color:red;
+}

@@ -7,9 +7,9 @@
 @section('title', 'Home')
 
 @section('content')
-<div class="container d-flex justify-content-center">
+<div class="d-flex justify-content-center p-0">
     <!-- Tags' bar -->
-    <div class="col-2 bg-white tag-bar border h-100">
+    <div class="col-2 bg-white tag-bar border">
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Recent</p>
             <ul class="nav nav-pills flex-column px-0">
@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link active" aria-current="page" style="background-color: #F4F7FC;">
+                    <a href="#" class="fw-bold flex-fill nav-link active" aria-current="page" style="background-color: #F4F7FC;">
                         <i class="fa-regular fa-hashtag"></i>
                         <span class="text-dark tag-name">Travel</span>
                     </a>
@@ -60,7 +60,7 @@
                 {{-- @endforeach --}}
             </ul>
         </div>
-        <div class="my-5">
+        <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Fav</p>
             <ul class="nav nav-pills flex-column px-0">
                 {{-- @foreach ($recent_tags as $tag) --}}
@@ -95,22 +95,22 @@
     <!-- Chats -->
     <div class="col">
         <!-- Header -->
-        <div class="bg-white py-3 border border-top-0">
+        <div class="bg-white my-3 py-1 border border-top-0">
             <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
             <a href="#" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">Travel</a>
         </div>
         <!-- Body (Need to update to show chats the user wants) -->
-        <div class="row mx-2 my-3 p-0">
-            <div class="col-1">
+        <div class="row mt-2 p-0 chat-body">
+            <div class="col-1 mx-1 pe-0">
                 @include('contents.title')
             </div>
-            <div class="col ps-0">
+            <div class="col ms-0 p-0">
                 @include('contents.body')
             </div>
         </div>
-        <!-- Send bar -->
+            <!-- Send bar -->
         <div class="bg-white">
-            <form action="#" method="post">
+            <form action="#" method="post" class="ms-0 mb-5 ps-0">
                 @csrf
                 <div class="input-group">
                     <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm" placeholder="Type your message #Travel"></textarea>

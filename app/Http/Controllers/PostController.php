@@ -112,7 +112,7 @@ class PostController extends Controller
         foreach($post_tags as $post_tag){
             $tags[] = Tag::find($post_tag->tag_id);
         }
-        return view('users.profiles.posts.show', compact('post', 'post_tags', 'tags'));
+        return view('users.profiles.posts.show', compact('post', 'tags'));
     }
 
     /**
@@ -137,7 +137,7 @@ class PostController extends Controller
             return redirect()->route('index');
         endif;
 
-        return view('users.profiles.posts.edit', compact('post', 'post_tags', 'tags', 'tag_count'));
+        return view('users.profiles.posts.edit', compact('post', 'tags', 'tag_count'));
     }
 
     /**
@@ -176,6 +176,7 @@ class PostController extends Controller
 
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
+        $count         = 0;
         foreach($request->tag as $tag){
             if(!is_Null($tag)){
                 $db_tags = Tag::get();
@@ -192,19 +193,24 @@ class PostController extends Controller
                     }
                 }
                 if($is_new){
-                    // create data in tags table if it is new
+                    // create Tag if it is new
                     Tag::create([
                         'tag' => $tag,
                     ]);
+                    // delete old PostTag
+                    PostTag::where('tag_id', $request->old_tag_id[$count])->delete();
+
                     // create data in post_tags table
                     PostTag::create([
                         'post_id' => $id,
                         'tag_id'  => $new_tag_id,
                     ]);
-                    PostTag::where(tag()->tag, $tag)->delete();
+
+                    // delete old Tag if it has no users or no other posts
                     $new_tag_id++;
                 }
             }
+            $count++;
         }
 
 

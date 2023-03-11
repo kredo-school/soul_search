@@ -38,6 +38,7 @@
                         <label for="tag" class="form-label">Tags(up to 3)</label>
                         @foreach ($tags as $tag)
                             <input name="tag[]" type="text" class="form-control" id="tag[]" value="{{ old('tag[]', $tag->tag) }}">
+                            <input name="old_tag_id[]" type="hidden" value="{{ $tag->id }}">
                         @endforeach
                         @if ($tag_count < 3)
                             @for ($i = 0; $i < 3 - $tag_count; $i++)

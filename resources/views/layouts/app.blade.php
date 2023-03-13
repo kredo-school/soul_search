@@ -38,13 +38,13 @@
                 @include('layouts.side')
                 </div>
             </div>
-            <div class="col-10 p-0">
-                <div class="ss-main">
+            <div class="col-10 p-0" style="height: 100%">
+                <div class="ss-main" style="height: 100%">
     @endif
 
                         {{-- content --}}
-                        <div class="container-fluid p-0">
-                            <div class="row">
+                        <div class="container-fluid p-0" style="height: 100%">
+                            <div class="row" style="height: 100%">
                                     @yield('content')
                             </div>
                         </div>

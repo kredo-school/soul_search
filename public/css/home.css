@@ -6,7 +6,7 @@
 
 .ss-sidebar {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: white;
 }
 
@@ -39,7 +39,7 @@ html, body, .container-fluid, .row {
   }
 }
 .container {
-  height: 100vh !important;
+  height: 100%;
 }
 
 .ul {
@@ -110,4 +110,14 @@ html, body, .container-fluid, .row {
   overflow-x: hidden;
   overflow-y: scroll;
   height: 90%;
+}
+
+.fa-circle-plus {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+/* Hide input:file for image */
+.form-image {
+  display: none;
 }

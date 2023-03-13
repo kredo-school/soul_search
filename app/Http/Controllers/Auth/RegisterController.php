@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -36,8 +39,12 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+     private $start_tag;
+
+    public function __construct(Tag $start_tag)
     {
+        $this->start_tag = $start_tag;
         $this->middleware('guest');
     }
 
@@ -69,7 +76,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -78,5 +85,21 @@ class RegisterController extends Controller
 
     public function redirectPath(){
         return '/tag_register';
+    }
+
+    public function store(Request $request){
+        $request->validate([
+            'tag_name' => 'required|min:1|max:255'
+        ]);
+
+        foreach($request->tag_name as $tag) {
+            $data = [
+                'is_main' => 1,
+                'tag' => $tag,
+                'user_id' => $user -> id,
+            ];
+            Tag::create($data);
+        }
+        return redirect()->route('home');
     }
 }

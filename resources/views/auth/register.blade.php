@@ -6,6 +6,9 @@
 
 @section('title','Create Account')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{{ mix('js/registration.js') }}"></script>
+
 @section('content')
 <div class="container">
     <img src="{{ asset('img/logo.svg')}}" class="float-left mt-2">
@@ -25,14 +28,14 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-8 mb-3 rounded-box btn-orange">
-                            <span class="col-5 text-center text-orange rounded-box btn-white">Profile</span>
+                            <span class="col-5 text-center text-orange rounded-box btn-white ">Profile</span>
                             <span class="col-5 text-end text-white rounded-box">Tags</span>
                         </div>
                     </div>
 
                     <h2 class="text-center fw-bold mt-2">Your Profile</h2>
                     <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
-                    <form method="POST" action="{{ route('register') }}" class="contact-form">
+                    <form method="POST" action="{{ route('store') }}" class="contact-form">
                         @csrf
 
                         <div class="form-section">
@@ -147,7 +150,7 @@
                             <div class="row mb-0 ">
                                 <div class="col-md-6 offset-md-3">
                                     <div class="form-navigation">
-                                        <button class="previous btn btn-primary text-white mb-3 float-left">&gl; Previous</button>
+                                        <button class="previous btn btn-primary text-white mb-3 float-left">&lt; Previous</button>
                                         <button class="next btn btn-orange text-white mb-3 float-right">Next &gt;</button>
                                         <button type="submit" class="btn btn-orange text-white mb-3 float-right">
                                             {{ __('Save') }}
@@ -183,41 +186,7 @@
     </div>
 </div>
 
-<script>
-    $(function(){
-        var $sections = $('.form-section');
 
-        function navigateTo(index){
-            $sections.removeClass('current').eq(index).addClass('current');
-            $('.form-navigation .previous').toggle(index>0);
-            var atTheEnd = index >= $sections.length - 1;
-            $('.form-navigation .next').toggle(!atTheEnd);
-            $('.form-navigation [type=submit]').toggle(atTheEnd);
-        }
-
-        function curIndex(){
-            return $sections.index($sections.filter('.current'));
-        }
-
-        $('.form-navigation .previous').click(function(){
-            navigateTo(curIndex()-1);
-        });
-
-        $('.form-navigation .next').click(function(){
-            $('.contact-form').parsley().whenValidate({
-                group: 'block-' + curIndex()
-            }).done(function(){
-                navigateTo(curIndex()+1);
-            });
-        });
-
-        $sections.each(function(index,section){
-            $(section).find(':input').attr('data-parsley-group','block-'+index);
-        });
-
-        navigateTo(0);
-    });
-</script>
 
 @endsection
 

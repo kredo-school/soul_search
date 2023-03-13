@@ -9,10 +9,14 @@ use App\Models\CommentLike;
 class CommentLikeController extends Controller
 {
     public function store(Request $request){
-        CommentLike::create([
-            'comment_id' => $request->comment_id,
-            'user_id'    => Auth::id(),
-        ]);
+        if(CommentLike::onlyTrashed()->where('user_id', Auth::id())->where('comment_id', $request->comment_id)->exists()){
+            CommentLike::onlyTrashed()->where('user_id', Auth::id())->where('comment_id', $request->comment_id)->restore();
+        }else{
+            CommentLike::create([
+                'comment_id' => $request->comment_id,
+                'user_id' => Auth::id(),
+            ]);
+        }
 
         return redirect()->back();
     }

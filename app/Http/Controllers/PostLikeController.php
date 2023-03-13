@@ -9,10 +9,14 @@ use App\Models\PostLike;
 class PostLikeController extends Controller
 {
     public function store(Request $request){
-        PostLike::create([
-            'post_id' => $request->post_id,
-            'user_id' => Auth::id(),
-        ]);
+        if(PostLike::onlyTrashed()->where('user_id', Auth::id())->where('post_id', $request->post_id)->exists()){
+            PostLike::onlyTrashed()->where('user_id', Auth::id())->where('post_id', $request->post_id)->restore();
+        }else{
+            PostLike::create([
+                'post_id' => $request->post_id,
+                'user_id' => Auth::id(),
+            ]);
+        }
 
         return redirect()->back();
     }

@@ -93,7 +93,7 @@
         </div>
     </div>
     <!-- Chats -->
-    <div class="col">
+    <div class="col" style="height: 95%">
         <!-- Header -->
         <div class="bg-white my-3 py-1 border border-top-0">
             <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
@@ -109,16 +109,27 @@
             </div>
         </div>
             <!-- Send bar -->
-        <div class="bg-white">
-            <form action="#" method="post" class="ms-0 mb-5 ps-0">
+        <div class="bg-white mt-3 mb-0">
+            <form action="#" method="post" class="ms-0 ps-0">
                 @csrf
-                <div class="input-group">
-                    <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm" placeholder="Type your message #Travel"></textarea>
-                    <button type="submit" class="btn btn-orange">Send</button>
+                <div class="row gx-2">
+                    <div class="col-sm">
+                        <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #Travel"></textarea>
+                        @error('chat')
+                        <div class="text-danger small">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-sm-1">
+                        <label for="image" class="form-label col-sm-1"><i class="fa-solid fa-circle-plus fa-2x text-secondary"></i></label>
+                        <input type="file" name="image" id="image" class="form-image">
+                        @error('image')
+                            <div class="text-danger small">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-sm-1 ps-0">
+                        <button type="submit" class="btn btn-orange">Send</button>
+                    </div>
                 </div>
-                @error('chat')
-                    <div class="text-danger small">{{ $message }}</div>
-                @enderror
             </form>
         </div>
     </div>

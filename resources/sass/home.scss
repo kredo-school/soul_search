@@ -1,0 +1,114 @@
+.ss-container {
+	display: flex;
+	width: 100%;
+    height: 100vh;
+}
+.ss-sidebar {
+	width: 100%;
+    height: 100vh;
+    background-color: white;
+}
+
+@media screen and (max-width: 700px) {
+	.ss-sidebar {
+		width: 45px;
+	}
+}
+
+.ss-main {
+	width: 100%;
+	margin:0;
+}
+
+html, body, .container-fluid, .row {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* set login-icon position at left-bottom */
+.login-icon {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+@media screen and (max-width: 700px) {
+	.login-icon {
+		left: 5px;
+	}
+}
+
+.container {
+    height: 100vh !important;
+}
+
+.ul {
+    list-style: none;
+    padding-left: 0
+}
+
+.btn-orange {
+    background:#FFB84D;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #e5a545;
+    --bs-btn-hover-border-color: #e5a545;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #e5a545;
+    --bs-btn-active-border-color: #e5a545;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #FFB84D;
+    --bs-btn-disabled-border-color: #FFB84D;
+}
+
+.fa-hashtag {
+    color: #6A9DFF;
+}
+
+.tag-header {
+    --bs-text-opacity: .7;
+}
+
+.tag-bar {
+    height: 100%;
+}
+
+.tag-name {
+    --bs-text-opacity: .5;
+}
+
+.logo-center {
+    text-align: center;
+}
+
+.textarea {
+    resize: none;
+}
+
+/* hide when the display width is <= 700px */
+@media screen and (max-width: 700px) {
+	.hide-700 {
+		display: none;
+	}
+}
+
+/* show when the display width is <= 700px */
+.show-700 {
+    display: none;
+}
+@media screen and (max-width: 700px) {
+	.show-700 {
+		display: block;
+	}
+}
+
+.text-orange {
+    color: #FFB84D;
+}
+
+.chat-body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 90%;
+}

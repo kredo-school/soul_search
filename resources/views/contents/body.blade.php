@@ -1,20 +1,17 @@
-<div class="container">
-    <div class="row align-items-center">
-        <!-- Username -->
-        <div class="col ps-0">
-            <a href="{{ route('profile.show', $chat->user->id) }}" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
-        </div>
-        <!-- Date -->
-        <div class="col">
-            <p class="text-muted fw-light">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</p>
+<div class="container p-0">
+    <div class="row">
+        <!-- Username and Date -->
+        <div class="col pt-0 ps-2">
+            <a href="#" class="text-decoration-none text-dark fw-bold">Username</a>
+            &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">3/8/2023 21:09</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
         <div class="col-auto text-end">
             <i class="fa-regular fa-heart"></i>
-            <span>{{ $chat->likes->count() }}</span>
+            <span>5</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
-        <div class="col-auto text-end">
+        <div class="col-auto text-end me-5">
             <button class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>
@@ -26,11 +23,7 @@
             {{-- @include(for Report) --}}
         </div>
     </div>
-
-    <div class="row align-items-center">
-        <p class="d-inline fw-light">{{ $chat->chat }}</p>
-        @if ($chat->image)
-            <img src="{{ asset('storage/images/' . $chat->image) }}" alt="{{ $chat->image }}">
-        @endif
-    </div>
+    <!-- Message -->
+    <p class="text-dark fw-light ms-2 w-75">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, placeat porro! Quas ipsa, nihil veniam nisi vero voluptatum itaque eos, assumenda sunt exercitationem ipsum! Consectetur quod at eos voluptatum quidem!</p>
+        {{-- <img src="#" alt=""> --}}
 </div>

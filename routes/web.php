@@ -26,16 +26,14 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
     #CHAT
     Route::post('/tag/{tag_id}/chats', [ChatController::class, 'store'])->name('chat.store');
 
     #TAG
     Route::post('/tag/{tag_id}/store', [TagController::class, 'store'])->name('tag.store');
-
-    #PROFILE
-    Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
 
     #LIKE
     Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');

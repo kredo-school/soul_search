@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\CommentLikeController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
@@ -35,11 +42,22 @@ Route::group(['middleware' => 'auth'], function(){
     #TAG
     Route::post('/tag/{tag_id}/store', [TagController::class, 'store'])->name('tag.store');
 
-    #PROFILE
-    Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
-
     #LIKE
     Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
+
+    #Profile(User)
+    Route::resource('/profile', UserController::class);
+
+    #Post
+    Route::resource('/post', PostController::class);
+    #PostLike
+    Route::resource('/postlike', PostLikeController::class);
+
+    #Comment
+    Route::resource('/comment', CommentController::class);
+    #CommentLike
+    Route::resource('/commentlike', CommentLikeController::class);
+
 });
 

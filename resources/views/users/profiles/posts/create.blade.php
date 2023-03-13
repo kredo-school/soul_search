@@ -3,7 +3,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">
 			<div class="modal-header">
-				<h2 class="h5" id="createPostHd">Create Post</h2>
+				<h2 class="h5" id="createPostModal">Create Post</h2>
 			</div>
 			<div class="modal-body">
                 <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-orange btn-sm px-5">Post</button>
+                        <button type="submit" class="btn btn-success btn-sm px-5">Post</button>
                     </div>
                 </form>
 

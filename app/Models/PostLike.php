@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostTag extends Model
+class PostLike extends Model
 {
     use HasFactory;
-    protected $table='post_tags';
-    protected $fillable = ['post_id','tag_id'];
+    protected $table='post_likes';
+    protected $fillable = ['post_id','user_id'];
     public $timestamps = false;
 
     public function post()
@@ -17,8 +17,8 @@ class PostTag extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function tag()
+    public function user()
     {
-        return $this->belongsTo(Tag::class);
+        return $this->belongsTo(User::class);
     }
 }

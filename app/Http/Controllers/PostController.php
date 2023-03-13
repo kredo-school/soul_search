@@ -82,10 +82,9 @@ class PostController extends Controller
                 $is_new = false;
                 // create data in post_tags table
                 PostTag::create([
-                    'post_id' => Post::latest()->first()->id,
+                    'post_id' => $id,
                     'tag_id'  => $db_tag->id,
                 ]);
-                break;
             }
         }
         if($is_new){
@@ -114,12 +113,18 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+
+        Post::where('id', $id)
+            ->update([
+                'view_count' => $post->view_count + 1,
+        ]);
+
         $post_tags = PostTag::where('post_id', $id)->get();
         $tags      = [];
         foreach($post_tags as $post_tag){
             $tags[] = Tag::find($post_tag->tag_id);
         }
-        return view('users.profiles.posts.show', compact('post', 'post_tags', 'tags'));
+        return view('users.profiles.posts.show', compact('post', 'tags'));
     }
 
     /**
@@ -219,15 +224,8 @@ class PostController extends Controller
     }
 
     private function deleteTag($request, $count){
-        // delete old Tag if it has no users or no other posts
-        $old_tag = Tag::where('id', $request->old_tag_id[$count])->first();
-        if(empty($old_tag->userTags()) && (count($old_tag->postTags()) == 1) && empty($old_tag->chats())){
-            Tag::where('id', $request->old_tag_id[$count])->delete();
-        }
-
         // delete old PostTag
         PostTag::where('tag_id', $request->old_tag_id[$count])->delete();
-
     }
 
     /**
@@ -238,10 +236,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::where('id', $id);
-        $this->deleteImage($post->image);
-        $post->delete();
+        Post::where('id', $id)->delete();
 
-        return redirect()->route('post.show', $id);
+        return redirect()->route('profile.index');
     }
 }

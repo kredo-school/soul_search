@@ -8,13 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-  private $comment;
-
-  public function __construct(Comment $comment)
-  {
-      $this->comment = $comment;
-  }
-
     /**
      * Display a listing of the resource.
      *
@@ -48,11 +41,11 @@ class CommentController extends Controller
           'comment' => 'required|min:1|max:255',
       ]);
 
-      // save data to post table
-      $this->comment->user_id  = Auth::user()->id;
-      $this->comment->post_id  = $request->post_id;
-      $this->comment->comment  = $request->comment;
-      $this->comment->save();
+    Comment::create([
+        'post_id'  => $request->post_id,
+        'user_id'  => Auth::id(),
+        'comment'  => $request->comment,
+    ]);
 
       return redirect()->back();
     }
@@ -99,8 +92,8 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-      $this->comment->destroy($id);
+        Comment::where('id', $id)->delete();
 
-      return redirect()->back();
+        return redirect()->back();
     }
 }

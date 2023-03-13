@@ -1,16 +1,16 @@
 {{-- report post modal --}}
-<div class="modal fade" id="reportPostModal" tabindex="-1" aria-labelledby="reportPostModalLabel" aria-hidden="true">
+<div class="modal fade" id="reportCommentModal" tabindex="-1" aria-labelledby="reportCommentModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">
 			<div class="modal-header">
-				<h2 class="modal-title" id="reportPostModal">Report Post</h2>
+				<h2 class="modal-title" id="reportCommentModal">Report Comment</h2>
 			</div>
 			<div class="modal-body">
                 <div class="mb-3">tell us the problem</div>
                 <div>
                     <form action="#" method="post">
                         @csrf
-                        <input type="hidden" value="{{ $post->id }}" name="post_id">
+                        <input type="hidden" value="{{ $comment->id }}" name="comment_id">
 
                         <div class="mb-2">
                             <input type="checkbox" class="form-check-input" id="comms" name="violation_types[]" value="communication">

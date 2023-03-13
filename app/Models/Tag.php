@@ -21,12 +21,16 @@ class Tag extends Model
     }
 
     // To get all the tags that the user has
+    public function isRecent(){
+        return $this->belongsTo(User::class, 'recent');
+    }
+
     public function isMain(){
-        return $this->belongsTo(User::class, 'is_main');
+        return $this->belongsTo(User::class, 'main');
     }
 
     public function isFav(){
-        return $this->belongsTo(User::class, 'is_fav');
+        return $this->belongsTo(User::class, 'favorite');
     }
 
     public function postTags()

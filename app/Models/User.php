@@ -21,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -63,12 +64,16 @@ class User extends Authenticatable
     }
 
     // To get all the tags that the user has
-    public function isMain(){
-        return $this->hasMany(Tag::class, 'is_main');
+    public function isRecent(){
+        return $this->hasMany(Tag::class, 'recent');
     }
 
-    public function isFAv(){
-        return $this->hasMany(Tag::class, 'is_fav');
+    public function isMain(){
+        return $this->hasMany(Tag::class, 'main');
+    }
+
+    public function isFav(){
+        return $this->hasMany(Tag::class, 'favorite');
     }
 
     // Add the functions about following/followed later

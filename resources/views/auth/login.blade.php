@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Login')
+
 @section('styles')
 <link href="{{ mix('css/login.css') }}" rel="stylesheet">
 @endsection

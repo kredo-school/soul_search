@@ -1,67 +1,33 @@
 <a href="#" class="text-decoration-none ms-3">
-    <img src="{{ asset('img/logo.svg')}}" class="my-3 hide-700">
+    <img src="{{ asset('img/logo.svg')}}" class="m-3 hide-700">
     <img src="{{ asset('img/logo-s.svg')}}" class="show-700">
 </a>
-<ul class="ms-0 mb-auto mt-4">
-
-    {{-- orange icon, bold text, gray backcround @ home page --}}
-    @if (request()->is('*home*'))
-        <li class="py-2 ps-3 bg-light">
-            <a href="#" class="nav-link active" aria-current="page">
-                <i class="fa-solid fa-house text-orange"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">Home</span></span>
-            </a>
-        </li>
-    @else
-        <li class="py-2 ps-3">
-            <a href="#" class="nav-link active" aria-current="page">
-                <i class="fa-solid fa-house"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</span>
-            </a>
-        </li>
-    @endif
-
-    {{-- orange icon, bold text, gray backcround @ profile or post page --}}
-    @if (request()->is('*profile*') || request()->is('*post*'))
-        <li class="py-2 ps-3 bg-light">
-            <a href="#" class="nav-link link-dark">
-                <i class="fa-solid fa-user text-orange"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">My Profile</span></span>
-            </a>
-        </li>
-    @else
-       <li class="py-2 ps-3">
-            <a href="#" class="nav-link link-dark">
-                <i class="fa-solid fa-user"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile</span>
-            </a>
-        </li>
-    @endif
-
-
-
-    <li class="py-2 ps-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-comment-dots"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message</span>
+<ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
+    <li class="my-3">
+        <a href="#" class="nav-link active" aria-current="page">
+            <i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home
         </a>
     </li>
-
-    <li class="py-2 ps-3">
+    <li class="my-3">
         <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-magnifying-glass"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search</span>
+            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile
         </a>
     </li>
-
-    {{-- orange icon, bold text, gray backcround @ contact page --}}
-    @if (request()->is('*contact*'))
-        <li class="py-2 ps-3 bg-light">
-            <a href="#" class="nav-link link-dark">
-                <i class="fa-solid fa-circle-question text-orange"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">Contact Us</span></span>
-            </a>
-        </li>
-    @else
-        <li class="py-2 ps-3">
-            <a href="#" class="nav-link link-dark">
-                <i class="fa-solid fa-circle-question"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us</span>
-            </a>
-        </li>
-    @endif
+    <li class="my-3">
+        <a href="#" class="nav-link link-dark">
+            <i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message
+        </a>
+    </li>
+    <li class="my-3">
+        <a href="#" class="nav-link link-dark">
+            <i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search
+        </a>
+    </li>
+    <li class="my-3">
+        <a href="#" class="nav-link link-dark">
+            <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us
+        </a>
+    </li>
 </ul>
 
 
@@ -78,17 +44,17 @@
                 </li>
             @endif
 
-            @if (Route::has('register'))
-                <li class="ps-3">
-                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-            @endif
-        @else
-        <li class="ps-3">
-            <a class="nav-link dropdown-toggle" href="#" role="button"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->name }}
-            </a>
+@if (Route::has('register'))
+    <li class="dropdown-item">
+        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+    </li>
+@endif
+@else
+<li class="dropdown-item dropdown">
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        {{ Auth::user()->name }}
+    </a>
 
             <a class="" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

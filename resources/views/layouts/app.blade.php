@@ -26,7 +26,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/side.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 
@@ -35,26 +34,32 @@
     {{-- not showing in login, register, or post pages --}}
     @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*'))
     @else
-        <div class="ss-container">
-            {{-- side bar --}}
-            <div class="ss-sidebar">
+    <div class="ss-container">
+        <div class="row" style="height: 100%">
+            <div class="col-2 p-0">
+                {{-- side bar --}}
+                <div class="ss-sidebar">
                 @include('layouts.side')
+                </div>
             </div>
-            <div class="ss-main">
-                <div class="container">
-                    <div class="row">
+            <div class="col-10 p-0" style="height: 100%">
+                <div class="ss-main" style="height: 100%">
     @endif
 
-                            {{-- content --}}
-                            @yield('content')
+                        {{-- content --}}
+                        <div class="container-fluid p-0" style="height: 100%">
+                            <div class="row" style="height: 100%">
+                                    @yield('content')
+                            </div>
+                        </div>
 
-    {{-- not showing in login, register, or post-show pages --}}
+            {{-- not showing in login or register pages --}}
+            @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password/reset*') || request()->is('*password/email*') || request()->is('*password/confirm*'))
+            @else
                     </div>
-                </div>
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*'))
-    @else
             </div>
         </div>
+    </div>
     @endif
 
 </body>

@@ -76,30 +76,25 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $user = User::create([
+        User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
 
-    public function redirectPath(){
-        return '/tag_register';
-    }
 
-    public function store(Request $request){
-        $request->validate([
-            'tag_name' => 'required|min:1|max:255'
-        ]);
+    // public function store(Request $request){
+    //     $request->validate([
+    //         'tag_name' => 'required|min:1|max:255'
+    //     ]);
 
-        foreach($request->tag_name as $tag) {
-            $data = [
-                'is_main' => 1,
-                'tag' => $tag,
-                'user_id' => $user -> id,
-            ];
-            Tag::create($data);
-        }
-        return redirect()->route('home');
-    }
+    //     foreach($request->tag_name as $tag) {
+    //         $data = [
+    //             'tag' => $tag,
+    //         ];
+    //         Tag::create($data);
+    //     }
+    //     return redirect()->route('home');
+    // }
 }

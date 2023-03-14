@@ -30,25 +30,21 @@
         </a>
     </li>
 
-    <li class="nav-item ms-3">
-        <a href="#" class="flex-fill nav-link link-dark">
-            <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;
-            <span class="text-dark hide-700">
-                Contact Us</span>
-        </a>
-    </li>
-
     {{-- orange icon, bold text, gray backcround @ contact page --}}
     @if ( request()->is('*contact*'))
-        <li class="py-2 ps-3 bg-light">
-            <a href="#" class="nav-link link-dark">
-                <i class="fa-solid fa-circle-question text-orange"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">Contact Us</span></span>
+        <li class="nav-item ms-3 bg-light">
+            <a href="#" class="flex-fill nav-link link-dark">
+                <i class="fa-solid fa-circle-question text-orange"></i>&nbsp;&nbsp;
+                <span class="text-dark hide-700">
+                    Contact Us</span>
             </a>
         </li>
     @else
-        <li class="py-2 ps-3">
-            <a href="#" class="nav-link link-dark">
-                <i class="fa-solid fa-circle-question"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us</span>
+        <li class="nav-item ms-3">
+            <a href="#" class="flex-fill nav-link link-dark">
+                <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;
+                <span class="text-dark hide-700">
+                    Contact Us</span>
             </a>
         </li>
     @endif

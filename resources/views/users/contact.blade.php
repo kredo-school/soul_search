@@ -2,6 +2,9 @@
 
 @section('title', 'ContactUs')
 
+@section('styles')
+    <link href="{{ mix('css/contact.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
     <div class="container mb-3 mt-5">

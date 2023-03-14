@@ -1,37 +1,40 @@
 <a href="#" class="text-decoration-none ms-3">
-    <img src="{{ asset('img/logo.svg')}}" class="my-3 hide-700">
+    <img src="{{ asset('img/logo.svg')}}" class="m-3 hide-700">
     <img src="{{ asset('img/logo-s.svg')}}" class="show-700">
 </a>
-<ul class="ms-0 mb-auto mt-4">
+<ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
 
     {{-- orange icon, bold text, gray backcround @ home page --}}
-    @if ( request()->is('*home*'))
-        <li class="py-2 ps-3 bg-light">
-            <a href="#" class="nav-link active" aria-current="page">
-                <i class="fa-solid fa-house text-orange"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fw-bold">Home</span></span>
-            </a>
-        </li>
-    @else
-        <li class="py-2 ps-3">
-            <a href="#" class="nav-link active" aria-current="page">
-                <i class="fa-solid fa-house"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</span>
-            </a>
-        </li>
-    @endif
+    <li class="nav-item ms-3 px-0">
+        <a href="#" class="flex-fill nav-link active fw-bold" aria-current="page" style="background-color: #F4F7FC;">
+            <i class="fa-solid fa-house text-orange"></i>&nbsp;&nbsp;
+            <span class="text-dark hide-700">Home</span>
+        </a>
+    </li>
+    <li class="nav-item ms-3">
+        <a href="#" class="flex-fill nav-link link-dark">
+            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
+            <span class="text-dark hide-700">My Profile</span>
+        </a>
+    </li>
+    <li class="nav-item ms-3">
+        <a href="#" class="flex-fill nav-link link-dark">
+            <i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;
+            <span class="text-dark hide-700">Message</span>
+        </a>
+    </li>
+    <li class="nav-item ms-3">
+        <a href="#" class="flex-fill nav-link link-dark">
+            <i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;
+            <span class="text-dark hide-700">Search</span>
+        </a>
+    </li>
 
-    <li class="py-2 ps-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-user"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile</span>
-        </a>
-    </li>
-    <li class="py-2 ps-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-comment-dots"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message</span>
-        </a>
-    </li>
-    <li class="py-2 ps-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-magnifying-glass"></i><span class="hide-700">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search</span>
+    <li class="nav-item ms-3">
+        <a href="#" class="flex-fill nav-link link-dark">
+            <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;
+            <span class="text-dark hide-700">
+                Contact Us</span>
         </a>
     </li>
 

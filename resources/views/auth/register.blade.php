@@ -35,18 +35,18 @@
 
                     <h2 class="text-center fw-bold mt-2">Your Profile</h2>
                     <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
-                    <form method="POST" action="{{ route('store') }}" class="contact-form">
+                    <form method="POST" action="{{ route('register') }}" class="contact-form">
                         @csrf
 
                         <div class="form-section">
                             {{--  Username  --}}
                             <div class="row mb-3 justify-content-center">
                                 <div>
-                                    <label for="name" class="text-position">{{ __('Username') }}</label>
+                                    <label for="username" class="text-position">{{ __('Username') }}</label>
                                 </div>
 
                                 <div class="col-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="username" type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">

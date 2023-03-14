@@ -195,11 +195,11 @@ class PostController extends Controller
                 if(Tag::where('id', $request->old_tag_id[$count])->first()->tag !== $tag){
                     if(!is_Null($tag)){
                         // both old and new exist
-                        $this->deleteTag($request, $count);
+                        $this->deleteTag($request, $count, $id);
                         $new_tag_id = $this->storeTag($id, $tag, $new_tag_id);
                     }else{
                         // only old exists
-                        $this->deleteTag($request, $count);
+                        $this->deleteTag($request, $count, $id);
                     }
                 }
             }else{
@@ -223,9 +223,9 @@ class PostController extends Controller
         }
     }
 
-    private function deleteTag($request, $count){
+    private function deleteTag($request, $count, $post_id){
         // delete old PostTag
-        PostTag::where('tag_id', $request->old_tag_id[$count])->delete();
+        PostTag::where('tag_id', $request->old_tag_id[$count])->where('post_id', $post_id)->delete();
     }
 
     /**

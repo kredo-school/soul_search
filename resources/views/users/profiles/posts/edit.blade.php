@@ -2,6 +2,10 @@
 
 @section('title', 'Profile')
 
+@section('style')
+    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <div class="row w-100">
 

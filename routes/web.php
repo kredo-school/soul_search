@@ -39,9 +39,6 @@ Route::group(['middleware' => 'auth'], function(){
     #TAG
     Route::post('/tag/{tag_id}/store', [TagController::class, 'store'])->name('tag.store');
 
-    #PROFILE
-    Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
-
     #LIKE
     Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');

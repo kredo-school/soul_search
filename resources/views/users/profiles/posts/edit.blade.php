@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link href="{{ mix('css/post.css') }}" rel="stylesheet">
+@endsection
+
 @section('title', 'Profile')
 
 @section('content')

@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -42,7 +45,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tags(){
+    public function chats(){
+        return $this->hasMany(Chat::class)->latest();
+    }
+
+    public function tag(){
         return $this->hasMany(Tag::class);
     }
+
+    // To get all the tags that the user has
+    public function isRecent(){
+        return $this->hasMany(Tag::class, 'recent');
+    }
+
+    public function isMain(){
+        return $this->hasMany(Tag::class, 'main');
+    }
+
+    public function isFav(){
+        return $this->hasMany(Tag::class, 'favorite');
+    }
+
+    // Add the functions about following/followed later
 }

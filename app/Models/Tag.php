@@ -11,6 +11,10 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'tag',
+    ];
+
     public function chats(){
         return $this->hasMany(Chat::class)->latest();
     }

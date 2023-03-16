@@ -14,33 +14,10 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    // protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-     private $start_tag;
+    private $start_tag;
 
     public function __construct(Tag $start_tag)
     {
@@ -60,6 +37,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'tag_name' => ['required', 'min:1', 'max:255']
         ]);
     }
 
@@ -76,25 +54,23 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        foreach($data['tag_name'] as $tag) {
+            $tag_data = [
+                'tag' => $tag,
+            ];
+            Tag::create($tag_data);
+        }
+
+        return $user;
     }
 
 
-    // public function store(Request $request){
-    //     $request->validate([
-    //         'tag_name' => 'required|min:1|max:255'
-    //     ]);
 
-    //     foreach($request->tag_name as $tag) {
-    //         $data = [
-    //             'tag' => $tag,
-    //         ];
-    //         Tag::create($data);
-    //     }
-    //     return redirect()->route('home');
-    // }
 }

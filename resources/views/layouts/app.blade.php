@@ -28,7 +28,7 @@
     @yield('styles')
 </head>
 
-<body>
+<body class="back-color">
 
     {{-- not showing in login or register pages --}}
     @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password/reset*') || request()->is('*password/email*') || request()->is('*password/confirm*'))

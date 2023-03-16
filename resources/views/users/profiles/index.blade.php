@@ -18,7 +18,7 @@
                 <div class="row">
                     @foreach ($posts as $post)
                     <div class="col-md-3 profile-post">
-                        <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" height="200"></a>
+                        <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" height="200"></a>
                     </div>
                     @endforeach
 

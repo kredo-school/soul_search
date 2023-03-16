@@ -6,7 +6,7 @@
 				<h2 class="h5" id="createPostModal">Create Post</h2>
 			</div>
 			<div class="modal-body">
-                <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">

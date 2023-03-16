@@ -59,10 +59,6 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if($id === Auth::id()){
-            $this->index();
-        }
-
         $user = User::find($id);
 
         $user_tags = UserTag::where('user_id', $id)->get();
@@ -70,6 +66,7 @@ class UserController extends Controller
         foreach($user_tags as $user_tag){
             $tags[] = Tag::find($user_tag->tag_id);
         }
+
         return view('users.profiles.show', compact('user', 'tags'));
     }
 

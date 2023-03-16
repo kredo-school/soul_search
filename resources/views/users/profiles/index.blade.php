@@ -15,7 +15,7 @@
 
                         {{-- avatar --}}
                         @if ($user->avatar)
-                            <img src="{{ asset('/storage/images/'. $user->avatar) }}" class="" alt="">
+                            <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="" alt="">
                         @else
                             <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
                         @endif

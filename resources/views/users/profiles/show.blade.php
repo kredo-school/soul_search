@@ -15,7 +15,7 @@
 
                         {{-- avatar --}}
                         @if ($user->avatar)
-                            <img src="{{ asset('/storage/images/'. $user->avatar) }}" class="" alt="">
+                            <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="" alt="">
                         @else
                             <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
                         @endif
@@ -40,29 +40,43 @@
                             {{-- introduction --}}
                             {{ $user->introduction }}
                         </div>
-                        {{-- send message --}}
-                        <a href="#" class="btn btn-orange float-end ms-3">
-                            send message
-                        </a>
 
-                        {{-- if followed --}}
-                        @if ($user->isFollowedBy(Auth::id()))
-                        <form action="{{ route('follow.destroy', $user->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" type="submit">
-                            <span class="px-2">UnFollow</span>
+                        {{-- check if the login user's profile or not --}}
+                        @if($user->id === Auth::id())
+                            {{-- edit profile --}}
+                            <a href="{{ route('profile.edit', Auth::id()) }}" class="btn btn-orange float-end ms-3 px-4">
+                                edit
+                            </a>
+                            <!-- create post modal-->
+                            <button class="btn btn-outline-secondary float-end" type="button"  data-bs-toggle="modal" data-bs-target="#createPostModal">
+                                create post
                             </button>
-                        </form>
-                        {{-- if NOT followed --}}
+                            @include('users.profiles.posts.create')
+
                         @else
-                        <form action="{{ route('follow.store')}}" method="post">
-                            @csrf
-                            <input type="hidden" value="{{ $user->id }}" name="user_id">
-                            <button class="btn btn-sm btn-secondary" type="submit">
-                            <span class="px-2">Follow</span>
-                            </button>
-                        </form>
+                            {{-- send message --}}
+                            <a href="#" class="btn btn-orange float-end ms-3">
+                                send message
+                            </a>
+                            {{-- if followed --}}
+                            @if ($user->isFollowedBy(Auth::id()))
+                            <form action="{{ route('follow.destroy', $user->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger float-end" type="submit">
+                                <span class="px-2">unfollow</span>
+                                </button>
+                            </form>
+                            {{-- if NOT followed --}}
+                            @else
+                            <form action="{{ route('follow.store')}}" method="post">
+                                @csrf
+                                <input type="hidden" value="{{ $user->id }}" name="user_id">
+                                <button class="btn btn-secondary float-end" type="submit">
+                                <span class="px-2">follow</span>
+                                </button>
+                            </form>
+                            @endif
                         @endif
 
                     </div>

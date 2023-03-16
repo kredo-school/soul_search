@@ -19,16 +19,7 @@ class Tag extends Model
         return $this->belongsTo(User::class)->withTrashed();
     }
 
-    // To get all the tags that the user has
-    public function isRecent(){
-        return $this->belongsTo(User::class, 'recent');
-    }
-
-    public function isMain(){
-        return $this->belongsTo(User::class, 'main');
-    }
-
-    public function isFav(){
-        return $this->belongsTo(User::class, 'favorite');
+    public function userTag(){
+        return $this->hasMany(UserTag::class);
     }
 }

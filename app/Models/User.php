@@ -59,10 +59,6 @@ class User extends Authenticatable
         return $this->hasMany(Chat::class)->latest();
     }
 
-    public function tag(){
-        return $this->hasMany(Tag::class);
-    }
-
     // To get all the tags that the user has
     public function isRecent(){
         return $this->hasMany(Tag::class, 'recent');
@@ -76,5 +72,13 @@ class User extends Authenticatable
         return $this->hasMany(Tag::class, 'favorite');
     }
 
-    // Add the functions about following/followed later
+    public function followers()
+    {
+        return $this->hasMany(Follow::class, 'followed_id');
+    }
+
+    public function isFollowedBy($user_id)
+    {
+        return $this->followers()->where('following_id', '=',  $user_id)->exists();
+    }
 }

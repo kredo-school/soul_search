@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     #Profile(User)
     Route::resource('/profile', UserController::class);
+    Route::post('/user/{id}/update_avatar', [LikeController::class, 'updateAvatar'])->name('user.update.avatar');
 
     #Post
     Route::resource('/post', PostController::class);

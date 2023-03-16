@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Post;
 use App\Models\Tag;
 use App\Models\UserTag;
 use Illuminate\Http\Request;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/images/';
+    const LOCAL_STORAGE_FOLDER = 'public/avatars/';
 
     /**
      * Display a listing of the resource.
@@ -21,8 +20,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('user_id', Auth::id())->latest()->get();
-        return view('users.profiles.index', compact('posts'));
+        $user = User::where('id', Auth::id())->first();
+
+        $user_tags = UserTag::where('user_id', Auth::id())->get();
+        $tags      = [];
+        foreach($user_tags as $user_tag){
+            $tags[] = Tag::find($user_tag->tag_id);
+        }
+        return view('users.profiles.index', compact('user', 'tags'));
     }
 
     /**
@@ -54,6 +59,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        if($id === Auth::id()){
+            $this->index();
+        }
+
         $user = User::find($id);
 
         $user_tags = UserTag::where('user_id', $id)->get();
@@ -70,7 +79,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
         $user      = User::find(Auth::id());
         $user_tags = UserTag::where('user_id', Auth::id())->get();
@@ -133,7 +142,7 @@ class UserController extends Controller
             $count++;
         }
 
-        return redirect()->back();
+        return redirect()->route('profile.index');
     }
 
     private function storeTag($tag, $new_tag_id){
@@ -171,7 +180,7 @@ class UserController extends Controller
         UserTag::where('tag_id', $request->old_tag_id[$count])->where('user_id', Auth::id())->delete();
     }
 
-    public function updateImage(Request $request)
+    public function updateAvatar(Request $request)
     {
         $request->validate([
             // name email tag password introduction
@@ -180,53 +189,34 @@ class UserController extends Controller
 
         $user = User::find(Auth::id());
 
-        // Delete the previous file from the local storage
-        $this->deleteImage($user->avatar);
+        // delete the previous file from the local storage
+        $this->deleteAvatar($user->avatar);
 
-
-
-
-        // save data to post table and store image file
-        Post::where('id', $id)
+        // save data to user table and store avatar file
+        User::where('id', Auth::id())
         ->update([
-            'image'   => $this->saveImage($request),
+            'avatar'   => $this->saveAvatar($request),
         ]);
 
-        // Tag and PostTag update
-        $latest_tag_id = Tag::max('id');
-        $new_tag_id    = $latest_tag_id + 1;
-        $count         = 0;
-        foreach($request->tag as $tag){
-            if($count < $request->old_tag_count){
-                // if old tag != new tag
-                if(Tag::where('id', $request->old_tag_id[$count])->first()->tag !== $tag){
-                    if(!is_Null($tag)){
-                        // both old and new exist
-                        $this->deleteTag($request, $count);
-                        $new_tag_id = $this->storeTag($id, $tag, $new_tag_id);
-                    }else{
-                        // only old exists
-                        $this->deleteTag($request, $count);
-                    }
-                }
-            }else{
-                if(!is_Null($tag)){
-                    // only new exists
-                    $new_tag_id = $this->storeTag($id, $tag, $new_tag_id);
-                }
-            }
-            $count++;
-        }
-
-        return redirect()->route('post.show', $id);
+        return redirect()->route('profile.index');
     }
 
-    private function deleteImage($image_name)
-    {
-        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
+    private function saveAvatar($request){
+        // Change the name of the avatar to Current Time to avoid overwriting.
+        $avatar_name = time() . "." . $request->avatar->extension();
 
-        if(Storage::disk('local')->exists($image_path)){
-            Storage::disk('local')->delete($image_path);
+        // Save the avatar inside the storage/app/public/avatars
+        $request->avatar->storeAs(self::LOCAL_STORAGE_FOLDER, $avatar_name);
+
+        return $avatar_name;
+    }
+
+    private function deleteAvatar($avatar_name)
+    {
+        $avatar_path = self::LOCAL_STORAGE_FOLDER . $avatar_name;
+
+        if(Storage::disk('local')->exists($avatar_path)){
+            Storage::disk('local')->delete($avatar_path);
         }
     }
 
@@ -238,8 +228,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-    $this->user->destroy($id);
+        User::where('id', $id)->delete();
 
-    return redirect()->back();
+        return redirect()->route('index');
     }
 }

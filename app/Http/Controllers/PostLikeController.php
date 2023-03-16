@@ -18,7 +18,9 @@ class PostLikeController extends Controller
     }
 
     public function destroy($id){
-        PostLike::where('user_id', Auth::id())->where('post_id', $id)->delete();
+        PostLike::where('user_id', Auth::id())
+                ->where('post_id', $id)
+                ->delete();
 
         return redirect()->back();
     }

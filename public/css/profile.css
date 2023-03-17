@@ -1,3 +1,21 @@
 .icon-lg {
   font-size: 9rem;
 }
+
+.icon-ex-lg {
+  font-size: 18rem;
+}
+
+.avatar-lg {
+  width: 9rem;
+  height: 9rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.avatar-ex-lg {
+  width: 18rem;
+  height: 18rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}

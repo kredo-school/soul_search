@@ -7,7 +7,6 @@ use App\Models\Tag;
 use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -177,46 +176,6 @@ class UserController extends Controller
         UserTag::where('tag_id', $request->old_tag_id[$count])->where('user_id', Auth::id())->delete();
     }
 
-    public function updateAvatar(Request $request)
-    {
-        $request->validate([
-            // name email tag password introduction
-            'avatar' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
-        ]);
-
-        $user = User::find(Auth::id());
-
-        // delete the previous file from the local storage
-        $this->deleteAvatar($user->avatar);
-
-        // save data to user table and store avatar file
-        User::where('id', Auth::id())
-        ->update([
-            'avatar'   => $this->saveAvatar($request),
-        ]);
-
-        return redirect()->route('profile.index');
-    }
-
-    private function saveAvatar($request){
-        // Change the name of the avatar to Current Time to avoid overwriting.
-        $avatar_name = time() . "." . $request->avatar->extension();
-
-        // Save the avatar inside the storage/app/public/avatars
-        $request->avatar->storeAs(self::LOCAL_STORAGE_FOLDER, $avatar_name);
-
-        return $avatar_name;
-    }
-
-    private function deleteAvatar($avatar_name)
-    {
-        $avatar_path = self::LOCAL_STORAGE_FOLDER . $avatar_name;
-
-        if(Storage::disk('local')->exists($avatar_path)){
-            Storage::disk('local')->delete($avatar_path);
-        }
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -229,4 +188,5 @@ class UserController extends Controller
 
         return redirect()->route('index');
     }
+
 }

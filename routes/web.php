@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
@@ -49,7 +50,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     #Profile(User)
     Route::resource('/profile', UserController::class);
-    Route::post('/user/{id}/update_avatar', [LikeController::class, 'updateAvatar'])->name('user.update.avatar');
+    #Avatar
+    Route::resource('/avatar', AvatarController::class);
 
     #Follow
     Route::resource('/follow', FollowController::class);

@@ -54,6 +54,18 @@
                             @include('users.profiles.posts.create')
 
                         @else
+                            {{-- report --}}
+                            <button class="btn float-end shadow-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a href="#" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportUserModal">
+                                        <i class="fa-solid fa-exclamation"></i> Report
+                                    </a>
+                                </li>
+                            </ul>
+                            @include('users.profiles.modal.report')
                             {{-- send message --}}
                             <a href="#" class="btn btn-orange float-end ms-3">
                                 send message

@@ -11,16 +11,6 @@
 
             <div class="container">
                 <h2 class="h5 mt-3">Edit Profile</h2>
-                <div class="row">
-                    <div class="col">
-                        {{-- avatar --}}
-                        @if ($user->avatar)
-                            <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="" alt="">
-                        @else
-                            <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
-                        @endif
-                    </div>
-                </div>
 
                 <form action="{{ route('profile.update', Auth::id()) }}" method="post">
                     @csrf
@@ -28,20 +18,36 @@
 
                     <div class="mb-3 row">
                         <div class="col">
+                            <div class="dropdown">
+                                <button class="btn shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{-- avatar --}}
+                                    @if ($user->avatar)
+                                        <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
+                                    @else
+                                        <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
+                                    @endif
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="ps-3">
+                                        <a href="{{ route('avatar.edit', Auth::id()) }}" class="text-decoration-none text-orange">
+                                            <i class="fa-solid fa-pencil"></i> Edit Image
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
                             <label for="name" class="form-label">Username</label>
                             <input tyoe="text" name="name" class="form-control" id="name" value="{{ old('name', $user->name) }}">
                             @error('name')
-                                <p class="text-danger small">{{ $name }}</p>
+                                <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>
-                    </div>
-
-                    <div class="mb-3 row">
                         <div class="col">
                             <label for="email" class="form-label">Email</label>
                             <input tyoe="text" name="email" class="form-control" id="email" value="{{ old('email', $user->email) }}">
                             @error('email')
-                                <p class="text-danger small">{{ $email }}</p>
+                                <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -66,10 +72,28 @@
 
                     <div class="mb-3 row">
                         <div class="col">
+                            <label for="current-password" class="form-label">Current Password</label>
+                            <input tyoe="text" name="current_password" class="form-control" id="current-password" value="{{ old('password', $user->password) }}">
+                            @error('current_password')
+                                <p class="text-danger small">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="col">
+                            <button type="button" class="btn btn-sm btn-orange px-3">Change Password</button>
+
+                        </div>
+
+                        <div class="col"></div>
+
+                    </div>
+
+                    <div class="mb-4 row">
+                        <div class="col">
                             <label for="introduction" class="form-label">Introduction</label>
                             <textarea name="introduction" class="form-control" id="introduction" cols="30" rows="2">{{ old('introduction', $user->introduction) }}</textarea>
                             @error('introduction')
-                                <p class="text-danger small">{{ $introduction }}</p>
+                                <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>

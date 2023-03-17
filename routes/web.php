@@ -51,14 +51,14 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/profile', UserController::class);
 
     #Post
-    Route::resource('/post', PostController::class);
+    Route::resource('/posts', PostController::class);
     #PostLike
     Route::resource('/postlike', PostLikeController::class);
 
     #Comment
-    Route::resource('/comment', CommentController::class);
+    Route::resource('/posts/{post}/comments', CommentController::class);
     #CommentLike
-    Route::resource('/commentlike', CommentLikeController::class);
+    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
 
 });
 

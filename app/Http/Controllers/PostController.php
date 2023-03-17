@@ -211,7 +211,7 @@ class PostController extends Controller
             $count++;
         }
 
-        return redirect()->route('post.show', $id);
+        return redirect()->route('posts.show', $id);
     }
 
     private function deleteImage($image_name)
@@ -234,9 +234,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        Post::where('id', $id)->delete();
+        $this->deleteImage($post->image);
+        $post->delete();
 
         return redirect()->route('profile.index');
     }

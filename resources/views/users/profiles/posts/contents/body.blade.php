@@ -28,7 +28,7 @@
         @if(Auth::id() === $post->user_id)
             <ul class="dropdown-menu float-end" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <a href="{{ route('post.edit', $post->id) }}" class="dropdown-item">
+                    <a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">
                         <i class="fa-regular fa-pen-to-square"></i> Edit
                     </a>
                 </li>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,12 +24,11 @@ class Comment extends Model
 
     public function likes()
     {
-        return $this->hasMany(CommentLike::class);
+        return $this->belongsToMany(User::class, 'comment_likes', 'comment_id', 'user_id')->withPovot('id');
     }
 
-    public function isLiked($user_id)
+    public function like($user_id)
     {
-        return $this->likes()->where('user_id', '=',  $user_id)->exists();
+        return $this->likes()->where('user_id', '=',  $user_id)->first();
     }
-
 }

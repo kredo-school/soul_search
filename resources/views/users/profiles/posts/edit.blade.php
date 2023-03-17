@@ -16,7 +16,7 @@
             <div class="container">
                 <h2 class="h5 mt-3">Edit Post</h2>
 
-                <form action="{{ route('post.update', $post->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
@@ -53,7 +53,7 @@
 
                     </div>
                     <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
-                    <a type="button" href="{{ route('post.show', $post->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                    <a type="button" href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 
                 </form>
 

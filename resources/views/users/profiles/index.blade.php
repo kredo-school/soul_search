@@ -23,7 +23,7 @@
                     <div class="col">
                         <div>
                             {{-- username --}}
-                            <span class="fw-bold">{{ $user->name}}</span>
+                            <span class="fw-bold">{{ $user->username}}</span>
                         </div>
                         <div>
                             {{-- tags --}}

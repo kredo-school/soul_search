@@ -38,9 +38,9 @@
                             </div>
                         </div>
                         <div class="col">
-                            <label for="name" class="form-label">Username</label>
-                            <input tyoe="text" name="name" class="form-control" id="name" value="{{ old('name', $user->name) }}">
-                            @error('name')
+                            <label for="username" class="form-label">Username</label>
+                            <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}">
+                            @error('username')
                                 <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>

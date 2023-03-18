@@ -101,7 +101,7 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name'         => 'min:1|max:100',
+            'username'     => 'min:1|max:100',
             'email'        => 'min:1|max:100|email',
             'tags'         => 'max:100',
             'introduction' => 'max:10000',
@@ -109,13 +109,13 @@ class UserController extends Controller
 
         User::where('id', Auth::id())
             ->update([
-                'name'         => $request->name,
+                'username'     => $request->username,
                 'email'        => $request->email,
                 'introduction' => $request->introduction,
         ]);
 
         // Password update
-        if($request->current_password){
+        if($request->new_password){
             $request->validate([
                 'current_password'  => 'required|string',
                 'new_password'      => 'required|confirmed|min:8|string',

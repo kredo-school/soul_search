@@ -10,7 +10,7 @@
 
     </div>
     <div class="col">
-        <span class="fw-bold">{{ Auth::user()->name }}</span>
+        <span class="fw-bold">{{ Auth::user()->username }}</span>
         <div>
             {{ $post->created_at->diffForHumans() }} -
             @if ($post->view_count <= 1)

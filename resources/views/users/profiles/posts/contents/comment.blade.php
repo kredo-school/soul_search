@@ -15,7 +15,7 @@
                 </div>
                 <div class="col">
                     <span class="fw-bold">
-                        {{ $comment->user->name }}
+                        {{ $comment->user->username }}
                     </span>
                     <span class="text-muted small">
                         {{ $comment->created_at->diffForHumans() }}

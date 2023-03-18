@@ -3,12 +3,27 @@
         <!-- Username and Date -->
         <div class="col pt-0 ps-2">
             <a href="#" class="text-decoration-none text-dark fw-bold">Username</a>
-            &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">3/8/2023 21:09</span>
+            &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i') }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
         <div class="col-auto text-end">
-            <i class="fa-regular fa-heart"></i>
-            <span>5</span>
+            @if ($chat->isLiked())
+                <form action="{{ route('chat.like.destroy', $chat->id) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm shdow-none">
+                        <i class="fa-solid fa-heart text-danger"></i>
+                    </button>
+                </form>
+            @else
+                <form action="{{ route('chat.like.store', $chat->id) }}" class="post">
+                    @csrf
+                    <button type="submit" class="btn bnn-sm shadow-none">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </form>
+            @endif
+            <span>{{ $chat->likes->count() }}</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
         <div class="col-auto text-end me-5">
@@ -24,6 +39,8 @@
         </div>
     </div>
     <!-- Message -->
-    <p class="text-dark fw-light ms-2 w-75">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, placeat porro! Quas ipsa, nihil veniam nisi vero voluptatum itaque eos, assumenda sunt exercitationem ipsum! Consectetur quod at eos voluptatum quidem!</p>
-        {{-- <img src="#" alt=""> --}}
+    <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
+    @if ($chat->image)
+        <img src="{{ asset('storage/img/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid">
+    @endif
 </div>

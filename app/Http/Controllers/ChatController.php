@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/images/';
+    const LOCAL_STORAGE_FOLDER = 'public/img/';
     private $chat;
     private $tag;
 
@@ -18,6 +18,7 @@ class ChatController extends Controller
         $this->chat = $chat;
         $this->tag  = $tag;
     }
+
 
     public function store($tag_id, Request $request){
         $request->validate([

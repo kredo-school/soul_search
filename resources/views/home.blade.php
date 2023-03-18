@@ -100,17 +100,19 @@
             <a href="#" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">Travel</a>
         </div>
         <!-- Body (Need to update to show chats the user wants) -->
-        <div class="row mt-2 p-0 chat-body">
-            <div class="col-1 mx-1 pe-0">
-                @include('contents.title')
+            <div class="row mt-2 p-0 chat-body">
+                @foreach ($tagged_chats as $chat)
+                    <div class="col-1 mx-1 pe-0">
+                        @include('contents.title')
+                    </div>
+                    <div class="col ms-0 p-0">
+                        @include('contents.body')
+                    </div>
+                @endforeach
             </div>
-            <div class="col ms-0 p-0">
-                @include('contents.body')
-            </div>
-        </div>
             <!-- Send bar -->
         <div class="bg-white mt-3 mb-0">
-            <form action="#" method="post" class="ms-0 ps-0">
+            <form action="#" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                 @csrf
                 <div class="row gx-2">
                     <div class="col-sm">

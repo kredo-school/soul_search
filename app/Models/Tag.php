@@ -22,4 +22,12 @@ class Tag extends Model
     public function userTag(){
         return $this->hasMany(UserTag::class);
     }
+
+    public function isMain(){
+        return $this->belongsTo(User::class, config('enums.main'));
+    }
+
+    public function isFav(){
+        return $this->belongsTo(User::class, config('enums.favorite'));
+    }
 }

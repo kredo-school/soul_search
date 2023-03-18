@@ -98,7 +98,7 @@
 
                         <div class="col">
                             <div id="newPassword">
-                                <button type="button" class="btn btn-orange px-3" onclick="changePassword()">Change Password</button>
+                                <button type="button" class="btn btn-warning px-3" onclick="changePassword()">Change Password</button>
                             </div>
                         </div>
 

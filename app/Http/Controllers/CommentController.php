@@ -41,7 +41,11 @@ class CommentController extends Controller
             'comment' => 'required',
         ]);
 
+<<<<<<< HEAD
         $post->comments()::create([
+=======
+        $post->comments()->create([
+>>>>>>> origin/demo/for-taka-san
             'post_id'  => $request->post_id,
             'user_id'  => Auth::id(),
             'comment'  => $request->comment,

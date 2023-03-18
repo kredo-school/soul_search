@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
@@ -52,6 +53,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/profile', UserController::class);
     #Avatar
     Route::resource('/avatar', AvatarController::class);
+    #Password
+    Route::resource('/passwords', ChangePasswordController::class);
 
     #Follow
     Route::resource('/follow', FollowController::class);

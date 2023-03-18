@@ -4,7 +4,6 @@
 
 @section('styles')
     <link href="{{ mix('css/profile.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 @endsection
 
 @section('content')
@@ -75,37 +74,18 @@
                         <div class="col">
                             <label for="current_password" class="form-label">Current Password</label>
                         </div>
-                        <div class="col" id="newPasslabel"></div>
-                        <div class="col" id="confirmPasslabel"></div>
+                        <div class="col"></div>
+                        <div class="col"></div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
-                            <div id="currentPassword">
-                            </div>
                             <input type="password" name="current_password" class="form-control" id="current_password">
-
-                            @if($errors->any())
-                            {!! implode('', $errors->all('<div style="color:red">:message</div>')) !!}
-                            @endif
-                            @if(Session::get('error') && Session::get('error') != null)
-                            <div style="color:red">{{ Session::get('error') }}</div>
-                            @php
-                            Session::put('error', null)
-                            @endphp
-                            @endif
                         </div>
-
                         <div class="col">
-                            <div id="newPassword">
-                                <button type="button" class="btn btn-warning px-3" onclick="changePassword()">Change Password</button>
-                            </div>
+                            <a href="{{ route('passwords.edit', Auth::id()) }}" type="button" class="btn btn-warning px-3">Change Password</a>
                         </div>
-
-                        <div class="col">
-                            <div id="confirmPassword"></div>
-                        </div>
-
+                        <div class="col"></div>
                     </div>
 
                     <div class="mb-4 row">
@@ -126,16 +106,5 @@
             </div>
 
     </div>
-
-    <script>
-        function changePassword(){
-            newPasslabel.innerHTML = '<label for="new_password" class="form-label">New Password</label>';
-            confirmPasslabel.innerHTML = '<label for="new_password_confirmation" class="form-label">Confirm New Password</label>';
-            newPassword.innerHTML = '<input type="password" name="new_password" class="form-control" id="new_password">';
-            confirmPassword.innerHTML = '<input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation">';
-        }
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 @endsection

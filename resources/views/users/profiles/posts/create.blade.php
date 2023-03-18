@@ -27,19 +27,6 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
-                        <label for="tag" class="form-label">Tags(up to 3)</label>
-                        <input name="tag[]" type="text" class="form-control" id="tag[]" placeholder="{{ old('tag[]') }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <input name="tag[]" type="text" class="form-control" id="tag[]" placeholder="{{ old('tag[]') }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <input name="tag[]" type="text" class="form-control" id="tag[]" placeholder="{{ old('tag[]') }}">
-                    </div>
-
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-sm px-5">Post</button>
                     </div>

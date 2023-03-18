@@ -89,7 +89,6 @@
     @csrf
     <div class="input-group">
         <input type="text" class="form-control" id="comment" name="comment" placeholder="comment here">
-        <input type="hidden" name="post_id" value="{{ $post->id }}">
         <button type="submit" class="input-group-text border-secondary">post</button>
     </div>
     </form>

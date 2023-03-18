@@ -56,14 +56,15 @@
     {{$post->body}}
 </div>
 <div>
-    @foreach($tags as $tag)
+    @forelse($tags as $tag)
         <a href="#" class="text-decoration-none">#{{ $tag->tag }}</a>&nbsp;
-    @endforeach
+    @empty
+    @endforelse
 </div>
 <div class="row">
     <div class="col-auto">
-        @if ($post->isLiked(Auth::id()))
-            <form action="{{ route('postlike.destroy', $post->id) }}" method="post" class="mt-1 ms-1">
+        @if ($like = $post->like(Auth::id()))
+            <form action="{{ route('responses.destroy', ['post' => $post->id, 'response' => $like->pivot->id]) }}" method="post" class="mt-1 ms-1">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-sm shadow-none p-0" type="submit">
@@ -71,7 +72,7 @@
                 </button>
             </form>
         @else
-            <form action="{{ route('postlike.store') }}" method="post" class="mt-1 ms-1">
+            <form action="{{ route('responses.store', ['post' => $post->id]) }}" method="post" class="mt-1 ms-1">
                 @csrf
                 <input type="hidden" value="{{ $post->id }}" name="post_id">
                 <button class="btn btn-sm shadow-none p-0" type="submit">

@@ -24,12 +24,12 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->hasMany(PostLike::class);
+        return $this->belongsToMany(User::class, 'post_likes', 'post_id', 'user_id')->withPivot('id');
     }
 
-    public function isLiked($user_id)
+    public function like($user_id)
     {
-        return $this->likes()->where('user_id', '=',  $user_id)->exists();
+        return $this->likes()->where('user_id', '=',  $user_id)->first();
     }
 
     public function postTags()

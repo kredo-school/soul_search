@@ -4,25 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\PostLike;
+use App\Models\Post;
 
 class PostLikeController extends Controller
 {
-    public function store(Request $request){
-        if(PostLike::onlyTrashed()->where('user_id', Auth::id())->where('post_id', $request->post_id)->exists()){
-            PostLike::onlyTrashed()->where('user_id', Auth::id())->where('post_id', $request->post_id)->restore();
-        }else{
-            PostLike::create([
-                'post_id' => $request->post_id,
-                'user_id' => Auth::id(),
-            ]);
-        }
+    public function store(Post $post, Request $request){
+        $post->likes()->attach([
+            'user_id' => Auth::id(),
+        ]);
 
         return redirect()->back();
     }
 
-    public function destroy($id){
-        PostLike::where('user_id', Auth::id())->where('post_id', $id)->delete();
+    public function destroy(Post $post){
+        $post->likes()->detach([
+            'user_id' => Auth::id(),
+        ]);
 
         return redirect()->back();
     }

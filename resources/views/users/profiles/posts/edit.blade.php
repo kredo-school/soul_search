@@ -38,20 +38,10 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
-                        <label for="tag" class="form-label">Tags(up to 3)</label>
-                        @foreach ($tags as $tag)
-                            <input name="tag[]" type="text" class="form-control" id="tag[]" value="{{ old('tag[]', $tag->tag) }}">
-                            <input name="old_tag_id[]" type="hidden" value="{{ $tag->id }}">
-                        @endforeach
-                        @if ($tag_count < 3)
-                            @for ($i = 0; $i < 3 - $tag_count; $i++)
-                                <input name="tag[]" type="text" class="form-control" id="tag[]" value="{{ old('tag[]') }}">
-                            @endfor
-                        @endif
-                        <input name="old_tag_count" type="hidden" value="{{ $tag_count }}">
+                    @foreach ($old_tag_ids as $old_tag_id)
+                        <input type="hidden" name="old_tag_ids[]" value="{{ $old_tag_id }}">
+                    @endforeach
 
-                    </div>
                     <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
                     <a type="button" href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 

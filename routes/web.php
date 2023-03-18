@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function(){
     #Post
     Route::resource('/posts', PostController::class);
     #PostLike
-    Route::resource('/postlike', PostLikeController::class);
+    Route::resource('/posts/{post}/responses', PostLikeController::class);
 
     #Comment
     Route::resource('/posts/{post}/comments', CommentController::class);

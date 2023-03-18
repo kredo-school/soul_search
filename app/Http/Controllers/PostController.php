@@ -46,18 +46,25 @@ class PostController extends Controller
             'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
+        // divide text and hushtags
+        $body_divided = explode('#', $request->body);
+
         // create data in posts table
         Post::create([
-            'body'    => $request->body,
+            'body'    => $body_divided[0],
             'user_id' => Auth::id(),
             'image'   => $this->saveImage($request),
         ]);
 
+        // remove text and leave tags
+        $body_divided = array_splice($body_divided, 1);
+
+        // store Tag and PostTag
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
-        foreach($request->tag as $tag){
+        foreach($body_divided as $tag){
             if(!is_Null($tag)){
-                $new_tag_id = $this->storeTag(Post::latest()->first()->id, $tag, $new_tag_id);
+                $new_tag_id = $this->storePostTag(Post::latest()->first()->id, trim($tag), $new_tag_id);
             }
         }
 
@@ -74,13 +81,13 @@ class PostController extends Controller
         return $image_name;
     }
 
-    private function storeTag($id, $tag, $new_tag_id){
+    private function storePostTag($id, $tag, $new_tag_id){
         $db_tags = Tag::get();
+        //check if tag is new
         $is_new = true;
         foreach($db_tags as $db_tag){
-            if($db_tag->tag === $tag){
+            if($db_tag->tag == $tag){
                 $is_new = false;
-                // create data in post_tags table
                 PostTag::create([
                     'post_id' => $id,
                     'tag_id'  => $db_tag->id,
@@ -88,12 +95,9 @@ class PostController extends Controller
             }
         }
         if($is_new){
-            // create new Tag
             Tag::create([
                 'tag' => $tag,
             ]);
-
-            // create new PostTag
             PostTag::create([
                 'post_id' => $id,
                 'tag_id'  => $new_tag_id,
@@ -136,12 +140,13 @@ class PostController extends Controller
     public function edit($id)
     {
         $post      = Post::find($id);
+
         $post_tags = PostTag::where('post_id', $id)->get();
-        $tags      = [];
-        $tag_count = 0;
+        $old_tag_ids = [];
         foreach($post_tags as $post_tag){
-            $tags[] = Tag::find($post_tag->tag_id);
-            $tag_count++;
+            $tag = Tag::find($post_tag->tag_id)->tag;
+            $post->body .= ' #' . $tag;
+            $old_tag_ids[] = $post_tag->tag_id;
         }
 
         // if not the owner of the post, redirect to homepage
@@ -149,7 +154,7 @@ class PostController extends Controller
             return redirect()->route('index');
         endif;
 
-        return view('users.profiles.posts.edit', compact('post', 'tags', 'tag_count'));
+        return view('users.profiles.posts.edit', compact('post', 'old_tag_ids'));
     }
 
     /**
@@ -166,12 +171,15 @@ class PostController extends Controller
             'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
-        $post = Post::find($id);
+        // divide text and hushtags
+        $body_divided = explode('#', $request->body);
 
         Post::where('id', $id)
             ->update([
-                'body'    => $request->body,
+                'body'    => $body_divided[0],
         ]);
+
+        $post = Post::find($id);
 
         // If there is a new image
         if($request->image){
@@ -185,30 +193,43 @@ class PostController extends Controller
             ]);
         }
 
+        // remove text and leave tags
+        $body_divided = array_splice($body_divided, 1);
+
         // Tag and PostTag update
-        $latest_tag_id = Tag::max('id');
-        $new_tag_id    = $latest_tag_id + 1;
-        $count         = 0;
-        foreach($request->tag as $tag){
-            if($count < $request->old_tag_count){
-                // if old tag != new tag
-                if(Tag::where('id', $request->old_tag_id[$count])->first()->tag !== $tag){
-                    if(!is_Null($tag)){
-                        // both old and new exist
-                        $this->deleteTag($request, $count, $id);
-                        $new_tag_id = $this->storeTag($id, $tag, $new_tag_id);
-                    }else{
-                        // only old exists
-                        $this->deleteTag($request, $count, $id);
-                    }
-                }
-            }else{
-                if(!is_Null($tag)){
-                    // only new exists
-                    $new_tag_id = $this->storeTag($id, $tag, $new_tag_id);
-                }
+        $latest_tag_id      = Tag::max('id');
+        $new_tag_id         = $latest_tag_id + 1;
+				if($request->old_tag_ids){
+						$number_of_old_tags = count($request->old_tag_ids);
+				}else{
+					$number_of_old_tags = 0;
+				}
+        $number_of_new_tags = count($body_divided);
+        $count = 0;
+        for($i = 0; $i < $number_of_old_tags && $i < $number_of_new_tags; $i++){
+            // check if old and new are same number or not
+            if(Tag::where('id', $request->old_tag_ids[$i])->first()->tag !== trim($body_divided[0])){
+                // delete old and store new
+                $this->deletePostTag($request, $i, $id);
+                $new_tag_id = $this->storePostTag($id, trim($body_divided[0]), $new_tag_id);
             }
+            // remove the tag already stored
+            $body_divided = array_splice($body_divided, 1);
             $count++;
+        }
+
+        // when more old tags
+        if($number_of_old_tags > $number_of_new_tags){
+            for($i = $count; $i < $number_of_old_tags; $i++){
+                $this->deletePostTag($request, $i, $id);
+            }
+        }
+
+        // when more new tags
+        if($number_of_old_tags < $number_of_new_tags){
+            foreach($body_divided as $tag){
+                $new_tag_id = $this->storePostTag($id, trim($tag), $new_tag_id);
+            }
         }
 
         return redirect()->route('posts.show', $id);
@@ -223,9 +244,9 @@ class PostController extends Controller
         }
     }
 
-    private function deleteTag($request, $count, $post_id){
+    private function deletePostTag($request, $count, $post_id){
         // delete old PostTag
-        PostTag::where('tag_id', $request->old_tag_id[$count])->where('post_id', $post_id)->delete();
+        PostTag::where('tag_id', $request->old_tag_ids[$count])->where('post_id', $post_id)->delete();
     }
 
     /**

@@ -38,26 +38,27 @@
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Main</p>
             <ul class="nav nav-pills flex-column px-0">
-                {{-- @foreach ($recent_tags as $tag) --}}
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Movie</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link" >
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Music</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="fw-bold flex-fill nav-link active" aria-current="page" style="background-color: #F4F7FC;">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Travel</span>
-                    </a>
-                </li>
-                {{-- @endforeach --}}
+                @foreach ($main_tags as $tag)
+                    <li class="nav-item mb-1">
+                        <a href="#" class="flex-fill nav-link">
+                            <i class="fa-regular fa-hashtag"></i>
+                            <span class="text-dark tag-name">{{ $tag->tag }}</span>
+                        </a>
+                    </li>
+                @endforeach
+                    {{-- <li class="nav-item mb-1">
+                        <a href="#" class="flex-fill nav-link" >
+                            <i class="fa-regular fa-hashtag"></i>
+                            <span class="text-dark tag-name">Music</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-1">
+                        <a href="#" class="fw-bold flex-fill nav-link active" aria-current="page" style="background-color: #F4F7FC;">
+                            <i class="fa-regular fa-hashtag"></i>
+                            <span class="text-dark tag-name">Travel</span>
+                        </a>
+                    </li> --}}
+
             </ul>
         </div>
         <div class="mt-5">
@@ -99,7 +100,7 @@
             <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
             <a href="#" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">Travel</a>
         </div>
-        <!-- Body (Need to update to show chats the user wants) -->
+        <!-- Body (Need to update to show chats the tag has) -->
             <div class="row mt-2 p-0 chat-body">
                 @foreach ($tagged_chats as $chat)
                     <div class="col-1 mx-1 pe-0">

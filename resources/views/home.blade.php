@@ -82,7 +82,7 @@
             </div>
             <!-- Send bar -->
         <div class="bg-white mt-3 mb-0">
-            <form action="#" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
+            <form action="{{ route('chat.store', $tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                 @csrf
                 <div class="row gx-2">
                     <div class="col-sm">

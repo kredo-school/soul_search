@@ -50,4 +50,11 @@ class ChatController extends Controller
             Storage::disk('local')->delete($image_path);
         }
     }
+
+    public function show($id){
+        $chat = $this->chat->findOrFail();
+
+        return view('home')
+            ->with('chat', $chat);
+    }
 }

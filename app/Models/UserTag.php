@@ -17,9 +17,9 @@ class UserTag extends Model
     }
 
     public function isMain(){
-        return $this->belongsTo(User::class, config('enums.main'));
+        return $this->belongsTo(User::class, config('enums')['tag_category']['main']);
     }
     public function isFav(){
-        return $this->belongsTo(User::class, config('enums.favorite'));
+        return $this->belongsTo(User::class, config('enums')['tag_category']['favorite']);
     }
 }

@@ -19,10 +19,11 @@ class HomeController extends Controller
     private $user;
     private $tag;
 
-    public function __construct(Chat $chat, User $user)
+    public function __construct(Chat $chat, User $user, Tag $tag)
     {
         $this->chat = $chat;
         $this->user = $user;
+        $this->tag = $tag;
     }
 
     /**
@@ -53,9 +54,7 @@ class HomeController extends Controller
             ->with('fav_tags', $fav_tags);
     }
 
-    // Need to fix to reflect the update of migrations
     private function getMainTags(){
-        return []; // To be removed
 
         $all_tags = $this->tag->all();
         $main_tags = [];
@@ -69,9 +68,7 @@ class HomeController extends Controller
         return array_slice($main_tags, 0, 3);
     }
 
-    // Need to fix to reflect the update of migrations
     private function getFavTags(){
-        return []; // To be removed
 
         $all_tags = $this->tag->all();
         $fav_tags = [];
@@ -80,8 +77,8 @@ class HomeController extends Controller
             if($tag->isFav()){
                 $fav_tags[] = $tag;
             }
-
-            return array($fav_tags);
         }
+
+        return array_slice($fav_tags, 0, 10);
     }
 }

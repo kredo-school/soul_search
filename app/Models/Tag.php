@@ -24,10 +24,10 @@ class Tag extends Model
     }
 
     public function isMain(){
-        return $this->belongsTo(User::class);
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['main']);
     }
 
     public function isFav(){
-        return $this->belongsTo(User::class);
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
     }
 }

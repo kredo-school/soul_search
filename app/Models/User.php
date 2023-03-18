@@ -56,4 +56,12 @@ class User extends Authenticatable
     public function userTag(){
         return $this->hasMany(UserTag::class);
     }
+
+    public function isMain(){
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['main']);
+    }
+
+    public function isFav(){
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
+    }
 }

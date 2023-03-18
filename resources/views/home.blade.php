@@ -46,50 +46,19 @@
                         </a>
                     </li>
                 @endforeach
-                    {{-- <li class="nav-item mb-1">
-                        <a href="#" class="flex-fill nav-link" >
-                            <i class="fa-regular fa-hashtag"></i>
-                            <span class="text-dark tag-name">Music</span>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-1">
-                        <a href="#" class="fw-bold flex-fill nav-link active" aria-current="page" style="background-color: #F4F7FC;">
-                            <i class="fa-regular fa-hashtag"></i>
-                            <span class="text-dark tag-name">Travel</span>
-                        </a>
-                    </li> --}}
-
             </ul>
         </div>
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Fav</p>
             <ul class="nav nav-pills flex-column px-0">
-                {{-- @foreach ($recent_tags as $tag) --}}
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Book</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Health</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Technology</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Education</span>
-                    </a>
-                </li>
-                {{-- @endforeach --}}
+                @foreach ($fav_tags as $tag)
+                    <li class="nav-item mb-1">
+                        <a href="#" class="flex-fill nav-link">
+                            <i class="fa-regular fa-hashtag"></i>
+                            <span class="text-dark tag-name">{{ $tag->tag }}</span>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>

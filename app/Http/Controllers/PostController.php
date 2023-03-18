@@ -236,15 +236,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-<<<<<<< HEAD
         $this->deleteImage($post->image);
         $post->delete();
-=======
-        $post->delete();
-        // Post::where('id', $id)->delete();
-
-        //todo: remove associated image to the post
->>>>>>> origin/demo/for-taka-san
 
         return redirect()->route('profile.index');
     }

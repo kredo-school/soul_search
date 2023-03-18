@@ -57,16 +57,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     #Comment
     Route::resource('/posts/{post}/comments', CommentController::class);
-<<<<<<< HEAD
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
-=======
-    // Route::resource('/comment', CommentController::class);
->>>>>>> origin/demo/for-taka-san
-
-    #CommentLike
-    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
-    // Route::resource('/commentlike', CommentLikeController::class);
 });
 
 

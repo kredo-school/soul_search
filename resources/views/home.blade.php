@@ -40,7 +40,7 @@
             <ul class="nav nav-pills flex-column px-0">
                 @foreach ($main_tags as $tag)
                     <li class="nav-item mb-1">
-                        <a href="#" class="flex-fill nav-link">
+                        <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
                             <i class="fa-regular fa-hashtag"></i>
                             <span class="text-dark tag-name">{{ $tag->tag }}</span>
                         </a>
@@ -53,7 +53,7 @@
             <ul class="nav nav-pills flex-column px-0">
                 @foreach ($fav_tags as $tag)
                     <li class="nav-item mb-1">
-                        <a href="#" class="flex-fill nav-link">
+                        <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
                             <i class="fa-regular fa-hashtag"></i>
                             <span class="text-dark tag-name">{{ $tag->tag }}</span>
                         </a>
@@ -67,7 +67,7 @@
         <!-- Header -->
         <div class="bg-white my-3 py-1 border border-top-0">
             <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-            <a href="#" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">Travel</a>
+            <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $tag->tag }}</a>
         </div>
         <!-- Body (Need to update to show chats the tag has) -->
             <div class="row mt-2 p-0 chat-body">

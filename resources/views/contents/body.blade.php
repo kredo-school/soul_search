@@ -2,8 +2,8 @@
     <div class="row">
         <!-- Username and Date -->
         <div class="col pt-0 ps-2">
-            <a href="#" class="text-decoration-none text-dark fw-bold">Username</a>
-            &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i') }}</span>
+            <a href="#" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
+            &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
         <div class="col-auto text-end">
@@ -38,7 +38,7 @@
             {{-- @include(for Report) --}}
         </div>
     </div>
-    <!-- Message -->
+    <!-- Body -->
     <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
     @if ($chat->image)
         <img src="{{ asset('storage/img/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid">

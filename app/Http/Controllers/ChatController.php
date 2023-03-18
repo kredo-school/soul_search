@@ -52,9 +52,8 @@ class ChatController extends Controller
     }
 
     public function show($id){
-        $chat = $this->chat->findOrFail();
+        $chat = $this->chat->findOrFail($id);
 
-        return view('home')
-            ->with('chat', $chat);
+        return view('home')->with('chat', $chat);
     }
 }

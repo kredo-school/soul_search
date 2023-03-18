@@ -29,8 +29,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
     #CHAT
-    Route::post('chat/{tag_id}/store', [ChatController::class, 'store'])->name('chat.store');
     Route::get('/chats/{tag_id}/show', [ChatController::class, 'show'])->name('chats.show');
+    Route::post('chat/{tag_id}/store', [ChatController::class, 'store'])->name('chat.store');
 
     #LIKE
     Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');

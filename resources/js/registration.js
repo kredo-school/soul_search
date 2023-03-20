@@ -18,7 +18,6 @@ $(function(){
     });
 
     $('.form-navigation .next').click(function(){
-
         navigateTo(curIndex()+1);
     });
 

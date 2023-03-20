@@ -35,4 +35,8 @@ class Tag extends Model
     public function isFav(){
         return $this->belongsTo(User::class, 'favorite');
     }
+
+    public function UserTag(){
+        return $this->hasMany(UserTag::class);
+    }
 }

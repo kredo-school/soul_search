@@ -80,7 +80,7 @@
 
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="password" name="current_password" class="form-control" id="current_password">
+                            <input type="text" name="current_password" class="form-control" id="current_password" value="••••••••" disabled>
                         </div>
                         <div class="col">
                             <a href="{{ route('passwords.edit', Auth::id()) }}" type="button" class="btn btn-warning px-3">Change Password</a>

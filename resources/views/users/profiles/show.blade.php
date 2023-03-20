@@ -44,7 +44,7 @@
                         {{-- check if the login user's profile or not --}}
                         @if($user->id === Auth::id())
                             {{-- edit profile --}}
-                            <a href="{{ route('profile.edit', Auth::id()) }}" class="btn btn-orange float-end ms-3 px-4">
+                            <a href="{{ route('profiles.edit', Auth::id()) }}" class="btn btn-orange float-end ms-3 px-4">
                                 edit
                             </a>
                             <!-- create post modal-->
@@ -72,7 +72,7 @@
                             </a>
                             {{-- if followed --}}
                             @if ($user->isFollowedBy(Auth::id()))
-                            <form action="{{ route('follow.destroy', $user->id)}}" method="post">
+                            <form action="{{ route('follows.destroy', $user->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger float-end" type="submit">
@@ -81,7 +81,7 @@
                             </form>
                             {{-- if NOT followed --}}
                             @else
-                            <form action="{{ route('follow.store')}}" method="post">
+                            <form action="{{ route('follows.store')}}" method="post">
                                 @csrf
                                 <input type="hidden" value="{{ $user->id }}" name="user_id">
                                 <button class="btn btn-secondary float-end" type="submit">
@@ -103,7 +103,7 @@
             {{-- user posts --}}
             @foreach ($user->posts as $post)
             <div class="col-md-3 profile-post">
-                <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" height="200"></a>
+                <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" height="200"></a>
             </div>
             @endforeach
 

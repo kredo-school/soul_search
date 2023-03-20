@@ -15,7 +15,7 @@
                 </div>
                 <div class="col">
                     <span class="fw-bold">
-                        {{ $comment->user->name }}
+                        {{ $comment->user->username }}
                     </span>
                     <span class="text-muted small">
                         {{ $comment->created_at->diffForHumans() }}
@@ -25,8 +25,8 @@
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            @if ($comment->isLiked(Auth::id()))
-                                <form action="{{ route('commentlike.destroy', $comment->id) }}" method="post" class="mt-1 ms-1">
+                            @if ($like = $comment->like(Auth::id()))
+                                <form action="{{ route('reactions.destroy', ['post' => $post->id, 'comment' => $comment->id, 'reaction' => $like->pivot->id]) }}" method="post" class="mt-1 ms-1">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm shadow-none p-0" type="submit">
@@ -34,7 +34,7 @@
                                     </button>
                                 </form>
                             @else
-                                <form action="{{ route('commentlike.store') }}" method="post" class="mt-1 ms-1">
+                                <form action="{{ route('reactions.store', ['post' => $post->id, 'comment' => $comment->id]) }}" method="post" class="mt-1 ms-1">
                                     @csrf
                                     <input type="hidden" value="{{ $comment->id }}" name="comment_id">
                                     <button class="btn btn-sm shadow-none p-0" type="submit">
@@ -85,11 +85,10 @@
     @endif
 
     {{-- submit comment --}}
-    <form action="{{ route('comment.store') }}" method="post">
+    <form action="{{ route('comments.store', $post->id) }}" method="post">
     @csrf
     <div class="input-group">
         <input type="text" class="form-control" id="comment" name="comment" placeholder="comment here">
-        <input type="hidden" name="post_id" value="{{ $post->id }}">
         <button type="submit" class="input-group-text border-secondary">post</button>
     </div>
     </form>

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Post')
-
-@section('style')
-    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
+@section('styles')
+    <link href="{{ mix('css/post.css') }}" rel="stylesheet">
 @endsection
+
+@section('title', 'Post')
 
 @section('content')
     <div class="row w-100">

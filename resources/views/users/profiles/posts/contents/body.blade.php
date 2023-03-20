@@ -10,7 +10,7 @@
 
     </div>
     <div class="col">
-        <span class="fw-bold">{{ Auth::user()->name }}</span>
+        <span class="fw-bold">{{ Auth::user()->username }}</span>
         <div>
             {{ $post->created_at->diffForHumans() }} -
             @if ($post->view_count <= 1)
@@ -28,7 +28,7 @@
         @if(Auth::id() === $post->user_id)
             <ul class="dropdown-menu float-end" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <a href="{{ route('post.edit', $post->id) }}" class="dropdown-item">
+                    <a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">
                         <i class="fa-regular fa-pen-to-square"></i> Edit
                     </a>
                 </li>
@@ -56,14 +56,15 @@
     {{$post->body}}
 </div>
 <div>
-    @foreach($tags as $tag)
+    @forelse($tags as $tag)
         <a href="#" class="text-decoration-none">#{{ $tag->tag }}</a>&nbsp;
-    @endforeach
+    @empty
+    @endforelse
 </div>
 <div class="row">
     <div class="col-auto">
-        @if ($post->isLiked(Auth::id()))
-            <form action="{{ route('postlike.destroy', $post->id) }}" method="post" class="mt-1 ms-1">
+        @if ($like = $post->like(Auth::id()))
+            <form action="{{ route('responses.destroy', ['post' => $post->id, 'response' => $like->pivot->id]) }}" method="post" class="mt-1 ms-1">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-sm shadow-none p-0" type="submit">
@@ -71,7 +72,7 @@
                 </button>
             </form>
         @else
-            <form action="{{ route('postlike.store') }}" method="post" class="mt-1 ms-1">
+            <form action="{{ route('responses.store', ['post' => $post->id]) }}" method="post" class="mt-1 ms-1">
                 @csrf
                 <input type="hidden" value="{{ $post->id }}" name="post_id">
                 <button class="btn btn-sm shadow-none p-0" type="submit">

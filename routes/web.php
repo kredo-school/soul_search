@@ -6,7 +6,6 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LikeController;
@@ -34,7 +33,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
@@ -50,24 +48,22 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
 
     #Profile(User)
-    Route::resource('/profile', UserController::class);
+    Route::resource('/profiles', UserController::class);
     #Avatar
-    Route::resource('/avatar', AvatarController::class);
+    Route::resource('/avatars', AvatarController::class);
     #Password
     Route::resource('/passwords', ChangePasswordController::class);
-
     #Follow
-    Route::resource('/follow', FollowController::class);
+    Route::resource('/follows', FollowController::class);
 
     #Post
-    Route::resource('/post', PostController::class);
+    Route::resource('/posts', PostController::class);
     #PostLike
-    Route::resource('/postlike', PostLikeController::class);
+    Route::resource('/posts/{post}/responses', PostLikeController::class);
 
     #Comment
-    Route::resource('/comment', CommentController::class);
+    Route::resource('/posts/{post}/comments', CommentController::class);
     #CommentLike
-    Route::resource('/commentlike', CommentLikeController::class);
-
+    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
 });
 

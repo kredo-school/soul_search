@@ -41,7 +41,7 @@
                             {{ $user->introduction }}
                         </div>
                         {{-- edit profile --}}
-                        <a href="{{ route('profile.edit', Auth::id()) }}" class="btn btn-orange float-end ms-3 px-4">
+                        <a href="{{ route('profiles.edit', Auth::id()) }}" class="btn btn-orange float-end ms-3 px-4">
                             edit
                         </a>
                         <!-- create post modal-->
@@ -62,7 +62,7 @@
             {{-- user posts --}}
             @foreach ($user->posts as $post)
             <div class="col-md-3 profile-post">
-                <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" height="200"></a>
+                <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" height="200"></a>
             </div>
             @endforeach
 

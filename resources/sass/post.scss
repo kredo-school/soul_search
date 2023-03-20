@@ -16,3 +16,56 @@
 .icon-sm{
     font-size: 3rem;
 }
+
+/* hide when the display width is <= 700px */
+@media screen and (max-width: 700px) {
+	.hide-700 {
+		display: none;
+	}
+}
+
+/* show when the display width is <= 700px */
+.show-700 {
+    display: none;
+}
+@media screen and (max-width: 700px) {
+	.show-700 {
+		display: block;
+	}
+}
+/* sidebar display setting */
+.ss-container {
+	display: flex;
+	width: 100%;
+    height: 100vh;
+}
+.ss-sidebar {
+	width: 20%;
+    background-color: white;
+}
+@media screen and (max-width: 700px) {
+	.ss-sidebar {
+		width: 45px;
+	}
+}
+.ss-main {
+	width: 80%;
+	margin: 10px;
+}
+/* set login-icon position at left-bottom */
+.login-icon {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+@media screen and (max-width: 700px) {
+	.login-icon {
+		left: 5px;
+	}
+}
+
+/* remove the left space of ul list */
+ul {
+    list-style: none;
+    padding-left: 0
+}

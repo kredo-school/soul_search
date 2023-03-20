@@ -12,7 +12,7 @@
             <div class="container">
                 <h2 class="h5 mt-3">Edit Profile</h2>
 
-                <form action="{{ route('profile.update', Auth::id()) }}" method="post">
+                <form action="{{ route('profiles.update', Auth::id()) }}" method="post">
                     @csrf
                     @method('PATCH')
 
@@ -29,7 +29,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li class="ps-3">
-                                        <a href="{{ route('avatar.edit', Auth::id()) }}" class="text-decoration-none text-orange">
+                                        <a href="{{ route('avatars.edit', Auth::id()) }}" class="text-decoration-none text-orange">
                                             <i class="fa-solid fa-pencil"></i> Edit Image
                                         </a>
                                     </li>
@@ -99,7 +99,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
-                    <a type="button" href="{{ route('profile.index') }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                    <a type="button" href="{{ route('profiles.index') }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 
                 </form>
 

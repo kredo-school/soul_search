@@ -11,7 +11,7 @@
                 </div>
 
                 <div>
-                    <form action="{{ route('post.destroy', $post->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('posts.destroy', $post->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('DELETE')
 

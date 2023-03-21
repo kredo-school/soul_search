@@ -53,7 +53,7 @@ class ChangePasswordController extends Controller
 
         }
 
-        return redirect()->route('profile.edit', Auth::id());
+        return redirect()->route('profiles.edit', Auth::id());
     }
 
 }

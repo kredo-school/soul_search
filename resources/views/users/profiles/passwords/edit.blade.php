@@ -92,7 +92,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-sm btn-warning px-3">Update Password</button>
-                    <a type="button" href="{{ route('profile.edit', Auth::id()) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                    <a type="button" href="{{ route('profiles.edit', Auth::id()) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 
                 </form>
 

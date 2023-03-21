@@ -138,7 +138,7 @@ class UserController extends Controller
             $count++;
         }
 
-        return redirect()->route('profile.index');
+        return redirect()->route('profiles.index');
     }
 
     private function storeTag($tag, $new_tag_id){

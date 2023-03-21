@@ -71,8 +71,8 @@
                                 send message
                             </a>
                             {{-- if followed --}}
-                            @if ($user->isFollowedBy(Auth::id()))
-                            <form action="{{ route('follows.destroy', $user->id)}}" method="post">
+                            @if ($follow = $user->follow(Auth::id()))
+                            <form action="{{ route('follows.destroy', ['user' => $user->id, 'follow' => $follow->pivot->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger float-end" type="submit">
@@ -81,7 +81,7 @@
                             </form>
                             {{-- if NOT followed --}}
                             @else
-                            <form action="{{ route('follows.store')}}" method="post">
+                            <form action="{{ route('follows.store', ['user' => $user->id])}}" method="post">
                                 @csrf
                                 <input type="hidden" value="{{ $user->id }}" name="user_id">
                                 <button class="btn btn-secondary float-end" type="submit">

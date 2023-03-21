@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function(){
     #Password
     Route::resource('/passwords', ChangePasswordController::class);
     #Follow
-    Route::resource('/follows', FollowController::class);
+    Route::resource('/users/{user}/follows', FollowController::class);
 
     #Post
     Route::resource('/posts', PostController::class);

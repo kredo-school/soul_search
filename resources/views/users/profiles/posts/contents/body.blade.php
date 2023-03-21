@@ -52,14 +52,8 @@
     </div>
 </div>
 
-<div class="mt-3">
-    {{$post->body}}
-</div>
-<div>
-    @forelse($tags as $tag)
-        <a href="#" class="text-decoration-none">#{{ $tag->tag }}</a>&nbsp;
-    @empty
-    @endforelse
+<div class="mt-3 hash-link">
+    {{ $post->body }}
 </div>
 <div class="row">
     <div class="col-auto">
@@ -91,3 +85,13 @@
     </div>
 </div>
 <hr>
+
+<script>
+const setHashtagLink= (selector)=>{
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(element =>{
+        element.innerHTML = element.innerHTML.replace(/#(\w+)/g, '<a href="#$1" class="text-decoration-none">#$1</a>');
+    });
+}
+setHashtagLink('.hash-link');
+</script>

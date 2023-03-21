@@ -45,6 +45,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function contact()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
     public function chats(){
         return $this->hasMany(Chat::class)->latest();
     }

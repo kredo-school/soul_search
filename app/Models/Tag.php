@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Testing\Constraints\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    protected $fillable = ['tag'];
 
     public function chats(){
         return $this->hasMany(Chat::class)->latest();
@@ -30,5 +31,15 @@ class Tag extends Model
 
     public function isFav(){
         return $this->belongsTo(User::class, 'favorite');
+    }
+
+    public function postTags()
+    {
+        return $this->hasMany(PostTag::class)->latest();
+    }
+
+    public function userTags()
+    {
+        return $this->hasMany(UserTag::class)->latest();
     }
 }

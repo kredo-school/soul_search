@@ -23,13 +23,6 @@
             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search
         </a>
     </li>
-<<<<<<< HEAD
-    <li class="my-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us
-        </a>
-    </li>
-=======
 
     {{-- orange icon, bold text, gray backcround @ contact page --}}
     @if ( request()->is('*contact*'))
@@ -49,7 +42,6 @@
             </a>
         </li>
     @endif
->>>>>>> main
 </ul>
 
 

@@ -26,7 +26,7 @@ class AddSoftDeleteToPostLikesTable extends Migration
     public function down()
     {
         Schema::table('post_likes', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->dropSoftDeletes();
         });
     }
 }

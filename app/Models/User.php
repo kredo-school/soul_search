@@ -48,6 +48,18 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class)->latest();
+<<<<<<< HEAD
+=======
+    }
+
+    public function contact()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+    public function chats(){
+        return $this->hasMany(Chat::class)->latest();
+>>>>>>> main
     }
 
     public function comments()

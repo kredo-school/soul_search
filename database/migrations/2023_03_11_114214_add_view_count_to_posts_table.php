@@ -26,7 +26,7 @@ class AddViewCountToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('view_count')->default(0);
+            $table->unsignedBigInteger('view_count')->default(null);
         });
     }
 }

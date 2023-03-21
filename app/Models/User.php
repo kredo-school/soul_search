@@ -48,8 +48,6 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class)->latest();
-<<<<<<< HEAD
-=======
     }
 
     public function contact()
@@ -59,16 +57,11 @@ class User extends Authenticatable
 
     public function chats(){
         return $this->hasMany(Chat::class)->latest();
->>>>>>> main
     }
 
     public function comments()
     {
         return $this->hasMany(Comment::class)->latest();
-    }
-
-    public function chats(){
-        return $this->hasMany(Chat::class)->latest();
     }
 
     // To get all the tags that the user has

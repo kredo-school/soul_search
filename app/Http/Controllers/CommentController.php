@@ -35,20 +35,6 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function store(Post $post, Request $request)
-    {
-        $request->validate([
-            'comment' => 'required',
-        ]);
-
-        $post->comments()->create([
-            'user_id'  => Auth::id(),
-            'comment'  => $request->comment,
-        ]);
-
-        return redirect()->back();
-=======
     public function store(Request $request, Post $post)
     {
       #Validate the request
@@ -63,7 +49,6 @@ class CommentController extends Controller
     ]);
 
       return redirect()->back();
->>>>>>> main
     }
 
     /**
@@ -106,11 +91,7 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function destroy(Post $post, Comment $comment)
-=======
-    public function destroy(Post $post,Comment $comment)
->>>>>>> main
     {
         $post->comments()->where('id', $comment->id)->delete();
 

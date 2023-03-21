@@ -1,18 +1,13 @@
 <?php
 
 use App\Http\Controllers\UserController;
-<<<<<<< HEAD
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
-=======
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
->>>>>>> main
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LikeController;
@@ -57,7 +52,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
 
     #Profile(User)
-<<<<<<< HEAD
     Route::resource('/profiles', UserController::class);
     #Avatar
     Route::resource('/avatars', AvatarController::class);
@@ -65,9 +59,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/passwords', ChangePasswordController::class);
     #Follow
     Route::resource('/users/{user}/follows', FollowController::class);
-=======
-    Route::resource('/profile', UserController::class);
->>>>>>> main
 
     #Post
     Route::resource('/posts', PostController::class);
@@ -78,11 +69,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments', CommentController::class);
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
-<<<<<<< HEAD
-=======
-    #CONTACT
+
+    #Contact
     Route::resource('/contact', ContactController::class);
->>>>>>> main
 });
 
 

@@ -23,11 +23,33 @@
             <i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search
         </a>
     </li>
+<<<<<<< HEAD
     <li class="my-3">
         <a href="#" class="nav-link link-dark">
             <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Us
         </a>
     </li>
+=======
+
+    {{-- orange icon, bold text, gray backcround @ contact page --}}
+    @if ( request()->is('*contact*'))
+        <li class="nav-item ms-3 bg-light">
+            <a href="#" class="flex-fill nav-link link-dark">
+                <i class="fa-solid fa-circle-question text-orange"></i>&nbsp;&nbsp;
+                <span class="text-dark hide-700">
+                    Contact Us</span>
+            </a>
+        </li>
+    @else
+        <li class="nav-item ms-3">
+            <a href="#" class="flex-fill nav-link link-dark">
+                <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;
+                <span class="text-dark hide-700">
+                    Contact Us</span>
+            </a>
+        </li>
+    @endif
+>>>>>>> main
 </ul>
 
 

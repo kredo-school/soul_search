@@ -45,9 +45,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
     public function posts()
     {
         return $this->hasMany(Post::class)->latest();
+=======
+    public function contact()
+    {
+        return $this->hasMany(Contact::class);
+>>>>>>> main
     }
 
     public function chats(){

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}| @yield('title')</title>
+    <title>{{ config('app.name') }} - @yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -45,20 +45,19 @@
                 <div class="ss-main" style="height: 100%">
     @endif
 
-                        {{-- content --}}
-                        <div class="container-fluid p-0" style="height: 100%">
-                            <div class="row" style="height: 100%">
-                                    @yield('content')
-                            </div>
+                    {{-- content --}}
+                    <div class="container-fluid p-0" style="height: 100%">
+                        <div class="row" style="height: 100%">
+                                @yield('content')
                         </div>
-
-            {{-- not showing in login or register pages --}}
-            @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password/reset*') || request()->is('*password/email*') || request()->is('*password/confirm*'))
-            @else
                     </div>
+
+    {{-- not showing in login or register pages --}}
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password/reset*') || request()->is('*password/email*') || request()->is('*password/confirm*'))
+    @else
+                </div>
             </div>
         </div>
-    </div>
     @endif
 
 </body>

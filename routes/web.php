@@ -1,8 +1,13 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+=======
+
+use App\Http\Controllers\ContactController;
+>>>>>>> main
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TagController;
@@ -11,8 +16,8 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +51,7 @@ Route::group(['middleware' => 'auth'], function(){
     #LIKE
     Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
+<<<<<<< HEAD
 
     #Profile(User)
     Route::resource('/profile', UserController::class);
@@ -59,6 +65,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments', CommentController::class);
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
+=======
+    
+    #CONTACT
+    Route::resource('/contact', ContactController::class);
+>>>>>>> main
 });
 
 

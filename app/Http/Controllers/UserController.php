@@ -3,22 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-<<<<<<< HEAD
 use App\Models\Tag;
 use App\Models\UserTag;
-=======
 use App\Models\Post;
->>>>>>> main
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-<<<<<<< HEAD
     const LOCAL_STORAGE_FOLDER = 'public/avatars/';
-
-=======
->>>>>>> main
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +19,6 @@ class UserController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
         $user = User::where('id', Auth::id())->first();
 
         $user_tags = UserTag::where('user_id', Auth::id())->get();
@@ -35,10 +27,6 @@ class UserController extends Controller
             $tags[] = Tag::find($user_tag->tag_id);
         }
         return view('users.profiles.index', compact('user', 'tags'));
-=======
-        $posts = Post::where('user_id', Auth::id())->latest()->get();
-        return view('users.profiles.index', compact('posts'));
->>>>>>> main
     }
 
     /**
@@ -68,7 +56,6 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function show($id)
     {
         $user = User::find($id);
@@ -80,11 +67,6 @@ class UserController extends Controller
         }
 
         return view('users.profiles.show', compact('user', 'tags'));
-=======
-    public function show(User $user)
-    {
-        //
->>>>>>> main
     }
 
     /**
@@ -93,7 +75,6 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function edit($id)
     {
         $user      = User::find(Auth::id());
@@ -106,11 +87,6 @@ class UserController extends Controller
         }
 
         return view('users.profiles.edit', compact('user', 'tags', 'tag_count'));
-=======
-    public function edit(User $user)
-    {
-        //
->>>>>>> main
     }
 
     /**
@@ -120,7 +96,6 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function update(Request $request)
     {
         $request->validate([
@@ -199,11 +174,6 @@ class UserController extends Controller
     private function deleteTag($request, $count){
         // delete old UserTag
         UserTag::where('tag_id', $request->old_tag_id[$count])->where('user_id', Auth::id())->delete();
-=======
-    public function update(Request $request, User $user)
-    {
-        //
->>>>>>> main
     }
 
     /**
@@ -214,16 +184,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
         User::where('id', $id)->delete();
 
         return redirect()->route('index');
     }
-
-=======
-    $this->user->destroy($id);
-
-    return redirect()->back();
-    }
->>>>>>> main
 }

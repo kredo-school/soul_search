@@ -65,11 +65,7 @@ class PostController extends Controller
             }
         }
 
-<<<<<<< HEAD
         return redirect()->route('profiles.index');
-=======
-        return redirect()->route('profile.index');
->>>>>>> main
     }
 
     private function saveImage($request){
@@ -236,10 +232,6 @@ class PostController extends Controller
         $this->deleteImage($post->image);
         $post->delete();
 
-<<<<<<< HEAD
         return redirect()->route('profiles.index');
-=======
-        return redirect()->route('profile.index');
->>>>>>> main
     }
 }

@@ -39,7 +39,7 @@ class CommentController extends Controller
     {
       #Validate the request
       $request->validate([
-          'comment' => 'required|min:1|max:255',
+          'comment' => 'required',
       ]);
 
     Comment::create([

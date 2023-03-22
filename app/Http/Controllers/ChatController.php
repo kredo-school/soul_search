@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/img/';
+    const LOCAL_STORAGE_FOLDER = 'public/images/';
     private $chat;
     private $tag;
 

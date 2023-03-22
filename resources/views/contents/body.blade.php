@@ -41,6 +41,6 @@
     <!-- Body -->
     <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
     @if ($chat->image)
-        <img src="{{ asset('storage/img/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid">
+        <img src="{{ asset('storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid">
     @endif
 </div>

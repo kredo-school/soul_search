@@ -24,10 +24,12 @@ class Tag extends Model
     }
 
     public function isMain(){
-        return $this->hasMany(UserTag::class, config('enums')['tag_category']['main']);
+        // return $this->hasMany(UserTag::class, config('enums')['tag_category']['main']);
+        return $this->userTag()->where('tag_category', config('enums')['tag_category']['main'])->exists();
     }
 
     public function isFav(){
-        return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
+        // return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
+        return $this->userTag()->where('tag_category', config('enums')['tag_category']['favorite'])->exists();
     }
 }

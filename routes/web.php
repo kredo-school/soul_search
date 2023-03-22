@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
@@ -60,7 +61,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments', CommentController::class);
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
-    #CONTACT
+
+    #Message
+    Route::resource('/messages', MessageController::class);
+
+    #Contact
     Route::resource('/contact', ContactController::class);
 });
 

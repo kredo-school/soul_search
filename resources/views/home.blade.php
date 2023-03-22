@@ -69,7 +69,7 @@
             <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
             <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $tag->tag }}</a>
         </div>
-        <!-- Body (Need to update to show chats the tag has) -->
+        <!-- Body (Need to update to show chats a tag has) -->
             <div class="row mt-2 p-0 chat-body">
                 @foreach ($tagged_chats as $chat)
                     <div class="col-1 mx-1 pe-0">
@@ -86,7 +86,7 @@
                 @csrf
                 <div class="row gx-2">
                     <div class="col-sm">
-                        <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #Travel"></textarea>
+                        <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $tag->tag }}"></textarea>
                         @error('chat')
                         <div class="text-danger small">{{ $message }}</div>
                         @enderror

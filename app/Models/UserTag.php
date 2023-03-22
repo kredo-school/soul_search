@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserTag extends Model
 {
     use HasFactory;
-    protected $table ='user_tags';
-    protected $fillable = ['user_id', 'tag_id'];
+    protected $table='user_tags';
+    protected $fillable = ['user_id','tag_id'];
     public $timestamps = false;
 
     public function user()

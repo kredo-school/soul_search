@@ -31,4 +31,14 @@ class Tag extends Model
     public function isFav(){
         return $this->userTag()->where('tag_category', config('enums')['tag_category']['favorite'])->exists();
     }
+
+    public function postTags()
+    {
+        return $this->hasMany(PostTag::class)->latest();
+    }
+
+    public function userTags()
+    {
+        return $this->hasMany(UserTag::class)->latest();
+    }
 }

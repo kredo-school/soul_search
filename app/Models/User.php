@@ -59,23 +59,28 @@ class User extends Authenticatable
         return $this->hasMany(Chat::class)->latest();
     }
 
+<<<<<<< HEAD
     public function comments()
     {
         return $this->hasMany(Comment::class)->latest();
+=======
+    public function tags(){
+        return $this->hasMany(Tag::class);
+>>>>>>> main
     }
 
-    // To get all the tags that the user has
-    public function isRecent(){
-        return $this->hasMany(Tag::class, 'recent');
+    public function userTag(){
+        return $this->hasMany(UserTag::class);
     }
 
     public function isMain(){
-        return $this->hasMany(Tag::class, 'main');
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['main']);
     }
 
     public function isFav(){
-        return $this->hasMany(Tag::class, 'favorite');
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
     }
+<<<<<<< HEAD
 
     public function follows()
     {
@@ -86,4 +91,6 @@ class User extends Authenticatable
     {
         return $this->follows()->where('following_id', '=',  $user_id)->exists();
     }
+=======
+>>>>>>> main
 }

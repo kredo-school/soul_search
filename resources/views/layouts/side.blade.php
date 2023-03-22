@@ -1,6 +1,6 @@
 <a href="#" class="text-decoration-none ms-3">
-    <img src="{{ asset('img/logo.svg')}}" class="m-3 hide-700">
-    <img src="{{ asset('img/logo-s.svg')}}" class="show-700">
+    <img src="{{ asset('images/logo.svg')}}" class="m-3 hide-700">
+    <img src="{{ asset('images/logo-s.svg')}}" class="show-700">
 </a>
 <ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
     <li class="my-3">

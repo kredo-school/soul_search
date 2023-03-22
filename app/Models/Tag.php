@@ -20,17 +20,16 @@ class Tag extends Model
         return $this->belongsTo(User::class)->withTrashed();
     }
 
-    // To get all the tags that the user has
-    public function isRecent(){
-        return $this->belongsTo(User::class, 'recent');
+    public function userTag(){
+        return $this->hasMany(UserTag::class);
     }
 
     public function isMain(){
-        return $this->belongsTo(User::class, 'main');
+        return $this->userTag()->where('tag_category', config('enums')['tag_category']['main'])->exists();
     }
 
     public function isFav(){
-        return $this->belongsTo(User::class, 'favorite');
+        return $this->userTag()->where('tag_category', config('enums')['tag_category']['favorite'])->exists();
     }
 
     public function postTags()

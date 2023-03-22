@@ -59,22 +59,19 @@ class User extends Authenticatable
         return $this->hasMany(Chat::class)->latest();
     }
 
-    public function tag(){
+    public function tags(){
         return $this->hasMany(Tag::class);
     }
 
-    // To get all the tags that the user has
-    public function isRecent(){
-        return $this->hasMany(Tag::class, 'recent');
+    public function userTag(){
+        return $this->hasMany(UserTag::class);
     }
 
     public function isMain(){
-        return $this->hasMany(Tag::class, 'main');
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['main']);
     }
 
     public function isFav(){
-        return $this->hasMany(Tag::class, 'favorite');
+        return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
     }
-
-    // Add the functions about following/followed later
 }

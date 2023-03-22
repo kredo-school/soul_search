@@ -12,11 +12,13 @@ class UserTag extends Model
     protected $fillable = ['user_id', 'tag_id'];
     public $timestamps = false;
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function tag(){
+    public function tag()
+    {
         return $this->belongsTo(Tag::class);
     }
 

@@ -15,7 +15,7 @@
 
                         {{-- avatar --}}
                         @if ($user->avatar)
-                            <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="" alt="">
+                            <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
                         @else
                             <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
                         @endif
@@ -23,7 +23,7 @@
                     <div class="col">
                         <div>
                             {{-- username --}}
-                            <span class="fw-bold">{{ $user->name}}</span>
+                            <span class="fw-bold">{{ $user->username}}</span>
                         </div>
                         <div>
                             {{-- tags --}}
@@ -44,8 +44,8 @@
                         {{-- check if the login user's profile or not --}}
                         @if($user->id === Auth::id())
                             {{-- edit profile --}}
-                            <a href="{{ route('profiles.edit', Auth::id()) }}" class="btn btn-orange float-end ms-3 px-4">
-                                edit
+                            <a href="{{ route('profiles.edit', $user->id) }}" class="btn btn-orange float-end ms-3 px-4">
+                                Edit
                             </a>
                             <!-- create post modal-->
                             <button class="btn btn-outline-secondary float-end" type="button"  data-bs-toggle="modal" data-bs-target="#createPostModal">
@@ -71,8 +71,8 @@
                                 send message
                             </a>
                             {{-- if followed --}}
-                            @if ($follow = $user->follow(Auth::id()))
-                            <form action="{{ route('follows.destroy', ['user' => $user->id, 'follow' => $follow->pivot->id])}}" method="post">
+                            @if ($user->isfollowed(Auth::id()))
+                            <form action="{{ route('follows.destroy', $user->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger float-end" type="submit">
@@ -81,7 +81,7 @@
                             </form>
                             {{-- if NOT followed --}}
                             @else
-                            <form action="{{ route('follows.store', ['user' => $user->id])}}" method="post">
+                            <form action="{{ route('follows.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" value="{{ $user->id }}" name="user_id">
                                 <button class="btn btn-secondary float-end" type="submit">

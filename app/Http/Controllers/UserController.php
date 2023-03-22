@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\UserTag;
-use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,8 +57,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-
+        $user = User::where('id', $id)->first();
         $user_tags = UserTag::where('user_id', $id)->get();
         $tags      = [];
         foreach($user_tags as $user_tag){
@@ -77,8 +75,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user      = User::find(Auth::id());
-        $user_tags = UserTag::where('user_id', Auth::id())->get();
+        $user = User::where('id', $id)->first();
+        $user_tags = UserTag::where('user_id', $user->id)->get();
         $tags      = [];
         $tag_count = 0;
         foreach($user_tags as $user_tag){
@@ -96,21 +94,20 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+        $user = User::where('id', $id)->first();
+
         $request->validate([
             'username'     => 'min:1|max:100',
             'email'        => 'min:1|max:100|email',
-            'tags'         => 'max:100',
             'introduction' => 'max:10000',
         ]);
 
-        User::where('id', Auth::id())
-            ->update([
-                'username'     => $request->username,
-                'email'        => $request->email,
-                'introduction' => $request->introduction,
-        ]);
+        $user->username     = $request->username;
+        $user->email        = $request->email;
+        $user->introduction = $request->introduction;
+        $user->save();
 
         // Tag and UserTag update
         $latest_tag_id = Tag::max('id');
@@ -182,10 +179,8 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::where('id', $id)->delete();
-
-        return redirect()->route('index');
+        //
     }
 }

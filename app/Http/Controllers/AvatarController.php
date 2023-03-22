@@ -13,7 +13,7 @@ class AvatarController extends Controller
 
     public function edit($id)
     {
-        $user      = User::find(Auth::id());
+        $user      = User::find($id);
 
         return view('users.profiles.avatars.edit', compact('user'));
     }
@@ -35,7 +35,7 @@ class AvatarController extends Controller
             'avatar'   => $this->save($request),
         ]);
 
-        return redirect()->route('profile.edit', Auth::id());
+        return redirect()->route('profiles.edit', Auth::id());
     }
 
     private function save($request){

@@ -79,12 +79,11 @@ class User extends Authenticatable
 
     public function follows()
     {
-        // return $this->hasMany(Follow::class, 'followed_id');
-        return $this->belongsToMany(User::class, 'follows', 'following_id', 'followed_id')->withPivot('id');
+        return $this->hasMany(Follow::class, 'followed_id');
     }
 
-    public function follow($user_id)
+    public function isfollowed($user_id)
     {
-        return $this->follows()->where('following_id', '=',  $user_id)->first();
+        return $this->follows()->where('following_id', '=',  $user_id)->exists();
     }
 }

@@ -22,7 +22,7 @@
 
     <div class="row mt-3">
         <div class="col">
-            <form action="{{ route('avatar.update', $user->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('avatars.update', $user->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 
@@ -36,7 +36,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-sm btn-warning px-3">Update Image</button>
-                <a type="button" href="{{ route('profile.edit', $user->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                <a type="button" href="{{ route('profiles.edit', $user->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 
             </form>
 

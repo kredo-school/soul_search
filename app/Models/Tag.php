@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Testing\Constraints\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    protected $fillable = ['tag'];
 
     public function chats(){
         return $this->hasMany(Chat::class)->latest();
@@ -19,16 +20,29 @@ class Tag extends Model
         return $this->belongsTo(User::class)->withTrashed();
     }
 
-    // To get all the tags that the user has
+    public function userTag(){
+        return $this->hasMany(UserTag::class);
+    }
+
     public function isRecent(){
-        return $this->belongsTo(User::class, 'recent');
+        return $this->userTag()->where('last_access')->exists();
     }
 
     public function isMain(){
-        return $this->belongsTo(User::class, 'main');
+        return $this->userTag()->where('tag_category', config('enums')['tag_category']['main'])->exists();
     }
 
     public function isFav(){
-        return $this->belongsTo(User::class, 'favorite');
+        return $this->userTag()->where('tag_category', config('enums')['tag_category']['favorite'])->exists();
+    }
+
+    public function postTags()
+    {
+        return $this->hasMany(PostTag::class)->latest();
+    }
+
+    public function userTags()
+    {
+        return $this->hasMany(UserTag::class)->latest();
     }
 }

@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
+@section('title', 'Login')
+
+@section('styles')
+<link href="{{ mix('css/login.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
-<div class="container">
-    <img src="{{ asset('img/logo.png')}}" class="float-left mt-2">
-</div>
+    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-4 icon-md icon-position">
+
     <div class="container mb-3">
         <div class="row justify-content-center">
             <div class="col-md-5">
@@ -18,7 +23,7 @@
                             {{--  Email  --}}
                             <div class="row mb-3">
                                 <div>
-                                    <label for="email" class="col-md-4 col-form-label ">{{ __('Email Address') }}</label>
+                                    <label for="email" class="col-md-5 col-form-label ">{{ __('Email Address') }}</label>
                                 </div>
 
                                 <div class="col-md-12">
@@ -57,10 +62,10 @@
                                     </button>
                                 </div>
 
-                                <div class="row justify-content-center">
+                                <div>
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            <p class="text-center mt-3">{{ __('Forgot Your Password?') }}</p>
+                                            <p class="mt-3">{{ __('Forgot Your Password?') }}</p>
                                         </a>
                                     @endif
                                 </div>
@@ -72,14 +77,13 @@
                             {{--  Facebook Logo  --}}
                             <div class="container justify-content-center logo-center">
                                 <a class="" href="#">
-                                    <img class="icon-sm justify-content-center mt-3" src="{{asset('img/btn_facebook.svg')}}" alt="">
+                                    <img class="icon-sm justify-content-center mt-3" src="{{asset('images/btn_facebook.svg')}}" alt="">
                                 </a>
                             </div>
                             {{--  Message  --}}
                             <p class="mt-3 mb-4 text-center">Do not have an account?
                                 <a href="{{ route('register') }}" class="text-center text-orange text-decoration-none">Sing up here!</a>
                             </p>
-
                         </form>
                     </div>
                 </div>

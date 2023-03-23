@@ -19,6 +19,7 @@ class ChatController extends Controller
         $this->tag  = $tag;
     }
 
+
     public function store($tag_id, Request $request){
         $request->validate([
             'chat' =>'required|min:1|max:255',
@@ -48,5 +49,12 @@ class ChatController extends Controller
         if(Storage::disk('local')->exists($image_path)){
             Storage::disk('local')->delete($image_path);
         }
+    }
+
+    public function show($id){
+        $chat = $this->chat->findOrFail($id);
+
+        return view('home')
+        ->with('chat', $chat);
     }
 }

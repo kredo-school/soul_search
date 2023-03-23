@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Chat;
 use App\Models\User;
 use App\Models\Tag;
@@ -60,11 +61,8 @@ class HomeController extends Controller
     }
 
     private function getRecentTags(){
-        $all_tags = $this->tag->all();
-        dd($this->user->userTag);
-        $recent_tags = $this->user_tag->latest()->get();
-
-        return array_slice($recent_tags, 0, 3);
+        $user = Auth::user();
+        return $this->user_tag->with('tag')->latest()->take(3)->get();
     }
 
     private function getMainTags(){

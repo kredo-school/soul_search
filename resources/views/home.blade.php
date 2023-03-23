@@ -8,28 +8,17 @@
 
 @section('content')
 <div class="d-flex justify-content-center p-0">
+    @auth
     <!-- Tags' bar -->
     <div class="col-2 bg-white tag-bar border">
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Recent</p>
             <ul class="nav nav-pills flex-column px-0">
-                @foreach ($recent_tags as $tag)
+                @foreach ($recent_tags as $recent_tag)
                 <li class="nav-item mb-1">
-                    <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
+                    <a href="{{ route('chats.show', $recent_tag->id) }}" class="flex-fill nav-link">
                         <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">{{ $tag->tag }}</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Politics</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Food</span>
+                        <span class="text-dark tag-name">{{ $recent_tag->tag->name }}</span>
                     </a>
                 </li>
             @endforeach
@@ -42,7 +31,7 @@
                     <li class="nav-item mb-1">
                         <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
                             <i class="fa-regular fa-hashtag"></i>
-                            <span class="text-dark tag-name">{{ $tag->tag }}</span>
+                            <span class="text-dark tag-name">{{ $tag->name }}</span>
                         </a>
                     </li>
                 @endforeach
@@ -55,19 +44,20 @@
                     <li class="nav-item mb-1">
                         <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
                             <i class="fa-regular fa-hashtag"></i>
-                            <span class="text-dark tag-name">{{ $tag->tag }}</span>
+                            <span class="text-dark tag-name">{{ $tag->name }}</span>
                         </a>
                     </li>
                 @endforeach
             </ul>
         </div>
     </div>
+    @endauth
     <!-- Chats -->
     <div class="col" style="height: 95%">
         <!-- Header -->
         <div class="bg-white my-3 py-1 border border-top-0">
             <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-            <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $tag->tag }}</a>
+            <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $tag->name }}</a>
         </div>
         <!-- Body (Need to update to show chats a tag has) -->
             <div class="row mt-2 p-0 chat-body">
@@ -86,7 +76,7 @@
                 @csrf
                 <div class="row gx-2">
                     <div class="col-sm">
-                        <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $tag->tag }}"></textarea>
+                        <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $tag->name }}"></textarea>
                         @error('chat')
                         <div class="text-danger small">{{ $message }}</div>
                         @enderror

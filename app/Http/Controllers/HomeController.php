@@ -61,6 +61,7 @@ class HomeController extends Controller
 
     private function getRecentTags(){
         $all_tags = $this->tag->all();
+        dd($this->user->userTag);
         $recent_tags = $this->user_tag->latest()->get();
 
         return array_slice($recent_tags, 0, 3);

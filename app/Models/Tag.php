@@ -25,7 +25,7 @@ class Tag extends Model
     }
 
     public function isRecent(){
-        return $this->hasMany(UserTag::class);
+        return $this->userTag()->where('last_access')->exists();
     }
 
     public function isMain(){

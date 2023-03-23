@@ -22,6 +22,10 @@ class UserTag extends Model
         return $this->belongsTo(Tag::class);
     }
 
+    public function isRecent(){
+        return $this->belongsTo(User::class);
+    }
+
     public function isMain(){
         return $this->belongsTo(User::class, config('enums')['tag_category']['main']);
     }

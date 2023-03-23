@@ -19,12 +19,14 @@ class HomeController extends Controller
     private $chat;
     private $user;
     private $tag;
+    private $user_tag;
 
-    public function __construct(Chat $chat, User $user, Tag $tag)
+    public function __construct(Chat $chat, User $user, Tag $tag, UserTag $user_tag)
     {
         $this->chat = $chat;
         $this->user = $user;
         $this->tag = $tag;
+        $this->user_tag = $user_tag;
     }
 
     /**
@@ -39,6 +41,7 @@ class HomeController extends Controller
         // Need to update to show only tagged chats a user wants
         // Need to show main tags(max:3) and added tags
         $tagged_chats = [];
+        $recent_tags = $this->getRecentTags();
         $main_tags = $this->getMainTags();
         $fav_tags = $this->getFavTags();
 
@@ -51,8 +54,16 @@ class HomeController extends Controller
 
         return view('home')
             ->with('tagged_chats', $tagged_chats)
+            ->with('recent_tags', $recent_tags)
             ->with('main_tags', $main_tags)
             ->with('fav_tags', $fav_tags);
+    }
+
+    private function getRecentTags(){
+        $all_tags = $this->tag->all();
+        $recent_tags = $this->user_tag->latest()->get();
+
+        return array_slice($recent_tags, 0, 3);
     }
 
     private function getMainTags(){

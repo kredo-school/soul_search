@@ -13,11 +13,11 @@
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Recent</p>
             <ul class="nav nav-pills flex-column px-0">
-                {{-- @foreach ($recent_tags as $tag) --}}
+                @foreach ($recent_tags as $tag)
                 <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
+                    <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
                         <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Music</span>
+                        <span class="text-dark tag-name">{{ $tag->tag }}</span>
                     </a>
                 </li>
                 <li class="nav-item mb-1">
@@ -32,7 +32,7 @@
                         <span class="text-dark tag-name">Food</span>
                     </a>
                 </li>
-            {{-- @endforeach --}}
+            @endforeach
             </ul>
         </div>
         <div class="mt-5">

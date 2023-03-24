@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessageController;
@@ -37,20 +40,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
     #CHAT
-    Route::post('/tag/{tag_id}/chats', [ChatController::class, 'store'])->name('chat.store');
-
-    #TAG
-    Route::post('/tag/{tag_id}/store', [TagController::class, 'store'])->name('tag.store');
+    Route::get('/chats/{tag_id}/show', [ChatController::class, 'show'])->name('chats.show');
+    Route::post('chat/{tag_id}/store', [ChatController::class, 'store'])->name('chat.store');
 
     #LIKE
     Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
 
     #Profile(User)
-    Route::resource('/profile', UserController::class);
+    Route::resource('/profiles', UserController::class);
+    #Avatar
+    Route::resource('/avatars', AvatarController::class);
+    #Password
+    Route::resource('/passwords', ChangePasswordController::class);
+    #Follow
+    Route::resource('/follows', FollowController::class);
 
     #Post
     Route::resource('/posts', PostController::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ class MessageController extends Controller
 {
     public function index()
     {
+        $users = User::latest()->get();
         $messages = Message::where('sender_id', Auth::id())->orWhere('receiver_id', Auth::id())->latest()->get();
 
         $messages_sent     = Message::where('sender_id', Auth::id())->latest()->get();
@@ -24,6 +26,6 @@ class MessageController extends Controller
         $collection = collect($friend_ids);
         $friend_ids = $collection->unique();
 
-        return view('users.messages.index', compact('messages', 'friend_ids'));
+        return view('users.messages.index', compact('users', 'messages', 'friend_ids'));
     }
 }

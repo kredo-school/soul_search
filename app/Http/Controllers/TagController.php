@@ -21,7 +21,7 @@ class TagController extends Controller
             'tag' => 'required|min:1|max:255'
         ]);
 
-        $this->tag->tag = $request->tag;
+        $this->tag->name = $request->tag;
         $this->tag->user_id = Auth::user()->id;
         $this->save();
 

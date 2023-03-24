@@ -61,49 +61,29 @@ class RegisterController extends Controller
         $user->password = Hash::make($data['password']);
         $user->save();
         $user_id = $user->id;
-        // $db_tags = Tag::get();
+        $db_tags = Tag::get();
 
-        // foreach ($data["tag_name"] as $tag)
-        // {
-        //     $dbtags = Tag::where('tag', '=' ,$tag)->get(); //Get all the tags that has the similar name in database [example: book == book]
-        //     $count = $dbtags->count(); //Then if we found similar tags already in the database, the tag count will increase
-
-        //     //If we then have 0 count in db tags we create the tag
-        //     if (count($dbtags) == 0)
-        //     {
-        //         $tag = Tag::create(['tag'=>$tag]);
-        //         $user_tag[] = ['tag_id' => $dbtags["id"], 'user_id' => $user_id, 'tag_category' => 'main'];
-        //         UserTag::insert($user_tag);
-        //     }
-        //     else
-        //     {
-        //         $user_tag[] = ['tag_id' => $dbtags["id"], 'user_id' => $user_id, 'tag_category' => 'main'];
-        //         UserTag::insert($user_tag);
-        //     }
-        // }
-
-        for ($i = 0; $i <= count($data['tag_name']); $i++)
+        foreach ($data['tag_name'] as $tag)
         {
-            $dbtags = Tag::where('tag', '=' ,$data["tag_name"][$i])->get(); //Get all the tags that has the similar name in database [example: book == book]
-            $count = $dbtags->count(); //Then if we found similar tags already in the database, the tag count will increase
-            dd($dbtags["id"]);
-            //If we then have 0 count in db tags we create the tag
-            if (count($dbtags) == 0)
+            $tagFound = false;
+
+            foreach ($db_tags as $db_tag)
             {
-                $tag = new Tag();
-                $tag->tag = $data['tag_name'][$i];
-                $tag->save();
-                // $tag = Tag::create(['tag'=>$tag]);
-                $user_tag[] = ['tag_id' => $tag->id, 'user_id' => $user_id, 'tag_category' => 'main'];
-                UserTag::insert($user_tag);
+                if ($tag == $db_tag->tag)
+                {
+                    $tagFound = true;
+                    UserTag::insert(['tag_id' => $db_tag->id, 'user_id' => $user_id, 'tag_category' => 'main']);
+
+                    break;
+                }
             }
-            else
+
+            if (!$tagFound) //$tagFound == false
             {
-                $user_tag[] = ['tag_id' => $dbtags["id"], 'user_id' => $user_id, 'tag_category' => 'main'];
-                UserTag::insert($user_tag);
+                $tag = Tag::create(['tag'=>$tag]);
+                UserTag::insert(['tag_id' => $tag->id, 'user_id' => $user_id, 'tag_category' => 'main']);
             }
         }
-
 
         return $user;
     }

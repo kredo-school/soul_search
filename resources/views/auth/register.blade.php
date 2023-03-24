@@ -37,7 +37,7 @@
 
                         <h2 class="text-center fw-bold mt-2">Your Profile</h2>
                         <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
-                        <form method="POST" action="{{ route('register') }}" class="contact-form">
+                        <form method="POST" action="{{ route('register') }}" class="contact-form" id="contact-form" >
                             @csrf
 
 
@@ -155,14 +155,16 @@
                             </div>
                         </div>
 
+                        <p id="errorwarning">Error warning</p>
+
 
                             {{--  Button  --}}
                             <div class="row mb-0 ">
                                 <div class="col-md-7 button-adjust">
                                     <div class="form-navigation">
-                                        <button class="previous btn btn-primary text-white mb-3 float-start button-right">&lt; Previous</button>
-                                        <button class="next btn btn-orange text-white mb-3 float-end">Next &gt;</button>
-                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end">
+                                        <button type="button" class="previous btn btn-primary text-white mb-3 float-start button-right" id="previousbtn">&lt; Previous</button>
+                                        <button type="button" class="next btn btn-orange text-white mb-3 float-end" id="nextbtn">Next &gt;</button>
+                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end" id="submitbtn">
                                             {{ __('Save') }}
                                         </button>
                                     </div>

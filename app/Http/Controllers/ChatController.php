@@ -53,8 +53,14 @@ class ChatController extends Controller
 
     public function show($id){
         $chat = $this->chat->findOrFail($id);
+        $recent_tags = getRecentTags();
+        $main_tags = getMainTags();
+        $fav_tags = getFavTags();
 
         return view('home')
-        ->with('chat', $chat);
+            ->with('chat', $chat)
+            ->with('recent_tags', $recent_tags)
+            ->with('main_tags', $main_tags)
+            ->with('fav_tags', $fav_tags);
     }
 }

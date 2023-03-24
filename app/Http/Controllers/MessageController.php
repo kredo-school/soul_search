@@ -24,10 +24,6 @@ class MessageController extends Controller
         $collection = collect($friend_ids);
         $friend_ids = $collection->unique();
 
-        print($friend_ids);
-
-
-
-        // return view('users.messages.index', compact('messages'));
+        return view('users.messages.index', compact('messages', 'friend_ids'));
     }
 }

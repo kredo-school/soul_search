@@ -12,6 +12,8 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
 
+use App\Http\Controllers\Admin\UsersController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,6 +61,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
     #CONTACT
     Route::resource('/contact', ContactController::class);
+
+    Route::get('/users', [UsersController::class, 'index'])->name('users'); // admin.users
 });
+
+// Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
+//     #USERS
+
+// });
 
 

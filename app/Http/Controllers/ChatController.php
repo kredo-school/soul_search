@@ -53,12 +53,20 @@ class ChatController extends Controller
 
     public function show($id){
         $chat = $this->chat->findOrFail($id);
+        $tagged_chats = [];
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
 
+        foreach($tagged_chats as $chat){
+            if($chat->tag->isMain() || $chat->tag->isFav()){
+                $tagged_chats[] = $chat;
+            }
+        }
+
         return view('home')
             ->with('chat', $chat)
+            ->with('tagged_chats', $tagged_chats)
             ->with('recent_tags', $recent_tags)
             ->with('main_tags', $main_tags)
             ->with('fav_tags', $fav_tags);

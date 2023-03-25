@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 function getRecentTags(){
     $user = Auth::user();
-    dd($user->userTag);
-    return $user->userTag->latest()->take(3)->get();
+    return $user->userTag()->with('tag')->latest()->take(3)->get();
 }
 
 function getMainTags(){

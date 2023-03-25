@@ -7,7 +7,6 @@
 @section('title','Create Account')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="{{ mix('js/registration.js') }}"></script>
 
 @section('content')
 <div class="container">
@@ -26,7 +25,7 @@
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
-                    <div class="form-section">
+                    <div class="form-section" id="first-form">
                         <div class="row justify-content-center">
                             <div class="col-8 mb-3 rounded-box btn-orange">
                                 <span class="col-5 text-center text-orange rounded-box btn-white ">Profile</span>
@@ -37,7 +36,7 @@
 
                         <h2 class="text-center fw-bold mt-2">Your Profile</h2>
                         <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
-                        <form method="POST" action="{{ route('register') }}" class="contact-form" id="contact-form" >
+                        <form method="POST" action="{{ route('register') }}" class="contact-form" id="contact-form" name="firstForm">
                             @csrf
 
 
@@ -104,73 +103,70 @@
                             </div>
                         </div>
 
-                        <div class="form-section">
-                            <div class="row justify-content-center">
-                                <div class="col-8 mb-3 rounded-box btn-orange">
-                                    <span class="col-md-5 text-center text-white rounded-box">Profile</span>
-                                    <span class="col-md-5 box-right text-center text-orange rounded-box btn-white ">Tags</span>
+                            <div class="form-section" style="display: none" id="second-form">
+                                <div class="row justify-content-center">
+                                    <div class="col-8 mb-3 rounded-box btn-orange">
+                                        <span class="col-md-5 text-center text-white rounded-box">Profile</span>
+                                        <span class="col-md-5 box-right text-center text-orange rounded-box btn-white ">Tags</span>
+                                    </div>
+                                </div>
+                                <h2 class="text-center fw-bold mt-2">Choose Tags</h2>
+                                    <p class="text-muted text-center mt-2">What kind of things are you interested in?</p>
+                                {{--  Tag1  --}}
+                                <div class="row mb-3 justify-content-center">
+                                    <div>
+                                        <label for="tag_name" class="text-position">Tag1</label>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="text" name="tag_name[]" id="tag_name1" class="form-control" required="required">
+                                        @error('tag_name')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                {{--  Tag2  --}}
+                                <div class="row mb-3 justify-content-center">
+                                    <div>
+                                        <label for="tag_name" class="text-position">Tag2</label>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="text" name="tag_name[]" id="tag_name2" class="form-control" required="required">
+                                        @error('tag_name')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                {{--  Tag3  --}}
+                                <div class="row mb-3 justify-content-center">
+                                    <div>
+                                        <label for="tag_name" class="text-position">Tag3</label>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="text" name="tag_name[]" id="tag_name3" class="form-control" required="required">
+                                        @error('tag_name')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                            <h2 class="text-center fw-bold mt-2">Choose Tags</h2>
-                                <p class="text-muted text-center mt-2">What kind of things are you interested in?</p>
-                            {{--  Tag1  --}}
-                            <div class="row mb-3 justify-content-center">
-                                <div>
-                                    <label for="tag_name" class="text-position">Tag1</label>
-                                </div>
-                                <div class="col-7">
-                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
-                                    @error('tag_name')
-                                        <div class="text-danger small">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            {{--  Tag2  --}}
-                            <div class="row mb-3 justify-content-center">
-                                <div>
-                                    <label for="tag_name" class="text-position">Tag2</label>
-                                </div>
-                                <div class="col-7">
-                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
-                                    @error('tag_name')
-                                        <div class="text-danger small">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            {{--  Tag3  --}}
-                            <div class="row mb-3 justify-content-center">
-                                <div>
-                                    <label for="tag_name" class="text-position">Tag3</label>
-                                </div>
-                                <div class="col-7">
-                                    <input type="text" name="tag_name[]" id="tag_name" class="form-control" required="required">
-                                    @error('tag_name')
-                                        <div class="text-danger small">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <p id="errorwarning">Error warning</p>
-
 
                             {{--  Button  --}}
                             <div class="row mb-0 ">
                                 <div class="col-md-7 button-adjust">
                                     <div class="form-navigation">
-                                        <button type="button" class="previous btn btn-primary text-white mb-3 float-start button-right" id="previousbtn">&lt; Previous</button>
-                                        <button type="button" class="next btn btn-orange text-white mb-3 float-end" id="nextbtn">Next &gt;</button>
-                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end" id="submitbtn">
+                                        <button type="button" class="previous btn btn-primary text-white mb-3 float-start button-right" style="display: none" id="previousbtn" onclick="previous()">&lt; Previous</button>
+                                        <button type="button" class="next btn btn-orange text-white mb-3 float-end" id="nextbtn" onclick="next()">Next &gt;</button>
+                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end" id="submitbtn" style="display: none">
                                             {{ __('Save') }}
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                    </form>
+                        </form>
                 </div>
 
                         {{--  Horizontal line  --}}
@@ -199,7 +195,7 @@
 </div>
 
 
-
+<script src="{{ mix('js/registration.js') }}"></script>
 @endsection
 
 

@@ -1,53 +1,43 @@
-$(document).ready(function(){
-    $("#errorwarning").hide();
-    var username = $("#username").val();
-    var password = $("#password").val();
-    var confirm_password = $("#password-confirm").val();
-    var email = $("#email").val();
-    $("#previousbtn").hide();
-    $("#submitbtn").hide();
-    $(".form-section2").hide();
+const firstForm = document.getElementById("first-form");
+const secondForm = document.getElementById("second-form");
+const nextbtn = document.getElementById("nextbtn");
+const previousbtn = document.getElementById("previousbtn");
+const submitbtn = document.getElementById("submitbtn");
 
-    // $("#nextbtn").on("click", function(){
-    //     if((username == "" || email == "" || password == "" || confirm_password == "") || password != confirm_password){
+window.next = function next()
+{
+    //First form input values
+    const username = document.forms['firstForm']['username'].value;
+    const email = document.forms['firstForm']['email'].value;
+    const password = document.forms['firstForm']['password'].value;
+    const password_confirmation = document.forms['firstForm']['password_confirmation'].value;
 
-    //     }
-    //     else{
-    //         $(".form-section1").hide();
-    //         $(".form-section2").show();
-    //         $("#previousbtn").show();
-    //         $("#submitbtn").show();
-    //         $("#nextbtn").hide();
-    //     }
-    // })
-    var $sections = $('.form-section');
-    // if((username == "" || email == "" || password == "" || confirm_password == "") || password != confirm_password){}
-        function navigateTo(index){
-        $sections.removeClass('current').eq(index).addClass('current');
-        $('.form-navigation .previous').hide();
-        $('.form-navigation .previous').toggle(index>0);
-        var atTheEnd = index >= $sections.length - 1;
-        $('.form-navigation .next').toggle(!atTheEnd);
-        $('.form-navigation [type=submit]').toggle(atTheEnd);
+    //Check if all of thee input fields have value
+    if (username != '' && email != '' && password != '' && password_confirmation != '')
+    {
+        //Hide first form (username, password and email)
+        firstForm.style.display = 'none';
+
+        //Hide next button, show submit button and show previous button
+        nextbtn.style.display = 'none'; //Hide next button
+        submitbtn.style.display = null; //Display submit button
+        previousbtn.style.display = null; //Display previous button
+
+        //Show Second form (tags)
+        secondForm.style.display = null;
     }
-    function curIndex(){
-        return $sections.index($sections.filter('.current'));
-    }
+}
 
-    $('.form-navigation .previous').click(function(){
-        navigateTo(curIndex()-1);
-        $("#submitbtn").show();
-    });
+window.previous = function previous()
+{
+    //Show first form (username, password and email)
+    firstForm.style.display = null;
 
-    $('.form-navigation .next').click(function(){
-        if((username == "" || email == "" || password == "" || confirm_password == "") || password != confirm_password){
+    //Show next button, hide submit button and hide previous button
+    nextbtn.style.display = null; //Show next button
+    submitbtn.style.display = 'none'; //Hide submit button
+    previousbtn.style.display = 'none'; //Hide previous button
 
-        }
-        else{
-        $(".form-navigation .previous").show();
-        navigateTo(curIndex()+1);
-        }
-    });
-
-    navigateTo(0);
-})
+    //Hide Second form (tags)
+    secondForm.style.display = 'none';
+}

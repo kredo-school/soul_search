@@ -51,18 +51,17 @@ class ChatController extends Controller
         }
     }
 
-    public function show($id){
-        $chat = $this->chat->findOrFail($id);
-        $tagged_chats = [];
+    public function show($tag_id){
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
 
-        foreach($tagged_chats as $chat){
-            if($chat->tag->isMain() || $chat->tag->isFav()){
-                $tagged_chats[] = $chat;
-            }
-        }
+        $tagged_chats = Chat::where('tag_id', $tag_id)->get()->filter(function($chat){
+            return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
+        });
+
+        $chat = $tagged_chats->first();
+
 
         return view('home')
             ->with('chat', $chat)

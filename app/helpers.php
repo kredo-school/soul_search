@@ -31,6 +31,6 @@ function getFavTags(){
             $fav_tags[] = $fav_tag;
         }
     }
-    return array_slice($fav_tags, 0, 10);
+    return $fav_tags;
 }
 

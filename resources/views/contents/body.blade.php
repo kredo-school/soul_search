@@ -2,7 +2,7 @@
     <div class="row">
         <!-- Username and Date -->
         <div class="col pt-0 ps-2">
-            <a href="{{ route('profile', $chat->user->id) }}" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
+            <a href="#" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
             &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
@@ -23,7 +23,11 @@
                     </button>
                 </form>
             @endif
-            <span>{{ $chat->likes->count() }}</span>
+            @if ($chat->likes->count() <= 1)
+                <span>{{ $chat->likes->count() }}</span>
+            @else
+                <span>{{ $chat->likes->count() }}</span>
+            @endif
         </div>
         <!-- A Ellipsis button for Report Chat -->
         <div class="col-auto text-end me-5">
@@ -41,6 +45,6 @@
     <!-- Body -->
     <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
     @if ($chat->image)
-        <img src="{{ asset('storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid">
+        <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image">
     @endif
 </div>

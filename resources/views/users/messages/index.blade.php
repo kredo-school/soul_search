@@ -32,7 +32,6 @@
     <div class="col" style="height: 95%">
         <!-- Header -->
         <div class="bg-white my-3 py-1 border border-top-0">
-            <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
             <a href="#" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">Travel</a>
         </div>
         <!-- Body (Need to update to show chats the user wants) -->

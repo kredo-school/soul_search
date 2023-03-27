@@ -66,16 +66,8 @@ html, body, .container-fluid, .row {
     color: #6A9DFF;
 }
 
-.tag-header {
-    --bs-text-opacity: .7;
-}
-
 .tag-bar {
     height: 100%;
-}
-
-.tag-name {
-    --bs-text-opacity: .5;
 }
 
 .logo-center {
@@ -121,4 +113,37 @@ html, body, .container-fluid, .row {
 /* Hide input:file for image */
 .form-image {
     display: none;
+}
+
+.icon-sm{
+    font-size: 3rem;
+}
+
+.icon-msg{
+    font-size: 1.5rem;
+}
+
+.avatar-sm{
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+}
+
+.avatar-msg{
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: cover;
+}
+
+.image-msg{
+    height: 100px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 50px;
+    width: 69%;
+    background-color: #fff;
 }

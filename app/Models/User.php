@@ -80,12 +80,16 @@ class User extends Authenticatable
         return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
     }
 
+<<<<<<< HEAD
     //follows
+=======
+>>>>>>> main
     public function follows()
     {
         return $this->hasMany(Follow::class, 'followed_id');
     }
 
+<<<<<<< HEAD
     public function isFollowed($user_id)
     {
         return $this->follows()
@@ -113,5 +117,10 @@ class User extends Authenticatable
     {
         return $this->messagesSent()
             ->where('receiver_id', '=',  $user_id)->latest()->first();
+=======
+    public function isfollowed($user_id)
+    {
+        return $this->follows()->where('following_id', '=',  $user_id)->exists();
+>>>>>>> main
     }
 }

@@ -17,6 +17,9 @@ mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/home.scss", "public/css")
     .sass('resources/sass/profile.scss', 'public/css')
     .sass("resources/sass/post.scss", "public/css")
+<<<<<<< HEAD
     .sass('resources/sass/message.scss', 'public/css')
+=======
+>>>>>>> main
     .sass('resources/sass/contact.scss', 'public/css')
     .sourceMaps();

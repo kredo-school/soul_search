@@ -29,7 +29,11 @@
                             {{-- tags --}}
                             @forelse($tags as $tag)
                                 <a href="#" class="text-decoration-none">
+<<<<<<< HEAD
                                     #{{ $tag->name }}
+=======
+                                    #{{ $tag->tag }}
+>>>>>>> main
                                 </a>
                                 &nbsp;
                             @empty

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Tag;
+<<<<<<< HEAD
 use App\Models\Message;
+=======
+>>>>>>> main
 use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,7 +106,10 @@ class UserController extends Controller
             'username'     => 'min:1|max:100',
             'email'        => 'min:1|max:100|email',
             'introduction' => 'max:10000',
+<<<<<<< HEAD
             'tag'          => 'string'
+=======
+>>>>>>> main
         ]);
 
         $user->username     = $request->username;
@@ -115,6 +121,7 @@ class UserController extends Controller
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
         $count         = 0;
+<<<<<<< HEAD
         foreach($request->tag_name as $tag_name){
             if($count < $request->old_tag_count){
                 // if old tag != new tag
@@ -123,15 +130,31 @@ class UserController extends Controller
                         // both old and new exist
                         $this->deleteTag($request, $count);
                         $new_tag_id = $this->storeTag($tag_name, $new_tag_id);
+=======
+        foreach($request->tag as $tag){
+            if($count < $request->old_tag_count){
+                // if old tag != new tag
+                if(Tag::where('id', $request->old_tag_id[$count])->first()->tag !== $tag){
+                    if(!is_Null($tag)){
+                        // both old and new exist
+                        $this->deleteTag($request, $count);
+                        $new_tag_id = $this->storeTag($tag, $new_tag_id);
+>>>>>>> main
                     }else{
                         // only old exists
                         $this->deleteTag($request, $count);
                     }
                 }
             }else{
+<<<<<<< HEAD
                 if(!is_Null($tag_name)){
                     // only new exists
                     $new_tag_id = $this->storeTag($tag_name, $new_tag_id);
+=======
+                if(!is_Null($tag)){
+                    // only new exists
+                    $new_tag_id = $this->storeTag($tag, $new_tag_id);
+>>>>>>> main
                 }
             }
             $count++;
@@ -140,11 +163,19 @@ class UserController extends Controller
         return redirect()->route('profiles.index');
     }
 
+<<<<<<< HEAD
     private function storeTag($tag_name, $new_tag_id){
         $db_tags = Tag::get();
         $is_new = true;
         foreach($db_tags as $db_tag){
             if($db_tag->name === $tag_name){
+=======
+    private function storeTag($tag, $new_tag_id){
+        $db_tags = Tag::get();
+        $is_new = true;
+        foreach($db_tags as $db_tag){
+            if($db_tag->tag === $tag){
+>>>>>>> main
                 $is_new = false;
                 // create UserTag
                 UserTag::create([
@@ -156,7 +187,11 @@ class UserController extends Controller
         if($is_new){
             // create new Tag
             Tag::create([
+<<<<<<< HEAD
                 'name' => $tag_name,
+=======
+                'tag' => $tag,
+>>>>>>> main
             ]);
 
             // create UserTag

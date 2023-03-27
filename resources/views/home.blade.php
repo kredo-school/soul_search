@@ -16,7 +16,7 @@
             <ul class="nav nav-pills flex-column px-0">
                 @foreach ($recent_tags as $recent_tag)
                     <li class="nav-item mb-1">
-                        <a href="{{ route('chats.show', $recent_tag->id) }}" class="flex-fill nav-link">
+                        <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link">
                             <i class="fa-regular fa-hashtag"></i>
                             <span class="text-dark tag-name">{{ $recent_tag->tag->name }}</span>
                         </a>
@@ -58,22 +58,24 @@
             <!-- Header -->
             <div class="bg-white my-3 py-1 border border-top-0">
                 <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-                <a href="{{ route('chats.show', $recent_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $recent_tag->tag->name }}</a>
+                <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $recent_tag->tag->name }}</a>
             </div>
             <!-- Body (Need to update to show chats a tag has) -->
-                <div class="row mt-2 p-0 chat-body">
+                <div class="row mt-0 p-0 chat-body">
                     @foreach ($tagged_chats as $chat)
-                        <div class="col-1 mx-1 pe-0">
-                            @include('contents.title')
-                        </div>
-                        <div class="col ms-0 p-0">
-                            @include('contents.body')
+                        <div class="chat-element">
+                            <div class="col-1 pe-0 user-avatar">
+                                @include('contents.title')
+                            </div>
+                            <div class="col chat-content">
+                                @include('contents.body')
+                            </div>
                         </div>
                     @endforeach
                 </div>
                 <!-- Send bar -->
             <div class="bg-white mt-3 mb-0">
-                <form action="{{ route('chat.store', $recent_tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
+                <form action="{{ route('chat.store', $recent_tag->tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                     @csrf
                     <div class="row gx-2">
                         <div class="col-sm">
@@ -89,8 +91,8 @@
                                 <div class="text-danger small">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-sm-1 ps-0">
-                            <button type="submit" class="btn btn-orange">Send</button>
+                        <div class="col-sm-1 ps-0" style="background-color: white;">
+                            <button type="submit" class="btn btn-orange btn-send">Send</button>
                         </div>
                     </div>
                 </form>
@@ -99,7 +101,7 @@
             <!-- Header -->
             <div class="bg-white my-3 py-1 border border-top-0">
                 <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-                <a href="{{ route('chats.show', $main_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $main_tag->tag->name }}</a>
+                <a href="{{ route('chats.show', $main_tag->tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $main_tag->name }}</a>
             </div>
             <!-- Body (Need to update to show chats a tag has) -->
             <div class="row mt-2 p-0 chat-body">
@@ -118,7 +120,7 @@
                     @csrf
                     <div class="row gx-2">
                         <div class="col-sm">
-                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $main_tag->tag->name }}"></textarea>
+                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $main_tag->name }}"></textarea>
                             @error('chat')
                             <div class="text-danger small">{{ $message }}</div>
                             @enderror
@@ -131,7 +133,7 @@
                             @enderror
                         </div>
                         <div class="col-sm-1 ps-0">
-                            <button type="submit" class="btn btn-orange">Send</button>
+                            <button type="submit" class="btn btn-orange btn-send">Send</button>
                         </div>
                     </div>
                 </form>
@@ -140,7 +142,7 @@
             <!-- Header -->
             <div class="bg-white my-3 py-1 border border-top-0">
                 <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-                <a href="{{ route('chats.show', $fav_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $fav_tag->tag->name }}</a>
+                <a href="{{ route('chats.show', $fav_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $fav_tag->name }}</a>
             </div>
             <!-- Body (Need to update to show chats a tag has) -->
             <div class="row mt-2 p-0 chat-body">
@@ -155,11 +157,11 @@
             </div>
             <!-- Send bar -->
             <div class="bg-white mt-3 mb-0">
-                <form action="{{ route('chat.store', $fav_tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
+                <form action="{{ route('chat.store', $fav_tag->tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                     @csrf
                     <div class="row gx-2">
                         <div class="col-sm">
-                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $fav_tag->tag->name }}"></textarea>
+                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $fav_tag->name }}"></textarea>
                             @error('chat')
                             <div class="text-danger small">{{ $message }}</div>
                             @enderror
@@ -172,7 +174,7 @@
                             @enderror
                         </div>
                         <div class="col-sm-1 ps-0">
-                            <button type="submit" class="btn btn-orange">Send</button>
+                            <button type="submit" class="btn btn-orange btn-send">Send</button>
                         </div>
                     </div>
                 </form>

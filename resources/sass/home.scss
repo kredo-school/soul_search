@@ -118,12 +118,38 @@ html, body, .container-fluid, .row {
     cursor: pointer;
 }
 
+.icon-sm {
+    font-size: 3.5rem;
+}
+
 /* Hide input:file for image */
 .form-image {
     display: none;
 }
 
 .chat-image {
-    width: 7rem;
-    height: 7rem;
+    width: 30%;
+    height: 20%;
+    border-radius: 10px;
+}
+
+.btn-send {
+    width: 5em;
+    transform: translate(-30px, -3px);
+}
+
+.d-flex {
+    height: 100vh;
+}
+
+.chat-element {
+    position: relative;
+}
+
+.user-avatar {
+    position: absolute;
+}
+
+.chat-content {
+    margin-left: 4rem;
 }

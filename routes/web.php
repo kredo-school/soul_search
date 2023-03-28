@@ -50,23 +50,23 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
 
     #Profile(User)
-    Route::resource('/profiles', UserController::class);
+    Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);
     #Avatar
-    Route::resource('/avatars', AvatarController::class);
+    Route::resource('/avatars', AvatarController::class, ['only' => ['edit', 'update', 'destroy']]);
     #Password
-    Route::resource('/passwords', ChangePasswordController::class);
+    Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
     #Follow
-    Route::resource('/follows', FollowController::class);
+    Route::resource('/follows', FollowController::class, ['only' => ['store', 'destroy']]);
 
     #Post
-    Route::resource('/posts', PostController::class);
+    Route::resource('/posts', PostController::class, ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
     #PostLike
-    Route::resource('/posts/{post}/responses', PostLikeController::class);
+    Route::resource('/posts/{post}/responses', PostLikeController::class, ['only' => ['store', 'destroy']]);
 
     #Comment
-    Route::resource('/posts/{post}/comments', CommentController::class);
+    Route::resource('/posts/{post}/comments', CommentController::class, ['only' => ['store', 'destroy']]);
     #CommentLike
-    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
+    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class, ['only' => ['store', 'destroy']]);
 
     #Message
     Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
 
     #Contact
-    Route::resource('/contact', ContactController::class);
+    Route::resource('/contact', ContactController::class, ['only' => ['index', 'store', 'destroy']]);
 });
 
 

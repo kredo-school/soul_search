@@ -26,23 +26,22 @@
             <span class=" like-count">{{ $chat->likes->count() }}</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
-        <div class="col-auto text-end me-5">
-            <button class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
+        @if (Auth::user()->id !== $chat->user->id)
+            <div class="col-auto text-end me-5">
+            <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>
-            {{-- <div class="dropdown-menu">
-                <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#report-chat-{{ $chat-id }}">
-                    Report Chat
-                </button>
-            </div> --}}
-            {{-- @include(for Report) --}}
+            <ul class="dropdown-menu">
+                <li title="report" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#reportChatModal">
+                    <i class="fa-solid fa-circle-exclamation"></i> Report
+                </li>
+            </ul>
         </div>
+        @endif
     </div>
     <!-- Body -->
     <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
     @if ($chat->image)
-        <a href="#">
-            <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image">
-        </a>
+        <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image">
     @endif
 </div>

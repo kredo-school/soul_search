@@ -111,6 +111,7 @@ html, body, .container-fluid, .row {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 90%;
+    background-color: #f4f7fc;
 }
 
 .fa-circle-plus {
@@ -119,7 +120,7 @@ html, body, .container-fluid, .row {
 }
 
 .icon-sm {
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 
 /* Hide input:file for image */
@@ -144,6 +145,11 @@ html, body, .container-fluid, .row {
 
 .chat-element {
     position: relative;
+
+    &:hover {
+        background-color: #eef3fc;
+    }
+
 }
 
 .user-avatar {
@@ -151,5 +157,5 @@ html, body, .container-fluid, .row {
 }
 
 .chat-content {
-    margin-left: 4rem;
+    margin-left: 3.5rem;
 }

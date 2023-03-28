@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Chat;
 use App\Models\User;
 use App\Models\Tag;
+use App\Models\UserTag;
 
 class HomeController extends Controller
 {
@@ -19,10 +20,11 @@ class HomeController extends Controller
     private $user;
     private $tag;
 
-    public function __construct(Chat $chat, User $user)
+    public function __construct(Chat $chat, User $user, Tag $tag)
     {
         $this->chat = $chat;
         $this->user = $user;
+        $this->tag = $tag;
     }
 
     /**
@@ -31,26 +33,18 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    // For Guests
     public function index(){
-        $all_chats = $this->chat->latest()->get();
-
-        return view('home');
-    }
-
-    // For Registered Users
-    public function home(){
         $all_chats = $this->chat->latest()->get();
 
         // Need to update to show only tagged chats a user wants
         // Need to show main tags(max:3) and added tags
         $tagged_chats = [];
-        $recent_tags = $this->getRecentTags();
         $main_tags = $this->getMainTags();
         $fav_tags = $this->getFavTags();
 
-        foreach($all_chats as $chat){
-            if($chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent()){
+        // Need to fix to reflect the update of migrations
+        foreach($tagged_chats as $chat){
+            if($chat->tag->isMain() || $chat->tag->isFav()){
                 $tagged_chats[] = $chat;
             }
         }
@@ -58,27 +52,10 @@ class HomeController extends Controller
         return view('home')
             ->with('tagged_chats', $tagged_chats)
             ->with('main_tags', $main_tags)
-            ->with('fav_tags', $fav_tags)
-            ->with('recent_tags', $recent_tags);
-    }
-
-    private function getRecentTags(){
-        return []; // To be removed
-
-        $all_tags = $this->tag->all();
-        $recent_tags = [];
-
-        foreach($all_tags as $tag){
-            if($tag->isRecent()){
-                $recent_tags[] = $tag;
-            }
-
-            return array_slice($recent_tags, 0, 3);
-        }
+            ->with('fav_tags', $fav_tags);
     }
 
     private function getMainTags(){
-        return []; // To be removed
 
         $all_tags = $this->tag->all();
         $main_tags = [];
@@ -93,7 +70,6 @@ class HomeController extends Controller
     }
 
     private function getFavTags(){
-        return []; // To be removed
 
         $all_tags = $this->tag->all();
         $fav_tags = [];
@@ -102,16 +78,8 @@ class HomeController extends Controller
             if($tag->isFav()){
                 $fav_tags[] = $tag;
             }
-
-            return array($fav_tags);
         }
-    }
 
-
-
-    public function showUser($id){
-        $user = $this->user->findOrFail($id);
-
-        return view('home');
+        return array_slice($fav_tags, 0, 10);
     }
 }

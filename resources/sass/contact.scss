@@ -1,0 +1,153 @@
+.ss-container {
+	display: flex;
+	width: 100%;
+    height: 100vh;
+}
+.ss-sidebar {
+	width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+@media screen and (max-width: 700px) {
+	.ss-sidebar {
+		width: 45px;
+	}
+}
+
+.ss-main {
+	width: 100%;
+	margin:0;
+}
+
+html, body, .container-fluid, .row {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* set login-icon position at left-bottom */
+.login-icon {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+@media screen and (max-width: 700px) {
+	.login-icon {
+		left: 5px;
+	}
+}
+
+.container {
+    height: 100%;
+}
+
+
+/* remove the left space of ul list */
+ul {
+    list-style: none;
+    padding-left: 0
+}
+
+/* hide when the display width is <= 700px */
+@media screen and (max-width: 700px) {
+	.hide-700 {
+		display: none;
+	}
+}
+
+/* show when the display width is <= 700px */
+.show-700 {
+    display: none;
+}
+@media screen and (max-width: 700px) {
+	.show-700 {
+		display: block;
+	}
+}
+
+// set theme colrs
+.text-orange {
+    color:#FFB84D;
+}
+.bg-orange {
+    background:#FFB84D;
+}
+
+.icon-lg {
+    font-size: 5rem;
+}
+
+.text-divider {
+    display: flex;
+    align-items: center;
+}
+.text-divider::before,
+.text-divider::after {
+    content: '';
+    border-bottom:1px solid #bbb;
+    background-color: #6c757d;
+    flex-grow: 1;
+}
+.text-divider::before {
+    margin-right: 1rem;
+}
+.text-divider::after {
+    margin-left: 1rem;
+}
+
+.icon-sm {
+    width: 40px;
+    height: 36px;
+}
+
+.btn-orange {
+    background:#FFB84D;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #e5a545;
+    --bs-btn-hover-border-color: #e5a545;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #e5a545;
+    --bs-btn-active-border-color: #e5a545;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #FFB84D;
+    --bs-btn-disabled-border-color: #FFB84D;
+}
+
+.fa-hashtag {
+    color: #6A9DFF;
+}
+
+.tag-header {
+    --bs-text-opacity: .7;
+}
+
+.tag-bar {
+    height: 100%;
+}
+
+.tag-name {
+    --bs-text-opacity: .5;
+}
+
+.logo-center {
+    text-align: center;
+}
+
+btn-white {
+    background:#fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fff;
+  --bs-btn-active-border-color: #fff;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #fff;
+  --bs-btn-disabled-border-color: #fff;
+}
+

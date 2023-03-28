@@ -38,57 +38,27 @@
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Main</p>
             <ul class="nav nav-pills flex-column px-0">
-                {{-- @foreach ($recent_tags as $tag) --}}
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Movie</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link" >
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Music</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="fw-bold flex-fill nav-link active" aria-current="page" style="background-color: #F4F7FC;">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Travel</span>
-                    </a>
-                </li>
-                {{-- @endforeach --}}
+                @foreach ($main_tags as $tag)
+                    <li class="nav-item mb-1">
+                        <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
+                            <i class="fa-regular fa-hashtag"></i>
+                            <span class="text-dark tag-name">{{ $tag->tag }}</span>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Fav</p>
             <ul class="nav nav-pills flex-column px-0">
-                {{-- @foreach ($recent_tags as $tag) --}}
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Book</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Health</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Technology</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-1">
-                    <a href="#" class="flex-fill nav-link">
-                        <i class="fa-regular fa-hashtag"></i>
-                        <span class="text-dark tag-name">Education</span>
-                    </a>
-                </li>
-                {{-- @endforeach --}}
+                @foreach ($fav_tags as $tag)
+                    <li class="nav-item mb-1">
+                        <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
+                            <i class="fa-regular fa-hashtag"></i>
+                            <span class="text-dark tag-name">{{ $tag->tag }}</span>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -97,24 +67,26 @@
         <!-- Header -->
         <div class="bg-white my-3 py-1 border border-top-0">
             <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-            <a href="#" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">Travel</a>
+            <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $tag->tag }}</a>
         </div>
-        <!-- Body (Need to update to show chats the user wants) -->
-        <div class="row mt-2 p-0 chat-body">
-            <div class="col-1 mx-1 pe-0">
-                @include('contents.title')
+        <!-- Body (Need to update to show chats a tag has) -->
+            <div class="row mt-2 p-0 chat-body">
+                @foreach ($tagged_chats as $chat)
+                    <div class="col-1 mx-1 pe-0">
+                        @include('contents.title')
+                    </div>
+                    <div class="col ms-0 p-0">
+                        @include('contents.body')
+                    </div>
+                @endforeach
             </div>
-            <div class="col ms-0 p-0">
-                @include('contents.body')
-            </div>
-        </div>
             <!-- Send bar -->
         <div class="bg-white mt-3 mb-0">
-            <form action="#" method="post" class="ms-0 ps-0">
+            <form action="{{ route('chat.store', $tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                 @csrf
                 <div class="row gx-2">
                     <div class="col-sm">
-                        <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #Travel"></textarea>
+                        <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $tag->tag }}"></textarea>
                         @error('chat')
                         <div class="text-danger small">{{ $message }}</div>
                         @enderror

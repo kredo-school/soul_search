@@ -67,15 +67,11 @@
                             </ul>
                             @include('users.profiles.modal.report')
                             {{-- send message --}}
-                            <a href="#" class="btn btn-orange float-end ms-3">
+                            <a href="{{ route('messages.show', ['user' => $user]) }}" class="btn btn-orange float-end ms-3">
                                 send message
                             </a>
                             {{-- if followed --}}
-<<<<<<< HEAD
-                            @if ($user->isFollowed(Auth::id()))
-=======
                             @if ($user->isfollowed(Auth::id()))
->>>>>>> main
                             <form action="{{ route('follows.destroy', $user->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')

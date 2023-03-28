@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    Are you sure to delete the post ?
+                    Are you sure to delete the message ?
                 </div>
 
                 <div>

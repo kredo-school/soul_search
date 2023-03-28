@@ -53,28 +53,16 @@
                     </div>
 
                     <div class="mb-3 row">
-<<<<<<< HEAD
                         <label for="tag_name" class="form-label">Tags(up to 3)</label>
                         @foreach ($tags as $tag)
                             <div class="col">
                                 <input name="tag_name[]" type="text" class="form-control" id="tag_name[]" value="{{ old('tag_name[]', $tag->name) }}">
-=======
-                        <label for="tag" class="form-label">Tags(up to 3)</label>
-                        @foreach ($tags as $tag)
-                            <div class="col">
-                                <input name="tag[]" type="text" class="form-control" id="tag[]" value="{{ old('tag[]', $tag->tag) }}">
->>>>>>> main
                                 <input name="old_tag_id[]" type="hidden" value="{{ $tag->id }}">
                             </div>
                         @endforeach
                         @if ($tag_count < 3)
                             @for ($i = 0; $i < 3 - $tag_count; $i++)
-                                <div class="col">
-<<<<<<< HEAD
                                     <input name="tag_name[]" type="text" class="form-control" id="tag_name[]" value="{{ old('tag_name[]') }}">
-=======
-                                    <input name="tag[]" type="text" class="form-control" id="tag[]" value="{{ old('tag[]') }}">
->>>>>>> main
                                 </div>
                             @endfor
                         @endif

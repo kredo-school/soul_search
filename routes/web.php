@@ -68,14 +68,11 @@ Route::group(['middleware' => 'auth'], function(){
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
 
-<<<<<<< HEAD
     #Message
-    Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'destroy']]);
+    Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
     #show Message
     Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
 
-=======
->>>>>>> main
     #Contact
     Route::resource('/contact', ContactController::class);
 });

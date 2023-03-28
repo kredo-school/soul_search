@@ -81,16 +81,20 @@
 
     <!-- Messages -->
     <div class="col" style="height: 95%">
-        <!-- Head -->
-        @include('users.messages.contents.head')
+        @if($user->id !== Auth::id())
+            <!-- Head -->
+            @include('users.messages.contents.head')
 
-        <!-- Body -->
-        <div class="row mt-2 p-0 chat-body">
-            @include('users.messages.contents.body')
-        </div>
+            <!-- Body -->
+            <div class="row mt-2 p-0 chat-body">
+                @include('users.messages.contents.body')
+            </div>
 
-        <!-- Foot -->
-        @include('users.messages.contents.foot')
+            <!-- Foot -->
+            @include('users.messages.contents.foot')
+
+        @endif
+
     </div>
 </div>
 @endsection

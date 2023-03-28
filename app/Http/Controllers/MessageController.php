@@ -12,28 +12,9 @@ class MessageController extends Controller
 {
     const LOCAL_STORAGE_FOLDER = 'public/images/';
 
-    public function show(User $user)
+    public function index()
     {
-        $all_users = User::latest()->get();
-
-        // redirect if user id is same as login user's id
-        if($user->id === Auth::id()){
-            return view('users.messages.index', compact('all_users'));
-        }
-
-        $messages = Message::where(function($query) use($user){
-                $query->where(function($query) use($user){
-                    $query->where('sender_id', '=', Auth::id())
-                    ->where('receiver_id', '=', $user->id);
-                })
-                    ->orWhere(function($query) use($user){
-                        $query->where('sender_id', '=', $user->id)
-                        ->where('receiver_id', '=', Auth::id());
-                    });
-            })
-            ->oldest()->get();
-
-        return view('users.messages.show', compact('user', 'all_users', 'messages'));
+        //
     }
 
     public function store(Request $request, User $user)
@@ -83,6 +64,42 @@ class MessageController extends Controller
         $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
 
         return $image_name;
+    }
+
+    public function show(User $user)
+    {
+        $all_users = User::latest()->get();
+
+        // // redirect if user id is same as login user's id
+        // if($user->id === Auth::id()){
+        //     return view('users.messages.index', compact('all_users'));
+        // }
+
+        $messages = Message::where(function($query) use($user){
+                $query->where(function($query) use($user){
+                    $query->where('sender_id', '=', Auth::id())
+                    ->where('receiver_id', '=', $user->id);
+                })
+                    ->orWhere(function($query) use($user){
+                        $query->where('sender_id', '=', $user->id)
+                        ->where('receiver_id', '=', Auth::id());
+                    });
+            })
+            ->oldest()->get();
+
+        return view('users.messages.show', compact('user', 'all_users', 'messages'));
+    }
+
+    public function update(Request $request, User $user, Message $message)
+    {
+        $request->validate([
+                'text'  => 'string',
+        ]);
+
+        $message->text = $request->text;
+        $message->save();
+
+        return redirect()->route('messages.show', $user->id);
     }
 
     private function deleteImage($image_name)

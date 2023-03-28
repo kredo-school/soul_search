@@ -25,7 +25,7 @@ class UserController extends Controller
         foreach($user_tags as $user_tag){
             $tags[] = Tag::find($user_tag->tag_id);
         }
-        return view('users.profiles.index', compact('user', 'tags'));
+        return view('users.profiles.show', compact('user', 'tags'));
     }
 
     /**

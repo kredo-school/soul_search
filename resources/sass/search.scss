@@ -1,0 +1,8 @@
+.search_ul {
+    list-style: none;
+    padding-left: 0
+}
+
+.search_a:hover:not(.header) {
+    background-color: #c8e4ff; /* Add a hover effect to all links, except for headers */
+}

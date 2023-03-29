@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
@@ -48,15 +51,21 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
 
     #Profile(User)
-    Route::resource('/profile', UserController::class);
+    Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);
+    #Avatar
+    Route::resource('/avatars', AvatarController::class, ['only' => ['edit', 'update', 'destroy']]);
+    #Password
+    Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
+    #Follow
+    Route::resource('/follows', FollowController::class, ['only' => ['store', 'destroy']]);
 
     #Post
-    Route::resource('/posts', PostController::class);
+    Route::resource('/posts', PostController::class, ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
     #PostLike
-    Route::resource('/posts/{post}/responses', PostLikeController::class);
+    Route::resource('/posts/{post}/responses', PostLikeController::class, ['only' => ['store', 'destroy']]);
 
     #Comment
-    Route::resource('/posts/{post}/comments', CommentController::class);
+    Route::resource('/posts/{post}/comments', CommentController::class, ['only' => ['store', 'destroy']]);
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
     #CONTACT

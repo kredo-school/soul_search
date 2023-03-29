@@ -30,61 +30,63 @@
             </tr>
         </thead>
         <tbody>
-            {{--  @foreach ($all_users as $user)  --}}
+            @foreach ($all_users as $user)
                 <tr>
                     <td>
-                        {{--  @if ($user->avatar)  --}}
-                            <img src="{{ asset('images/cat.png')}}" alt="#" class="rounded-circle d-block mx-auto avatar-md">
-                        {{--  @else  --}}
+                        @if ($user->avatar)
+                            <img src="{{ asset('/storage/avatars/' . $user->avatar) }}" alt="{{ $user->avatar }}" class="rounded-circle d-block mx-auto avatar-md">
+                        @else
                             <i class="fa-solid fa-circle-user text-secondary d-block text-center icon-md"></i>
-                        {{--  @endif  --}}
+                        @endif
                     </td>
                     <td class="ps-5">
-                        <a href="#" class="text-decoration-none text-dark">Ben</a>
+                        <a href="#" class="text-decoration-none text-dark">{{ $user->username }}</a>
                     </td>
                     <td class="cell-tiny">
-                        ben@mail.com
+                        {{ $user->email }}
                     </td>
                     <td class="cell-padding">
-                        2023-3-28 22:00
+                        {{ $user->created_at }}
                     </td>
                     <td>
-                        {{--  @if ($user->trashed())  --}}
+                        @if ($user->trashed())
                              <i class="fa-solid fa-circle text-secondary"></i>&nbsp; Inactive
-                        {{--  @else  --}}
+                        @else
                              <i class="fa-solid fa-circle text-success"></i>&nbsp; Active
-                        {{--  @endif  --}}
+                        @endif
 
                     </td>
                     <td>
-                        {{--  @if (Auth::user()->id !== $user->id)  --}}
+                        @if (Auth::user()->id !== $user->id)
                             <div class="dropdown">
                                 <button class="btn btn-sm" data-bs-toggle="dropdown">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </button>
-                                {{--  @if ($user->trashed())  --}}
+                                @if ($user->trashed())
                                 <div class="dropdown-menu">
                                     <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#">
-                                        <i class="fa-solid fa-user-check"></i> Activate
+                                        <i class="fa-solid fa-user-check"></i> Activate {{ $user->username }}
                                     </button>
                                 </div>
-                                {{--  @else  --}}
+                                @else
                                 <div class="dropdown-menu">
                                     <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#">
-                                        <i class="fa-solid fa-user-slash"></i> Deactivate
+                                        <i class="fa-solid fa-user-slash"></i> Deactivate {{ $user->username }}
                                     </button>
                                 </div>
-                                {{--  @endif  --}}
+                                @endif
 
                             </div>
                             @include('admin.users.modal.status')
-                            {{--  @endif  --}}
+                            @endif
                         </td>
                      </tr>
-                 {{--  @endforeach  --}}
+                 @endforeach
             </tbody>
         </table>
         </div>
     </div>
-    {{--  {{ $all_users->appends(request()->query())->links() }}  --}}
+    <div class="ms-5">
+        {{ $all_users->appends(request()->query())->links() }}
+    </div>
 @endsection

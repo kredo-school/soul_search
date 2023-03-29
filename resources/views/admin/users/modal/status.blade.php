@@ -1,6 +1,6 @@
-{{--  @if ($user->trashed())  --}}
+@if ($user->trashed())
 {{--  Activate  --}}
-<div class="modal fade" id="#">
+<div class="modal fade" id="activate-user-{{ $user->id }}">
     <div class="modal-dialog">
         <div class="modal-content border-success">
             <div class="modal-header border-success">
@@ -9,7 +9,7 @@
                 </h3>
             </div>
             <div class="modal-body">
-                Are you sure you want to Activate <span class="fw-bold">Username</span>
+                Are you sure you want to Activate <span class="fw-bold">{{ $user->username }}</span>
             </div>
             <div class="modal-footer border-0">
                 <form action="#" method="post">
@@ -23,9 +23,9 @@
         </div>
     </div>
 </div>
-{{--  @else  --}}
+@else
 {{--  Deactivate  --}}
-<div class="modal fade" id="#">
+<div class="modal fade" id="deactivate-user-{{ $user->id }}">
     <div class="modal-dialog">
         <div class="modal-content border-danger">
             <div class="modal-header border-danger">
@@ -34,7 +34,7 @@
                 </h3>
             </div>
             <div class="modal-body">
-                Are you sure you want to deactivate <span class="fw-bold">Username</span>
+                Are you sure you want to deactivate <span class="fw-bold">{{ $user->username }}</span>
             </div>
             <div class="modal-footer border-0">
                 <form action="#" method="post">
@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-{{--  @endif  --}}
+@endif
 
 
 

@@ -70,11 +70,6 @@ class MessageController extends Controller
     {
         $all_users = User::latest()->get();
 
-        // // redirect if user id is same as login user's id
-        // if($user->id === Auth::id()){
-        //     return view('users.messages.index', compact('all_users'));
-        // }
-
         $messages = Message::where(function($query) use($user){
                 $query->where(function($query) use($user){
                     $query->where('sender_id', '=', Auth::id())

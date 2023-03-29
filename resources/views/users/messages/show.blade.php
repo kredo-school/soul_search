@@ -80,7 +80,7 @@
     </div>
 
     <!-- Messages -->
-    <div class="col" style="height: 95%">
+    <div class="col position-relative" style="height: 95%">
         @if($user->id !== Auth::id())
             <!-- Head -->
             @include('users.messages.contents.head')
@@ -89,10 +89,6 @@
             <div class="row mt-2 p-0 chat-body">
                 @include('users.messages.contents.body')
             </div>
-
-            <!-- Foot -->
-            @include('users.messages.contents.foot')
-
         @endif
 
     </div>

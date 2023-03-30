@@ -103,7 +103,7 @@ class UserController extends Controller
             'username'     => 'min:1|max:100',
             'email'        => 'min:1|max:100|email',
             'introduction' => 'max:10000',
-            'tag'          => 'string'
+            'tag_name'     => 'string'
         ]);
 
         $user->username     = $request->username;

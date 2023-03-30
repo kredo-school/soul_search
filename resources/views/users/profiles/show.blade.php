@@ -29,7 +29,7 @@
                             {{-- tags --}}
                             @forelse($tags as $tag)
                                 <a href="#" class="text-decoration-none">
-                                    #{{ $tag->tag }}
+                                    #{{ $tag->name }}
                                 </a>
                                 &nbsp;
                             @empty

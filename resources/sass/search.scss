@@ -3,6 +3,12 @@
     padding-left: 0
 }
 
-.search_a:hover:not(.header) {
-    background-color: #c8e4ff; /* Add a hover effect to all links, except for headers */
+.icon-srch{
+    font-size: 2.5rem;
+}
+
+.avatar-srch{
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
 }

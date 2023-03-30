@@ -12,16 +12,46 @@
         <input type="text" id="userInput" onkeyup="searchUserTag()" placeholder="input here" class="form-control">
         <ul id="searchUl" class="search_ul">
             @foreach ($users as $user)
-                <li  style="display: none;">
-                    <a href="{{ route('profiles.show', Auth::id()) }}" class="text-decoration-none">
-                        <span>{{$user->username}}</span>
+                <li class="mt-3 ms-2" style="display: none;">
+                    <a href="{{ route('profiles.show', $user->id) }}" class="text-decoration-none">
+                        <div class="row">
+                            <div class="col-sm-auto">
+                                @if ($user->avatar)
+                                    <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-srch rounded-circle" alt="">
+                                @else
+                                    <i class="fa-solid fa-circle-user text-secondary icon-srch"></i>
+                                @endif
+                            </div>
+                            <div class="col-sm">
+                                <div><span class="text-dark">{{$user->username}}</span></div>
+                                @php
+                                    $follow_count = $user->follows->count();
+                                @endphp
+                                <div class="text-muted">
+                                    @if ($follow_count > 1)
+                                        {{$follow_count}}&nbsp;followers
+                                    @else
+                                        {{$follow_count}}&nbsp;follower
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </a>
                 </li>
             @endforeach
             @foreach ($tags as $tag)
-                <li style="display: none;">
+                <li class="mt-3 ms-2" style="display: none;">
+                    {{-- need link to chat --}}
                     <a href="#" class="text-decoration-none">
-                        <span>{{$tag->name}}</span>
+                        <div class="row">
+                            <div class="col-sm-auto">
+                                <i class="fa-solid fa-hashtag text-secondary icon-srch"></i>
+                            </div>
+                            <div class="col-sm">
+                                <div><span class="text-dark">{{$tag->name}}</span></div>
+                                <div class="text-muted">400 chats{{-- count chat numbers --}}</div>
+                            </div>
+                        </div>
                     </a>
                 </li>
             @endforeach

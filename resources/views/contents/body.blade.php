@@ -23,7 +23,7 @@
                     </button>
                 </form>
             @endif
-            <span class=" like-count">{{ $chat->likes->count() }}</span>
+            <span class="p-0 likes-count">{{ $chat->likes->count() }}</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
         @if (Auth::user()->id !== $chat->user->id)

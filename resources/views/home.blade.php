@@ -101,7 +101,7 @@
             <!-- Header -->
             <div class="bg-white mt-3 mb-0 py-1 border border-top-0">
                 <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-                <a href="{{ route('chats.show', $main_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $main_tag->tag->name }}</a>
+                <a href="{{ route('chats.show', $main_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $main_tag->name }}</a>
             </div>
             <!-- Body (Need to update to show chats a tag has) -->
             <div class="row pt-3 chat-body">
@@ -120,7 +120,7 @@
                     @csrf
                     <div class="row gx-2">
                         <div class="col-sm">
-                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $main_tag->tag->name }}"></textarea>
+                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $main_tag->name }}"></textarea>
                             @error('chat')
                             <div class="text-danger small">{{ $message }}</div>
                             @enderror
@@ -142,7 +142,7 @@
             <!-- Header -->
             <div class="bg-white mt-3 mb-0 py-1 border border-top-0">
                 <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-                <a href="{{ route('chats.show', $fav_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $fav_tag->tag->name }}</a>
+                <a href="{{ route('chats.show', $fav_tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $fav_tag->name }}</a>
             </div>
             <!-- Body (Need to update to show chats a tag has) -->
             <div class="row pt-3 chat-body">
@@ -161,7 +161,7 @@
                     @csrf
                     <div class="row gx-2">
                         <div class="col-sm">
-                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $fav_tag->tag->name }}"></textarea>
+                            <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $fav_tag->name }}"></textarea>
                             @error('chat')
                             <div class="text-danger small">{{ $message }}</div>
                             @enderror

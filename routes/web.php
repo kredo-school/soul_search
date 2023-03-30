@@ -6,6 +6,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
@@ -66,6 +67,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments', CommentController::class, ['only' => ['store', 'destroy']]);
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class, ['only' => ['store', 'destroy']]);
+
+    #Message
+    Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
+    #show Message
+    Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
 
     #Contact
     Route::resource('/contact', ContactController::class, ['only' => ['index', 'store', 'destroy']]);

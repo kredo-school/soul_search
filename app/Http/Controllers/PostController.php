@@ -46,9 +46,6 @@ class PostController extends Controller
             'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
-        // get hashtags
-        preg_match_all("/#(\\w+)/", $request->body, $hashtags);
-
         // create data in posts table
         Post::create([
             'body'    => $request->body,
@@ -59,10 +56,9 @@ class PostController extends Controller
         // store Tag and PostTag
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
-        foreach($hashtags[1] as $tag){
-            if(!is_Null($tag)){
-                $new_tag_id = $this->storePostTag(Post::latest()->first()->id, trim($tag), $new_tag_id);
-            }
+        preg_match_all("/#(\\w+)/", $request->body, $hashtags);
+        foreach($hashtags[1] as $tag_name){
+            $new_tag_id = $this->storePostTag(Post::latest()->first()->id, $tag_name, $new_tag_id);
         }
 
         return redirect()->route('profiles.index');
@@ -78,12 +74,12 @@ class PostController extends Controller
         return $image_name;
     }
 
-    private function storePostTag($id, $tag, $new_tag_id){
+    private function storePostTag($id, $tag_name, $new_tag_id){
         $db_tags = Tag::get();
         //check if tag is new
         $is_new = true;
         foreach($db_tags as $db_tag){
-            if($db_tag->tag == $tag){
+            if($db_tag->name == $tag_name){
                 $is_new = false;
                 PostTag::create([
                     'post_id' => $id,
@@ -93,7 +89,7 @@ class PostController extends Controller
         }
         if($is_new){
             Tag::create([
-                'tag' => $tag,
+                'name' => $tag_name,
             ]);
             PostTag::create([
                 'post_id' => $id,
@@ -182,7 +178,7 @@ class PostController extends Controller
         $count = 0;
         for($i = 0; $i < $number_of_old_tags && $i < $number_of_new_tags; $i++){
             // check if old and new are same number or not
-            if(Tag::where('id', $request->old_tag_ids[$i])->first()->tag !== $hashtags[1][$i]){
+            if(Tag::where('id', $request->old_tag_ids[$i])->first()->name !== $hashtags[1][$i]){
                 // delete old and store new
                 $this->deletePostTag($request, $i, $post_id);
                 $new_tag_id = $this->storePostTag($post_id, $hashtags[1][$i], $new_tag_id);

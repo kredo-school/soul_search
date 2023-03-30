@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         Gate::define('admin', function($user){
-            return $user->role_id == User::ADMIN_ROLE_ID
+            return $user->id == 1
                     ? Response::allow()
                     : Response::deny('You must be an administrator');
         });

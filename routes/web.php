@@ -74,5 +74,6 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
-Route::get('/users', [UsersController::class, 'index'])->name('users'); // admin.users
+    #USERS
+    Route::get('/users', [UsersController::class, 'index'])->name('users'); // admin.users
 });

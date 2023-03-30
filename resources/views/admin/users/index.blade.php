@@ -10,7 +10,7 @@
     @auth
         <div class="mb-2 ml-auto d-flex justify-content-end mt-5">
 
-            <form action="{{ route('users') }}" style="width:300px">
+            <form action="{{ route('admin.users') }}" style="width:300px">
 
             </form>
         </div>

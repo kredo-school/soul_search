@@ -11,13 +11,19 @@ class ReportController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'violation_type' => 'required|in:communication,name,threat',
+            'violation_type' => 'required',
         ]);
+
+        // print $request->source;
+        // print "<br>/";
+        // print $request->source_id;
+        // print "<br>//";
+        // print $request->violation_type;
 
         Report::create([
             'reporter_id'    => Auth::id(),
-            'source_id'      => $request->source_id,
             'source'         => $request->source,
+            'source_id'      => $request->source_id,
             'violation_type' => $request->violation_type,
         ]);
 

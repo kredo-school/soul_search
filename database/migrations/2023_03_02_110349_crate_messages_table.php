@@ -15,7 +15,7 @@ class CrateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('text')->nullable();
+            $table->string('message')->nullable();
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
             $table->string('image', 50)->nullable();

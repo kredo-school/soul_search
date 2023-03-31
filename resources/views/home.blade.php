@@ -55,7 +55,7 @@
         @endauth
         <!-- Chats -->
         <div class="col" style="height: 96%">
-            @if ($recent_tags->isRecent())
+            @if ($recent_tag->isRecent())
                 <!-- Header -->
                 <div class="bg-white py-3 border border-top-0">
                     <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
@@ -98,7 +98,7 @@
                         </div>
                     </form>
                 </div>
-            @elseif ($main_tags->isMain())
+            @elseif ($main_tag->isMain())
                 <!-- Header -->
                 <div class="bg-white mt-3 mb-0 py-1 border border-top-0">
                     <i class="fa-regular fa-hashtag fa-2x ps-5"></i>

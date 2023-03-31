@@ -70,7 +70,7 @@
                     @else
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                             <li>
-                                <a href="#" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportCommentModal">
+                                <a href="" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportCommentModal">
                                     <i class="fa-solid fa-exclamation"></i> Report
                                 </a>
                             </li>

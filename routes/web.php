@@ -5,7 +5,9 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -13,8 +15,6 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\PostLikeController;
-use App\Http\Controllers\CommentLikeController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -75,6 +75,9 @@ Route::group(['middleware' => 'auth'], function(){
 
     #Contact
     Route::resource('/contact', ContactController::class, ['only' => ['index', 'store', 'destroy']]);
+
+    #Report
+    Route::resource('/reports', ReportController::class, ['only' => ['store']]);
 });
 
 

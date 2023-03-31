@@ -98,7 +98,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
-                    <a type="button" href="{{ route('profiles.index') }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                    <a type="button" href="{{ route('profiles.show', Auth::id()) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 
                 </form>
 

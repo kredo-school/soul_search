@@ -23,12 +23,12 @@ class CrateReportsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('reporter_id')->references('id')->on('users');
-            $table->foreign('source_id', 'source_id_users')->references('id')->on('users');
-            $table->foreign('source_id', 'source_id_posts')->references('id')->on('posts');
-            $table->foreign('source_id', 'source_id_comments')->references('id')->on('comments');
-            $table->foreign('source_id', 'source_id_tags')->references('id')->on('tags');
-            $table->foreign('source_id', 'source_id_chats')->references('id')->on('chats');
-            $table->foreign('source_id', 'source_id_messages')->references('id')->on('messages');
+            // $table->foreign('source_id', 'source_id_users')->references('id')->on('users');
+            // $table->foreign('source_id', 'source_id_posts')->references('id')->on('posts');
+            // $table->foreign('source_id', 'source_id_comments')->references('id')->on('comments');
+            // $table->foreign('source_id', 'source_id_tags')->references('id')->on('tags');
+            // $table->foreign('source_id', 'source_id_chats')->references('id')->on('chats');
+            // $table->foreign('source_id', 'source_id_messages')->references('id')->on('messages');
         });
     }
 

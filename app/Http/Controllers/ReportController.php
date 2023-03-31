@@ -14,12 +14,6 @@ class ReportController extends Controller
             'violation_type' => 'required',
         ]);
 
-        // print $request->source;
-        // print "<br>/";
-        // print $request->source_id;
-        // print "<br>//";
-        // print $request->violation_type;
-
         Report::create([
             'reporter_id'    => Auth::id(),
             'source'         => $request->source,

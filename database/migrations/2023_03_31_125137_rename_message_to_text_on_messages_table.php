@@ -13,7 +13,7 @@ class RenameMessageToTextOnMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('text_on_messages', function (Blueprint $table) {
+        Schema::table('messages', function (Blueprint $table) {
             $table->renameColumn('message', 'text');
         });
     }
@@ -25,7 +25,7 @@ class RenameMessageToTextOnMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('text_on_messages', function (Blueprint $table) {
+        Schema::table('messages', function (Blueprint $table) {
             $table->renameColumn('text', 'message');
         });
     }

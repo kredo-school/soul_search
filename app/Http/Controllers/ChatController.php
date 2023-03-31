@@ -70,4 +70,11 @@ class ChatController extends Controller
             ->with('main_tags', $main_tags)
             ->with('fav_tags', $fav_tags);
     }
+
+    public function destroy($id){
+        $chat = $this->chat->findOrFail($id);
+        $this->deleteImage($chat->image);
+        $chat->forceDelete();
+        return redirect()->route('home');
+    }
 }

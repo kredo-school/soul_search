@@ -23,3 +23,13 @@
   .icon-md{
     font-size:3.5rem;
   }
+
+  .ss-container {
+	display: flex;
+	width: 100%;
+    height: 100vh;
+}
+.ss-sidebar {
+	width: 20%;
+    background-color: white;
+}

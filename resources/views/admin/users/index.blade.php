@@ -7,6 +7,16 @@
 @endsection
 
 @section('content')
+<div class="ss-container">
+    <div class="row" style="height: 100%">
+        <div class="col-2 p-0">
+            {{-- side bar --}}
+            <div class="ss-sidebar">
+            @include('admin.admin_side')
+            </div>
+        </div>
+    </div>
+</div>
     @auth
         <div class="mb-2 ml-auto d-flex justify-content-end mt-5">
 
@@ -16,7 +26,7 @@
         </div>
     @endauth
     <h1 class="ms-5 mb-2">Users</h1>
-    <div class="contaoiner display-user ms-5">
+    <div class="container display-user ms-5">
         <div class="colmd-8">
     <table class="table table-hover align-middle bg-white border cell-padding">
         <thead class="small bg-orange">
@@ -64,13 +74,13 @@
                                 </button>
                                 @if ($user->trashed())
                                 <div class="dropdown-menu">
-                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#">
+                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#activate-user-{{ $user->id }}">
                                         <i class="fa-solid fa-user-check"></i> Activate {{ $user->username }}
                                     </button>
                                 </div>
                                 @else
                                 <div class="dropdown-menu">
-                                    <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#">
+                                    <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deactivate-user-{{ $user->id }}">
                                         <i class="fa-solid fa-user-slash"></i> Deactivate {{ $user->username }}
                                     </button>
                                 </div>

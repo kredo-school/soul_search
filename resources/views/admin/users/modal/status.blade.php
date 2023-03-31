@@ -12,7 +12,7 @@
                 Are you sure you want to Activate <span class="fw-bold">{{ $user->username }}</span>
             </div>
             <div class="modal-footer border-0">
-                <form action="#" method="post">
+                <form action="{{ route('admin.users.activate', $user->id) }}" method="post">
                     @csrf
                     @method('PATCH')
 
@@ -37,7 +37,7 @@
                 Are you sure you want to deactivate <span class="fw-bold">{{ $user->username }}</span>
             </div>
             <div class="modal-footer border-0">
-                <form action="#" method="post">
+                <form action="{{ route('admin.users.deactivate', $user->id) }}" method="post">
                     @csrf
                     @method('DELETE')
 

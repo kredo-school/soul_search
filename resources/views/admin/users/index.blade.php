@@ -8,17 +8,13 @@
 
 @section('content')
     @auth
-        <div class="mb-2 ml-auto d-flex justify-content-end bg-color">
-
-            <form action="{{ route('admin.users') }}" style="width:300px">
-
-            </form>
-        </div>
-    @endauth
-    <h1 class="ms-5 mb-2">Users</h1>
+    <h1 class="ms-5 mt-5 text-heigt d-flex align-items-end">Users</h1>
     <div class="container display-user ms-5">
-        <div class="colmd-8">
-    <table class="table table-hover align-middle bg-white border cell-padding">
+        <form action="{{ route('admin.users') }}">
+        </form>
+    <div class="colmd-8">
+    @endauth
+    <table class="table table-hover bg-white border cell-padding text-heigt">
         <thead class="small bg-orange">
             <tr>
                 <th></th>
@@ -86,7 +82,7 @@
         </table>
         </div>
     </div>
-    <div class="ms-5">
+    <div class="ms-5 ">
         {{ $all_users->appends(request()->query())->links() }}
     </div>
 @endsection

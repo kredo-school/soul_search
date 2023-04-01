@@ -32,6 +32,7 @@
 
     {{-- not showing in login, register, or post pages --}}
     @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*') ||  request()->is('*admin*'))
+
     @else
     <div class="ss-container">
         <div class="row" style="height: 100%">
@@ -43,28 +44,20 @@
             </div>
             <div class="col-10 p-0" style="height: 100%">
                 <div class="ss-main" style="height: 100%">
-                @endif
+                    @endif
 
                     @if ( request()->is('*admin*'))
                     <div class="ss-container">
-                        <div class="row" style="height: 100%">
-                            <div class="col-2 p-0">
-                                {{-- side bar --}}
-                                <div class="ss-sidebar">
-                                @include('admin.admin_side')
-                                </div>
-                            </div>
-                            <div class="col-10 p-0" style="height: 100%">
-                                <div class="ss-main" style="height: 100%">
-                                    @endif
+                        {{-- side bar --}}
+                        <div class="ss-sidebar label">
+                        @include('admin.admin_side')
+                        </div>
+                    @endif
 
-                                    {{-- content --}}
-                                    <div class="container-fluid p-0" style="height: 100%">
-                                        <div class="row" style="height: 100%">
-                                                @yield('content')
-                                        </div>
-                                     </div>
-                                </div>
+                    {{-- content --}}
+                        <div class="container-fluid p-0" style="height: 100%">
+                            <div class="row" style="height: 100%">
+                                @yield('content')
                             </div>
                         </div>
                     </div>

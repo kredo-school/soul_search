@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -13,10 +14,12 @@ class ChatController extends Controller
     const LOCAL_STORAGE_FOLDER = 'public/images/';
     private $chat;
     private $tag;
+    private $user;
 
-    public function __construct(Chat $chat, Tag $tag){
+    public function __construct(Chat $chat, Tag $tag, User $user){
         $this->chat = $chat;
         $this->tag  = $tag;
+        $this->user = $user;
     }
 
 

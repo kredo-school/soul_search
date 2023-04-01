@@ -1,4 +1,4 @@
-{{-- report user modal --}}
+{{-- report message modal --}}
 <div class="modal fade" id="reportMsgModal{{$message->id}}" tabindex="-1" aria-labelledby="reportMsgModal{{$message->id}}Label" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">
@@ -8,24 +8,25 @@
 			<div class="modal-body">
                 <div class="mb-3">tell us the problem</div>
                 <div>
-                    <form action="#" method="post">
+                    <form action="{{ route('reports.store') }}" method="post">
                         @csrf
-                        <input type="hidden" value="{{ $message->id }}" name="message_id">
+                        <input type="hidden" value="message" name="source">
+                        <input type="hidden" value="{{ $message->id }}" name="source_id">
 
                         <div class="mb-2">
-                            <input type="checkbox" class="form-check-input" id="comms" name="violation_types[]" value="communication">
+                            <input type="radio" class="form-check-input" id="comms" name="violation_type" value="communication">
                             <label for="comms" class="form-check-label fw-bold">Comms Abuse</label>
                             <div class="text-muted text-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Offensive Language, Hateful Speech, Sexual Harassment</div>
                         </div>
 
                         <div class="mb-2">
-                            <input type="checkbox" class="form-check-input" id="names" name="violation_types[]" value="name">
+                            <input type="radio" class="form-check-input" id="names" name="violation_type" value="name">
                             <label for="names" class="form-check-label fw-bold">Offensive or Inappropriate Names</label>
                             <div class="text-muted text-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username, Tag</div>
                         </div>
 
                         <div class="mb-3">
-                            <input type="checkbox" class="form-check-input" id="threats" name="violation_types[]" value="threat">
+                            <input type="radio" class="form-check-input" id="threats" name="violation_type" value="threat">
                             <label for="threats" class="form-check-label fw-bold">Threats</label>
                             <div class="text-muted text-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Off-App Physical and Emotional Abuse, Doxxing, Bullying</div>
                         </div>

@@ -1,4 +1,4 @@
-{{-- report post modal --}}
+{{-- report comment modal --}}
 <div class="modal fade" id="reportCommentModal" tabindex="-1" aria-labelledby="reportCommentModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">

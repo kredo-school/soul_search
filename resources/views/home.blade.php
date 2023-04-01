@@ -51,7 +51,7 @@
                 </ul>
             </div>
         </div>
-        @endauth
+    @endauth
         <!-- Chats -->
         <div class="col" style="height: 96%">
             @if ($recent_tag->isRecent())

@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="d-flex justify-content-center p-0">
-    <!-- Tags' bar -->
+    <!-- Tags bar -->
     <div class="col-2 bg-white tag-bar border">
         <div class="mt-5">
             <p class="text-dark fw-bold mb-1 ms-3 tag-name">Recent</p>

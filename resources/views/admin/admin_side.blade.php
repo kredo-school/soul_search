@@ -4,43 +4,14 @@
 <ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
     <li class="my-3">
         <a href="#" class="nav-link active" aria-current="page">
-            <i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home
+            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Users
         </a>
     </li>
     <li class="my-3">
         <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile
+            <i class="fa-regular fa-file"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posts
         </a>
     </li>
-    <li class="my-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message
-        </a>
-    </li>
-    <li class="my-3">
-        <a href="#" class="nav-link link-dark">
-            <i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search
-        </a>
-    </li>
-
-    {{-- orange icon, bold text, gray backcround @ contact page --}}
-    @if ( request()->is('*contact*'))
-        <li class="nav-item ms-3 bg-light">
-            <a href="#" class="flex-fill nav-link link-dark">
-                <i class="fa-solid fa-circle-question text-orange"></i>&nbsp;&nbsp;
-                <span class="text-dark hide-700">
-                    Contact Us</span>
-            </a>
-        </li>
-    @else
-        <li class="nav-item ms-3">
-            <a href="#" class="flex-fill nav-link link-dark">
-                <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;
-                <span class="text-dark hide-700">
-                    Contact Us</span>
-            </a>
-        </li>
-    @endif
 </ul>
 
 

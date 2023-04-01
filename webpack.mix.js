@@ -19,4 +19,5 @@ mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/post.scss", "public/css")
     .sass('resources/sass/contact.scss', 'public/css')
     .sass('resources/sass/admin_users.scss', 'public/css')
+    .sass('resources/sass/side.scss', 'public/css')
     .sourceMaps();

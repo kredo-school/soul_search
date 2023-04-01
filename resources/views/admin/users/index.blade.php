@@ -7,18 +7,8 @@
 @endsection
 
 @section('content')
-<div class="ss-container">
-    <div class="row" style="height: 100%">
-        <div class="col-2 p-0">
-            {{-- side bar --}}
-            <div class="ss-sidebar">
-            @include('admin.admin_side')
-            </div>
-        </div>
-    </div>
-</div>
     @auth
-        <div class="mb-2 ml-auto d-flex justify-content-end mt-5">
+        <div class="mb-2 ml-auto d-flex justify-content-end bg-color">
 
             <form action="{{ route('admin.users') }}" style="width:300px">
 

@@ -30,7 +30,12 @@ class ChatController extends Controller
         $this->chat->user_id = Auth::user()->id;
         $this->chat->tag_id = $tag_id;
         $this->chat->chat = $request->chat;
-        $this->chat->image = $this->saveImage($request);
+
+        #Check if the chat has an image
+        if(isset($this->chat->image)){
+            $this->chat->image = $this->saveImage($request);
+        }
+
         $this->chat->save();
 
         return redirect()->back();

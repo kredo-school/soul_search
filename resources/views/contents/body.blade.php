@@ -1,4 +1,4 @@
-<div class="container pb-4">
+<div class="container">
     <div class="row" style="height: 1.5rem;">
         <!-- Username and Date -->
         <div class="col pt-0 ps-2">
@@ -40,8 +40,10 @@
         @endif
     </div>
     <!-- Body -->
-    <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
     @if ($chat->image)
-        <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image">
+        <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
+        <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image mb-4">
+    @else
+        <p class="text-dark fw-light ms-2 w-75 pb-1">{{ $chat->chat }}</p>
     @endif
 </div>

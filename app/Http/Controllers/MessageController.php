@@ -19,40 +19,57 @@ class MessageController extends Controller
 
     public function store(Request $request, User $user)
     {
-        if($request->text && $request->image){
-            $request->validate([
-                'text'  => 'string',
-                'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
-            ]);
-            Message::create([
-                'text'        => $request->text,
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
-            ]);
-            Message::create([
-                'image'       => $this->saveImage($request),
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
-            ]);
-        }elseif($request->text){
-            $request->validate([
-                'text'  => 'string',
-            ]);
-            Message::create([
-                'text'        => $request->text,
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
-            ]);
-        }elseif($request->image){
-            $request->validate([
-                'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
-            ]);
-            Message::create([
-                'image'       => $this->saveImage($request),
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
-            ]);
+        $request->validate([
+            'text' => 'string',
+            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000'
+        ]);
+
+        $text = $request->text;
+        $image = null;
+        if($request->image) {
+            $image = $this->saveImage($request);
         }
+
+        $user->messagesReceived()->attach(Auth::id(), [
+            'image' => $image,
+            'text' => $text
+        ]);
+
+        // if($request->text && $request->image){
+        //     $request->validate([
+        //         'text'  => 'string',
+        //         'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
+        //     ]);
+        //     Message::create([
+        //         'text'        => $request->text,
+        //         'sender_id'   => Auth::id(),
+        //         'receiver_id' => $user->id,
+        //     ]);
+        //     Message::create([
+        //         'image'       => $this->saveImage($request),
+        //         'sender_id'   => Auth::id(),
+        //         'receiver_id' => $user->id,
+        //     ]);
+        // }elseif($request->text){
+        //     $request->validate([
+        //         'text'  => 'string',
+        //     ]);
+        //     Message::create([
+        //         'text'        => $request->text,
+        //         'sender_id'   => Auth::id(),
+        //         'receiver_id' => $user->id,
+        //     ]);
+        // }elseif($request->image){
+        //     $request->validate([
+        //         'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
+        //     ]);
+        //     Message::create([
+        //         'image'       => $this->saveImage($request),
+        //         'sender_id'   => Auth::id(),
+        //         'receiver_id' => $user->id,
+        //     ]);
+        // }
+
         return redirect()->back();
     }
 

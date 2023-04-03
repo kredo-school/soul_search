@@ -8,21 +8,24 @@
 
 @section('content')
 <div class="d-flex justify-content-center p-0">
+    @if(Auth::user()->tags())
     @auth
         <!-- Tags' bar -->
         <div class="col-2 bg-white tag-bar border">
             <div class="mt-5">
                 <p class="text-dark fw-bold mb-1 ms-3 tag-name">Recent</p>
+
                 <ul class="nav nav-pills flex-column px-0">
                     @foreach ($recent_tags as $recent_tag)
                         <li class="nav-item mb-1">
-                            <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link">
+                            <a href="{{ route('chats.show', $racent_tags->tag->id) }}" class="flex-fill nav-link">
                                 <i class="fa-regular fa-hashtag"></i>
-                                <span class="text-dark tag-name">{{ $recent_tag->tag->name }}</span>
+                                <span class="text-dark tag-name">{{ $recent_tags->tag->name }}</span>
                             </a>
                         </li>
                     @endforeach
                 </ul>
+
             </div>
             <div class="mt-5">
                 <p class="text-dark fw-bold mb-1 ms-3 tag-name">Main</p>
@@ -54,11 +57,11 @@
     @endauth
         <!-- Chats -->
         <div class="col" style="height: 96%">
-            @if ($recent_tag->isRecent())
+            @if ($recent_tags->isRecent())
                 <!-- Header -->
                 <div class="bg-white py-3 border border-top-0">
                     <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
-                    <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $recent_tag->tag->name }}</a>
+                    <a href="{{ route('chats.show', $recent_tags->tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold text-dark tag-header">{{ $recent_tags->tag->name }}</a>
                 </div>
                 <!-- Body (Need to update to show chats a tag has) -->
                     <div class="row pt-3 chat-body">
@@ -75,11 +78,11 @@
                     </div>
                     <!-- Send bar -->
                 <div class="pt-3 align-bottom">
-                    <form action="{{ route('chat.store', $recent_tag->tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
+                    <form action="{{ route('chat.store', $recent_tags->tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                         @csrf
                         <div class="row gx-2">
                             <div class="col-sm">
-                                <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $recent_tag->tag->name }}"></textarea>
+                                <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $recent_tags->tag->name }}"></textarea>
                                 @error('chat')
                                 <div class="text-danger small">{{ $message }}</div>
                                 @enderror
@@ -181,8 +184,10 @@
                 </div>
             @endif
         </div>
-    {{-- <div class="text-center">
-        <p class="text-muted" style="transform: translateY(40vh)">You don't have any tags yet.</p>
-    </div> --}}
+    @else
+        <div class="text-center">
+            <p class="text-muted" style="transform: translateY(40vh)">You don't have any tags yet.</p>
+        </div>
+    @endif
 </div>
 @endsection

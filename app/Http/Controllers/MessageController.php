@@ -69,18 +69,25 @@ class MessageController extends Controller
     public function show(User $user)
     {
         $all_users = User::latest()->get();
+        $authUser = Auth::user();
 
-        $messages = Message::where(function($query) use($user){
-                $query->where(function($query) use($user){
-                    $query->where('sender_id', '=', Auth::id())
-                    ->where('receiver_id', '=', $user->id);
-                })
-                    ->orWhere(function($query) use($user){
-                        $query->where('sender_id', '=', $user->id)
-                        ->where('receiver_id', '=', Auth::id());
-                    });
-            })
-            ->oldest()->get();
+        $messages = collect($authUser->messagesSent)->merge($authUser->messagesReceived)->sortBy('pivot.created_at')
+        ->filter(function($a) use($user){
+            return $a->pivot->sender_id == $user->id || $a->pivot->receiver_id == $user->id;
+        });
+
+        // $messages = Message::where(function($query) use($user){
+        //         $query->where(function($query) use($user){
+        //             $query->where('sender_id', '=', Auth::id())
+        //             ->where('receiver_id', '=', $user->id);
+        //         })
+        //             ->orWhere(function($query) use($user){
+        //                 $query->where('sender_id', '=', $user->id)
+        //                 ->where('receiver_id', '=', Auth::id());
+        //             });
+        //     })
+        //     ->oldest()->get();
+        // $messages = [];
 
         return view('users.messages.show', compact('user', 'all_users', 'messages'));
     }

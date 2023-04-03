@@ -1,58 +1,60 @@
 {{-- message display --}}
 <div class="col ms-0 p-0">
     <div class="container p-0">
-        @forelse ($messages as $message)
+        @foreach ($messages as $val)
+            <?php $chat = $val->pivot; ?>
             <div class="row">
                 <div class="col pt-0 ps-2">
-                    @if($message->sender_id === Auth::id())
-                        <a class="shadow-none text-decoration-none float-end" type="button" id="dropdownMenuButtonMsg{{$message->id}}" data-bs-toggle="dropdown">
-                            <span class="text-sm text-muted">{{$message->created_at->diffForHumans()}}</span>
-                            @if($message->text)
-                                @if($message->updated_at != $message->created_at)
+                    @if($chat->sender_id === Auth::id())
+                        <a class="shadow-none text-decoration-none float-end" type="button" id="dropdownMenuButtonMsg{{$chat->id}}" data-bs-toggle="dropdown">
+                            <span class="text-sm text-muted">{{$chat->created_at->diffForHumans()}}</span>
+                            @if($chat->text)
+                                @if($chat->updated_at != $chat->created_at)
                                     <span class="text-muted text-sm">edited</span>
                                 @endif
-                                <span class="btn btn-sm btn-orange px-3 rounded-pill mb-2">{{ $message->text }}</span>
+                                <span class="btn btn-sm btn-orange px-3 rounded-pill mb-2">{{ $chat->text }}</span>
                             @else
-                                <img src="{{ asset('/storage/images/'. $message->image) }}" class="image-msg mb-2" alt="">
+                                <img src="{{ asset('/storage/images/'. $chat->image) }}" class="image-msg mb-2" alt="">
                             @endif
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$message->id}}">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$chat->id}}">
                             {{-- edit (only for text) --}}
-                            @if($message->text)
+                            @if($chat->text)
                                 <li>
-                                    <a href="" class="dropdown-item text-dark" title="Edit" data-bs-toggle="modal" data-bs-target="#editMsgModal{{$message->id}}">
+                                    <a href="" class="dropdown-item text-dark" title="Edit" data-bs-toggle="modal" data-bs-target="#editMsgModal{{$chat->id}}">
                                         <i class="fa-regular fa-pen-to-square"></i> Edit
                                     </a>
                                 </li>
                             @endif
                             {{-- delete --}}
                             <li>
-                                <a href="" class="dropdown-item text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteMsgModal{{$message->id}}">
+                                <a href="" class="dropdown-item text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteMsgModal{{$chat->id}}">
                                     <i class="fa-regular fa-trash-can"></i> Delete
                                 </a>
                             </li>
                         </ul>
                     @else
+                        <h1></h1>
                         @if ($user->avatar)
                             <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="rounded-circle avatar-msg me-1" alt="">
                         @else
                             <i class="fa-solid fa-circle-user text-secondary icon-msg me-1"></i>
                         @endif
-                        <a class="shadow-none text-decoration-none" type="button" id="dropdownMenuButtonMsg{{$message->id}}" data-bs-toggle="dropdown">
-                            @if($message->text)
-                                <span class="btn btn-sm btn-secondary px-3 rounded-pill mb-2">{{ $message->text }}</span>
-                                @if($message->updated_at != $message->created_at)
+                        <a class="shadow-none text-decoration-none" type="button" id="dropdownMenuButtonMsg{{$chat->id}}" data-bs-toggle="dropdown">
+                            @if($chat->text)
+                                <span class="btn btn-sm btn-secondary px-3 rounded-pill mb-2">{{ $chat->text }}</span>
+                                @if($chat->updated_at != $chat->created_at)
                                     <span class="text-muted text-sm">edited</span>
                                 @endif
                             @else
-                            <img src="{{ asset('/storage/images/'. $message->image) }}" class="image-msg mb-2" alt="">
+                            <img src="{{ asset('/storage/images/'. $chat->image) }}" class="image-msg mb-2" alt="">
                             @endif
-                            <span class="text-sm text-muted">{{$message->created_at->diffForHumans()}}</span>
+                            <span class="text-sm text-muted">{{$chat->created_at->diffForHumans()}}</span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$message->id}}">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$chat->id}}">
                             {{-- report --}}
                             <li>
-                                <a href="" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportMsgModal{{$message->id}}">
+                                <a href="" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportMsgModal{{$chat->id}}">
                                     <i class="fa-solid fa-exclamation"></i> Report
                                 </a>
                             </li>
@@ -65,10 +67,8 @@
             {{-- delete modal --}}
             @include('users.messages.modal.delete')
             {{-- report modal --}}
-            @include('users.messages.modal.reportMsg')
-        @empty
-
-        @endforelse
+            @include('users.messages.modal.reportMsg') 
+        @endforeach
 
         {{-- error messages from "send message" below --}}
         @error('text')

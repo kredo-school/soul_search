@@ -70,17 +70,17 @@ class MessageController extends Controller
     {
         $all_users = User::latest()->get();
 
-        $messages = Message::where(function($query) use($user){
-                $query->where(function($query) use($user){
-                    $query->where('sender_id', '=', Auth::id())
-                    ->where('receiver_id', '=', $user->id);
-                })
-                    ->orWhere(function($query) use($user){
-                        $query->where('sender_id', '=', $user->id)
-                        ->where('receiver_id', '=', Auth::id());
-                    });
-            })
-            ->oldest()->get();
+        // $messages = Message::where(function($query) use($user){
+        //         $query->where(function($query) use($user){
+        //             $query->where('sender_id', '=', Auth::id())
+        //             ->where('receiver_id', '=', $user->id);
+        //         })
+        //             ->orWhere(function($query) use($user){
+        //                 $query->where('sender_id', '=', $user->id)
+        //                 ->where('receiver_id', '=', Auth::id());
+        //             });
+        //     })
+        //     ->oldest()->get();
 
         return view('users.messages.show', compact('user', 'all_users', 'messages'));
     }

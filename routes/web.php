@@ -15,6 +15,8 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\FormController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +38,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+
+Route::get('/register',[RegisterController::class, 'index'])->name('register');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function(){

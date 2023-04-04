@@ -6,11 +6,8 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
-<<<<<<< HEAD
 use App\Http\Controllers\MessageController;
-=======
 use App\Http\Controllers\SearchController;
->>>>>>> main
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
@@ -72,15 +69,13 @@ Route::group(['middleware' => 'auth'], function(){
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class, ['only' => ['store', 'destroy']]);
 
-<<<<<<< HEAD
     #Message
     Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
     #show Message
     Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
-=======
+
     #Search
     Route::resource('/search', SearchController::class, ['only' => ['index']]);
->>>>>>> main
 
     #Contact
     Route::resource('/contact', ContactController::class, ['only' => ['index', 'store', 'destroy']]);

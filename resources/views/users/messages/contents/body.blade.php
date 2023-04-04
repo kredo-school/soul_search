@@ -1,12 +1,13 @@
 {{-- message display --}}
 <div class="col ms-0 p-0">
     <div class="container p-0">
-        @forelse ($messages as $message)
+        @foreach ($pivot_items as $item)
+            <?php $message = $item->pivot; ?>
             <div class="row">
                 <div class="col pt-0 ps-2">
                     @if($message->sender_id === Auth::id())
                         <a class="shadow-none text-decoration-none float-end" type="button" id="dropdownMenuButtonMsg{{$message->id}}" data-bs-toggle="dropdown">
-                            <span class="text-sm text-muted">{{$message->created_at->diffForHumans()}}</span>
+                            <span class="text-time text-muted">{{$message->created_at->diffForHumans()}}</span>
                             @if($message->text)
                                 @if($message->updated_at != $message->created_at)
                                     <span class="text-muted text-sm">edited</span>
@@ -47,7 +48,7 @@
                             @else
                             <img src="{{ asset('/storage/images/'. $message->image) }}" class="image-msg mb-2" alt="">
                             @endif
-                            <span class="text-sm text-muted">{{$message->created_at->diffForHumans()}}</span>
+                            <span class="text-time text-muted">{{$message->created_at->diffForHumans()}}</span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$message->id}}">
                             {{-- report --}}
@@ -66,19 +67,17 @@
             @include('users.messages.modal.delete')
             {{-- report modal --}}
             @include('users.messages.modal.reportMsg')
-        @empty
-
-        @endforelse
+        @endforeach
 
         {{-- error messages from "send message" below --}}
         @error('text')
             <div class="text-danger small position-absolute bottom-0 end-0">
-                <span class="me-4">{{ $message }}</span>
+                <span class="me-4 pb-3">{{ $message }}</span>
             </div>
         @enderror
         @error('image')
             <div class="text-danger small position-absolute bottom-0 end-0">
-                <span class="me-4">{{ $message }}</span>
+                <span class="me-4 pb-3">{{ $message }}</span>
             </div>
         @enderror
 

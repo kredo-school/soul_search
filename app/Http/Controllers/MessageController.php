@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -19,38 +18,40 @@ class MessageController extends Controller
 
     public function store(Request $request, User $user)
     {
-        if($request->text && $request->image){
+        $text  = $request->text;
+        $image = $request->image;
+        if($text && $image){
             $request->validate([
                 'text'  => 'string',
                 'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
             ]);
-            Message::create([
-                'text'        => $request->text,
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
+            // save text
+            $user->messagesReceived()->attach(Auth::id(), [
+                'text'  => $text
             ]);
-            Message::create([
-                'image'       => $this->saveImage($request),
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
+            // save image
+            $image = $this->saveImage($request);
+            $user->messagesReceived()->attach(Auth::id(), [
+                'image'  => $image
             ]);
-        }elseif($request->text){
+
+        }elseif($text){
             $request->validate([
                 'text'  => 'string',
             ]);
-            Message::create([
-                'text'        => $request->text,
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
+            // save text
+            $user->messagesReceived()->attach(Auth::id(), [
+                'text'  => $text
             ]);
-        }elseif($request->image){
+
+        }elseif($image){
             $request->validate([
                 'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
             ]);
-            Message::create([
-                'image'       => $this->saveImage($request),
-                'sender_id'   => Auth::id(),
-                'receiver_id' => $user->id,
+            // save image
+            $image = $this->saveImage($request);
+            $user->messagesReceived()->attach(Auth::id(), [
+                'image'  => $image
             ]);
         }
         return redirect()->back();
@@ -70,19 +71,14 @@ class MessageController extends Controller
     {
         $all_users = User::latest()->get();
 
-        // $messages = Message::where(function($query) use($user){
-        //         $query->where(function($query) use($user){
-        //             $query->where('sender_id', '=', Auth::id())
-        //             ->where('receiver_id', '=', $user->id);
-        //         })
-        //             ->orWhere(function($query) use($user){
-        //                 $query->where('sender_id', '=', $user->id)
-        //                 ->where('receiver_id', '=', Auth::id());
-        //             });
-        //     })
-        //     ->oldest()->get();
+        $authUser = Auth::user();
 
-        return view('users.messages.show', compact('user', 'all_users', 'messages'));
+        $pivot_items = collect($authUser->messagesSent)->merge($authUser->messagesReceived)->sortBy('pivot.created_at')
+        ->filter(function($a) use($user){
+            return $a->pivot->sender_id == $user->id || $a->pivot->receiver_id == $user->id;
+        });
+
+        return view('users.messages.show', compact('user', 'all_users', 'pivot_items'));
     }
 
     public function update(Request $request, User $user, Message $message)

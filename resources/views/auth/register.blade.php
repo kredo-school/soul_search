@@ -7,37 +7,42 @@
 @section('title','Create Account')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js">
 
 @section('content')
 <div class="container">
-    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2">
-</div>
+    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2 ms-3">
 
-<div class="container">
-    <h1 class="text-center fw-bold mb-3">
-        Create Your Account
-    </h1>
-</div>
+
+    <div class="justify-content-center">
+        <h1 class="text-center fw-bold mb-3 mt-3 me-5">
+            Create Your Account
+        </h1>
+    </div>
 
 {{--  Card body  --}}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="form-section" id="first-form">
-                        <div class="row justify-content-center">
-                            <div class="col-8 mb-3 rounded-box btn-orange">
-                                <span class="col-5 text-center text-orange rounded-box btn-white ">Profile</span>
-                                <span class="col-5 text-end text-white rounded-box">Tags</span>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="form-section" id="first-form">
+                            <div class="row justify-content-center">
+                                <div class="col-8 mb-3 rounded-box btn-orange">
+                                    <span class="col-5 text-center text-orange rounded-box btn-white ">Profile</span>
+                                    <span class="col-5 text-end text-white rounded-box">Tags</span>
+                                </div>
                             </div>
-                        </div>
 
 
-                        <h2 class="text-center fw-bold mt-2">Your Profile</h2>
-                        <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
-                        <form method="POST" action="{{ route('register') }}" class="contact-form" id="contact-form" name="firstForm">
-                            @csrf
+                            <h2 class="text-center fw-bold mt-2">Your Profile</h2>
+                            <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
+                            <form method="POST" action="{{ route('register') }}" class="contact-form" id="contact-form" name="firstForm">
+                                @csrf
 
 
                             {{--  Username  --}}
@@ -101,7 +106,6 @@
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
-                        </div>
 
                             <div class="form-section" style="display: none" id="second-form">
                                 <div class="row justify-content-center">
@@ -166,8 +170,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                </div>
+                            </form>
+                        </div>
 
                         {{--  Horizontal line  --}}
                         <div class="text-divider text-muted">
@@ -188,12 +192,12 @@
                             </a>
                         </p>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <script src="{{ mix('js/registration.js') }}"></script>
 @endsection

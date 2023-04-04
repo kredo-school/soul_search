@@ -79,6 +79,14 @@ class ChatController extends Controller
             ->with('fav_tags', $fav_tags);
     }
 
+    public function showSpecificTag($id){
+        $all_tags = Tag::all();
+        $tag = $this->tag->findOrFail($id);
+
+        return view('home')
+            ->with('tag', $tag);
+    }
+
     public function destroy($id){
         $chat = $this->chat->findOrFail($id);
         $this->deleteImage($chat->image);

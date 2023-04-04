@@ -9,7 +9,7 @@
 @section('content')
 <div class="d-flex justify-content-center p-0">
     @if(Auth::user()->userTag()->exists())
-    @auth
+        @auth
         <!-- Tags' bar -->
         <div class="col-2 bg-white tag-bar border">
             <div class="mt-5">
@@ -18,7 +18,7 @@
                 <ul class="nav nav-pills flex-column px-0">
                     @foreach ($recent_tags as $recent_tag)
                         <li class="nav-item mb-1">
-                            <a href="{{ route('chats.show', $recent_tag->id) }}" class="flex-fill nav-link">
+                            <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link">
                                 <i class="fa-regular fa-hashtag"></i>
                                 <span class="text-dark tag-name">{{ $recent_tag->tag->name }}</span>
                             </a>
@@ -54,7 +54,7 @@
                 </ul>
             </div>
         </div>
-    @endauth
+        @endauth
         <!-- Chats -->
         <div class="col" style="height: 96%">
             @if ($fav_tag->isFav())
@@ -76,7 +76,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <!-- Send bar -->
+                <!-- Form -->
                 <div class="pt-3 align-bottom">
                     <form action="{{ route('chat.store', $fav_tag->tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                         @csrf
@@ -117,7 +117,7 @@
                         </div>
                     @endforeach
                 </div>
-                <!-- Send bar -->
+                <!-- Form -->
                 <div class="bg-white mt-3 mb-0">
                     <form action="{{ route('chat.store', $main_tag->tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                         @csrf
@@ -158,7 +158,7 @@
                         </div>
                     @endforeach
                 </div>
-                <!-- Send bar -->
+                <!-- Form -->
                 <div class="bg-white mt-3 mb-0">
                     <form action="{{ route('chat.store', $recent_tag->tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
                         @csrf

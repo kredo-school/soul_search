@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js">
 
 @section('content')
+
+    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2 ms-3 icon-md">
+
 <div class="container">
-    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2 ms-3">
-
-
     <div class="justify-content-center">
         <h1 class="text-center fw-bold mb-3 mt-3 me-5">
             Create Your Account

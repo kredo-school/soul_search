@@ -29,20 +29,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js">
+    <link href="{{ asset('css/side.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 
 <body class="back-color">
 
     {{-- not showing in login, register, or post pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*'))
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*'))
     @else
     <div class="ss-container">
         <div class="row" style="height: 100%">
-            <div class="col-2 p-0">
+            <div class="col-2 p-0 bg-white">
                 {{-- side bar --}}
                 <div class="ss-sidebar">
-                @include('layouts.side')
+                    @include('layouts.side')
                 </div>
             </div>
             <div class="col-10 p-0" style="height: 100%">
@@ -52,12 +53,12 @@
                     {{-- content --}}
                     <div class="container-fluid p-0" style="height: 100%">
                         <div class="row" style="height: 100%">
-                                @yield('content')
+                            @yield('content')
                         </div>
                     </div>
 
-    {{-- not showing in login or register pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*tag_register*') || request()->is('*verify*') || request()->is('*password/reset*') || request()->is('*password/email*') || request()->is('*password/confirm*'))
+    {{-- not showing in login, register, or post pages --}}
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*'))
     @else
                 </div>
             </div>

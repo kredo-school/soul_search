@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <div>
 
-                    <form action="{{ route('messages.update', ['user' => $user, 'message' => $message]) }}" method="post">
+                    <form action="{{ route('messages.update', ['user' => $user->id, 'message' => $message->id]) }}" method="post">
                         @csrf
                         @method('PATCH')
                         <div class="row gx-2 mb-2">

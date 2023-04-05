@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
@@ -94,12 +95,12 @@ class User extends Authenticatable
     //messages
     public function messagesSent()
     {
-        return $this->belongsToMany(User::class, 'messages', 'sender_id', 'receiver_id')->withPivot('text', 'image', 'id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'messages', 'sender_id', 'receiver_id')->withPivot('id', 'text', 'image')->withTimestamps();
     }
 
     public function messagesReceived()
     {
-        return $this->belongsToMany(User::class, 'messages', 'receiver_id', 'sender_id')->withPivot('text', 'image', 'id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'messages', 'receiver_id', 'sender_id')->withPivot('id', 'text', 'image')->withTimestamps();
     }
 
     public function messageFrom($user_id)

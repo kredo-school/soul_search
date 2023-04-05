@@ -18,42 +18,22 @@ class MessageController extends Controller
 
     public function store(Request $request, User $user)
     {
-        $text  = $request->text;
-        $image = $request->image;
-        if($text && $image){
-            $request->validate([
-                'text'  => 'string',
-                'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
-            ]);
-            // save text
-            $user->messagesReceived()->attach(Auth::id(), [
-                'text'  => $text
-            ]);
-            // save image
-            $image = $this->saveImage($request);
-            $user->messagesReceived()->attach(Auth::id(), [
-                'image'  => $image
-            ]);
+        $request->validate([
+            'text'  => 'required_if:image,=,null|nullable|string',
+            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000'
+        ]);
 
-        }elseif($text){
-            $request->validate([
-                'text'  => 'string',
-            ]);
-            // save text
-            $user->messagesReceived()->attach(Auth::id(), [
-                'text'  => $text
-            ]);
-
-        }elseif($image){
-            $request->validate([
-                'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
-            ]);
-            // save image
-            $image = $this->saveImage($request);
-            $user->messagesReceived()->attach(Auth::id(), [
-                'image'  => $image
-            ]);
+        $text = $request->text;
+        $image = null;
+        if($request->image) {
+                $image = $this->saveImage($request);
         }
+
+        $user->messagesReceived()->attach(Auth::id(), [
+                'image' => $image,
+                'text' => $text
+        ]);
+
         return redirect()->back();
     }
 
@@ -81,14 +61,15 @@ class MessageController extends Controller
         return view('users.messages.show', compact('user', 'all_users', 'pivot_items'));
     }
 
-    public function update(Request $request, User $user, Message $message)
+    public function update(Request $request, User $user, $message_id)
     {
         $request->validate([
-                'text'  => 'string',
+            'text'  => 'string',
         ]);
 
-        $message->text = $request->text;
-        $message->save();
+        $user->messagesReceived()->updateExistingPivot($message_id, [
+            'text' => $request->text,
+        ]);
 
         return redirect()->route('messages.show', $user->id);
     }
@@ -101,12 +82,13 @@ class MessageController extends Controller
             Storage::disk('local')->delete($image_path);
         }
     }
-    public function destroy(User $user, Message $message)
+
+    public function destroy($user_id, $message_id)
     {
-        if($message->image){
-            $this->deleteImage($message->image);
-        }
-        $message->where('id', $message->id)->delete();
+        $user = User::find($user_id);
+		$user->messagesReceived()->detach([
+			'id' => $message_id,
+		]);
 
         return redirect()->back();
     }

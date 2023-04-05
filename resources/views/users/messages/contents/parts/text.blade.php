@@ -1,12 +1,14 @@
 <div class="row">
-    <div class="col pt-0 ps-2">
+    <div class="col pt-0 ps-2 mb-2">
         <a class="shadow-none text-decoration-none float-{{$position}}" type="button" id="dropdownMenuButtonMsg{{$id}}" data-bs-toggle="dropdown">
+            <span class="btn btn-sm btn-{{$color}} px-3 rounded-pill">{{$text}}</span>
             @if($message->updated_at != $message->created_at)
-                <div class="text-muted text-sm">edited</div>
+                <div>
+                    <span class="text-muted text-vsm float-{{$position}}">edited</span>
+                </div>
             @endif
-            <span class="btn btn-sm btn-{{$color}} px-3 rounded-pill mb-2">{{$text}}</span>
         </a>
-        <span class="text-time text-muted float-{{$position}} {{$margin}}">{{$message->created_at->diffForHumans()}}</span>
+        <span class="text-vsm text-muted float-{{$position}} {{$margin}}">{{$message->created_at->diffForHumans()}}</span>
         @if($auth)
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}">
                 {{-- edit --}}

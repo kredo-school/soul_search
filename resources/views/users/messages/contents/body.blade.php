@@ -27,42 +27,62 @@
 
 				{{-- data has both text and image --}}
 				@if($text && $image)
-
+                    @php
+                        $both_data = true;
+                        $text_data = true;
+                        $modal     = '';
+                    @endphp
                     {{-- message text --}}
                     @include('users.messages.contents.parts.text')
 
-					{{-- edit modal --}}
-					@include('users.messages.modal.edit')
-					{{-- delete modal --}}
-					@include('users.messages.modal.delete')
-					{{-- report modal --}}
-					@include('users.messages.modal.reportMsg')
+                    @if ($auth)
+                        {{-- edit modal --}}
+                        @include('users.messages.modal.edit')
+                        {{-- delete modal --}}
+                        @include('users.messages.modal.delete')
+                    @else
+                        {{-- report modal --}}
+                        @include('users.messages.modal.reportMsg')
+                    @endif
 
                     @php
-                        $id .= 'Img'; // to avoid to call the same modal
+                        $text_data = false;
+                        $modal     = 'second'; // to change modal id name
                     @endphp
-
                     {{-- message image --}}
                     @include('users.messages.contents.parts.image')
 
 				{{-- data has only text --}}
 				@elseif($text)
+                    @php
+                        $both_data = false;
+                        $text_data = true;
+                        $modal     = '';
+                    @endphp
                     {{-- message text --}}
                     @include('users.messages.contents.parts.text')
 
 				{{-- data has only image --}}
 				@else
+                    @php
+                        $both_data = false;
+                        $text_data = false;
+                        $modal     = '';
+                    @endphp
                     {{-- message image --}}
                     @include('users.messages.contents.parts.image')
 
 				@endif
 
-            {{-- edit modal --}}
-            @include('users.messages.modal.edit')
-            {{-- delete modal --}}
-            @include('users.messages.modal.delete')
-            {{-- report modal --}}
-            @include('users.messages.modal.reportMsg')
+                @if ($auth)
+                    {{-- edit modal --}}
+                    @include('users.messages.modal.edit')
+                    {{-- delete modal --}}
+                    @include('users.messages.modal.delete')
+                @else
+                    {{-- report modal --}}
+                    @include('users.messages.modal.reportMsg')
+                @endif
 
         @endforeach
 

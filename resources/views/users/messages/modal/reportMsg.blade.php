@@ -1,9 +1,9 @@
 {{-- report user modal --}}
-<div class="modal fade" id="reportMsgModal{{$message->id}}" tabindex="-1" aria-labelledby="reportMsgModal{{$message->id}}Label" aria-hidden="true">
+<div class="modal fade" id="reportMsgModal{{$message->id}}{{$modal}}" tabindex="-1" aria-labelledby="reportMsgModal{{$message->id}}{{$modal}}Label" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">
 			<div class="modal-header">
-				<h2 class="modal-title" id="reportMsgModal{{$message->id}}">Report Message</h2>
+				<h2 class="modal-title" id="reportMsgModal{{$message->id}}{{$modal}}">Report Message</h2>
 			</div>
 			<div class="modal-body">
                 <div class="mb-3">tell us the problem</div>

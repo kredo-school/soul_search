@@ -61,13 +61,12 @@ class MessageController extends Controller
         return view('users.messages.show', compact('user', 'all_users', 'pivot_items'));
     }
 
-    public function update(Request $request, User $user, $message_id)
+    public function update(Request $request, User $user)
     {
         $request->validate([
             'text'  => 'string',
         ]);
-
-        $user->messagesReceived()->updateExistingPivot(Auth::id(), [
+        $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
             'text' => $request->text,
         ]);
 
@@ -83,11 +82,30 @@ class MessageController extends Controller
         }
     }
 
-    public function destroy($user_id, $message_id)
+    public function remove(Request $request, User $user)
     {
-        $user = User::find($user_id);
-		$user->messagesReceived()->detach([
-			'id' => $message_id,
+        if($request->text_data){
+            $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
+                'text' => null,
+            ]);
+        }else{
+            $this->deleteImage($request->image);
+            $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
+                'image' => null,
+            ]);
+        }
+
+        return redirect()->route('messages.show', $user->id);
+    }
+
+    public function destroy(Request $request, User $user)
+    {
+        if($request->image){
+            $this->deleteImage($request->image);
+        }
+
+        $user->messagesReceived()->wherePivot('id', $request->message)->detach([
+			'sender_id' => Auth::id(),
 		]);
 
         return redirect()->back();

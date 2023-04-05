@@ -67,7 +67,7 @@ class MessageController extends Controller
             'text'  => 'string',
         ]);
 
-        $user->messagesReceived()->updateExistingPivot($message_id, [
+        $user->messagesReceived()->updateExistingPivot(Auth::id(), [
             'text' => $request->text,
         ]);
 

@@ -107,6 +107,10 @@ html, body, .container-fluid, .row {
     color: #FFB84D;
 }
 
+.active {
+    background-color: #f4f7fc
+}
+
 .chat-body {
     overflow-x: hidden;
     overflow-y: scroll;

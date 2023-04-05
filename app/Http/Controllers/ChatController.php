@@ -23,23 +23,30 @@ class ChatController extends Controller
     }
 
 
-    public function store($tag_id, Request $request){
+    public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|min:1|max:255',
             'image' => 'mimes:jpg,jpeg,png,gif|max:1048'
         ]);
 
         #Save the chat
-        $this->chat->user_id = Auth::user()->id;
-        $this->chat->tag_id = $tag_id;
-        $this->chat->chat = $request->chat;
+        // $this->chat->user_id = Auth::user()->id;
+        // $this->chat->tag_id = $tag_id;
+        // $this->chat->chat = $request->chat;
 
         #Check if the chat has an image
-        if(isset($this->chat->image)){
-            $this->chat->image = $this->saveImage($request);
+        $image = NULL;
+        if(isset($request->image)){
+            $image = $this->saveImage($request);
         }
 
-        $this->chat->save();
+        // $this->chat->save();
+
+        $tag->chats()->create([
+            'user_id' => Auth::id(),
+            'chat' => $request->chat,
+            'image' => $image
+        ]);
 
         return redirect()->back();
     }
@@ -59,20 +66,17 @@ class ChatController extends Controller
         }
     }
 
-    public function show($tag_id){
+    public function show(Tag $tag){
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
 
-        $tagged_chats = Chat::where('tag_id', $tag_id)->get()->filter(function($chat){
+        $tagged_chats = Chat::where('tag_id', $tag->id)->get()->filter(function($chat){
             return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
         });
 
-        $chat = $tagged_chats->first();
-
-
         return view('home')
-            ->with('chat', $chat)
+            ->with('tag', $tag)
             ->with('tagged_chats', $tagged_chats)
             ->with('recent_tags', $recent_tags)
             ->with('main_tags', $main_tags)

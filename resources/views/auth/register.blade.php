@@ -11,15 +11,11 @@
 
 @section('content')
 
-
     <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2 ms-4 icon-md">
-
-
 
     <h1 class="text-center fw-bold">
         Create Your Account
     </h1>
-
 
 {{--  Card body  --}}
 <div class="container">
@@ -35,12 +31,10 @@
                             </div>
                         </div>
 
-
                         <h2 class="text-center fw-bold mt-2">Your Profile</h2>
                         <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
                         <form method="POST" action="{{ route('register') }}" class="contact-form" id="contact-form" name="firstForm">
                             @csrf
-
 
                             {{--  Username  --}}
                             <div class="row mb-3 justify-content-center">
@@ -140,7 +134,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
 
                                 {{--  Tag3  --}}
                                 <div class="row mb-3 justify-content-center">

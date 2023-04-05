@@ -59,6 +59,11 @@ class User extends Authenticatable
         return $this->hasMany(Chat::class)->latest();
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->latest();
+    }
+
     public function tags(){
         return $this->hasMany(Tag::class);
     }
@@ -77,5 +82,15 @@ class User extends Authenticatable
 
     public function isFav(){
         return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
+    }
+
+    public function follows()
+    {
+        return $this->hasMany(Follow::class, 'followed_id');
+    }
+
+    public function isfollowed($user_id)
+    {
+        return $this->follows()->where('following_id', '=',  $user_id)->exists();
     }
 }

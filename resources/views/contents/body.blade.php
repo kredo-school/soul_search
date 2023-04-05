@@ -1,12 +1,12 @@
-<div class="container p-0">
-    <div class="row">
+<div class="container">
+    <div class="row" style="height: 1.5rem;">
         <!-- Username and Date -->
         <div class="col pt-0 ps-2">
-            <a href="{{ route('profile', $chat->user->id) }}" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
+            <a href="#" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
             &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
-        <div class="col-auto text-end">
+        <div class="col-auto text-end pe-4 chat-likes">
             @if ($chat->isLiked())
                 <form action="{{ route('chat.like.destroy', $chat->id) }}" method="post">
                     @csrf
@@ -23,24 +23,27 @@
                     </button>
                 </form>
             @endif
-            <span>{{ $chat->likes->count() }}</span>
+            <span class="p-0 likes-count">{{ $chat->likes->count() }}</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
-        <div class="col-auto text-end me-5">
-            <button class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
+        @if (Auth::user()->id !== $chat->user->id)
+            <div class="col-auto text-end me-5">
+            <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>
-            {{-- <div class="dropdown-menu">
-                <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#report-chat-{{ $chat-id }}">
-                    Report Chat
-                </button>
-            </div> --}}
-            {{-- @include(for Report) --}}
+            <ul class="dropdown-menu">
+                <li title="report" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#reportChatModal">
+                    <i class="fa-solid fa-circle-exclamation"></i> Report
+                </li>
+            </ul>
         </div>
+        @endif
     </div>
     <!-- Body -->
-    <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
     @if ($chat->image)
-        <img src="{{ asset('storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid">
+        <p class="text-dark fw-light ms-2 w-75">{{ $chat->chat }}</p>
+        <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image mb-4">
+    @else
+        <p class="text-dark fw-light ms-2 w-75 pb-1">{{ $chat->chat }}</p>
     @endif
 </div>

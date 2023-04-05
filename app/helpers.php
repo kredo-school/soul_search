@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Auth;
 
 function getRecentTags(){
     $user = Auth::user();
-    dd($user->userTag);
-    return $user->userTag->latest()->take(3)->get();
+
+    return $user->userTag()->with('tag')->latest()->take(3)->get();
 }
 
 function getMainTags(){
-
+    $user = Auth::user();
     $all_tags = Tag::all();
     $main_tags = [];
 
@@ -19,11 +19,11 @@ function getMainTags(){
             $main_tags[] = $main_tag;
         }
     }
-    return array_slice($main_tags, 0, 3);
+    return $user->userTag()->where('tag_category', config('enums')['tag_category']['main'])->with('tag')->take(3)->get();
 }
 
 function getFavTags(){
-
+    $user = Auth::user();
     $all_tags = Tag::all();
     $fav_tags = [];
 
@@ -32,6 +32,5 @@ function getFavTags(){
             $fav_tags[] = $fav_tag;
         }
     }
-    return array_slice($fav_tags, 0, 10);
+    return $user->userTag()->where('tag_category', config('enums')['tag_category']['favorite'])->with('tag')->get();
 }
-

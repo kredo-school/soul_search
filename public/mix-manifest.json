@@ -1,8 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/contact.css": "/css/contact.css",
+    "/css/post.css": "/css/post.css",
+    "/css/profile.css": "/css/profile.css",
     "/css/home.css": "/css/home.css",
     "/css/login.css": "/css/login.css",
-    "/css/post.css": "/css/post.css"
+    "/css/contact.css": "/css/contact.css"
 }

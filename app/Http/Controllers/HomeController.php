@@ -14,7 +14,7 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @return void{{  }}
      *
      */
     private $chat;
@@ -48,7 +48,7 @@ class HomeController extends Controller
 
         // Need to fix to reflect the update of migrations
         foreach($tagged_chats as $chat){
-            if($chat->tag->isMain() || $chat->tag->isFav()){
+            if($chat->main_tag->isMain() || $chat->fav_tag->isFav() || $chat->recent_tag->isRecent()){
                 $tagged_chats[] = $chat;
             }
         }

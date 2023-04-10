@@ -95,12 +95,16 @@ class User extends Authenticatable
     //messages
     public function messagesSent()
     {
-        return $this->belongsToMany(User::class, 'messages', 'sender_id', 'receiver_id')->withPivot('id', 'text', 'image')->withTimestamps();
+        return $this->belongsToMany(User::class, 'messages', 'sender_id', 'receiver_id')
+                    ->withPivot('id', 'text', 'media_id', 'text_edited')
+                    ->withTimestamps();
     }
 
     public function messagesReceived()
     {
-        return $this->belongsToMany(User::class, 'messages', 'receiver_id', 'sender_id')->withPivot('id', 'text', 'image')->withTimestamps();
+        return $this->belongsToMany(User::class, 'messages', 'receiver_id', 'sender_id')
+                    ->withPivot('id', 'text', 'media_id', 'text_edited')
+                    ->withTimestamps();
     }
 
     public function messageFrom($user_id)

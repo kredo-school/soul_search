@@ -3,76 +3,41 @@
     <div class="container p-0">
         @foreach ($pivot_items as $item)
             @php
-                $message = $item->pivot;
-                $text    = $message->text;
-                $image   = $message->image;
-                $id      = $message->id;
+                $message  = $item->pivot;
+                $text     = $message->text;
+                $media_id = $message->media_id;
+                $image    = null;
+                $id       = $message->id;
+                if ($media_id) {
+                    $image = $media->where('id', $media_id)->first()->path;
+                }
             @endphp
-                {{-- if login user's message or not --}}
-                @if($message->sender_id === Auth::id())
-					@php
-						$position = 'end';
-                        $margin   = 'me-2';
-						$color    = 'orange';
-						$auth     = true;
-					@endphp
-				@else
-					@php
-						$position = 'start';
-                        $margin   = 'ms-2';
-						$color    = 'secondary';
-						$auth     = false;
-					@endphp
-				@endif
+            {{-- if login user's message or not --}}
+            @if($message->sender_id === Auth::id())
+                @php
+                    $position = 'end';
+                    $margin   = 'me-2';
+                    $color    = 'orange';
+                    $auth     = true;
+                @endphp
+            @else
+                @php
+                    $position = 'start';
+                    $margin   = 'ms-2';
+                    $color    = 'secondary';
+                    $auth     = false;
+                @endphp
+            @endif
 
-				{{-- data has both text and image --}}
-				@if($text && $image)
-                    @php
-                        $both_data = true;
-                        $text_data = true;
-                        $modal     = '';
-                    @endphp
-                    {{-- message text --}}
-                    @include('users.messages.contents.parts.text')
-
-                    @if ($auth)
-                        {{-- edit modal --}}
-                        @include('users.messages.modal.edit')
-                        {{-- delete modal --}}
-                        @include('users.messages.modal.delete')
-                    @else
-                        {{-- report modal --}}
-                        @include('users.messages.modal.reportMsg')
-                    @endif
-
-                    @php
-                        $text_data = false;
-                        $modal     = 'second'; // to change modal id name
-                    @endphp
-                    {{-- message image --}}
-                    @include('users.messages.contents.parts.image')
-
-				{{-- data has only text --}}
-				@elseif($text)
-                    @php
-                        $both_data = false;
-                        $text_data = true;
-                        $modal     = '';
-                    @endphp
-                    {{-- message text --}}
-                    @include('users.messages.contents.parts.text')
-
-				{{-- data has only image --}}
-				@else
-                    @php
-                        $both_data = false;
-                        $text_data = false;
-                        $modal     = '';
-                    @endphp
-                    {{-- message image --}}
-                    @include('users.messages.contents.parts.image')
-
-				@endif
+            {{-- data has both text and image --}}
+            @if($text && $image)
+                @php
+                    $both_data = true;
+                    $text_data = true;
+                    $modal     = '';
+                @endphp
+                {{-- message text --}}
+                @include('users.messages.contents.parts.text')
 
                 @if ($auth)
                     {{-- edit modal --}}
@@ -83,6 +48,49 @@
                     {{-- report modal --}}
                     @include('users.messages.modal.reportMsg')
                 @endif
+
+                @php
+                    $text_data = false;
+                    $modal     = 'second'; // to differentiate dorpdown id and modal id
+                @endphp
+
+                {{-- message image --}}
+                @include('users.messages.contents.parts.image')
+
+            {{-- data has only text --}}
+            @elseif($text)
+                @php
+                    $both_data = false;
+                    $text_data = true;
+                    $modal     = '';
+                @endphp
+                {{-- message text --}}
+                @include('users.messages.contents.parts.text')
+
+            {{-- data has only image --}}
+            @elseif($image)
+                @php
+                    $both_data = false;
+                    $text_data = false;
+                    $modal     = '';
+                @endphp
+                {{-- message image --}}
+                @include('users.messages.contents.parts.image')
+
+            {{-- no data --}}
+            @else
+
+            @endif
+
+            @if ($auth)
+                {{-- edit modal --}}
+                @include('users.messages.modal.edit')
+                {{-- delete modal --}}
+                @include('users.messages.modal.delete')
+            @else
+                {{-- report modal --}}
+                @include('users.messages.modal.reportMsg')
+            @endif
 
         @endforeach
 

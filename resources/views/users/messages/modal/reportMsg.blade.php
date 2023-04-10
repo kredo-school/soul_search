@@ -1,16 +1,16 @@
 {{-- report user modal --}}
-<div class="modal fade" id="reportMsgModal{{$message->id}}{{$modal}}" tabindex="-1" aria-labelledby="reportMsgModal{{$message->id}}{{$modal}}Label" aria-hidden="true">
+<div class="modal fade" id="reportMsgModal{{$id}}{{$modal}}" tabindex="-1" aria-labelledby="reportMsgModal{{$id}}{{$modal}}Label" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">
 			<div class="modal-header">
-				<h2 class="modal-title" id="reportMsgModal{{$message->id}}{{$modal}}">Report Message</h2>
+				<h2 class="modal-title" id="reportMsgModal{{$id}}{{$modal}}">Report Message</h2>
 			</div>
 			<div class="modal-body">
                 <div class="mb-3">tell us the problem</div>
                 <div>
                     <form action="#" method="post">
                         @csrf
-                        <input type="hidden" value="{{ $message->id }}" name="message_id">
+                        <input type="hidden" value="{{ $id }}" name="message_id">
 
                         <div class="mb-2">
                             <input type="checkbox" class="form-check-input" id="comms" name="violation_types[]" value="communication">

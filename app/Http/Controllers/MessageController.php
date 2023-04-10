@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Codec\TimestampLastCombCodec;
 
 class MessageController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/images/';
+    const LOCAL_STORAGE_FOLDER = 'public/images';
 
     public function index()
     {
@@ -24,13 +26,13 @@ class MessageController extends Controller
         ]);
 
         $text = $request->text;
-        $image = null;
+        $media_id = null;
         if($request->image) {
-                $image = $this->saveImage($request);
+            $media_id = $this->saveImage($request);
         }
 
         $user->messagesReceived()->attach(Auth::id(), [
-                'image' => $image,
+                'media_id' => $media_id,
                 'text' => $text
         ]);
 
@@ -44,12 +46,19 @@ class MessageController extends Controller
         // Save the image inside the storage/app/public/images
         $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
 
-        return $image_name;
+        // Save the path in the media table
+        $media = new Media();
+        $media->path = $image_name;
+        $media->save();
+
+        return $media->id;
     }
 
     public function show(User $user)
     {
         $all_users = User::latest()->get();
+
+        $media = Media::latest()->get();
 
         $authUser = Auth::user();
 
@@ -58,7 +67,7 @@ class MessageController extends Controller
             return $a->pivot->sender_id == $user->id || $a->pivot->receiver_id == $user->id;
         });
 
-        return view('users.messages.show', compact('user', 'all_users', 'pivot_items'));
+        return view('users.messages.show', compact('user', 'all_users', 'media', 'pivot_items'));
     }
 
     public function update(Request $request, User $user)
@@ -67,7 +76,8 @@ class MessageController extends Controller
             'text'  => 'string',
         ]);
         $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
-            'text' => $request->text,
+            'text'        => $request->text,
+            'text_edited' => true,
         ]);
 
         return redirect()->route('messages.show', $user->id);
@@ -91,8 +101,10 @@ class MessageController extends Controller
         }else{
             $this->deleteImage($request->image);
             $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
-                'image' => null,
+                'media_id' => null,
+                'updated_at' => $user->messagesReceived()->wherePivot('id', $request->message)->first()->pivot->created_at,
             ]);
+            Media::where('id', $request->media_id)->first()->delete();
         }
 
         return redirect()->route('messages.show', $user->id);

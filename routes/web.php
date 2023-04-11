@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function(){
     #Password
     Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
     #Follow
-    Route::resource('/follows', FollowController::class, ['only' => ['store', 'destroy']]);
+    Route::resource('/users/{user}/follows', FollowController::class, ['only' => ['store', 'destroy']]);
 
     #Post
     Route::resource('/posts', PostController::class, ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);

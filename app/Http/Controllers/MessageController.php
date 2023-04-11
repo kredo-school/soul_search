@@ -72,13 +72,28 @@ class MessageController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'text'  => 'string',
-        ]);
-        $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
-            'text'        => $request->text,
-            'text_edited' => true,
-        ]);
+        if($request->remove_data){
+            if($request->text_data){
+                $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
+                    'text' => null,
+                ]);
+            }else{
+                $this->deleteImage($request->image);
+                $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
+                    'media_id' => null,
+                    'updated_at' => $user->messagesReceived()->wherePivot('id', $request->message)->first()->pivot->created_at,
+                ]);
+                Media::where('id', $request->media_id)->first()->delete();
+            }
+        }else{
+            $request->validate([
+                'text'  => 'string',
+            ]);
+            $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
+                'text'        => $request->text,
+                'text_edited' => true,
+            ]);
+        }
 
         return redirect()->route('messages.show', $user->id);
     }
@@ -90,24 +105,6 @@ class MessageController extends Controller
         if(Storage::disk('local')->exists($image_path)){
             Storage::disk('local')->delete($image_path);
         }
-    }
-
-    public function remove(Request $request, User $user)
-    {
-        if($request->text_data){
-            $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
-                'text' => null,
-            ]);
-        }else{
-            $this->deleteImage($request->image);
-            $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
-                'media_id' => null,
-                'updated_at' => $user->messagesReceived()->wherePivot('id', $request->message)->first()->pivot->created_at,
-            ]);
-            Media::where('id', $request->media_id)->first()->delete();
-        }
-
-        return redirect()->route('messages.show', $user->id);
     }
 
     public function destroy(Request $request, User $user)

@@ -77,8 +77,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
     #Message show
     Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
-    #Message remove data when it has both text and image
-    Route::patch('/users/{user}/messages/', [MessageController::class, 'remove'])->name('messages.remove');
 
     #Search
     Route::resource('/search', SearchController::class, ['only' => ['index']]);

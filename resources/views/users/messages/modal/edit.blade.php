@@ -8,14 +8,14 @@
             <div class="modal-body">
                 <div>
 
-                    <form action="{{ route('messages.update', ['user' => $user->id, 'message' => $message]) }}" method="post">
+                    <form action="{{ route('messages.update', ['user' => $user->id, 'message' => $message->id]) }}" method="post">
                         @csrf
                         @method('PATCH')
                         <div class="row gx-2 mb-2">
                             <div class="col-sm">
                                 <textarea name="text" id="text" rows="1" class="form-control form-control-sm col-sm">{{ old('text', $message->text) }}</textarea>
                                 @error('text')
-                                <div class="text-danger small">{{ $message }}</div>
+                                    <div class="text-danger small">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

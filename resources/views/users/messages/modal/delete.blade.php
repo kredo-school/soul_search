@@ -27,11 +27,12 @@
 
                 <div>
                     @if($both_data)
-                        <form action="{{ route('messages.remove', ['user' => $user->id, 'message' => $message->id]) }}" method="post" class="d-inline">
+                        <form action="{{ route('messages.update', ['user' => $user->id, 'message' => $message->id]) }}" method="post" class="d-inline">
                             @csrf
                             @method('PATCH')
                             <input type="hidden" name="text_data" value="{{$text_data}}">
                             <input type="hidden" name="media_id" value="{{$media_id}}">
+                            <input type="hidden" name="remove_data" value="remove">
                     @else
                         <form action="{{ route('messages.destroy', ['user' => $user->id, 'message' => $message->id]) }}" method="post" class="d-inline">
                             @csrf

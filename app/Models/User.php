@@ -112,12 +112,12 @@ class User extends Authenticatable
     public function messageFrom($user_id)
     {
         return $this->messagesReceived()
-            ->where('sender_id', '=',  $user_id)->latest('id')->first();
+            ->where('sender_id', '=',  $user_id)->latest('messages.id')->first();
     }
 
     public function messageTo($user_id)
     {
         return $this->messagesSent()
-            ->where('receiver_id', '=',  $user_id)->latest('id')->first();
+            ->where('receiver_id', '=',  $user_id)->latest('messages.id')->first();
     }
 }

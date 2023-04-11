@@ -35,7 +35,7 @@
                                         {{-- show the latest message --}}
                                         <span class="text-muted">
                                             @if($message_to && $message_from)
-                                                @if($message_to->created_at > $message_from->created_at)
+                                                @if($message_to->pivot->created_at > $message_from->pivot->created_at)
                                                     @if($message_to->pivot->text)
                                                         {{ $message_to->pivot->text }}
                                                     @else

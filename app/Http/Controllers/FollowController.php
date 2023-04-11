@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class FollowController extends Controller
 {
     public function store(Request $request, User $user){
-        $user->follows()->attach(['following_id' => Auth::id()]);
+        $user->follows()->attach(Auth::id());
 
         return redirect()->back();
     }
 
     public function destroy(User $user){
-        $user->follows()->detach(['following_id' => Auth::id()]);
+        $user->follows()->detach(Auth::id());
 
         return redirect()->back();
     }

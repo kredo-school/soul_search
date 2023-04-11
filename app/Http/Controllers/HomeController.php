@@ -36,8 +36,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index(){
-        $all_chats = $this->chat->latest()->get();
+    public function index(Tag $tag){
 
         // Need to update to show only tagged chats a user wants
         // Need to show main tags(max:3) and added tags
@@ -54,6 +53,7 @@ class HomeController extends Controller
         }
 
         return view('home')
+            ->with('tag', $tag)
             ->with('tagged_chats', $tagged_chats)
             ->with('recent_tags', $recent_tags)
             ->with('main_tags', $main_tags)

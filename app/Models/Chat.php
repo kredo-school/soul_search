@@ -12,7 +12,6 @@ class Chat extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $table='chat_likes';
 
     public function user(){
         return $this->belongsTo(User::class)->withTrashed();

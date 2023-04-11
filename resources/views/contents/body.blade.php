@@ -6,37 +6,40 @@
             &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
-        <div class="col-auto text-end pe-4 chat-likes">
+        <div class="col-auto text-end chat-likes">
             @if ($chat->isLiked())
                 <form action="{{ route('chat.like.destroy', $chat->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-sm shdow-none">
+                    <button type="submit" class="btn btn-sm shadow-none">
                         <i class="fa-solid fa-heart text-danger"></i>
                     </button>
                 </form>
             @else
-                <form action="{{ route('chat.like.store', $chat->id) }}" class="post">
+                <form action="{{ route('chat.like.store', $chat->id) }}" method="post">
                     @csrf
-                    <button type="submit" class="btn bnn-sm shadow-none">
+                    <button type="submit" class="btn btn-sm shadow-none">
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </form>
             @endif
-            <span class="p-0 likes-count">{{ $chat->likes->count() }}</span>
+        </div>
+        <div class="col-1 px-0 pt-1 likes-count">
+            <span>{{ $chat->likes->count() }}</span>
         </div>
         <!-- A Ellipsis button for Report Chat -->
         @if (Auth::user()->id !== $chat->user->id)
             <div class="col-auto text-end me-5">
-            <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
-                <i class="fa-solid fa-ellipsis"></i>
-            </button>
-            <ul class="dropdown-menu">
-                <li title="report" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#reportChatModal">
-                    <i class="fa-solid fa-circle-exclamation"></i> Report
-                </li>
-            </ul>
-        </div>
+                <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item text-danger" title="report" data-bs-toggle="modal" data-bs-target="#reportChatModal">
+                        <i class="fa-solid fa-circle-exclamation"></i> Report
+                    </button>
+                </div>
+                @include('contents.modal.report')
+            </div>
         @endif
     </div>
     <!-- Body -->

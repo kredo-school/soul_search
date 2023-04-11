@@ -68,7 +68,7 @@ class ChatController extends Controller
             return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
         });
 
-        return view('home')
+        return view('show')
             ->with('tag', $tag)
             ->with('tagged_chats', $tagged_chats)
             ->with('recent_tags', $recent_tags)
@@ -80,6 +80,6 @@ class ChatController extends Controller
         $chat = $this->chat->findOrFail($id);
         $this->deleteImage($chat->image);
         $chat->forceDelete();
-        return redirect()->route('home');
+        return redirect()->route('show');
     }
 }

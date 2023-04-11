@@ -1,13 +1,13 @@
-{{-- report chat modal --}}
+{{-- Modal for reporting a chat --}}
 <div class="modal fade" id="reportChatModal" tabindex="-1" aria-labelledby="reportChatModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content modal-menu">
 			<div class="modal-header">
-				<h2 class="modal-title" id="reportPostModal">Report Chat</h2>
+				<h2 class="modal-title text-center" id="reportPostModal">Report Chat</h2>
 			</div>
 			<div class="modal-body">
-                <div class="mb-3">Please tell us the problem.</div>
-                <div>
+                <p class="text-center fw-bold">Please tell us the problem.</p>
+                <div class="text-start">
                     <form action="#" method="post">
                         @csrf
                         <input type="hidden" value="{{ $chat->id }}" name="chat_id">

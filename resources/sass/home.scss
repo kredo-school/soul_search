@@ -153,7 +153,6 @@ html, body, .container-fluid, .row {
     &:hover {
         background-color: #eef3fc;
     }
-
 }
 
 .user-avatar {
@@ -162,4 +161,12 @@ html, body, .container-fluid, .row {
 
 .chat-content {
     margin-left: 3.5rem;
+}
+
+.chat-likes {
+    width: 3.5em;
+}
+
+.likes-count {
+    width: 1.5em;
 }

@@ -42,7 +42,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'body'  => 'required|min:1|max:10000',
+            'body'  => 'required|max:10000',
             'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 

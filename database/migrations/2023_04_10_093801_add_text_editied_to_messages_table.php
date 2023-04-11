@@ -26,7 +26,7 @@ class AddTextEditiedToMessagesTable extends Migration
     public function down()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->Boolean('text_edited')->default(null);
+            $table->dropColumn('text_edited');
         });
     }
 }

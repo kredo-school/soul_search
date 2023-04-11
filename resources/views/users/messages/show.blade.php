@@ -16,7 +16,7 @@
                     $message_to = $a_user->messageTo(Auth::id());
                     $message_from = $a_user->messageFrom(Auth::id());
                 @endphp
-                @if($message_to || $message_from || $a_user->isFollowed(Auth::id()))
+                @if($message_to || $message_from || $a_user->followedBy(Auth::id()))
                     <li class="nav-item my-2">
                         <div class="row">
                             <div class="col-auto">
@@ -33,41 +33,35 @@
                                     </div>
                                     <div class="text-dark">
                                         {{-- show the latest message --}}
-                                        @if($message_to && $message_from)
-                                            @if($message_to->created_at > $message_from->created_at)
-                                                @if($message_to->text)
-                                                    {{ $message_to->text }}
-                                                @else
-                                                    <span class="text-muted">
+                                        <span class="text-muted">
+                                            @if($message_to && $message_from)
+                                                @if($message_to->created_at > $message_from->created_at)
+                                                    @if($message_to->pivot->text)
+                                                        {{ $message_to->pivot->text }}
+                                                    @else
                                                         {{ $a_user->username }} sent an image.
-                                                    </span>
-                                                @endif
-                                            @else
-                                                @if($message_from->text)
-                                                    You: {{ $message_from->text }}
+                                                    @endif
                                                 @else
-                                                    <span class="text-muted">
+                                                    @if($message_from->pivot->text)
+                                                        You: {{ $message_from->pivot->text }}
+                                                    @else
                                                         You sent an image.
-                                                    </span>
+                                                    @endif
+                                                @endif
+                                            @elseif($message_to)
+                                                @if($message_to->pivot->text)
+                                                    {{ $message_to->pivot->text }}
+                                                @else
+                                                    {{ $a_user->username }} sent an image.
+                                                @endif
+                                            @else
+                                                @if($message_from->pivot->text)
+                                                    You: {{ $message_from->pivot->text }}
+                                                @else
+                                                    You sent an image.
                                                 @endif
                                             @endif
-                                        @elseif($message_to)
-                                            @if($message_to->text)
-                                                {{ $message_to->text }}
-                                            @else
-                                                <span class="text-muted">
-                                                    {{ $a_user->username }} sent an image.
-                                                </span>
-                                            @endif
-                                        @else
-                                            @if($message_from->text)
-                                                You: {{ $message_from->text }}
-                                            @else
-                                                <span class="text-muted">
-                                                    You sent an image.
-                                                </span>
-                                            @endif
-                                        @endif
+                                        </span>
 
                                     </div>
                                 </a>

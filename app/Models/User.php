@@ -87,12 +87,8 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'followed_id', 'following_id')->withPivot('id');
         // return $this->hasMany(Follow::class, 'followed_id');
     }
-<<<<<<< HEAD
-    public function isFollowed($user_id)
-=======
 
     public function followedBy($user_id)
->>>>>>> main
     {
         return $this->follows()
             ->where('following_id', '=',  $user_id)->exists();
@@ -116,12 +112,12 @@ class User extends Authenticatable
     public function messageFrom($user_id)
     {
         return $this->messagesReceived()
-            ->where('sender_id', '=',  $user_id)->latest()->first();
+            ->where('sender_id', '=',  $user_id)->latest('id')->first();
     }
 
     public function messageTo($user_id)
     {
         return $this->messagesSent()
-            ->where('receiver_id', '=',  $user_id)->latest()->first();
+            ->where('receiver_id', '=',  $user_id)->latest('id')->first();
     }
 }

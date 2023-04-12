@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrateTagsTable extends Migration
+class AddSoftDeleteToMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,7 @@ class CrateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('media', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -28,6 +25,8 @@ class CrateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::table('media', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

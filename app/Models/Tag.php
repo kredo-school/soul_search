@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class Tag extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['tag'];
+    protected $fillable = ['name'];
 
     public function chats(){
         return $this->hasMany(Chat::class)->latest();

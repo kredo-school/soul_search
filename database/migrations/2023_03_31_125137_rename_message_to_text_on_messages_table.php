@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrateTagsTable extends Migration
+class RenameMessageToTextOnMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CrateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->renameColumn('message', 'text');
         });
     }
 
@@ -28,6 +25,8 @@ class CrateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->renameColumn('text', 'message');
+        });
     }
 }

@@ -29,7 +29,7 @@
                             {{-- tags --}}
                             @forelse($tags as $tag)
                                 <a href="#" class="text-decoration-none">
-                                    #{{ $tag->tag }}
+                                    #{{ $tag->name }}
                                 </a>
                                 &nbsp;
                             @empty
@@ -67,27 +67,26 @@
                             </ul>
                             @include('users.profiles.modal.report')
                             {{-- send message --}}
-                            <a href="#" class="btn btn-orange float-end ms-3">
+                            <a href="{{ route('messages.show', ['user' => $user]) }}" class="btn btn-orange float-end ms-3">
                                 send message
                             </a>
                             {{-- if followed --}}
-                            @if ($user->isfollowed(Auth::id()))
-                            <form action="{{ route('follows.destroy', $user->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger float-end" type="submit">
-                                <span class="px-2">unfollow</span>
-                                </button>
-                            </form>
+                            @if ($user->followedBy(Auth::id()))
+                                <form action="{{ route('follows.destroy', ['user' => $user->id, 'follow' => $user->follows()->where('following_id', Auth::id())->first()->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger float-end" type="submit">
+                                    <span class="px-2">unfollow</span>
+                                    </button>
+                                </form>
                             {{-- if NOT followed --}}
                             @else
-                            <form action="{{ route('follows.store') }}" method="post">
-                                @csrf
-                                <input type="hidden" value="{{ $user->id }}" name="user_id">
-                                <button class="btn btn-secondary float-end" type="submit">
-                                <span class="px-2">follow</span>
-                                </button>
-                            </form>
+                                <form action="{{ route('follows.store', ['user' => $user->id]) }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-secondary float-end" type="submit">
+                                    <span class="px-2">follow</span>
+                                    </button>
+                                </form>
                             @endif
                         @endif
 

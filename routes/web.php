@@ -6,6 +6,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -62,7 +63,7 @@ Route::group(['middleware' => 'auth'], function(){
     #Password
     Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
     #Follow
-    Route::resource('/follows', FollowController::class, ['only' => ['store', 'destroy']]);
+    Route::resource('/users/{user}/follows', FollowController::class, ['only' => ['store', 'destroy']]);
 
     #Post
     Route::resource('/posts', PostController::class, ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
@@ -75,6 +76,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
     #CONTACT
     Route::resource('/contact', ContactController::class);
+
+    #Message
+    Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
+    #Message show
+    Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
 
     #Search
     Route::resource('/search', SearchController::class, ['only' => ['index']]);

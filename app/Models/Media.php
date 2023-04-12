@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Follow extends Model
+
+class Media extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['following_id', 'followed_id'];
-    public $timestamps = false;
+    protected $fillable = ['path'];
 
-    public function user()
+    public function message()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Message::class);
     }
 }

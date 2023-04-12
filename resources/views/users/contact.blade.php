@@ -2,10 +2,6 @@
 
 @section('title', 'ContactUs')
 
-@section('styles')
-    <link href="{{ mix('css/contact.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
     <div class="mt-5">
         <div class="row justify-content-center">

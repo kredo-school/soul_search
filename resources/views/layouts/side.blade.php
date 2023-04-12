@@ -7,7 +7,7 @@
     {{-- orange icon, bold text, gray backcround @ home page --}}
     @if ( !request()->is('*profile*') && !request()->is('*message*') && !request()->is('*search*') && !request()->is('*contact*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
-            <a href="#" class="flex-fill nav-link link-dark">
+            <a href="{{ route('index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-house text-orange"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Home</span>
@@ -15,7 +15,7 @@
         </li>
     @else
         <li class="nav-item py-2">
-            <a href="#" class="flex-fill nav-link link-dark" title="Home">
+            <a href="{{ route('index') }}" class="flex-fill nav-link link-dark" title="Home">
                 <i class="fa-solid fa-house"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Home</span>
@@ -26,7 +26,7 @@
     {{-- orange icon, bold text, gray backcround @ profile page --}}
     @if ( request()->is('*profile*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
-            <a href="#" class="flex-fill nav-link link-dark">
+            <a href="{{ route('profiles.index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-user text-orange"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;My Profile</span>
@@ -34,7 +34,7 @@
         </li>
     @else
         <li class="nav-item py-2">
-            <a href="#" class="flex-fill nav-link link-dark" title="My Profile">
+            <a href="{{ route('profiles.index') }}" class="flex-fill nav-link link-dark" title="My Profile">
                 <i class="fa-solid fa-user"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;My Profile</span>
@@ -45,7 +45,7 @@
     {{-- orange icon, bold text, gray backcround @ message page --}}
     @if ( request()->is('*message*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
-            <a href="#" class="flex-fill nav-link link-dark">
+            <a href="{{ route('messages.show', ['user' => Auth::id()]) }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-comment-dots text-orange"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Message</span>
@@ -53,7 +53,7 @@
         </li>
     @else
         <li class="nav-item py-2">
-            <a href="#" class="flex-fill nav-link link-dark" title="Message">
+            <a href="{{ route('messages.show', ['user' => Auth::id()]) }}" class="flex-fill nav-link link-dark" title="Message">
                 <i class="fa-solid fa-comment-dots"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Message</span>
@@ -64,7 +64,7 @@
     {{-- orange icon, bold text, gray backcround @ search page --}}
     @if ( request()->is('*search*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
-            <a href="#" class="flex-fill nav-link link-dark">
+            <a href="{{ route('search.index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-magnifying-glass text-orange"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Search</span>
@@ -72,7 +72,7 @@
         </li>
     @else
         <li class="nav-item py-2">
-            <a href="#" class="flex-fill nav-link link-dark" title="Search">
+            <a href="{{ route('search.index') }}" class="flex-fill nav-link link-dark" title="Search">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Search</span>
@@ -83,7 +83,7 @@
     {{-- orange icon, bold text, gray backcround @ contact page --}}
     @if ( request()->is('*contact*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
-            <a href="#" class="flex-fill nav-link link-dark">
+            <a href="{{ route('contact.index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-circle-question text-orange"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Contact Us</span>
@@ -91,7 +91,7 @@
         </li>
     @else
         <li class="nav-item py-2">
-            <a href="#" class="flex-fill nav-link link-dark" title="Contact Us">
+            <a href="{{ route('contact.index') }}" class="flex-fill nav-link link-dark" title="Contact Us">
                 <i class="fa-solid fa-circle-question"></i>
                 <span class="text-dark hide-800">
                     &nbsp;&nbsp;Contact Us</span>
@@ -99,13 +99,6 @@
         </li>
     @endif
 </ul>
-
-<a class="" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-
 
 <div class="dropdown login-icon">
     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

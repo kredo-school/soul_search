@@ -54,7 +54,7 @@
                                                 @else
                                                     {{ $a_user->username }} sent an image.
                                                 @endif
-                                            @else
+                                            @elseif($message_from)
                                                 @if($message_from->pivot->text)
                                                     You: {{ $message_from->pivot->text }}
                                                 @else

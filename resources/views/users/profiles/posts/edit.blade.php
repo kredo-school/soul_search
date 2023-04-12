@@ -31,10 +31,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="body" class="form-label">Message</label>
-                        <textarea name="body" class="form-control" id="body" cols="30" rows="2">{{ old('body', $post->body) }}</textarea>
-                        @error('body')
-                            <p class="text-danger small">{{ $body }}</p>
+                        <label for="text" class="form-label">Message</label>
+                        <textarea name="text" class="form-control" id="text" cols="30" rows="2">{{ old('text', $post->text) }}</textarea>
+                        @error('text')
+                            <p class="text-danger small">{{ $text }}</p>
                         @enderror
                     </div>
 

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <img src="{{ asset('img/logo.svg')}}" class="float-left mt-4 icon-md icon-position">
+    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-4 icon-md icon-position">
 
     <div class="container mb-3">
         <div class="row justify-content-center">
@@ -77,7 +77,7 @@
                             {{--  Facebook Logo  --}}
                             <div class="container justify-content-center logo-center">
                                 <a class="" href="#">
-                                    <img class="icon-sm justify-content-center mt-3" src="{{asset('img/btn_facebook.svg')}}" alt="">
+                                    <img class="icon-sm justify-content-center mt-3" src="{{asset('images/btn_facebook.svg')}}" alt="">
                                 </a>
                             </div>
                             {{--  Message  --}}

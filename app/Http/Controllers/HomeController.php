@@ -22,13 +22,6 @@ class HomeController extends Controller
     private $tag;
     private $user_tag;
 
-    public function __construct(Chat $chat, User $user, Tag $tag, UserTag $user_tag)
-    {
-        $this->chat = $chat;
-        $this->user = $user;
-        $this->tag = $tag;
-        $this->user_tag = $user_tag;
-    }
 
     /**
      * Show the application dashboard.

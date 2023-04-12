@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
@@ -89,6 +90,34 @@ class User extends Authenticatable
 
     public function followedBy($user_id)
     {
-        return $this->follows()->where('following_id', '=',  $user_id)->exists();
+        return $this->follows()
+            ->where('following_id', '=',  $user_id)->exists();
+    }
+
+    //messages
+    public function messagesSent()
+    {
+        return $this->belongsToMany(User::class, 'messages', 'sender_id', 'receiver_id')
+                    ->withPivot('id', 'text', 'media_id', 'text_edited')
+                    ->withTimestamps();
+    }
+
+    public function messagesReceived()
+    {
+        return $this->belongsToMany(User::class, 'messages', 'receiver_id', 'sender_id')
+                    ->withPivot('id', 'text', 'media_id', 'text_edited')
+                    ->withTimestamps();
+    }
+
+    public function messageFrom($user_id)
+    {
+        return $this->messagesReceived()
+            ->where('sender_id', '=',  $user_id)->latest('messages.id')->first();
+    }
+
+    public function messageTo($user_id)
+    {
+        return $this->messagesSent()
+            ->where('receiver_id', '=',  $user_id)->latest('messages.id')->first();
     }
 }

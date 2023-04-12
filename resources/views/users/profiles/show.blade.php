@@ -51,7 +51,15 @@
                             <button class="btn btn-outline-secondary float-end" type="button"  data-bs-toggle="modal" data-bs-target="#createPostModal">
                                 create post
                             </button>
+
                             @include('users.profiles.posts.create')
+                            {{-- error message from create modal --}}
+                            @error('image')
+                                <p class="text-danger small">{{ $message }}</p>
+                            @enderror
+                            @error('text')
+                                <p class="text-danger small">{{ $message }}</p>
+                            @enderror
 
                         @else
                             {{-- report --}}

@@ -1,8 +1,8 @@
-<div class="container">
-    <div class="row" style="height: 1.5rem;">
+<div class="container px-1">
+    <div class="row justify-content-start" style="height: 1.5rem;">
         <!-- Username and Date -->
         <div class="col pt-0 ps-2">
-            <a href="#" class="text-decoration-none text-dark fw-bold">{{ $chat->user->username }}</a>
+            <a href="#" class="text-decoration-none fw-bold text-dark tag-name">{{ $chat->user->username }}</a>
             &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
@@ -38,7 +38,7 @@
                         <i class="fa-solid fa-circle-exclamation"></i> Report
                     </button>
                 </div>
-                @include('contents.modal.report')
+                {{-- @include('contents.modal.report') --}}
             </div>
         @endif
     </div>

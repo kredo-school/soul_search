@@ -3,7 +3,8 @@
 }
 
 .tag-header {
-    --bs-text-opacity: .7;
+    opacity: .8;
+    color: #505050;
 }
 
 .tag-bar {
@@ -11,7 +12,8 @@
 }
 
 .tag-name {
-    --bs-text-opacity: .5;
+    opacity: .8;
+    color: #505050;
 }
 
 .logo-center {
@@ -104,5 +106,5 @@
 }
 
 .likes-count {
-    width: 1.5em;
+    width: 1em;
 }

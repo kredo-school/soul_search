@@ -80,12 +80,14 @@ class User extends Authenticatable
         return $this->hasMany(UserTag::class, config('enums')['tag_category']['favorite']);
     }
 
+    //follows
     public function follows()
     {
-        return $this->hasMany(Follow::class, 'followed_id');
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'following_id')->withPivot('id');
+        // return $this->hasMany(Follow::class, 'followed_id');
     }
 
-    public function isfollowed($user_id)
+    public function followedBy($user_id)
     {
         return $this->follows()->where('following_id', '=',  $user_id)->exists();
     }

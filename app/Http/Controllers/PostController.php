@@ -42,13 +42,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'body'  => 'required|max:10000',
+            'text'  => 'required|max:10000',
             'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
         // create data in posts table
         Post::create([
-            'body'    => $request->body,
+            'text'    => $request->text,
             'user_id' => Auth::id(),
             'image'   => $this->saveImage($request),
         ]);
@@ -56,7 +56,7 @@ class PostController extends Controller
         // store Tag and PostTag
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
-        preg_match_all("/#(\\w+)/", $request->body, $hashtags);
+        preg_match_all("/#(\\w+)/", $request->text, $hashtags);
         foreach($hashtags[1] as $tag_name){
             $new_tag_id = $this->storePostTag(Post::latest()->first()->id, $tag_name, $new_tag_id);
         }
@@ -147,11 +147,11 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'body'  => 'min:1|max:10000',
+            'text'  => 'min:1|max:10000',
             'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
         ]);
 
-        $post->body = $request->body;
+        $post->text = $request->text;
 
         // If there is a new image
         if($request->image){
@@ -166,7 +166,7 @@ class PostController extends Controller
 
         // Tag and PostTag update
         $post_id = $post->id;
-        preg_match_all("/#(\\w+)/", $request->body, $hashtags);
+        preg_match_all("/#(\\w+)/", $request->text, $hashtags);
         $latest_tag_id      = Tag::max('id');
         $new_tag_id         = $latest_tag_id + 1;
 				if($request->old_tag_ids){

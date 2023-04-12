@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['body','user_id', 'image'];
+    protected $fillable = ['text','user_id', 'image'];
 
     public function user()
     {

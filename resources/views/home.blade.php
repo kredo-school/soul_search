@@ -24,7 +24,6 @@
                         </li>
                     @endforeach
                 </ul>
-
             </div>
             <div class="mt-5">
                 <p class="text-dark fw-bold mb-1 ms-3 tag-name">Main</p>
@@ -54,7 +53,7 @@
             </div>
         </div>
         @endauth
-        <!-- Home for a specofic user -->
+        <!-- Home for a specific user -->
         <div class="col text-center">
             <p class="text-muted h5" style="transform: translateY(40vh)">Hello {{ Auth::user()->username }}!</p>
         </div>

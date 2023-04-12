@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="container">
-        <div class="card border-0 shadow-ig m-3">
+        <div class="card border-0 shadow-lg m-3">
             <div class="card-body">
                 <div class="row justify-content-center">
                     <div class="col-auto">
@@ -71,23 +71,22 @@
                                 send message
                             </a>
                             {{-- if followed --}}
-                            @if ($user->isfollowed(Auth::id()))
-                            <form action="{{ route('follows.destroy', $user->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger float-end" type="submit">
-                                <span class="px-2">unfollow</span>
-                                </button>
-                            </form>
+                            @if ($user->followedBy(Auth::id()))
+                                <form action="{{ route('follows.destroy', ['user' => $user->id, 'follow' => $user->follows()->where('following_id', Auth::id())->first()->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger float-end" type="submit">
+                                    <span class="px-2">unfollow</span>
+                                    </button>
+                                </form>
                             {{-- if NOT followed --}}
                             @else
-                            <form action="{{ route('follows.store') }}" method="post">
-                                @csrf
-                                <input type="hidden" value="{{ $user->id }}" name="user_id">
-                                <button class="btn btn-secondary float-end" type="submit">
-                                <span class="px-2">follow</span>
-                                </button>
-                            </form>
+                                <form action="{{ route('follows.store', ['user' => $user->id]) }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-secondary float-end" type="submit">
+                                    <span class="px-2">follow</span>
+                                    </button>
+                                </form>
                             @endif
                         @endif
 

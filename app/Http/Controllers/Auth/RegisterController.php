@@ -5,39 +5,24 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Tag;
+use App\Models\UserTag;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    private $start_tag;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(Tag $start_tag)
     {
+        $this->start_tag = $start_tag;
         $this->middleware('guest');
     }
 
@@ -53,6 +38,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'tag_name' => ['required', 'max:255']
         ]);
     }
 
@@ -62,12 +48,43 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
+    public function index(){
+        return view('auth.register');
+    }
+
     protected function create(array $data)
     {
-        return User::create([
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = new User();
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->save();
+        $user_id = $user->id;
+        $db_tags = Tag::get();
+
+        foreach ($data['tag_name'] as $tag)
+        {
+            $tagFound = false;
+
+            foreach ($db_tags as $db_tag)
+            {
+                if ($tag == $db_tag->tag)
+                {
+                    $tagFound = true;
+                    UserTag::insert(['tag_id' => $db_tag->id, 'user_id' => $user_id, 'tag_category' => 'main']);
+
+                    break;
+                }
+            }
+
+            if (!$tagFound) //$tagFound == false
+            {
+                $tag = Tag::create(['tag'=>$tag]);
+                UserTag::insert(['tag_id' => $tag->id, 'user_id' => $user_id, 'tag_category' => 'main']);
+            }
+        }
+
+        return $user;
     }
 }

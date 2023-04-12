@@ -6,6 +6,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\FormController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +38,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+
+Route::get('/register',[RegisterController::class, 'index'])->name('register');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
@@ -56,7 +61,7 @@ Route::group(['middleware' => 'auth'], function(){
     #Password
     Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
     #Follow
-    Route::resource('/follows', FollowController::class, ['only' => ['store', 'destroy']]);
+    Route::resource('/users/{user}/follows', FollowController::class, ['only' => ['store', 'destroy']]);
 
     #Post
     Route::resource('/posts', PostController::class, ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
@@ -67,6 +72,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments', CommentController::class, ['only' => ['store', 'destroy']]);
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class, ['only' => ['store', 'destroy']]);
+
+    #Search
+    Route::resource('/search', SearchController::class, ['only' => ['index']]);
 
     #Contact
     Route::resource('/contact', ContactController::class, ['only' => ['index', 'store', 'destroy']]);

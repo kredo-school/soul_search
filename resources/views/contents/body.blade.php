@@ -1,4 +1,4 @@
-<div class="container px-1">
+<div class="container px-0 pt-2">
     <div class="row justify-content-start" style="height: 1.5rem;">
         <!-- Username and Date -->
         <div class="col pt-0 ps-2">
@@ -6,7 +6,7 @@
             &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
-        <div class="col-auto text-end chat-likes">
+        <div class="col-1 text-end chat-likes">
             @if ($chat->isLiked())
                 <form action="{{ route('chat.like.destroy', $chat->id) }}" method="post">
                     @csrf
@@ -30,15 +30,17 @@
         <!-- A Ellipsis button for Report Chat -->
         @if (Auth::user()->id !== $chat->user->id)
             <div class="col-auto text-end me-5">
-                <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
-                    <i class="fa-solid fa-ellipsis"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item text-danger" title="report" data-bs-toggle="modal" data-bs-target="#reportChatModal">
-                        <i class="fa-solid fa-circle-exclamation"></i> Report
+                <div class="dropdown">
+                    <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
+                        <i class="fa-solid fa-ellipsis"></i>
                     </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportChatModal">
+                            <i class="fa-solid fa-circle-exclamation"></i> Report
+                        </button>
+                    </div>
+                    @include('contents.modal.report')
                 </div>
-                {{-- @include('contents.modal.report') --}}
             </div>
         @endif
     </div>

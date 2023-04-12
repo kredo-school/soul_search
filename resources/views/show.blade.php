@@ -7,7 +7,7 @@
 @section('title', 'Home')
 
 @section('content')
-<div class="d-flex justify-content-center p-0">
+<div class="d-flex justify-content-start p-0">
     @if(Auth::user()->userTag()->exists())
         @auth
         <!-- Tags' bar -->
@@ -62,7 +62,7 @@
                     <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold tag-name">{{ $tag->name }}</a>
                 </div>
                 <!-- Body (Need to update to show chats a tag has) -->
-                    <div class="row pt-3 chat-body">
+                    <div class="row pt-0 chat-body">
                         @foreach ($tagged_chats as $chat)
                             <div class="chat-element">
                                 <div class="user-avatar">
@@ -107,12 +107,14 @@
                 <!-- Body (Need to update to show chats a tag has) -->
                 <div class="row pt-3 chat-body">
                     @foreach ($tagged_chats as $chat)
-                        <div class="col-1 mx-1 pe-0">
+                    <div class="chat-element">
+                        <div class="user-avatar">
                             @include('contents.title')
                         </div>
-                        <div class="col ms-0 p-0">
+                        <div class="chat-content">
                             @include('contents.body')
                         </div>
+                    </div>
                     @endforeach
                 </div>
                 <!-- Form -->
@@ -148,12 +150,14 @@
                 <!-- Body (Need to update to show chats a tag has) -->
                 <div class="row pt-3 chat-body">
                     @foreach ($tagged_chats as $chat)
-                        <div class="col-1 mx-1 pe-0">
+                    <div class="chat-element">
+                        <div class="user-avatar">
                             @include('contents.title')
                         </div>
-                        <div class="col ms-0 p-0">
+                        <div class="chat-content">
                             @include('contents.body')
                         </div>
+                    </div>
                     @endforeach
                 </div>
                 <!-- Form -->

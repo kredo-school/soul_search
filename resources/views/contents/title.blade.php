@@ -1,4 +1,4 @@
-<div class="container ms-3 p-0">
+<div class="container ms-2 pt-2">
     <!-- User Avatar -->
     <a href="#">
         @if ($chat->user->avatar)

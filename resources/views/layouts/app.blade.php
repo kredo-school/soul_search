@@ -47,14 +47,6 @@
                 <div class="ss-main" style="height: 100%">
                     @endif
 
-                    @if ( request()->is('*admin*'))
-                    <div class="ss-container">
-                        {{-- side bar --}}
-                        <div class="ss-sidebar label">
-                        @include('admin.admin_side')
-                        </div>
-                    @endif
-
                     {{-- content --}}
                         <div class="container-fluid p-0" style="height: 100%">
                             <div class="row" style="height: 100%">

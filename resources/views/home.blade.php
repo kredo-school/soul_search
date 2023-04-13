@@ -42,7 +42,7 @@
                     <li class="nav-item mb-1">
                         <a href="{{ route('chats.show', $tag->id) }}" class="flex-fill nav-link">
                             <i class="fa-regular fa-hashtag"></i>
-                            <span class="text-dark tag-name">{{ $tag->tag }}</span>
+                            <span class="text-dark tag-name">{{ $tag->name }}</span>
                         </a>
                     </li>
                 @endforeach

@@ -17,7 +17,7 @@
                     <ul class="nav nav-pills flex-column px-0">
                         @foreach ($recent_tags as $recent_tag)
                             <li class="nav-item mb-1">
-                                <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('home')) ? 'active' : '' }}">
+                                <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link">
                                     <i class="fa-regular fa-hashtag"></i>
                                     <span class="text-dark tag-name">{{ $recent_tag->tag->name }}</span>
                                 </a>
@@ -30,7 +30,7 @@
                     <ul class="nav nav-pills flex-column px-0">
                         @foreach ($main_tags as $main_tag)
                             <li class="nav-item mb-1">
-                                <a href="{{ route('chats.show', $main_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('home')) ? 'active' : '' }}">
+                                <a href="{{ route('chats.show', $main_tag->tag->id) }}" class="flex-fill nav-link">
                                     <i class="fa-regular fa-hashtag"></i>
                                     <span class="text-dark tag-name">{{ $main_tag->tag->name }}</span>
                                 </a>
@@ -43,7 +43,7 @@
                     <ul class="nav nav-pills flex-column px-0">
                         @foreach ($fav_tags as $fav_tag)
                             <li class="nav-item mb-1">
-                                <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('home')) ? 'active' : '' }}">
+                                <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="flex-fill nav-link">
                                     <i class="fa-regular fa-hashtag"></i>
                                     <span class="text-dark tag-name">{{ $fav_tag->tag->name }}</span>
                                 </a>

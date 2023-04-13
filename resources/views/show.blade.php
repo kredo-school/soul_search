@@ -17,7 +17,7 @@
                 <ul class="nav nav-pills flex-column px-0">
                     @foreach ($recent_tags as $recent_tag)
                         <li class="nav-item mb-1">
-                            <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('home')) ? 'active' : '' }}">
+                            <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('show')) ? 'active' : '' }}">
                                 <i class="fa-regular fa-hashtag"></i>
                                 <span class="text-dark tag-name">{{ $recent_tag->tag->name }}</span>
                             </a>
@@ -30,7 +30,7 @@
                 <ul class="nav nav-pills flex-column px-0">
                     @foreach ($main_tags as $main_tag)
                         <li class="nav-item mb-1">
-                            <a href="{{ route('chats.show', $main_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('home')) ? 'active' : '' }}">
+                            <a href="{{ route('chats.show', $main_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('show')) ? 'active' : '' }}">
                                 <i class="fa-regular fa-hashtag"></i>
                                 <span class="text-dark tag-name">{{ $main_tag->tag->name }}</span>
                             </a>
@@ -43,7 +43,7 @@
                 <ul class="nav nav-pills flex-column px-0">
                     @foreach ($fav_tags as $fav_tag)
                         <li class="nav-item mb-1">
-                            <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('home')) ? 'active' : '' }}">
+                            <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="flex-fill nav-link {{ (request()->is('show')) ? 'active' : '' }}">
                                 <i class="fa-regular fa-hashtag"></i>
                                 <span class="text-dark tag-name">{{ $fav_tag->tag->name }}</span>
                             </a>
@@ -76,7 +76,7 @@
                     </div>
                 <!-- Form -->
                 <div class="pt-2 pb-0 align-bottom">
-                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
+                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0 pt-1" enctype="multipart/form-data">
                         @csrf
                         <div class="row gx-2">
                             <div class="col-sm">
@@ -119,7 +119,7 @@
                 </div>
                 <!-- Form -->
                 <div class="bg-white mt-3 mb-0">
-                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
+                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0 pt-1" enctype="multipart/form-data">
                         @csrf
                         <div class="row gx-2">
                             <div class="col-sm">
@@ -162,7 +162,7 @@
                 </div>
                 <!-- Form -->
                 <div class="bg-white mt-3 mb-0">
-                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data">
+                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0 pt-1" enctype="multipart/form-data">
                         @csrf
                         <div class="row gx-2">
                             <div class="col-sm">

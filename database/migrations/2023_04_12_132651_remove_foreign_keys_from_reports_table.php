@@ -11,11 +11,17 @@ class RemoveForeignKeysFromReportsTable extends Migration
      *
      * @return void
      */
-    public function up()
+        public function up()
     {
         Schema::table('reports', function (Blueprint $table) {
-            $table->dropForeign(['reporter_id']);
+            $table->dropForeign('source_id_chats');
+            $table->dropForeign('source_id_comments');
             $table->dropForeign('source_id_messages');
+            $table->dropForeign('source_id_posts');
+            $table->dropForeign('source_id_tags');
+            $table->dropForeign('source_id_users');
+
+            $table->dropIndex('source_id_messages');
         });
     }
 

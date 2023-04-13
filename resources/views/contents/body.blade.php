@@ -39,7 +39,7 @@
                             <i class="fa-solid fa-circle-exclamation"></i> Report
                         </button>
                     </div>
-                    {{-- @include('contents.modal.report') --}}
+                    @include('contents.modals.report')
                 </div>
             </div>
         @endif

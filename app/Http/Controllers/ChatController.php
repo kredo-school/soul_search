@@ -16,13 +16,6 @@ class ChatController extends Controller
     private $tag;
     private $user;
 
-    public function __construct(Chat $chat, Tag $tag, User $user){
-        $this->chat = $chat;
-        $this->tag  = $tag;
-        $this->user = $user;
-    }
-
-
     public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|min:1|max:255',
@@ -76,8 +69,7 @@ class ChatController extends Controller
             ->with('fav_tags', $fav_tags);
     }
 
-    public function destroy($id){
-        $chat = $this->chat->findOrFail($id);
+    public function destroy(Chat $chat){
         $this->deleteImage($chat->image);
         $chat->forceDelete();
         return redirect()->route('show');

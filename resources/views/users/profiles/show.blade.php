@@ -29,7 +29,7 @@
                             {{-- tags --}}
                             @forelse($tags as $tag)
                                 <a href="#" class="text-decoration-none">
-                                    #{{ $tag->tag }}
+                                    #{{ $tag->name }}
                                 </a>
                                 &nbsp;
                             @empty
@@ -51,7 +51,15 @@
                             <button class="btn btn-outline-secondary float-end" type="button"  data-bs-toggle="modal" data-bs-target="#createPostModal">
                                 create post
                             </button>
+
                             @include('users.profiles.posts.create')
+                            {{-- error message from create modal --}}
+                            @error('image')
+                                <p class="text-danger small">{{ $message }}</p>
+                            @enderror
+                            @error('text')
+                                <p class="text-danger small">{{ $message }}</p>
+                            @enderror
 
                         @else
                             {{-- report --}}
@@ -67,7 +75,7 @@
                             </ul>
                             @include('users.profiles.modal.report')
                             {{-- send message --}}
-                            <a href="#" class="btn btn-orange float-end ms-3">
+                            <a href="{{ route('messages.show', ['user' => $user]) }}" class="btn btn-orange float-end ms-3">
                                 send message
                             </a>
                             {{-- if followed --}}

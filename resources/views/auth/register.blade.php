@@ -4,20 +4,19 @@
 <link href="{{ mix('css/register.css') }}" rel="stylesheet">
 @endsection
 
+@section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+@endsection
+
 @section('title','Create Account')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
 @section('content')
-<div class="container">
-    <img src="{{ asset('img/logo.png')}}" class="float-left mt-2">
-</div>
 
-<div class="container">
-    <h1 class="text-center fw-bold mb-3">
+    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2 ms-4 icon-md">
+
+    <h1 class="text-center fw-bold">
         Create Your Account
     </h1>
-</div>
 
 {{--  Card body  --}}
 <div class="container">
@@ -33,12 +32,10 @@
                             </div>
                         </div>
 
-
                         <h2 class="text-center fw-bold mt-2">Your Profile</h2>
                         <p class="text-muted text-center mt-2">Enter the login information for your account.<br>You can edit it after registering.</p>
                         <form method="POST" action="{{ route('register') }}" class="contact-form" id="contact-form" name="firstForm">
                             @csrf
-
 
                             {{--  Username  --}}
                             <div class="row mb-3 justify-content-center">
@@ -139,7 +136,6 @@
                                     </div>
                                 </div>
 
-
                                 {{--  Tag3  --}}
                                 <div class="row mb-3 justify-content-center">
                                     <div>
@@ -193,7 +189,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="{{ mix('js/registration.js') }}"></script>
 @endsection

@@ -1,0 +1,46 @@
+.icon-sm{
+    font-size: 3rem;
+}
+
+.icon-msg{
+    font-size: 1.5rem;
+}
+
+.avatar-sm{
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+}
+
+.avatar-msg{
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: cover;
+}
+
+.image-msg{
+    height: 100px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 50px;
+    width: 69%;
+    background-color: #fff;
+}
+
+.text-vsm {
+    font-size: .7rem;
+}
+
+.fa-circle-plus {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+/* Hide input:file for image */
+.form-image {
+    display: none;
+}

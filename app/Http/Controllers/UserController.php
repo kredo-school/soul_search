@@ -102,6 +102,7 @@ class UserController extends Controller
             'username'     => 'min:1|max:100',
             'email'        => 'min:1|max:100|email',
             'introduction' => 'max:10000',
+            'tag_name'     => 'string'
         ]);
 
         $user->username     = $request->username;
@@ -113,23 +114,23 @@ class UserController extends Controller
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
         $count         = 0;
-        foreach($request->tag as $tag){
+        foreach($request->tag_name as $tag_name){
             if($count < $request->old_tag_count){
                 // if old tag != new tag
-                if(Tag::where('id', $request->old_tag_id[$count])->first()->tag !== $tag){
-                    if(!is_Null($tag)){
+                if(Tag::where('id', $request->old_tag_id[$count])->first()->name !== $tag_name){
+                    if(!is_Null($tag_name)){
                         // both old and new exist
                         $this->deleteTag($request, $count);
-                        $new_tag_id = $this->storeTag($tag, $new_tag_id);
+                        $new_tag_id = $this->storeTag($tag_name, $new_tag_id);
                     }else{
                         // only old exists
                         $this->deleteTag($request, $count);
                     }
                 }
             }else{
-                if(!is_Null($tag)){
+                if(!is_Null($tag_name)){
                     // only new exists
-                    $new_tag_id = $this->storeTag($tag, $new_tag_id);
+                    $new_tag_id = $this->storeTag($tag_name, $new_tag_id);
                 }
             }
             $count++;
@@ -138,11 +139,11 @@ class UserController extends Controller
         return redirect()->route('profiles.index');
     }
 
-    private function storeTag($tag, $new_tag_id){
+    private function storeTag($tag_name, $new_tag_id){
         $db_tags = Tag::get();
         $is_new = true;
         foreach($db_tags as $db_tag){
-            if($db_tag->tag === $tag){
+            if($db_tag->name === $tag_name){
                 $is_new = false;
                 // create UserTag
                 UserTag::create([
@@ -154,7 +155,7 @@ class UserController extends Controller
         if($is_new){
             // create new Tag
             Tag::create([
-                'tag' => $tag,
+                'name' => $tag_name,
             ]);
 
             // create UserTag

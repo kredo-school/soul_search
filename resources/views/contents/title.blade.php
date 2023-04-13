@@ -1,6 +1,6 @@
-<div class="container ms-2 pt-2">
+<div class="container ms-1 pt-2">
     <!-- User Avatar -->
-    <a href="#">
+    <a href="{{ route('profiles.index') }}">
         @if ($chat->user->avatar)
             <img src="{{ asset('/storage/avatars/' . $chat->user->avatar) }}" alt="{{ $chat->user->avatar }}" class="rounded-circle icon-sm">
         @else

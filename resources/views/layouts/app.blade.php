@@ -32,7 +32,7 @@
 <body class="back-color">
 
     {{-- not showing in login, register, or post pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*'))
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') ||  request()->is('*post*'))
     @else
     <div class="ss-container">
         <div class="row" style="height: 100%">
@@ -54,7 +54,7 @@
                     </div>
 
     {{-- not showing in login, register, or post pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*password*') ||  request()->is('*post*'))
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') ||  request()->is('*post*'))
     @else
                 </div>
             </div>

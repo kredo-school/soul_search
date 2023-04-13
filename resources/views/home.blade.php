@@ -62,6 +62,8 @@
             </ul>
         </div>
     </div>
+
+    @if(isset($tag))
     <!-- Chats -->
     <div class="col" style="height: 95%">
         <!-- Header -->
@@ -105,5 +107,6 @@
             </form>
         </div>
     </div>
+    @endif
 </div>
 @endsection

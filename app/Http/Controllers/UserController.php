@@ -99,16 +99,18 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
 
         $request->validate([
-            'username'     => 'min:1|max:100',
-            'email'        => 'min:1|max:100|email',
-            'introduction' => 'max:10000',
-            'tag_name'     => 'string'
+            'username'     => 'required|max:100',
+            'email'        => 'required|max:100|email',
+            'introduction' => 'max:10000|nullable',
+            'tag_name'     => 'array|nullable',
+            'tag_name.*'   => 'string|nullable',
         ]);
 
         $user->username     = $request->username;
         $user->email        = $request->email;
         $user->introduction = $request->introduction;
         $user->save();
+
 
         // Tag and UserTag update
         $latest_tag_id = Tag::max('id');

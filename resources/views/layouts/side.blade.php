@@ -5,7 +5,7 @@
 <ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
 
     {{-- orange icon, bold text, gray backcround @ home page --}}
-    @if ( !request()->is('*profile*') && !request()->is('*message*') && !request()->is('*search*') && !request()->is('*contact*'))
+    @if ( !request()->is('*profile*') && !request()->is('*message*') && !request()->is('*search*') && !request()->is('*contact*') && !request()->is('*passwords*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-house text-orange"></i>
@@ -24,7 +24,7 @@
     @endif
 
     {{-- orange icon, bold text, gray backcround @ profile page --}}
-    @if ( request()->is('*profile*'))
+    @if ( request()->is('*profile*') || request()->is('*passwords*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('profiles.index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-user text-orange"></i>

@@ -53,7 +53,7 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="tag_name" class="form-label">Tags(up to 3)</label>
+                <label for="tag_name" class="form-label">Your Main Tags(up to 3)</label>
                 @foreach ($tags as $tag)
                     <div class="col">
                         <input name="tag_name[]" type="text" class="form-control" id="tag_name[]" value="{{ old('tag_name[]', $tag->name) }}">

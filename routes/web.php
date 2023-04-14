@@ -87,6 +87,9 @@ Route::group(['middleware' => 'auth'], function(){
 
     #Contact
     Route::resource('/contact', ContactController::class, ['only' => ['index', 'store', 'destroy']]);
+
+    #Report
+    Route::resource('/reports', ReportController::class, ['only' => ['store']]);
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){

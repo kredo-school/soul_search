@@ -69,7 +69,7 @@ class RegisterController extends Controller
 
             foreach ($db_tags as $db_tag)
             {
-                if ($tag == $db_tag->tag)
+                if ($tag == $db_tag->name)
                 {
                     $tagFound = true;
                     UserTag::insert(['tag_id' => $db_tag->id, 'user_id' => $user_id, 'tag_category' => 'main']);
@@ -80,7 +80,7 @@ class RegisterController extends Controller
 
             if (!$tagFound) //$tagFound == false
             {
-                $tag = Tag::create(['tag'=>$tag]);
+                $tag = Tag::create(['name'=>$tag]);
                 UserTag::insert(['tag_id' => $tag->id, 'user_id' => $user_id, 'tag_category' => 'main']);
             }
         }

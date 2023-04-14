@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="ss-container">
+<div class="ss-container p-0">
     <div class="row" style="height: 100%">
         <div class="col-2 p-0 bg-white">
         {{-- side bar --}}
@@ -16,12 +16,12 @@
             </div>
         </div>
 
-        <div class="col-10 p-0" style="height: 100%">
+        <div class="col-9 p-0" style="height: 100%">
             <div class="ss-main" style="height: 100%">
                 <div class="container-fluid p-0" style="height: 100%">
-                    <div class="row" style="height: 100%">
+                    <div class="row ps-5 mt-5">
                         @auth
-                        <h1 class="ms-5 mt-5 text-heigt d-flex align-items-end">Users</h1>
+                        <h1 class="mb-3 p-0 mt-5 text-heigt d-flex align-items-end">Users</h1>
 
                             <form action="{{ route('admin.users') }}">
                             </form>
@@ -32,7 +32,7 @@
                                 <tr>
                                     <th></th>
                                     <th class="ps-5">Username</th>
-                                    <th class="cell-tiny">Email</th>
+                                    <th class="cell-padding">Email</th>
                                     <th class="cell-padding">Created at</th>
                                     <th>Status</th>
                                     <th></th>
@@ -51,7 +51,7 @@
                                         <td class="ps-5">
                                             <a href="#" class="text-decoration-none text-dark">{{ $user->username }}</a>
                                         </td>
-                                        <td class="cell-tiny">
+                                        <td class="cell-padding">
                                             {{ $user->email }}
                                         </td>
                                         <td class="cell-padding">
@@ -95,7 +95,7 @@
                             </table>
 
 
-                        <div class="ms-5 ">
+                        <div class="p-0">
                             {{ $all_users->appends(request()->query())->links() }}
                         </div>
                     </div>

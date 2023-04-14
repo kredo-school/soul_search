@@ -27,7 +27,7 @@
         <div class="col-1 px-0 pt-1 likes-count">
             <span>{{ $chat->likes->count() }}</span>
         </div>
-        <!-- A Ellipsis button for Report Chat -->
+        <!-- A Ellipsis button for Report Chat and Follow/Unfollow -->
         @if (Auth::user()->id !== $chat->user->id)
             <div class="col-auto text-end me-5">
                 <div class="dropdown">

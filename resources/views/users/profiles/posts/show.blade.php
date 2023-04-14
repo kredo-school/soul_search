@@ -4,6 +4,12 @@
     <link href="{{ mix('css/post.css') }}" rel="stylesheet">
 @endsection
 
+@section('scripts')
+    <script>
+        document.documentElement.clientWidth
+    </script>
+@endsection
+
 @section('title', 'Post')
 
 @section('content')

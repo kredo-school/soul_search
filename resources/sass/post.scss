@@ -89,3 +89,20 @@ ul {
 .post-list li{
     background-color: transparent;
 }
+
+/* hide when the display width is <= 1000px */
+@media screen and (max-width: 1000px) {
+	.hide-1000 {
+		display: none;
+	}
+}
+
+/* show when the display width is <= 1000px */
+.show-1000 {
+    display: none;
+}
+@media screen and (max-width: 1000px) {
+	.show-1000 {
+		display: block;
+	}
+}

@@ -5,12 +5,28 @@
     left: 0;
 }
 
+.post-exit-outline {
+    position: absolute;
+    color: #fff;
+    top: 0;
+    left: 0;
+}
+
 /* image in post/show page */
 .post-image {
-    width: 100%;
-    object-fit: contain;
-    background: #505050;
-    position: relative;
+	display: block;
+
+	img {
+		display: block;
+        max-height: 100vh;
+        max-width: 100%;
+		object-fit: cover;
+	}
+}
+
+.post-image-container {
+    height: 100vh;
+    background-color: #505050;
 }
 
 .icon-sm{
@@ -68,4 +84,8 @@
 ul {
     list-style: none;
     padding-left: 0
+}
+
+.post-list li{
+    background-color: transparent;
 }

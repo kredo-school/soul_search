@@ -1,6 +1,6 @@
 <div>
     @if ($post->comments->isNotEmpty())
-    <ul class="list-group">
+    <ul class="list-group post-list">
         @foreach ($post->comments as $comment)
         <li class="list-group-item border-0 p-0 mb-2">
             <div class="row">

@@ -1,5 +1,5 @@
 
-<ul class="list-group">
+<ul class="list-group post-list">
     <li class="list-group-item border-0 p-0">
 
         <div class="row">

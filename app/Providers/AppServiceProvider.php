@@ -29,11 +29,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-
-        Gate::define('admin', function($user){
-            return $user->id == 1
-                    ? Response::allow()
-                    : Response::deny('You must be an administrator');
-        });
     }
 }

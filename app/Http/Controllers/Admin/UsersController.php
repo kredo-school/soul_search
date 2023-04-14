@@ -8,26 +8,20 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-    private $user;
 
-    public function __construct(User $user)
+    public function index(Request $request, User $user)
     {
-        $this->users = $user;
-    }
-
-    public function index(Request $request)
-    {
-        $all_users = $this->users->where('username','like', '%' . $request->search . '%')->withTrashed()->latest()->paginate(5);
+        $all_users = $user->where('username','like', '%' . $request->search . '%')->withTrashed()->latest()->paginate(5);
         return view('admin.users.index')->with('all_users', $all_users)->with('search', $request->search);
     }
 
-    public function deactivate($id){
-        $this->users->destroy($id);
+    public function deactivate(User $user, $id){
+        $user->destroy($id);
         return redirect()->back();
     }
 
-    public function activate($id){
-        $this->users->onlyTrashed()->findOrFail($id)->restore();
+    public function activate(User $user, $id){
+        $user->onlyTrashed()->findOrFail($id)->restore();
         return redirect()->back();
     }
 }

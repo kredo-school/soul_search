@@ -11,14 +11,14 @@
 
                     <div class="mb-3">
                         <label for="image" class="form-label">Photo</label>
-                        <input type="file" class="form-control" id="image" name="image" aria-describedby="image-info">
+                        <input type="file" accept=".jpeg, .jpg, .png, .gif" class="form-control" id="image" name="image" aria-describedby="image-info" required>
                         <div class="text-muted text-sm">Acceptable formats: jpeg, jpg, png, gif</div>
                         <div class="text-muted text-sm">Max file size is 1048kb</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="text" class="form-label">Message</label>
-                        <textarea name="text" class="form-control" id="text" cols="30" rows="2">{{ old('text') }}</textarea>
+                        <textarea name="text" class="form-control" id="text" cols="30" rows="2" required>{{ old('text') }}</textarea>
                     </div>
 
                     <div class="text-center">

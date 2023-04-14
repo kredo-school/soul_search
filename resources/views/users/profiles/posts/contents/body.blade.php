@@ -2,7 +2,7 @@
 <ul class="list-group post-list">
     <li class="list-group-item border-0 p-0">
 
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-auto">
                 <a href="#">
                     @if ($post->user->avatar)
@@ -56,8 +56,8 @@
             </div>
         </div>
 
-        <div class="mt-3 hash-link">
-            {{ $post->body }}
+        <div class="mt-2 ms-3 hash-link">
+            {{ $post->text }}
         </div>
         <div class="row">
             <div class="col-auto">

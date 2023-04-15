@@ -15,8 +15,8 @@ class UsersController extends Controller
         return view('admin.users.index')->with('all_users', $all_users)->with('search', $request->search);
     }
 
-    public function deactivate(User $user, $id){
-        $user->destroy($id);
+    public function deactivate(User $user){
+        $user->delete();
         return redirect()->back();
     }
 

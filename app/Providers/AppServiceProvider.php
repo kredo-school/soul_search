@@ -4,6 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Pagination\paginator;
+use Illuminate\Auth\Access\Response;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +28,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
+
+        Gate::define('admin', function($user){
+            return $user->username == User::NAME_OF_CONSTANT
+                    ? Response::allow()
+                    : Response::deny('You must be an administrator');
+        });
     }
 }

@@ -19,6 +19,8 @@ use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FormController;
 
+use App\Http\Controllers\Admin\PostsController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -88,4 +90,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/reports', ReportController::class, ['only' => ['store']]);
 });
 
-
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
+    #USERS
+    Route::get('/users', [PostsController::class, 'index'])->name('users');
+    Route::delete('/users/{user}/deactivate', [PostsController::class, 'deactivate'])->name('users.deactivate');
+    Route::patch('/users/{id}/activate', [PostsController::class, 'activate'])->name('users.activate');
+});

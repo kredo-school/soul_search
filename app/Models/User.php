@@ -15,6 +15,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    const NAME_OF_CONSTANT = 'Kazu';
+
     /**
      * The attributes that are mass assignable.
      *

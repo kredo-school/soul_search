@@ -115,7 +115,7 @@
 </div>
 
 {{-- send message --}}
-<div class="bg-white mt-3 p-2 mb-0 footer">
+<div class="bg-white p-2 mb-0 footer">
     <form action="{{ route('messages.store', ['user' => $user]) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data" runat="server">
         @csrf
         <div class="row gx-2">

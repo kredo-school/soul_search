@@ -27,7 +27,7 @@
     bottom: 0;
     right: 0;
     height: 50px;
-    width: 69%;
+    width: 69.4%;
     background-color: #fff;
 }
 
@@ -43,4 +43,23 @@
 /* Hide input:file for image */
 .form-image {
     display: none;
+}
+
+/* remove auto margin and padding */
+.col, .col-auto {
+    margin: 0;
+    padding: 0;
+}
+
+/* hide overflow message on the message list */
+.latest-message {
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+    width: 150px;
+}
+
+/* width of message list*/
+.message-list {
+    width: 265px;
 }

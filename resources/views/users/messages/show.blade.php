@@ -9,7 +9,7 @@
 @section('content')
 <div class="d-flex justify-content-center p-0">
     <!-- Users -->
-    <div class="col-2 bg-white tag-bar border">
+    <div class="message-list bg-white tag-bar border-start border-end">
         <ul class="nav nav-pills flex-column px-0">
             @foreach($all_users as $a_user)
                 @php
@@ -17,9 +17,9 @@
                     $message_from = $a_user->messageFrom(Auth::id());
                 @endphp
                 @if($message_to || $message_from || $a_user->followedBy(Auth::id()))
-                    <li class="nav-item my-2">
+                    <li class="nav-item m-2">
                         <div class="row">
-                            <div class="col-auto">
+                            <div class="col-auto me-2">
                                 @if ($a_user->avatar)
                                     <img src="{{ asset('/storage/avatars/'. $a_user->avatar) }}" class="avatar-sm rounded-circle" alt="">
                                 @else
@@ -27,11 +27,11 @@
                                 @endif
                             </div>
                             <div class="col">
-                                <a href="{{ route('messages.show', ['user' => $a_user->id]) }}" class="flex-fill nav-link">
+                                <a href="{{ route('messages.show', ['user' => $a_user->id]) }}" class="text-decoration-none">
                                     <div class="text-dark">
                                         {{$a_user->username}}
                                     </div>
-                                    <div class="text-dark">
+                                    <div class="text-dark latest-message">
                                         {{-- show the latest message --}}
                                         <span class="text-muted">
                                             @if($message_to && $message_from)

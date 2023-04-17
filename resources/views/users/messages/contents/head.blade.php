@@ -1,8 +1,8 @@
 
-<div class="bg-white mb-3 py-1 border border-top-0">
+<div class="bg-white mb-3 py-1 border border-top-0 message-header">
     <div class="row">
         <div class="col-auto ms-2 me-3">
-            <a href="#" class="ps-1 text-decoration-none fw-bold text-dark tag-header">
+            <a href="#" class="ps-1 text-decoration-none fw-bold text-dark">
                 @if ($user->avatar)
                     <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-sm rounded-circle" alt="">
                 @else

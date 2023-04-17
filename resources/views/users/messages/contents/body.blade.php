@@ -3,17 +3,17 @@
     <div class="container p-0">
         @foreach ($pivot_items as $item)
             @php
-                $message  = $item->pivot;
-                $text     = $message->text;
-                $media_id = $message->media_id;
-                $image    = null;
-                $id       = $message->id;
+                $user_message = $item->pivot;
+                $text         = $user_message->text;
+                $media_id     = $user_message->media_id;
+                $image        = null;
+                $id           = $user_message->id;
                 if ($media_id) {
                     $image = $media->where('id', $media_id)->first()->path;
                 }
             @endphp
             {{-- if login user's message or not --}}
-            @if($message->sender_id === Auth::id())
+            @if($user_message->sender_id === Auth::id())
                 @php
                     $position = 'end';
                     $margin   = 'me-2';

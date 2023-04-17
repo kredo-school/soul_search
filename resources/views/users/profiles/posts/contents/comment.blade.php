@@ -1,6 +1,16 @@
 <div>
+    {{-- submit comment --}}
+    <form action="{{ route('comments.store', $post->id) }}" method="post">
+    @csrf
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id="comment" name="comment" placeholder="comment here">
+        <button type="submit" class="input-group-text border-secondary">send</button>
+    </div>
+    </form>
+
+    {{-- show comments --}}
     @if ($post->comments->isNotEmpty())
-    <ul class="list-group">
+    <ul class="list-group post-list">
         @foreach ($post->comments as $comment)
         <li class="list-group-item border-0 p-0 mb-2">
             <div class="row">
@@ -83,14 +93,5 @@
         @endforeach
     </ul>
     @endif
-
-    {{-- submit comment --}}
-    <form action="{{ route('comments.store', $post->id) }}" method="post">
-    @csrf
-    <div class="input-group">
-        <input type="text" class="form-control" id="comment" name="comment" placeholder="comment here">
-        <button type="submit" class="input-group-text border-secondary">post</button>
-    </div>
-    </form>
 
 </div>

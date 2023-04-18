@@ -11,6 +11,7 @@ class UserTag extends Model
     protected $table='user_tags';
     protected $fillable = ['user_id','tag_id'];
     public $timestamps = false;
+    const CREATED_AT = 'last_access';
 
     public function user()
     {
@@ -20,6 +21,10 @@ class UserTag extends Model
     public function tag()
     {
         return $this->belongsTo(Tag::class);
+    }
+
+    public function isRecent(){
+        return $this->belongsTo(User::class);
     }
 
     public function isMain(){

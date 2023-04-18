@@ -3,7 +3,8 @@
 }
 
 .tag-header {
-    --bs-text-opacity: .7;
+    opacity: .8;
+    color: #505050;
 }
 
 .tag-bar {
@@ -11,17 +12,44 @@
 }
 
 .tag-name {
-    --bs-text-opacity: .5;
+    opacity: .8;
+    color: #505050;
 }
 
 .logo-center {
     text-align: center;
 }
 
+.textarea {
+    resize: none;
+}
+
+/* hide when the display width is <= 700px */
+@media screen and (max-width: 700px) {
+	.hide-700 {
+		display: none;
+	}
+}
+
+/* show when the display width is <= 700px */
+.show-700 {
+    display: none;
+}
+@media screen and (max-width: 700px) {
+	.show-700 {
+		display: block;
+	}
+}
+
+.text-orange {
+    color: #FFB84D;
+}
+
 .chat-body {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 90%;
+    background-color: #f4f7fc;
 }
 
 .fa-circle-plus {
@@ -29,7 +57,50 @@
     cursor: pointer;
 }
 
+.icon-sm {
+    font-size: 3rem;
+}
+
 /* Hide input:file for image */
 .form-image {
     display: none;
+}
+
+.chat-image {
+    width: 30%;
+    height: 20%;
+    border-radius: 10px;
+}
+
+.btn-send {
+    width: 5em;
+    transform: translate(-30px, -3px);
+}
+
+.d-flex {
+    height: 100vh;
+}
+
+.chat-element {
+    position: relative;
+
+    &:hover {
+        background-color: #eef3fc;
+    }
+}
+
+.user-avatar {
+    position: absolute;
+}
+
+.chat-content {
+    margin-left: 3.5rem;
+}
+
+.chat-likes {
+    width: 3.5em;
+}
+
+.likes-count {
+    width: 1em;
 }

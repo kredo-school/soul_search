@@ -103,7 +103,7 @@
 /* hide when the display width is < 992px */
 @media screen and (min-width: 992px) {
 	.hide-992 {
-		display: block;
+		display: inline;
 	}
 }
 @media screen and (max-width: 991px) {

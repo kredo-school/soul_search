@@ -24,6 +24,10 @@ class Tag extends Model
         return $this->hasMany(UserTag::class);
     }
 
+    public function isRecent(){
+        return $this->userTag()->where('last_access')->exists();
+    }
+
     public function isMain(){
         return $this->userTag()->where('tag_category', config('enums')['tag_category']['main'])->exists();
     }

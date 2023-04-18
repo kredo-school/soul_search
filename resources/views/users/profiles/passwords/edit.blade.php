@@ -66,7 +66,7 @@
 
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="password" name="current_password" class="form-control">
+                            <input type="password" name="current_password" class="form-control" required>
                             @if($errors->any())
                             {!! implode('', $errors->all('<div style="color:red">:message</div>')) !!}
                             @endif
@@ -78,10 +78,11 @@
                             @endif
                         </div>
                         <div class="col">
-                            <input type="password" name="new_password" class="form-control">
+                            <input type="password" name="new_password" class="form-control" required>
                         </div>
                         <div class="col">
-                            <input type="password" name="new_password_confirmation" class="form-control"></div>
+                            <input type="password" name="new_password_confirmation" class="form-control" required>
+                        </div>
                     </div>
 
                     <div class="mb-4 row">

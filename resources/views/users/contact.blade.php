@@ -21,7 +21,7 @@
                             <div class="mt-3 row justify-content-center">
                                 <div class="col-md-9">
                                     <label for="message" class="form-label mt-3">message</label>
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="4">{{ old('message') }}</textarea>
+                                    <textarea name="message" class="form-control" id="message" cols="30" rows="4" required>{{ old('message') }}</textarea>
                                     @error('message')
                                         <p class="text-danger small">{{ $message }}</p>
                                     @enderror

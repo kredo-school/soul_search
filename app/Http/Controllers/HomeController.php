@@ -2,13 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Chat;
-use App\Models\User;
 use App\Models\Tag;
-use App\Models\UserTag;
-
 class HomeController extends Controller
 {
     /**
@@ -17,12 +11,6 @@ class HomeController extends Controller
      * @return void
      *
      */
-    private $chat;
-    private $user;
-    private $tag;
-    private $user_tag;
-
-
     /**
      * Show the application dashboard.
      *

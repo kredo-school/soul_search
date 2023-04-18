@@ -51,9 +51,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('chats/{tag}/store', [ChatController::class, 'store'])->name('chats.store');
 
     #LIKE
-    Route::get('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');
-    Route::post('/like/{chat_id}/store', [LikeController::class, 'store'])->name('chat.like.store');
-    Route::delete('/like/{chat_id}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
+    Route::get('/like/{chat}/store', [LikeController::class, 'store'])->name('chat.like.store');
+    Route::post('/like/{chat}/store', [LikeController::class, 'store'])->name('chat.like.store');
+    Route::delete('/like/{chat}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
 
     #Profile(User)
     Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);

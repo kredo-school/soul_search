@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use App\Models\Tag;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -12,9 +11,6 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     const LOCAL_STORAGE_FOLDER = 'public/images/';
-    private $chat;
-    private $tag;
-    private $user;
 
     public function store(Tag $tag, Request $request){
         $request->validate([

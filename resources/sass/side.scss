@@ -1,17 +1,24 @@
 
-/* hide when the display width is <= 1000px */
-@media screen and (max-width: 1000px) {
-	.hide-1000 {
+/* hide when the display width is < 992px */
+@media screen and (min-width: 992px) {
+	.hide-992 {
+		display: block;
+	}
+}
+@media screen and (max-width: 991px) {
+	.hide-992 {
 		display: none;
 	}
 }
 
-/* show when the display width is <= 1000px */
-.show-1000 {
-    display: none;
+/* show when the display width is < 992px */
+@media screen and (max-width: 992px) {
+	.show-992 {
+		display: block;
+	}
 }
-@media screen and (max-width: 1000px) {
-	.show-1000 {
+@media screen and (max-width: 991px) {
+	.show-992 {
 		display: block;
 	}
 }
@@ -29,7 +36,7 @@
 	width: 150px;
     height: 100%;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 992px) {
 	.ss-sidebar {
         width: 45px;
 	}
@@ -74,7 +81,7 @@ html, body, .container-fluid, .row {
     bottom: 20px;
     left: 20px;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 992px) {
 	.login-icon {
 		left: 5px;
 	}

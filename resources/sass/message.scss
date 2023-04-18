@@ -83,20 +83,19 @@
 }
 
 /* width of message list*/
+.message-list{
+    .message-selected {
+        background-color: #F4F7FC;
+    }
+}
 @media screen and (min-width: 993px) {
     .message-list {
         width: 265px;
-        .message-selected {
-            background-color: #F4F7FC;
-        }
     }
 }
 @media screen and (max-width: 992px) {
 	.message-list {
 		width: 65px;
-        .message-selected {
-            background-color: #F4F7FC;
-        }
 	}
 }
 

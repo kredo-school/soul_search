@@ -12,9 +12,9 @@
 }
 
 /* show when the display width is < 992px */
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 992px) {
 	.show-992 {
-		display: block;
+		display: none;
 	}
 }
 @media screen and (max-width: 991px) {

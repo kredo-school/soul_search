@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col pt-0 ps-2 mb-2">
-        <a class="shadow-none text-decoration-none float-{{$position}}" type="button" id="dropdownMenuButtonMsg{{$id}}" data-bs-toggle="dropdown">
-            <span class="btn btn-sm btn-{{$color}} px-3 rounded-pill">{{$text}}</span>
+        <a class="shadow-none text-decoration-none me-2 float-{{$position}}" type="button" id="dropdownMenuButtonMsg{{$id}}" data-bs-toggle="dropdown">
+            <span class="btn btn-sm btn-{{$color}} px-3 message-text">{{$text}}</span>
             @if($user_message->text_edited)
                 <div>
                     <span class="text-muted text-vsm float-{{$position}}">edited</span>

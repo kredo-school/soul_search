@@ -1,3 +1,14 @@
+/* set message box height */
+.message-box {
+    height: 100vh;
+    width: 100%;
+}
+
+/* set container height */
+.message-container {
+    height: 100%;
+}
+
 .icon-sm{
     font-size: 3rem;
 }
@@ -22,14 +33,26 @@
     height: 100px;
 }
 
-.footer {
+.message-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+
+.message-footer {
     position: fixed;
     bottom: 0;
     right: 0;
     height: 50px;
-    width: 69%;
-    background-color: #fff;
 }
+
+.message-text {
+    border-radius: 1rem;
+    max-width: 500px;
+    text-align: left;
+  }
 
 .text-vsm {
     font-size: .7rem;
@@ -43,4 +66,55 @@
 /* Hide input:file for image */
 .form-image {
     display: none;
+}
+
+/* remove auto margin and padding */
+.col, .col-auto {
+    margin: 0;
+    padding: 0;
+}
+
+/* hide overflow message on the message list */
+.latest-message {
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+    width: 150px;
+}
+
+/* width of message list*/
+@media screen and (min-width: 992px) {
+    .message-list {
+        width: 265px;
+        .message-selected {
+            background-color: #F4F7FC;
+        }
+    }
+}
+@media screen and (max-width: 991px) {
+	.message-list {
+		width: 65px;
+        .message-selected {
+            background-color: #F4F7FC;
+        }
+	}
+}
+
+/* hide when the display width is < 992px */
+@media screen and (min-width: 992px) {
+	.hide-992 {
+		display: block;
+	}
+}
+@media screen and (max-width: 991px) {
+	.hide-992 {
+		display: none;
+	}
+}
+
+/* image preview position */
+.image-preview {
+    position: absolute;
+    right: 10px;
+    bottom: 40px;
 }

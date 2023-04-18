@@ -11,6 +11,8 @@ class Chat extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $guarded = [];
+
     public function user(){
         return $this->belongsTo(User::class)->withTrashed();
     }
@@ -20,10 +22,10 @@ class Chat extends Model
     }
 
     public function likes(){
-        return $this->hasMany(Like::class);
+        return $this->belongsToMany(User::class, 'chat_likes', 'chat_id', 'user_id');
     }
 
     public function isLiked(){
-        return $this->likes()->where('user_id', Auth::user()->id)->exists();
+        return $this->likes()->wherePivot('user_id', Auth::user()->id)->exists();
     }
 }

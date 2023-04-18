@@ -11,7 +11,7 @@
         @if(Auth::user()->userTag()->exists())
             @auth
             <!-- Tags' bar -->
-            <div class="col-2 bg-white tag-bar border">
+            <div class="col-2 ps-1 bg-white tag-bar border">
                 <div class="mt-5">
                     <p class="text-dark fw-bold mb-1 ms-3 tag-name">Recent</p>
                     <ul class="nav nav-pills flex-column px-0">

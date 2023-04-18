@@ -38,7 +38,7 @@
         <div class="row" style="height: 100%">
             <div class="col-2 p-0 bg-white">
                 {{-- side bar --}}
-                <div class="ss-sidebar">
+                <div class="ss-sidebar shadow">
                     @include('layouts.side')
                 </div>
             </div>

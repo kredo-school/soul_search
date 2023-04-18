@@ -1,6 +1,6 @@
 <a href="#" class="text-decoration-none ms-3">
-    <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-3 hide-1000">
-    <img src="{{ asset('images/logo-s.svg')}}" class="show-1000">
+    <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-3 hide-992">
+    <img src="{{ asset('images/logo-s.svg')}}" class="show-992">
 </a>
 <ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
 
@@ -9,14 +9,14 @@
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-house text-orange"></i>
-                <span class="text-dark ms-3 hide-1000">Home</span>
+                <span class="text-dark ms-3 hide-992">Home</span>
             </a>
         </li>
     @else
         <li class="nav-item py-2">
             <a href="{{ route('index') }}" class="flex-fill nav-link link-dark" title="Home">
                 <i class="fa-solid fa-house"></i>
-                <span class="text-dark ms-3 hide-1000">Home</span>
+                <span class="text-dark ms-3 hide-992">Home</span>
             </a>
         </li>
     @endif
@@ -26,14 +26,14 @@
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('profiles.index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-user text-orange"></i>
-                <span class="text-dark ms-3 hide-1000">My Profile</span>
+                <span class="text-dark ms-3 hide-992">My Profile</span>
             </a>
         </li>
     @else
         <li class="nav-item py-2">
             <a href="{{ route('profiles.index') }}" class="flex-fill nav-link link-dark" title="My Profile">
                 <i class="fa-solid fa-user"></i>
-                <span class="text-dark ms-3 hide-1000">My Profile</span>
+                <span class="text-dark ms-3 hide-992">My Profile</span>
             </a>
         </li>
     @endif
@@ -43,14 +43,14 @@
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('messages.show', ['user' => Auth::id()]) }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-comment-dots text-orange"></i>
-                <span class="text-dark ms-3 hide-1000">Message</span>
+                <span class="text-dark ms-3 hide-992">Message</span>
             </a>
         </li>
     @else
         <li class="nav-item py-2">
             <a href="{{ route('messages.show', ['user' => Auth::id()]) }}" class="flex-fill nav-link link-dark" title="Message">
                 <i class="fa-solid fa-comment-dots"></i>
-                <span class="text-dark ms-3 hide-1000">Message</span>
+                <span class="text-dark ms-3 hide-992">Message</span>
             </a>
         </li>
     @endif
@@ -60,14 +60,14 @@
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('search.index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-magnifying-glass text-orange"></i>
-                <span class="text-dark ms-3 hide-1000">Search</span>
+                <span class="text-dark ms-3 hide-992">Search</span>
             </a>
         </li>
     @else
         <li class="nav-item py-2">
             <a href="{{ route('search.index') }}" class="flex-fill nav-link link-dark" title="Search">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <span class="text-dark ms-3 hide-1000">Search</span>
+                <span class="text-dark ms-3 hide-992">Search</span>
             </a>
         </li>
     @endif
@@ -77,14 +77,14 @@
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('contact.index') }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-circle-question text-orange"></i>
-                <span class="text-dark ms-3 hide-1000">Contact Us</span>
+                <span class="text-dark ms-3 hide-992">Contact Us</span>
             </a>
         </li>
     @else
         <li class="nav-item py-2">
             <a href="{{ route('contact.index') }}" class="flex-fill nav-link link-dark" title="Contact Us">
                 <i class="fa-solid fa-circle-question"></i>
-                <span class="text-dark ms-3 hide-1000">Contact Us</span>
+                <span class="text-dark ms-3 hide-992">Contact Us</span>
             </a>
         </li>
     @endif
@@ -92,7 +92,7 @@
 
 <div class="dropdown login-icon">
     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-unlock hide-1000"></i>
+        <i class="fa-solid fa-unlock hide-992"></i>
     </button>
     <ul class="dropdown-menu">
 

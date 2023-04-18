@@ -23,24 +23,31 @@
 	}
 }
 
-/* sidebar display setting */
+/* sidebar display settings */
 .ss-container {
 	display: flex;
 	width: 100%;
     height: 100vh;
 }
+
 .ss-row {
     height: 100%;
 }
+
 .ss-sidebar {
-	width: 150px;
     height: 100%;
 }
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 992px) {
+	.ss-sidebar {
+        width: 150px;
+	}
+}
+@media screen and (max-width: 991px) {
 	.ss-sidebar {
         width: 45px;
 	}
 }
+
 .sidebar-fix {
     position: fixed;
     top: 0;
@@ -49,11 +56,13 @@
     height: 100vh;
     background-color: white;
 }
+
 .ss-main {
 	width: 100%;
     height: 100%;
 	margin:0;
 }
+
 .sidebar-selected {
     background-color: #F4F7FC;
 }
@@ -79,9 +88,13 @@ html, body, .container-fluid, .row {
 .login-icon {
     position: absolute;
     bottom: 20px;
-    left: 20px;
 }
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 992px) {
+	.login-icon {
+		left: 20px;
+	}
+}
+@media screen and (max-width: 991px) {
 	.login-icon {
 		left: 5px;
 	}

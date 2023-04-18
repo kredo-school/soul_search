@@ -9,7 +9,7 @@
 @section('content')
 <div class="d-flex justify-content-center p-0">
     <!-- Users -->
-    <div class="message-list bg-white tag-bar border-start border-end">
+    <div class="message-list bg-white border-start border-end">
         <ul class="nav nav-pills flex-column px-0">
             @foreach($all_users as $a_user)
                 @php

@@ -109,9 +109,9 @@
             @enderror
 
             {{-- image preview from "send message" below --}}
-            <figure id="figure" style="display: none" class="position-absolute bottom-0 end-0">
-                <figcaption class="me-4">Image Preview</figcaption>
-                <img src="" alt="your image" class="me-3" id="figureImage" style="height: 100px">
+            <figure id="figure" style="display: none" class="image-preview">
+                <figcaption>Image Preview</figcaption>
+                <img src="" alt="your image" id="figureImage" style="height: 100px">
             </figure>
 
         </div>

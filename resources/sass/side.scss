@@ -1,28 +1,4 @@
 
-/* hide when the display width is < 992px */
-@media screen and (min-width: 992px) {
-	.hide-992 {
-		display: inline;
-	}
-}
-@media screen and (max-width: 991px) {
-	.hide-992 {
-		display: none;
-	}
-}
-
-/* show when the display width is < 992px */
-@media screen and (min-width: 992px) {
-	.show-992 {
-		display: none;
-	}
-}
-@media screen and (max-width: 991px) {
-	.show-992 {
-		display: inline;
-	}
-}
-
 /* sidebar display settings */
 .ss-container {
 	display: flex;

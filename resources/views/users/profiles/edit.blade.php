@@ -38,14 +38,14 @@
                 </div>
                 <div class="col">
                     <label for="username" class="form-label">Username</label>
-                    <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}">
+                    <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}" required>
                     @error('username')
                         <p class="text-danger small">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col">
                     <label for="email" class="form-label">Email</label>
-                    <input tyoe="text" name="email" class="form-control" id="email" value="{{ old('email', $user->email) }}">
+                    <input tyoe="text" name="email" class="form-control" id="email" value="{{ old('email', $user->email) }}" required>
                     @error('email')
                         <p class="text-danger small">{{ $message }}</p>
                     @enderror

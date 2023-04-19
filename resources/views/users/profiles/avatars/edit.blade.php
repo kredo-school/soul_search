@@ -27,7 +27,7 @@
                 @method('PATCH')
 
                 <div class="mb-3">
-                    <input type="file" class="form-control" id="avatar" name="avatar" aria-describedby="image-info">
+                    <input type="file" class="form-control" id="avatar" name="avatar" aria-describedby="image-info" accept="image/*" required>
                     <div class="text-muted text-sm">Acceptable formats: jpeg, jpg, png, gif</div>
                     <div class="text-muted text-sm">Max file size is 1048kb</div>
                     @error('avatar')

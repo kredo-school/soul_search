@@ -7,101 +7,124 @@
 @endsection
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md">
 
-        <h2 class="h5 mt-3">Edit Profile</h2>
+<div class="profile-container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-md">
 
-        <form action="{{ route('profiles.update', Auth::id()) }}" method="post">
-            @csrf
-            @method('PATCH')
+            <h2 class="h5 mt-3">Edit Profile</h2>
 
-            <div class="mb-3 row">
-                <div class="col">
-                    <div class="dropdown">
-                        <button class="btn shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{-- avatar --}}
-                            @if ($user->avatar)
-                                <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
-                            @else
-                                <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
-                            @endif
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="ps-3">
-                                <a href="{{ route('avatars.edit', Auth::id()) }}" class="text-decoration-none text-orange">
-                                    <i class="fa-solid fa-pencil"></i> Edit Image
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col">
-                    <label for="username" class="form-label">Username</label>
-                    <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}" required>
-                    @error('username')
-                        <p class="text-danger small">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="email" class="form-label">Email</label>
-                    <input tyoe="text" name="email" class="form-control" id="email" value="{{ old('email', $user->email) }}" required>
-                    @error('email')
-                        <p class="text-danger small">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+            <form action="{{ route('profiles.update', Auth::id()) }}" method="post">
+                @csrf
+                @method('PATCH')
 
-            <div class="mb-3 row">
-                <label for="tag_name" class="form-label">Your Main Tags(up to 3)</label>
-                @foreach ($tags as $tag)
+                <div class="mb-3 row">
                     <div class="col">
-                        <input name="tag_name[]" type="text" class="form-control" id="tag_name[]" value="{{ old('tag_name[]', $tag->name) }}">
-                        <input name="old_tag_id[]" type="hidden" value="{{ $tag->id }}">
-                    </div>
-                @endforeach
-                @if ($tag_count < 3)
-                    @for ($i = 0; $i < 3 - $tag_count; $i++)
-                        <div class="col">
-                            <input name="tag_name[]" type="text" class="form-control" id="tag_name[]" value="{{ old('tag_name[]') }}">
+                        <div class="dropdown">
+                            <button class="btn shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{-- avatar --}}
+                                @if ($user->avatar)
+                                    <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
+                                @else
+                                    <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
+                                @endif
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="ps-3">
+                                    <a href="{{ route('avatars.edit', Auth::id()) }}" class="text-decoration-none text-orange">
+                                        <i class="fa-solid fa-pencil"></i> Edit Image
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                    @endfor
-                @endif
-                <input name="old_tag_count" type="hidden" value="{{ $tag_count }}">
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <label for="current_password" class="form-label">Current Password</label>
+                    </div>
+                    <div class="col">
+                        <label for="username" class="form-label">Username</label>
+                        <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}" required>
+                        @error('username')
+                            <p class="text-danger small">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="col">
+                        <label for="email" class="form-label">Email</label>
+                        <input tyoe="text" name="email" class="form-control" id="email" value="{{ old('email', $user->email) }}" required>
+                        @error('email')
+                            <p class="text-danger small">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
-                <div class="col"></div>
-                <div class="col"></div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <input type="text" name="current_password" class="form-control" id="current_password" value="••••••••" disabled>
+                <div class="mb-3 row">
+                    <label for="m_tag_str" class="form-label">Your Main Tags (at least 1)</label>
+                    @php
+                        $m_tag_str       = '';
+                        $old_m_tag_ids   = [];
+                        $old_m_tag_count = 0;
+                        foreach($main_tags as $main_tag){
+                            $m_tag_str      .= '#' . $main_tag . ' ';
+                            $old_m_tag_ids[] = $main_tag->id;
+                            $old_m_tag_count++;
+                        }
+                    @endphp
+                    <div class="col">
+                        <input name="m_tag_str" type="text" class="form-control" id="m_tag_str" value="{{ old('m_tag_str', $m_tag_str) }}" required>
+                        <input name="old_m_tag_ids" type="hidden" value="{{ $old_m_tag_ids }}">
+                        <input name="old_m_tag_count" type="hidden" value="{{ $old_m_tag_count }}">
+                    </div>
                 </div>
-                <div class="col">
-                    <a href="{{ route('passwords.edit', Auth::id()) }}" type="button" class="btn btn-warning px-3">Change Password</a>
+
+                <div class="mb-3 row">
+                    <label for="fav_tag_string" class="form-label">Your Favorite Tags</label>>
+                    @php
+                        $f_tag_str       = '';
+                        $old_f_tag_ids   = [];
+                        $old_f_tag_count = 0;
+                        foreach($fav_tags as $fav_tag){
+                            $f_tag_str      .= '#' . $fav_tag . ' ';
+                            $old_f_tag_ids[] = $fav_tag->id;
+                            $old_f_tag_count++;
+                        }
+                    @endphp
+                    <div class="col">
+                        <textarea name="f_tag_str" class="form-control" id="f_tag_str" cols="30" rows="2">{{ old('f_tag_str', $f_tag_str) }}</textarea>
+                        <input name="old_f_tag_ids" type="hidden" value="{{ $old_f_tag_ids }}">
+                        <input name="old_f_tag_count" type="hidden" value="{{ $old_f_tag_count }}">
+                    </div>
                 </div>
-                <div class="col"></div>
-            </div>
 
-            <div class="mb-4 row">
-                <div class="col">
-                    <label for="introduction" class="form-label">Introduction</label>
-                    <textarea name="introduction" class="form-control" id="introduction" cols="30" rows="2">{{ old('introduction', $user->introduction) }}</textarea>
-                    @error('introduction')
-                        <p class="text-danger small">{{ $message }}</p>
-                    @enderror
+                <div class="row">
+                    <div class="col">
+                        <label for="current_password" class="form-label">Current Password</label>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col"></div>
                 </div>
-            </div>
 
-            <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
-            <a type="button" href="{{ route('profiles.index') }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                <div class="row mb-3">
+                    <div class="col">
+                        <input type="text" name="current_password" class="form-control" id="current_password" value="••••••••" disabled>
+                    </div>
+                    <div class="col">
+                        <a href="{{ route('passwords.edit', Auth::id()) }}" type="button" class="btn btn-warning px-3">Change Password</a>
+                    </div>
+                    <div class="col"></div>
+                </div>
 
-        </form>
+                <div class="mb-4 row">
+                    <div class="col">
+                        <label for="introduction" class="form-label">Introduction</label>
+                        <textarea name="introduction" class="form-control" id="introduction" cols="30" rows="2">{{ old('introduction', $user->introduction) }}</textarea>
+                        @error('introduction')
+                            <p class="text-danger small">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
+                <a type="button" href="{{ route('profiles.index') }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+
+            </form>
+        </div>
     </div>
 </div>
 

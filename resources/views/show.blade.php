@@ -55,7 +55,7 @@
         @endauth
         <!-- Chats -->
         <div class="col p-0" style="height: 96%">
-            @if ($fav_tag->isFav())
+            @if (isset($fav_tag))
                 <!-- Header -->
                 <div class="bg-white py-3 border border-top-0">
                     <i class="fa-regular fa-hashtag fa-2x ps-5"></i>

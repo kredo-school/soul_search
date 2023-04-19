@@ -58,36 +58,36 @@
                     <label for="m_tag_str" class="form-label">Your Main Tags (at least 1)</label>
                     @php
                         $m_tag_str       = '';
-                        $old_m_tag_ids   = [];
                         $old_m_tag_count = 0;
-                        foreach($main_tags as $main_tag){
-                            $m_tag_str      .= '#' . $main_tag . ' ';
-                            $old_m_tag_ids[] = $main_tag->id;
-                            $old_m_tag_count++;
-                        }
                     @endphp
+                    @foreach ($main_tags as $main_tag)
+                        @php
+                            $m_tag_str .= '#' . $main_tag->tag->name . ' ';
+                            $old_m_tag_count++;
+                        @endphp
+                        <input name="old_m_tag_ids[]" type="hidden" value="{{ $main_tag->tag->id }}">
+                    @endforeach
+                    <input name="old_m_tag_count" type="hidden" value="{{ $old_m_tag_count }}">
                     <div class="col">
                         <input name="m_tag_str" type="text" class="form-control" id="m_tag_str" value="{{ old('m_tag_str', $m_tag_str) }}" required>
-                        <input name="old_m_tag_ids" type="hidden" value="{{ $old_m_tag_ids }}">
-                        <input name="old_m_tag_count" type="hidden" value="{{ $old_m_tag_count }}">
                     </div>
                 </div>
 
                 <div class="mb-3 row">
-                    <label for="fav_tag_string" class="form-label">Your Favorite Tags</label>>
+                    <label for="fav_tag_string" class="form-label">Your Favorite Tags</label>
                     @php
                         $f_tag_str       = '';
-                        $old_f_tag_ids   = [];
                         $old_f_tag_count = 0;
-                        foreach($fav_tags as $fav_tag){
-                            $f_tag_str      .= '#' . $fav_tag . ' ';
-                            $old_f_tag_ids[] = $fav_tag->id;
-                            $old_f_tag_count++;
-                        }
                     @endphp
+                    @foreach ($fav_tags as $fav_tag)
+                        @php
+                            $f_tag_str .= '#' . $fav_tag->tag->name . ' ';
+                            $old_f_tag_count++;
+                        @endphp
+                        <input name="old_f_tag_ids[]" type="hidden" value="{{ $fav_tag->tag->id }}">
+                    @endforeach
                     <div class="col">
                         <textarea name="f_tag_str" class="form-control" id="f_tag_str" cols="30" rows="2">{{ old('f_tag_str', $f_tag_str) }}</textarea>
-                        <input name="old_f_tag_ids" type="hidden" value="{{ $old_f_tag_ids }}">
                         <input name="old_f_tag_count" type="hidden" value="{{ $old_f_tag_count }}">
                     </div>
                 </div>

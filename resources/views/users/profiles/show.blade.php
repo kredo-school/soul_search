@@ -27,9 +27,9 @@
                         </div>
                         <div>
                             {{-- tags --}}
-                            @forelse($tags as $tag)
+                            @forelse($main_tags as $main_tag)
                                 <a href="#" class="text-decoration-none">
-                                    #{{ $tag->name }}
+                                    #{{ $main_tag->tag->name }}
                                 </a>
                                 &nbsp;
                             @empty

@@ -1,54 +1,61 @@
-@if ($post->trashed())
-{{--  Activate  --}}
-<div class="modal fade" id="activate-user-{{ $post->id }}">
+{{--  Unhide Post  --}}
+<div class="modal fade" id="unhide-post-{{ $post->id }}">
     <div class="modal-dialog">
-        <div class="modal-content border-success">
-            <div class="modal-header border-success">
-                <h3 class="h5 modal-title text-success">
-                    <i class="fa-solid fa-user-check"></i> Activate User
-                </h3>
+        <div class="modal-content border-primary">
+            <div class="modal-header border-primary">
+                <h5 class="modal-title text-primary">
+                    <i class="fa-solid fa-eye">
+                        Unhide Post
+                    </i>
+                </h5>
             </div>
             <div class="modal-body">
-                Are you sure you want to Activate <span class="fw-bold">{{ $post->username }}</span>
+                <p>Are you sure you want to unhide this post?</p>
+                <div class="mt-3">
+                    <img src="{{ asset('/storage/images/' . $post->image) }}" alt="{{ $post->image }}" class="admin-posts-img">
+                    <p class="mt-1 text-muted">{{ $post->text }}</p>
+                </div>
             </div>
             <div class="modal-footer border-0">
-                <form action="{{ route('admin.users.activate', $post->id) }}" method="post">
+                <form action="{{ route('admin.posts.unhide', $post->id) }}" method="post">
                     @csrf
                     @method('PATCH')
 
-                    <button type="button" class="btn btn-outline-success btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success btn-sm">Activate</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Unhide Post</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@else
-{{--  Deactivate  --}}
-<div class="modal fade" id="deactivate-user-{{ $post->id }}">
+
+{{-- Hide Post --}}
+<div class="modal fade" id="hide-post-{{ $post->id }}">
     <div class="modal-dialog">
         <div class="modal-content border-danger">
             <div class="modal-header border-danger">
-                <h3 class="h5 modal-title text-danger">
-                    <i class="fa-solid fa-user-slash"></i> Deactivate User
-                </h3>
+                <h5 class="modal-title text-danger">
+                    <i class="fa-solid fa-eye-slash">
+                        Hide Post
+                    </i>
+                </h5>
             </div>
             <div class="modal-body">
-                Are you sure you want to deactivate <span class="fw-bold">{{ $post->username }}</span>
+                <p>Are you sure you want to hide this post?</p>
+                <div class="mt-3">
+                    <img src="{{ asset('/storage/images/' . $post->image) }}" alt="{{ $post->image }}" class="admin-posts-img">
+                    <p class="mt-1 text-muted">{{ $post->text }}</p>
+                </div>
             </div>
             <div class="modal-footer border-0">
-                <form action="{{ route('admin.users.deactivate', $post->id) }}" method="post">
+                <form action="{{ route('admin.posts.hide', $post) }}" method="post">
                     @csrf
                     @method('DELETE')
 
                     <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Deactivate</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Hide Post</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@endif
-
-
-

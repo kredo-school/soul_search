@@ -48,7 +48,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <span class="badge bg-secondary bg-opacity-50">{{ $post->text }}</span>
+                                        <span class="hash-link">{{ $post->text }}</span>
                                     </td>
                                     <td>
 
@@ -108,4 +108,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    const setHashtagLink= (selector)=>{
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element =>{
+            element.innerHTML = element.innerHTML.replace(/#(\w+)/g, '<a href="#$1" class="text-decoration-none">#$1</a>');
+        });
+    }
+    setHashtagLink('.hash-link');
+</script>
+
 @endsection

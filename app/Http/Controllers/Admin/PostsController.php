@@ -18,13 +18,13 @@ class PostsController extends Controller
         return view('admin.posts.index')->with('all_posts', $all_posts);
     }
 
-    public function deactivate(Post $post){
+    public function hide(Post $post){
         $post->delete();
         return redirect()->back();
     }
 
-    public function activate(Post $post, $id){
-        $user->onlyTrashed()->findOrFail($id)->restore();
+    public function unhide(Post $post, $id){
+        $post->onlyTrashed()->findOrFail($id)->restore();
         return redirect()->back();
     }
 }

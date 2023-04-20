@@ -1,5 +1,5 @@
 .display-user {
-    width: 80%;
+    width: 100%;
 }
 
 .cell-padding {
@@ -103,4 +103,10 @@ ul {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #FFB84D;
   --bs-btn-disabled-border-color: #FFB84D;
+}
+
+.admin-posts-img, .delete-post-img{
+    width: 7rem;
+    height: 7rem;
+    object-fit:cover;
 }

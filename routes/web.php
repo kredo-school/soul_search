@@ -94,6 +94,6 @@ Route::group(['middleware' => 'auth'], function(){
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
     #USERS
     Route::get('/posts', [PostsController::class, 'index'])->name('posts');
-    Route::delete('/users/{user}/deactivate', [PostsController::class, 'deactivate'])->name('users.deactivate');
-    Route::patch('/users/{id}/activate', [PostsController::class, 'activate'])->name('users.activate');
+    Route::delete('/posts/{post}/hide', [PostsController::class, 'hide'])->name('posts.hide');
+    Route::patch('/posts/{id}/unhide', [PostsController::class, 'unhide'])->name('posts.unhide');
 });

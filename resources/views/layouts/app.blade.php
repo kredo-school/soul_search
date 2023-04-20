@@ -43,9 +43,9 @@
                     @include('layouts.side')
                 </div>
             </div>
-            <div class="col-10 p-0" style="height: 100%">
-                <div class="ss-main" style="height: 100%">
-                    @endif
+            <div class="col p-0" style="height: 100%">
+                <div class="ss-main">
+    @endif
 
                     {{-- content --}}
                         <div class="container-fluid p-0" style="height: 100%">

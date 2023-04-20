@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin: Users')
+@section('title', 'Admin: Posts')
 
 @section('styles')
 <link href="{{ mix('css/admin_posts.css') }}" rel="stylesheet">
@@ -21,9 +21,9 @@
                 <div class="container-fluid p-0" style="height: 100%">
                     <div class="row ps-5 mt-5">
                         @auth
-                        <h1 class="mb-3 p-0 mt-5 text-heigt d-flex align-items-end">Users</h1>
+                        <h1 class="mb-3 p-0 mt-5 text-heigt d-flex align-items-end">Posts</h1>
 
-                            <form action="{{ route('admin.users') }}">
+                            <form action="{{ route('admin.posts') }}">
                             </form>
 
                         @endauth
@@ -31,72 +31,76 @@
                             <thead class="small bg-orange">
                                 <tr>
                                     <th></th>
-                                    <th class="ps-5">Username</th>
-                                    <th class="cell-padding">Email</th>
+                                    <th class="ps-5">Tag/Text</th>
+                                    <th class="cell-padding">Username</th>
                                     <th class="cell-padding">Created at</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($all_users as $user)
-                                    <tr>
-                                        <td>
-                                            @if ($user->avatar)
-                                                <img src="{{ asset('/storage/avatars/' . $user->avatar) }}" alt="{{ $user->avatar }}" class="rounded-circle d-block mx-auto avatar-md">
-                                            @else
-                                                <i class="fa-solid fa-circle-user text-secondary d-block text-center icon-md"></i>
-                                            @endif
-                                        </td>
-                                        <td class="ps-5">
-                                            <a href="#" class="text-decoration-none text-dark">{{ $user->username }}</a>
-                                        </td>
-                                        <td class="cell-padding">
-                                            {{ $user->email }}
-                                        </td>
-                                        <td class="cell-padding">
-                                            {{ $user->created_at }}
-                                        </td>
-                                        <td>
-                                            @if ($user->trashed())
-                                                <i class="fa-solid fa-circle text-secondary"></i>&nbsp; Inactive
-                                            @else
-                                                <i class="fa-solid fa-circle text-success"></i>&nbsp; Active
-                                            @endif
+                                @forelse ($all_posts as $post)
+                                <tr>
 
-                                        </td>
-                                        <td>
-                                            @if (Auth::user()->id !== $user->id)
-                                                <div class="dropdown">
-                                                    <button class="btn btn-sm" data-bs-toggle="dropdown">
-                                                        <i class="fa-solid fa-ellipsis"></i>
+                                    <td>
+                                        <a href="{{ route('profiles.show', $post->user->id) }}">
+                                            <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->image }}" class="d-block mx-auto avatar-md">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary bg-opacity-50">{{ $post->text }}</span>
+                                    </td>
+                                    <td>
+
+                                            {{ $post->user->username }}
+
+                                    </td>
+                                    <td>
+                                        {{ $post->created_at }}
+                                    </td>
+                                    <td>
+                                        @if ($post->trashed())
+                                        <i class="fa-solid fa-circle-minus text-secondary"></i>&nbsp; Hidden
+                                        @else
+                                        <i class="fa-solid fa-circle text-primary"></i>&nbsp; Visible
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm" data-bs-toggle="dropdown">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                </button>
+                                                @if ($post->trashed())
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#unhide-post-{{ $post->id }}">
+                                                        <i class="fa-solid fa-eye"></i> Unhide Post {{ $post->id }}
                                                     </button>
-                                                    @if ($user->trashed())
-                                                    <div class="dropdown-menu">
-                                                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#activate-user-{{ $user->id }}">
-                                                            <i class="fa-solid fa-user-check"></i> Activate {{ $user->username }}
-                                                        </button>
-                                                    </div>
-                                                    @else
-                                                    <div class="dropdown-menu">
-                                                        <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deactivate-user-{{ $user->id }}">
-                                                            <i class="fa-solid fa-user-slash"></i> Deactivate {{ $user->username }}
-                                                        </button>
-                                                    </div>
-                                                    @endif
-
                                                 </div>
-                                                @include('admin.posts.modal.status')
+                                                @else
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#hide-post-{{ $post->id }}">
+                                                        <i class="fa-solid fa-eye-slash"></i> Hide Post {{ $post->id }}
+                                                    </button>
+                                                </div>
                                                 @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
+
+                                            </div>
+
+                                        </td>
+                                     </tr>
+                                     @include('admin.posts.modal.status')
+                                 @empty
+                                     <tr>
+                                        <td colspan="7" class="lead text-muted text-center">No posts found.</td>
+                                     </tr>
+                                 @endforelse
                                 </tbody>
                             </table>
 
 
                         <div class="p-0">
-                            {{ $all_users->appends(request()->query())->links() }}
+                            {{ $all_posts->appends(request()->query())->links() }}
                         </div>
                     </div>
                 </div>

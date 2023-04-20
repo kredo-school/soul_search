@@ -1,6 +1,6 @@
-@if ($user->trashed())
+@if ($post->trashed())
 {{--  Activate  --}}
-<div class="modal fade" id="activate-user-{{ $user->id }}">
+<div class="modal fade" id="activate-user-{{ $post->id }}">
     <div class="modal-dialog">
         <div class="modal-content border-success">
             <div class="modal-header border-success">
@@ -9,10 +9,10 @@
                 </h3>
             </div>
             <div class="modal-body">
-                Are you sure you want to Activate <span class="fw-bold">{{ $user->username }}</span>
+                Are you sure you want to Activate <span class="fw-bold">{{ $post->username }}</span>
             </div>
             <div class="modal-footer border-0">
-                <form action="{{ route('admin.users.activate', $user->id) }}" method="post">
+                <form action="{{ route('admin.users.activate', $post->id) }}" method="post">
                     @csrf
                     @method('PATCH')
 
@@ -25,7 +25,7 @@
 </div>
 @else
 {{--  Deactivate  --}}
-<div class="modal fade" id="deactivate-user-{{ $user->id }}">
+<div class="modal fade" id="deactivate-user-{{ $post->id }}">
     <div class="modal-dialog">
         <div class="modal-content border-danger">
             <div class="modal-header border-danger">
@@ -34,10 +34,10 @@
                 </h3>
             </div>
             <div class="modal-body">
-                Are you sure you want to deactivate <span class="fw-bold">{{ $user->username }}</span>
+                Are you sure you want to deactivate <span class="fw-bold">{{ $post->username }}</span>
             </div>
             <div class="modal-footer border-0">
-                <form action="{{ route('admin.users.deactivate', $user->id) }}" method="post">
+                <form action="{{ route('admin.users.deactivate', $post->id) }}" method="post">
                     @csrf
                     @method('DELETE')
 

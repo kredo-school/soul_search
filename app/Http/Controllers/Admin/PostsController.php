@@ -4,22 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Post;
 
 class PostsController extends Controller
 {
-    public function index(Request $request, User $user)
+    public function index(Request $request, Post $post)
     {
-        $all_users = $user->where('username','like', '%' . $request->search . '%')->withTrashed()->latest()->paginate(5);
-        return view('admin.posts.index')->with('all_users', $all_users)->with('search', $request->search);
+        $all_posts = $post
+        ->where('created_at')
+        ->orWhere('text', 'like', '%')
+        ->withTrashed()->latest()->paginate(5);
+
+        return view('admin.posts.index')->with('all_posts', $all_posts);
     }
 
-    public function deactivate(User $user){
-        $user->delete();
+    public function deactivate(Post $post){
+        $post->delete();
         return redirect()->back();
     }
 
-    public function activate(User $user, $id){
+    public function activate(Post $post, $id){
         $user->onlyTrashed()->findOrFail($id)->restore();
         return redirect()->back();
     }

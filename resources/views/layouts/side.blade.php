@@ -106,6 +106,14 @@
     </button>
     <ul class="dropdown-menu">
 
+        <!-- Admin Controls -->
+        @can('admin')
+            <a href="{{ route('admin.posts') }}" class="dropdown-item">
+                <i class="fa-solid fa-user-gear"></i> Admin
+            </a>
+            <hr class="dropdown-divider">
+        @endcan
+
         @guest
             @if (Route::has('login'))
                 <li class="ps-3">

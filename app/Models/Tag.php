@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 class Tag extends Model
 {
@@ -21,7 +20,7 @@ class Tag extends Model
     }
 
     public function userTag(){
-        return $this->hasMany(UserTag::class);
+        return $this->hasMany(UserTag::class)->orderByDesc('last_access');
     }
 
     public function isRecent(){

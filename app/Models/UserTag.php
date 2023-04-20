@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserTag extends Model
 {
     use HasFactory;
     protected $table='user_tags';
-    protected $fillable = ['user_id','tag_id'];
-    public $timestamps = false;
-    const CREATED_AT = 'last_access';
+    protected $fillable = ['user_id', 'tag_id', 'last_access', 'tag_category'];
+    // public $timestamps = false;
+    const UPDATED_AT = 'last_access';
 
     public function user()
     {
@@ -32,5 +33,10 @@ class UserTag extends Model
     }
     public function isFav(){
         return $this->belongsTo(User::class, config('enums')['tag_category']['favorite']);
+    }
+
+    public function updateLastAccess(){
+        $this->last_access = \Carbon\Carbon::now();
+        $this->save();
     }
 }

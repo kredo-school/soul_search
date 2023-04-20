@@ -6,7 +6,18 @@ use Illuminate\Support\Facades\Auth;
 function getRecentTags(){
     $user = Auth::user();
 
-    return $user->userTag()->with('tag')->latest()->take(3)->get();
+    // return $user->userTag()->with('tag')->latest()->take(3)->get();
+    $recent_tags = $user->userTag()
+            ->with('tag')
+            ->orderBy('last_access', 'desc')
+            ->take(3)
+            ->get();
+
+    foreach ($recent_tags as $recent_tag) {
+        $recent_tag->updateLastAccess();
+    }
+
+    return $recent_tags;
 }
 
 function getMainTags(){

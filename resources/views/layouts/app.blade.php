@@ -29,21 +29,21 @@
     @yield('styles')
 </head>
 
-<body class="back-color">
+<body>
 
     {{-- not showing in login, register, or post pages --}}
     @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*reset*') ||  request()->is('*post*')|  request()->is('*admin*'))
     @else
     <div class="ss-container">
-        <div class="row" style="height: 100%">
-            <div class="col-2 p-0 bg-white">
-                {{-- side bar --}}
-                <div class="ss-sidebar">
+        <div class="row ss-row">
+            {{-- side bar --}}
+            <div class="ss-sidebar p-0 m-0">
+                <div class="sidebar-fix m-0 p-0">
                     @include('layouts.side')
                 </div>
             </div>
-            <div class="col-10 p-0" style="height: 100%">
-                <div class="ss-main" style="height: 100%">
+            <div class="col p-0" style="height: 100%">
+                <div class="ss-main">
     @endif
 
                     {{-- content --}}

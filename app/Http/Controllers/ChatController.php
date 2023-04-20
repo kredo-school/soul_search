@@ -11,27 +11,24 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     const LOCAL_STORAGE_FOLDER = 'public/images/';
-    private $chat;
-    private $tag;
 
-    public function __construct(Chat $chat, Tag $tag){
-        $this->chat = $chat;
-        $this->tag  = $tag;
-    }
-
-
-    public function store($tag_id, Request $request){
+    public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|min:1|max:255',
             'image' => 'mimes:jpg,jpeg,png,gif|max:1048'
         ]);
 
-        #Save the chat
-        $this->chat->user_id = Auth::user()->id;
-        $this->chat->tag_id = $tag_id;
-        $this->chat->chat = $request->chat;
-        $this->chat->image = $this->saveImage($request);
-        $this->chat->save();
+        #Check if the chat has an image
+        $image = NULL;
+        if(isset($request->image)){
+            $image = $this->saveImage($request);
+        }
+
+        $tag->chats()->create([
+            'user_id' => Auth::id(),
+            'chat' => $request->chat,
+            'image' => $image
+        ]);
 
         return redirect()->back();
     }
@@ -51,10 +48,26 @@ class ChatController extends Controller
         }
     }
 
-    public function show($id){
-        $chat = $this->chat->findOrFail($id);
+    public function show(Tag $tag){
+        $recent_tags = getRecentTags();
+        $main_tags = getMainTags();
+        $fav_tags = getFavTags();
 
-        return view('home')
-        ->with('chat', $chat);
+        $tagged_chats = Chat::where('tag_id',$tag->id)->get()->filter(function($chat){
+            return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
+        });
+
+        return view('show')
+            ->with('tag', $tag)
+            ->with('tagged_chats', $tagged_chats)
+            ->with('recent_tags', $recent_tags)
+            ->with('main_tags', $main_tags)
+            ->with('fav_tags', $fav_tags);
+    }
+
+    public function destroy(Chat $chat){
+        $this->deleteImage($chat->image);
+        $chat->forceDelete();
+        return redirect()->route('show');
     }
 }

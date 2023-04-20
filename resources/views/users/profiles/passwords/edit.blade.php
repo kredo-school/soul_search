@@ -3,8 +3,8 @@
 @section('title', 'Edit Password')
 
 @section('styles')
-    <link href="{{ mix('css/profile.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="{{ mix('css/profile.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -66,7 +66,7 @@
 
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="password" name="current_password" class="form-control">
+                            <input type="password" name="current_password" class="form-control" required>
                             @if($errors->any())
                             {!! implode('', $errors->all('<div style="color:red">:message</div>')) !!}
                             @endif
@@ -78,10 +78,11 @@
                             @endif
                         </div>
                         <div class="col">
-                            <input type="password" name="new_password" class="form-control">
+                            <input type="password" name="new_password" class="form-control" required>
                         </div>
                         <div class="col">
-                            <input type="password" name="new_password_confirmation" class="form-control"></div>
+                            <input type="password" name="new_password_confirmation" class="form-control" required>
+                        </div>
                     </div>
 
                     <div class="mb-4 row">

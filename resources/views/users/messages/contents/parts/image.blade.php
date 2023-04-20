@@ -3,7 +3,7 @@
         <a class="shadow-none text-decoration-none float-{{$position}}" type="button" id="dropdownMenuButtonMsg{{$id}}{{$modal}}" data-bs-toggle="dropdown">
             <img src="{{ asset('/storage/images/'. $image) }}" class="image-msg mb-2" alt="">
         </a>
-        <span class="text-vsm text-muted float-{{$position}} {{$margin}}">{{$message->created_at->diffForHumans()}}</span>
+        <span class="text-vsm text-muted float-{{$position}} {{$margin}}">{{$user_message->created_at->diffForHumans()}}</span>
         @if ($auth)
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}{{$modal}}">
                 {{-- delete --}}

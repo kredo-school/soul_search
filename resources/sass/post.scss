@@ -5,67 +5,48 @@
     left: 0;
 }
 
+.post-exit-outline {
+    position: absolute;
+    color: #fff;
+    top: 0;
+    left: 0;
+}
+
+// in show.blede.php
+.photo-container {
+    background-color: #505050;
+}
+
 /* image in post/show page */
 .post-image {
-    width: 100%;
-    object-fit: contain;
-    background: #505050;
-    position: relative;
+	display: block;
+
+	img {
+		display: block;
+        max-height: 100vh;
+        max-width: 100%;
+		object-fit: cover;
+	}
+    @media screen and (max-width: 1000px) {
+        img {
+            max-height: 50vh;
+        }
+    }
+}
+
+.post-image-container {
+    height: 100vh;
+}
+@media screen and (max-width: 1000px) {
+    .post-image-container {
+        height: 50vh;
+    }
 }
 
 .icon-sm{
     font-size: 3rem;
 }
 
-/* hide when the display width is <= 700px */
-@media screen and (max-width: 700px) {
-	.hide-700 {
-		display: none;
-	}
-}
-
-/* show when the display width is <= 700px */
-.show-700 {
-    display: none;
-}
-@media screen and (max-width: 700px) {
-	.show-700 {
-		display: block;
-	}
-}
-/* sidebar display setting */
-.ss-container {
-	display: flex;
-	width: 100%;
-    height: 100vh;
-}
-.ss-sidebar {
-	width: 20%;
-    background-color: white;
-}
-@media screen and (max-width: 700px) {
-	.ss-sidebar {
-		width: 45px;
-	}
-}
-.ss-main {
-	width: 80%;
-	margin: 10px;
-}
-/* set login-icon position at left-bottom */
-.login-icon {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-}
-@media screen and (max-width: 700px) {
-	.login-icon {
-		left: 5px;
-	}
-}
-
-/* remove the left space of ul list */
-ul {
-    list-style: none;
-    padding-left: 0
+.post-list li{
+    background-color: transparent;
 }

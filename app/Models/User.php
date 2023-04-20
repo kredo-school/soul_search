@@ -75,6 +75,10 @@ class User extends Authenticatable
         return $this->hasMany(UserTag::class);
     }
 
+    public function isRecent(){
+        return $this->hasMany(UserTag::class);
+    }
+
     public function isMain(){
         return $this->hasMany(UserTag::class, config('enums')['tag_category']['main']);
     }

@@ -94,7 +94,7 @@
                         @endif
                     </div>
                     <div class="col">
-                        <input type="password" name="new_password" class="form-control" required>
+                        <input type="password" name="new_password" class="form-control" required autofocus>
                     </div>
                     <div class="col">
                         <input type="password" name="new_password_confirmation" class="form-control" required>

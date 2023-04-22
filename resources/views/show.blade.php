@@ -4,7 +4,7 @@
     <link href="{{ mix('css/home.css') }}" rel="stylesheet">
 @endsection
 
-@section('title', 'Home')
+@section('title', 'Chats')
 
 @section('content')
 <div class="d-flex justify-content-start p-0">

@@ -55,7 +55,7 @@
         @endauth
         <!-- Home for a specific user -->
         <div class="col px-5 pt-5">
-            <div class="card">
+            <div class="card home-card justify-content-center">
                 <div class="card-header bg-white border">
                     <div class="row align-items-center">
                         <p class="text-muted h4 pt-3">Hello {{ Auth::user()->username }}!</p>
@@ -66,7 +66,7 @@
                 @foreach($close_users as $user)
                     <div class="card-body border border-1">
                         <div class="row justify-content-center">
-                            <div class="col-auto" style="width: 5.5rem">
+                            <div class="col-auto home-user-avatar">
                                 <a href="{{ route('messages.show', $user->id) }}">
                                     @if ($user->avatar)
                                         <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="rounded-circle user-avatar" alt="{{ $user->avatar }}">

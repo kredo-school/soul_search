@@ -11,12 +11,17 @@
 @section('title','Create Account')
 
 @section('content')
+<div class="ss-sidebar p-0 m-0">
+    <div class="sidebar-contents m-0 p-0">
+        <a href="{{ route('login') }}" class="text-decoration-none ms-2">
+            <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 d-none d-lg-inline">
+        </a>
+    </div>
+</div>
 
-    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2 ms-4 icon-md">
-
-    <h1 class="text-center fw-bold">
-        Create Your Account
-    </h1>
+<h1 class="text-center fw-bold top-sp">
+    Create Your Account
+</h1>
 
 {{--  Card body  --}}
 <div class="container">

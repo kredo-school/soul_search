@@ -40,7 +40,7 @@
                     </div>
                     <div class="col">
                         <label for="username" class="form-label">Username</label>
-                        <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}" required>
+                        <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}" required autofocus>
                         @error('username')
                             <p class="text-danger small">{{ $message }}</p>
                         @enderror

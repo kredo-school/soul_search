@@ -45,13 +45,13 @@
                                             <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->image }}" class="d-block mx-auto avatar-md">
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="ps-5">
                                         <span class="hash-link">{{ $post->text }}</span>
                                     </td>
-                                    <td>
-                                            {{ $post->user->username }}
+                                    <td class="cell-padding">
+                                        {{ $post->user->username }}
                                     </td>
-                                    <td>
+                                    <td class="cell-padding">
                                         {{ $post->created_at }}
                                     </td>
                                     <td>
@@ -83,10 +83,13 @@
                                     </td>
                                 </tr>
                                 @include('admin.posts.modal.status')
+
+                                {{--  No Posts  --}}
                                 @empty
                                 <tr>
                                 <td colspan="7" class="lead text-muted text-center">No posts found.</td>
                                 </tr>
+
                                 @endforelse
                             </tbody>
                         </table>

@@ -58,7 +58,8 @@ Route::group(['middleware' => 'auth'], function(){
     #Profile(User)
     Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);
     #Avatar
-    Route::resource('/avatars', AvatarController::class, ['only' => ['edit', 'update', 'destroy']]);
+    Route::resource('/avatars', AvatarController::class, ['only' => ['index', 'edit', 'update', 'destroy']]);
+    Route::get('/avatars/{user}/crop', [AvatarController::class, 'crop'])->name('avatars.crop');
     #Password
     Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
     #Follow

@@ -6,16 +6,29 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class AvatarController extends Controller
 {
     const LOCAL_STORAGE_FOLDER = 'public/avatars/';
+
+    public function index(){
+        return view('users.profiles.avatars.test');
+    }
 
     public function edit($id)
     {
         $user      = User::find($id);
 
         return view('users.profiles.avatars.edit', compact('user'));
+    }
+
+    // link to avatar-image-cropping page
+    public function crop($id)
+    {
+        $user      = User::find($id);
+
+        return view('users.profiles.avatars.crop', compact('user'));
     }
 
     public function update(Request $request)
@@ -25,6 +38,14 @@ class AvatarController extends Controller
         ]);
 
         $user = User::find(Auth::id());
+
+        $avatar = $request->file('avatar');
+        $filename = $avatar->getClientOriginalName();
+        $path = $avatar->storeAs(self::LOCAL_STORAGE_FOLDER, $filename);
+
+        $img = Image::make(storage_path('app/'.$path));
+        $img->crop($request->input('width'), $request->input('height'), $request->input('x'), $request->input('y'));
+        $img->save();
 
         // delete the previous file from the local storage
         $this->delete($user->avatar);

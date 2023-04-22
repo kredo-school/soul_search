@@ -7,15 +7,13 @@
 @endsection
 
 @section('content')
-        <div class="ss-sidebar p-0 m-0">
-            <div class="sidebar-contents m-0 p-0">
-                <a href="{{ route('login') }}" class="text-decoration-none ms-2">
-                    <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 d-none d-lg-inline">
-                </a>
-            </div>
+    <div class="ss-sidebar p-0 m-0">
+        <div class="sidebar-contents m-0 p-0">
+            <a href="{{ route('login') }}" class="text-decoration-none ms-2">
+                <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 d-none d-lg-inline">
+            </a>
         </div>
-
-
+    </div>
 
     <div class="container mb-3">
         <div class="row justify-content-center">

@@ -21,6 +21,7 @@ mix.js("resources/js/app.js", "public/js")
     .sass('resources/sass/message.scss', 'public/css')
     .sass('resources/sass/search.scss', 'public/css')
     .sass('resources/sass/admin_users.scss', 'public/css')
+    .sass('resources/sass/contact.scss', 'public/css')
     .js('resources/js/registration.js', 'public/js')
     .sass('resources/sass/register.scss', 'public/css')
     .sourceMaps();

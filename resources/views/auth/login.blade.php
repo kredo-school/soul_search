@@ -7,12 +7,20 @@
 @endsection
 
 @section('content')
-    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-4 icon-md icon-position">
+        <div class="ss-sidebar p-0 m-0">
+            <div class="sidebar-contents m-0 p-0">
+                <a href="{{ route('login') }}" class="text-decoration-none ms-2">
+                    <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 d-none d-lg-inline">
+                </a>
+            </div>
+        </div>
+
+
 
     <div class="container mb-3">
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <div class="card"><i class="fa-regular fa-circle-user text-center mt-3 icon-lg text-orange"></i>
+                <div class="card top-sp"><i class="fa-regular fa-circle-user text-center mt-3 icon-lg text-orange"></i>
                     <h1 class="text-center mt-3">{{ __('Login') }}</h1>
 
 

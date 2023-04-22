@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="mt-2">
+<div class="mt-2 search_container mx-auto">
     <div class="row justify-content-center">
         <div class="col-md">
             <h2 class="mt-3"><i class="fa-solid fa-magnifying-glass me-3"></i>Search</h2>

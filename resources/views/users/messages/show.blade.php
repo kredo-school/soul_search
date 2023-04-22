@@ -11,7 +11,7 @@
     <!-- Users -->
     <div class="message-list bg-white">
         <ul>
-            <div class="message-list-fix border-start">
+            <div class="message-list-fix border-start border-end">
                 @foreach($all_users as $a_user)
                     @php
                         $message_to = $a_user->messageTo(Auth::id());

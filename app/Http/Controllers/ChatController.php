@@ -14,6 +14,8 @@ class ChatController extends Controller
 {
     const LOCAL_STORAGE_FOLDER = 'public/images/';
 
+    private $user_tag;
+
     public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|min:1|max:255',
@@ -50,28 +52,30 @@ class ChatController extends Controller
         }
     }
 
-    public function show(Tag $tag, User $user){
+    public function show(Tag $tag, User $user, UserTag $user_tag){
         $user = Auth::user();
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
+        $user_tag->last_access = \Carbon\Carbon::now();
+        $user_tag->save();
 
         $tagged_chats = Chat::where('tag_id',$tag->id)->get()->filter(function($chat){
             return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
         });
 
-        $user_tag = UserTag::where('user_id', $user->id)->where('tag_id', $tag->id)->first();
+        // $user_tag = UserTag::where('user_id', $user->id)->where('tag_id', $tag->id)->first();
 
-        if ($user_tag) {
-            $user_tag->updateLastAccess();
-        } else {
-            $user_tag = new UserTag([
-                'user_id' => $user->id,
-                'tag_id' => $tag->id,
-                'last_access' => now(),
-            ]);
-            $user_tag->save();
-        }
+        // if ($user_tag) {
+        //     $user_tag->updateLastAccess();
+        // } else {
+        //     $user_tag = new UserTag([
+        //         'user_id' => $user->id,
+        //         'tag_id' => $tag->id,
+        //         'last_access' => now(),
+        //     ]);
+        //     $user_tag->save();
+        // }
 
         return view('show')
             ->with('tag', $tag)

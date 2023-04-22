@@ -13,16 +13,11 @@ class ChangePasswordController extends Controller
 {
     public function edit($id)
     {
-        $user      = User::find(Auth::id());
-        $user_tags = UserTag::where('user_id', Auth::id())->get();
-        $tags      = [];
-        $tag_count = 0;
-        foreach($user_tags as $user_tag){
-            $tags[] = Tag::find($user_tag->tag_id);
-            $tag_count++;
-        }
+        $user           = User::where('id', $id)->first();
+        $main_tags      = getMainTags(); // from helpers
+        $fav_tags       = getFavTags(); // from helpers
 
-        return view('users.profiles.passwords.edit', compact('user', 'tags', 'tag_count'));
+        return view('users.profiles.passwords.edit', compact('user', 'main_tags', 'fav_tags'));
     }
 
     public function update(Request $request)

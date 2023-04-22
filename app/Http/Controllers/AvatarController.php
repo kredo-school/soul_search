@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class AvatarController extends Controller
 {
@@ -17,14 +16,6 @@ class AvatarController extends Controller
         $user      = User::find($id);
 
         return view('users.profiles.avatars.edit', compact('user'));
-    }
-
-    // link to avatar-image-cropping page
-    public function crop($id)
-    {
-        $user      = User::find($id);
-
-        return view('users.profiles.avatars.crop', compact('user'));
     }
 
     public function update(Request $request)

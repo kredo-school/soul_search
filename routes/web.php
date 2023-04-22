@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\AvatarCropController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
@@ -59,7 +60,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);
     #Avatar
     Route::resource('/avatars', AvatarController::class, ['only' => ['edit', 'update', 'destroy']]);
-    Route::get('/avatars/{user}/crop', [AvatarController::class, 'crop'])->name('avatars.crop');
+    #AvatarCrop
+    Route::resource('/crops', AvatarCropController::class, ['only' => ['edit', 'update']]);
     #Password
     Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
     #Follow

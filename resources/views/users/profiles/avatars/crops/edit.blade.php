@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="profile-container">
+<div class="profile-container mx-auto">
     <div class="row mt-3">
         <div class="col">
 
@@ -87,14 +87,14 @@
     function save_img(){
         const canvasData = out.toDataURL("image/png");
         const ajax = new XMLHttpRequest();
-        ajax.open("POST",'{{ asset('php/save_cropped_image.php') }}',false);
-        ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Updated content type
-        ajax.onreadystatechange = function() {
-            if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
-                console.log(ajax.responseText); // Log the response from the server
+        ajax.open("POST", "{{ route('crops.edit') }}", false);
+        ajax.setRequestHeader('Content-Type', 'application/upload');
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState === 4 && ajax.status === 200) {
+                console.log(ajax.responseText); // print response from controller
             }
         };
-        ajax.send('canvasData=' + encodeURIComponent(canvasData)); // Pass the canvasData variable as a POST parameter
+        ajax.send(canvasData);
     }
 
 

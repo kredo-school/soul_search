@@ -8,10 +8,9 @@
 
 @section('content')
 
-
-<div class="container">
+<div class="profile-container mx-auto">
     <div class="row mt-3">
-        <div class="col">
+        <div class="d-flex justify-content-center">
             {{-- avatar --}}
             @if ($user->avatar)
                 <div class="dropdown">
@@ -20,7 +19,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li class="ps-3">
-                            <a href="{{ route('avatars.crop', Auth::id()) }}" class="text-decoration-none text-orange">
+                            <a href="{{ route('crops.edit', Auth::id()) }}" class="text-decoration-none text-orange">
                                 <i class="fa-solid fa-scissors"></i> Crop Image
                             </a>
                         </li>
@@ -47,8 +46,8 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-sm btn-orange px-3">Update Image</button>
-                <a type="button" href="{{ route('profiles.edit', $user->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                <a type="button" href="{{ route('profiles.edit', $user->id) }}" class="btn btn-sm btn-secondary px-3 float-end">Cancel</a>
+                <button type="submit" class="btn btn-sm btn-orange px-3 float-end me-2">Update Image</button>
 
             </form>
 

@@ -15,11 +15,12 @@ class AvatarCropController extends Controller
     {
         $user      = User::find($id);
 
-        return view('users.profiles.avatars.crops.edit', compact('user'));
+        return view('users.profiles.avatars.crop', compact('user'));
     }
 
     public function update(Request $request)
     {
+        dd($request->getContent('canvasData'));
         $image = $request->input('canvasData');
         $image = str_replace('data:image/png;base64,', '', $image);
         $image = str_replace(' ', '+', $image);

@@ -35,7 +35,7 @@ class AvatarController extends Controller
             'avatar'   => $this->save($request),
         ]);
 
-        return redirect()->route('profiles.edit', Auth::id());
+        return redirect()->route('avatars.edit', Auth::id());
     }
 
     private function save($request){

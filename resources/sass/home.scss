@@ -12,7 +12,6 @@
 }
 
 .tag-name {
-    opacity: .9;
     color: #505050;
 }
 
@@ -43,6 +42,14 @@
 
 .text-orange {
     color: #FFB84D;
+}
+
+.card-body {
+    position: relative;
+
+    &:hover {
+        background-color: #eef3fc;
+    }
 }
 
 .chat-body {

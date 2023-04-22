@@ -64,7 +64,6 @@ class HomeController extends Controller
             }
         }
 
-        // return view('home', compact('user', 'all_users', 'pivot_items'));
-        return array_slice($close_users, 0, 8);
+        return array_slice($close_users, 0, 7);
     }
 }

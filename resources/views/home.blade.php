@@ -54,7 +54,7 @@
         </div>
         @endauth
         <!-- Home for a specific user -->
-        <div class="col px-5 pt-5">
+        <div class="col px-5 pt-4">
             <div class="card home-card justify-content-center">
                 <div class="card-header bg-white border">
                     <div class="row align-items-center">
@@ -64,35 +64,38 @@
                 <!-- Show Close Users-->
                 @if ($close_users)
                 @foreach($close_users as $user)
-                    <div class="card-body border border-1">
-                        <div class="row justify-content-center">
-                            <div class="col-auto home-user-avatar">
-                                <a href="{{ route('messages.show', $user->id) }}">
+                    <a href="{{ route('messages.show', $user->id) }}" class="text-decoration-none">
+                        <div class="card-body border border-1">
+                            <div class="row justify-content-center">
+                                <div class="col-auto home-user-avatar">
                                     @if ($user->avatar)
                                         <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="rounded-circle user-avatar" alt="{{ $user->avatar }}">
                                     @else
                                         <i class="fa-solid fa-circle-user fa-4x text-secondary"></i>
                                     @endif
-                                </a>
-                            </div>
-                            <div class="col ps-0 pt-1">
-                                <div class="row justify-content-center">
-                                    <div>
-                                        <a href="{{ route('messages.show', $user->id) }}" class="h5 text-decoration-none fw-bold tag-name">
-                                            {{ $user->username }}
-                                        </a>
+                                </div>
+                                <div class="col ps-0 pt-1">
+                                    <div class="row justify-content-center">
+                                        <div>
+                                            <span class="h5 fw-bold tag-name">
+                                                {{ $user->username }}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            @if ($user->is_active)
+                                                <p class="chat-text"><i class="fa-solid fa-globe text-info"></i>&nbsp;Online</p>
+                                            @else
+                                                <p class="chat-text"><i class="fa-solid fa-circle-xmark text-danger"></i>&nbsp;Offline</p>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div>
-                                        @if ($user->is_active)
-                                            <p class="chat-text"><i class="fa-solid fa-globe text-info"></i>&nbsp;Online</p>
-                                        @else
-                                            <p class="chat-text"><i class="fa-solid fa-circle-xmark text-danger"></i>&nbsp;Offline</p>
-                                        @endif
-                                    </div>
+                                </div>
+                                <div class="col-1 pt-3 me-3">
+                                    <i class="fa-solid fa-comment-dots fa-2x" title="message"></i>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
                 @endif
             </div>

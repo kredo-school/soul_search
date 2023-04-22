@@ -46,6 +46,7 @@
 
 .home-card {
     width: 60%;
+    margin: 0 auto;
 }
 
 .card-body {
@@ -125,4 +126,15 @@
 
 .likes-count {
     width: 1em;
+}
+
+.col-1 {
+    &.fa-comment-dots {
+        opacity: 0.5;
+        color: #6A9DFF;
+    }
+}
+
+.fa-circle-xmark {
+    opacity: 0.9;
 }

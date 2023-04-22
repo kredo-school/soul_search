@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -40,4 +43,19 @@ class HomeController extends Controller
             ->with('main_tags', $main_tags)
             ->with('fav_tags', $fav_tags);
     }
+
+    public function showCloseUsers(User $user)
+    {
+        $all_users = User::latest()->get();
+
+        $authUser = Auth::user();
+
+        $pivot_items = collect($authUser->messagesSent)->merge($authUser->messagesReceived)->sortBy('pivot.created_at')
+        ->filter(function($a) use($user){
+            return $a->pivot->sender_id == $user->id || $a->pivot->receiver_id == $user->id;
+        });
+
+        return view('home', compact('user', 'all_users', 'pivot_items'));
+    }
+
 }

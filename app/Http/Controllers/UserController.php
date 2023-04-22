@@ -19,13 +19,8 @@ class UserController extends Controller
     public function index()
     {
         $user = User::where('id', Auth::id())->first();
-
-        $user_tags = UserTag::where('user_id', Auth::id())->get();
-        $tags      = [];
-        foreach($user_tags as $user_tag){
-            $tags[] = Tag::find($user_tag->tag_id);
-        }
-        return view('users.profiles.show', compact('user', 'tags'));
+        $main_tags = getMainTags(); // from helpers
+        return view('users.profiles.show', compact('user', 'main_tags'));
     }
 
     /**
@@ -58,13 +53,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        $user_tags = UserTag::where('user_id', $id)->get();
-        $tags      = [];
-        foreach($user_tags as $user_tag){
-            $tags[] = Tag::find($user_tag->tag_id);
-        }
+        $main_tags = getMainTags(); // from helpers
 
-        return view('users.profiles.show', compact('user', 'tags'));
+        return view('users.profiles.show', compact('user', 'main_tags'));
     }
 
     /**
@@ -75,16 +66,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('id', $id)->first();
-        $user_tags = UserTag::where('user_id', $user->id)->get();
-        $tags      = [];
-        $tag_count = 0;
-        foreach($user_tags as $user_tag){
-            $tags[] = Tag::find($user_tag->tag_id);
-            $tag_count++;
-        }
+        $user           = User::where('id', $id)->first();
+        $main_tags      = getMainTags(); // from helpers
+        $fav_tags       = getFavTags(); // from helpers
 
-        return view('users.profiles.edit', compact('user', 'tags', 'tag_count'));
+        return view('users.profiles.edit', compact('user', 'main_tags', 'fav_tags'));
     }
 
     /**
@@ -102,8 +88,8 @@ class UserController extends Controller
             'username'     => 'required|max:100',
             'email'        => 'required|max:100|email',
             'introduction' => 'max:10000|nullable',
-            'tag_name'     => 'array|nullable',
-            'tag_name.*'   => 'string|nullable',
+            'm_tag_str'    => 'string',
+            'f_tag_str'    => 'string|nullable',
         ]);
 
         $user->username     = $request->username;
@@ -115,33 +101,40 @@ class UserController extends Controller
         // Tag and UserTag update
         $latest_tag_id = Tag::max('id');
         $new_tag_id    = $latest_tag_id + 1;
-        $count         = 0;
-        foreach($request->tag_name as $tag_name){
-            if($count < $request->old_tag_count){
-                // if old tag != new tag
-                if(Tag::where('id', $request->old_tag_id[$count])->first()->name !== $tag_name){
-                    if(!is_Null($tag_name)){
-                        // both old and new exist
-                        $this->deleteTag($request, $count);
-                        $new_tag_id = $this->storeTag($tag_name, $new_tag_id);
-                    }else{
-                        // only old exists
-                        $this->deleteTag($request, $count);
-                    }
-                }
-            }else{
-                if(!is_Null($tag_name)){
-                    // only new exists
-                    $new_tag_id = $this->storeTag($tag_name, $new_tag_id);
-                }
-            }
-            $count++;
-        }
+        $m_count       = 0;
+        $m_category    = 'main';
+        $f_count       = 0;
+        $f_category    = 'favorite';
+
+        $new_tag_id = $this->updateTag($new_tag_id, $m_count, $m_category, $request->old_m_tag_count, $request->old_m_tag_ids, $request->m_tag_str);
+        $new_tag_id = $this->updateTag($new_tag_id, $f_count, $f_category, $request->old_f_tag_count, $request->old_f_tag_ids, $request->f_tag_str);
 
         return redirect()->route('profiles.index');
     }
 
-    private function storeTag($tag_name, $new_tag_id){
+    private function updateTag($new_tag_id, $count, $category, $old_tag_count, $old_tag_ids, $new_tag_str){
+        preg_match_all("/#(\\w+)/", $new_tag_str, $hashtags);
+        foreach($hashtags[1] as $tag_name){
+            if($count < $old_tag_count){
+                // both old and new exist, update if old tag != new tag
+                if(Tag::where('id', $old_tag_ids[$count])->first()->name !== $tag_name){
+                $this->deleteTag($old_tag_ids[$count]);
+                $new_tag_id = $this->storeTag($tag_name, $new_tag_id, $category);
+                }
+            }else{
+                // only new exists
+                $new_tag_id = $this->storeTag($tag_name, $new_tag_id, $category);
+            }
+            $count++;
+        }
+        for($i = $count; $i < $old_tag_count; $i++){
+            // only old exists
+            $this->deleteTag($old_tag_ids[$count]);
+        }
+        return $new_tag_id;
+    }
+
+    private function storeTag($tag_name, $new_tag_id, $category){
         $db_tags = Tag::get();
         $is_new = true;
         foreach($db_tags as $db_tag){
@@ -149,8 +142,9 @@ class UserController extends Controller
                 $is_new = false;
                 // create UserTag
                 UserTag::create([
-                    'user_id' => Auth::id(),
-                    'tag_id'  => $db_tag->id,
+                    'user_id'      => Auth::id(),
+                    'tag_id'       => $db_tag->id,
+                    'tag_category' => $category,
                 ]);
             }
         }
@@ -162,8 +156,9 @@ class UserController extends Controller
 
             // create UserTag
             UserTag::create([
-                'user_id' => Auth::id(),
-                'tag_id'  => $new_tag_id,
+                'user_id'      => Auth::id(),
+                'tag_id'       => $new_tag_id,
+                'tag_category' => $category,
             ]);
             $new_tag_id++;
         }
@@ -171,9 +166,9 @@ class UserController extends Controller
         return $new_tag_id;
     }
 
-    private function deleteTag($request, $count){
+    private function deleteTag($old_tag_id){
         // delete old UserTag
-        UserTag::where('tag_id', $request->old_tag_id[$count])->where('user_id', Auth::id())->delete();
+        UserTag::where('tag_id', $old_tag_id)->where('user_id', Auth::id())->limit(1)->delete();
     }
 
     /**

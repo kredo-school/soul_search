@@ -1,3 +1,6 @@
+.profile-container {
+    max-width: 920px;
+}
 
 .icon-lg{
     font-size: 9rem;
@@ -17,4 +20,16 @@
     width: 18rem;
     height: 18rem;
     object-fit: cover;
+}
+
+/* post image in profile page */
+.profile-post{
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+}
+
+.col-3{
+    margin: 0;
+    padding: 0;
 }

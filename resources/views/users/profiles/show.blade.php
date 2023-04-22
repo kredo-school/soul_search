@@ -7,8 +7,8 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="card border-0 shadow-lg m-3">
+    <div class="profile-container mx-auto">
+        <div class="card border-0 shadow p-2 mt-3 me-1">
             <div class="card-body">
                 <div class="row justify-content-center">
                     <div class="col-auto">
@@ -27,9 +27,9 @@
                         </div>
                         <div>
                             {{-- tags --}}
-                            @forelse($tags as $tag)
+                            @forelse($main_tags as $main_tag)
                                 <a href="#" class="text-decoration-none">
-                                    #{{ $tag->name }}
+                                    #{{ $main_tag->tag->name }}
                                 </a>
                                 &nbsp;
                             @empty
@@ -104,16 +104,26 @@
             </div>
         </div>
 
-        <hr>
-
-        <div class="row mt-5">
-            {{-- user posts --}}
+        {{-- user posts --}}
+        <div class="mx-auto mt-4">
+            @php
+                $count = 0;
+            @endphp
             @foreach ($user->posts as $post)
-            <div class="col-md-3 profile-post">
-                <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" height="200"></a>
+                @if ($count % 4 == 0)
+            <div class="row mt-1">
+                @endif
+                <div class="col-3">
+                    <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" class="profile-post"></a>
+                </div>
+                @if ($count % 4 == 3)
             </div>
+                @endif
+                @php
+                    $count++;
+                @endphp
             @endforeach
-
         </div>
+
     </div>
 @endsection

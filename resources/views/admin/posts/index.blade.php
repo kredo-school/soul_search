@@ -41,7 +41,7 @@
                                 @forelse ($all_posts as $post)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('profiles.show', $post->user->id) }}">
+                                        <a href="{{ route('posts.show', $post->id) }}">
                                             <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->image }}" class="d-block mx-auto avatar-md">
                                         </a>
                                     </td>

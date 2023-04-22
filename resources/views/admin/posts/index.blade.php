@@ -30,7 +30,7 @@
                             <thead class="small bg-orange">
                                 <tr>
                                     <th></th>
-                                    <th class="ps-5">Tag/Text</th>
+                                    <th class="ps-5">Tag / Text</th>
                                     <th class="cell-padding">Username</th>
                                     <th class="cell-padding">Created at</th>
                                     <th>Status</th>

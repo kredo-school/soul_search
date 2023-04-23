@@ -105,7 +105,7 @@
                         <input type="text" name="current_password" class="form-control" id="current_password" value="••••••••" disabled>
                     </div>
                     <div class="col">
-                        <a href="{{ route('passwords.edit', Auth::id()) }}" type="button" class="btn btn-warning px-3">Change Password</a>
+                        <a href="{{ route('passwords.edit', Auth::id()) }}" type="button" class="btn btn-orange px-3">Change Password</a>
                     </div>
                     <div class="col"></div>
                 </div>
@@ -120,8 +120,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-sm btn-warning px-3">Update</button>
-                <a type="button" href="{{ route('profiles.index') }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                <a type="button" href="{{ route('profiles.index') }}" class="btn btn-secondary px-3 float-end">Cancel</a>
+                <button type="submit" class="btn btn-orange px-3 float-end me-3">Update</button>
 
             </form>
         </div>

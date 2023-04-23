@@ -90,6 +90,9 @@
 
                 <!-- Body -->
                 @include('users.messages.contents.body')
+            @else
+                <div class="bg-white p-2 mb-0 message-footer" id="footer">
+                </div>
             @endif
         </div>
     </div>
@@ -102,6 +105,7 @@
     window.addEventListener('resize', function(){
         client_w = document.getElementById('message-box').clientWidth + 'px';
         window.document.getElementById('footer').style.width = client_w;
+        console.log(client_w);
     })
 </script>
 

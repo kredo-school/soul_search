@@ -19,14 +19,14 @@
 
                 <div class="mb-3 row">
                     <div class="col">
-                    <button class="btn shadow-none" type="button">
-                        {{-- avatar --}}
-                        @if ($user->avatar)
-                            <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
-                        @else
-                            <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
-                        @endif
-                    </button>
+                        <button class="btn shadow-none" type="button">
+                            {{-- avatar --}}
+                            @if ($user->avatar)
+                                <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
+                            @else
+                                <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
+                            @endif
+                        </button>
                     </div>
                     <div class="col">
                         <label for="username" class="form-label">Username</label>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="row mb-4">
                     <div class="col">
                         <input type="password" name="current_password" class="form-control" required>
                         @if($errors->any())
@@ -101,15 +101,19 @@
                     </div>
                 </div>
 
-                <div class="mb-4 row">
+                <div class="mb-3">
+                    <a type="button" href="{{ route('profiles.edit', Auth::id()) }}" class="btn btn-secondary px-3 float-end">Cancel</a>
+                    <button type="submit" class="btn btn-warning px-3 float-end me-3">Update Password</button>
+
+                </div>
+
+                <div class="row">
                     <div class="col">
                         <label for="introduction" class="form-label">Introduction</label>
                         <textarea name="introduction" class="form-control" id="introduction" cols="30" rows="2" disabled>{{ old('introduction', $user->introduction) }}</textarea>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-sm btn-warning px-3">Update Password</button>
-                <a type="button" href="{{ route('profiles.edit', Auth::id()) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
 
             </form>
         </div>

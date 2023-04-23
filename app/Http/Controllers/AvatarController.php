@@ -13,7 +13,7 @@ class AvatarController extends Controller
 
     public function edit($id)
     {
-        $user      = User::find($id);
+        $user      = Auth::user();
 
         return view('users.profiles.avatars.edit', compact('user'));
     }

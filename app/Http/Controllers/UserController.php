@@ -66,7 +66,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user           = User::where('id', $id)->first();
+        $user           = Auth::user();
         $main_tags      = getMainTags(); // from helpers
         $fav_tags       = getFavTags(); // from helpers
 

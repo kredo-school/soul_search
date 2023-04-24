@@ -105,7 +105,6 @@
     window.addEventListener('resize', function(){
         client_w = document.getElementById('message-box').clientWidth + 'px';
         window.document.getElementById('footer').style.width = client_w;
-        console.log(client_w);
     })
 </script>
 

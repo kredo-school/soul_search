@@ -120,7 +120,7 @@
                                         <label for="tag_name" class="text-position">Tag1</label>
                                     </div>
                                     <div class="col-7">
-                                        <input type="text" name="tag_name[]" id="tag_name1" class="form-control" required="required">
+                                        <input type="text" name="tag_name[]" id="tag_name1" class="form-control" required="required" placeholder="e.g. Music">
                                         @error('tag_name')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -134,7 +134,7 @@
                                         <label for="tag_name" class="text-position">Tag2</label>
                                     </div>
                                     <div class="col-7">
-                                        <input type="text" name="tag_name[]" id="tag_name2" class="form-control" required="required">
+                                        <input type="text" name="tag_name[]" id="tag_name2" class="form-control" required="required" placeholder="e.g. Travel">
                                         @error('tag_name')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -147,7 +147,7 @@
                                         <label for="tag_name" class="text-position">Tag3</label>
                                     </div>
                                     <div class="col-7">
-                                        <input type="text" name="tag_name[]" id="tag_name3" class="form-control" required="required">
+                                        <input type="text" name="tag_name[]" id="tag_name3" class="form-control" required="required" placeholder="e.g. Game">
                                         @error('tag_name')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror

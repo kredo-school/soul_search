@@ -98,7 +98,7 @@
 
         <!-- Admin Controls -->
         @can('admin')
-            <a href="{{ route('admin.users') }}" class="dropdown-item">
+            <a href="#" class="dropdown-item">
                 <i class="fa-solid fa-user-gear"></i> Admin
             </a>
             <hr class="dropdown-divider">

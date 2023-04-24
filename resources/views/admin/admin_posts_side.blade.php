@@ -1,4 +1,4 @@
-<a href="#" class="text-decoration-none ms-3">
+<a href="{{ route('index') }}" class="text-decoration-none ms-3">
     <img src="{{ asset('images/logo.svg')}}" class="m-3 hide-700">
 </a>
 

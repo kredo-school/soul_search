@@ -20,7 +20,7 @@
 }
 @media screen and (max-width: 991px) {
 	.ss-sidebar {
-        width: 45px;
+        width: 50px;
 	}
 }
 
@@ -103,4 +103,15 @@ ul {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #FFB84D;
   --bs-btn-disabled-border-color: #FFB84D;
+}
+
+@media screen and (min-width: 992px) {
+	li a i {
+		font-size: 0.9rem;
+	}
+}
+@media screen and (max-width: 991px) {
+	li a i {
+		font-size: 1rem;
+	}
 }

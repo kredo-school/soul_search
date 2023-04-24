@@ -19,10 +19,10 @@
                 @method('PATCH')
 
                 <div class="mb-3 row">
+                    {{-- avatar --}}
                     <div class="col">
                         <div class="dropdown">
                             <button class="btn shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{-- avatar --}}
                                 @if ($user->avatar)
                                     <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
                                 @else
@@ -38,6 +38,7 @@
                             </ul>
                         </div>
                     </div>
+                    {{-- username --}}
                     <div class="col">
                         <label for="username" class="form-label">Username</label>
                         <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}" required autofocus>
@@ -45,6 +46,7 @@
                             <p class="text-danger small">{{ $message }}</p>
                         @enderror
                     </div>
+                    {{-- email --}}
                     <div class="col">
                         <label for="email" class="form-label">Email</label>
                         <input tyoe="text" name="email" class="form-control" id="email" value="{{ old('email', $user->email) }}" required>
@@ -54,44 +56,81 @@
                     </div>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="m_tag_str" class="form-label">Your Main Tags (at least 1)</label>
-                    @php
-                        $m_tag_str       = '';
-                        $old_m_tag_count = 0;
-                    @endphp
-                    @foreach ($main_tags as $main_tag)
-                        @php
-                            $m_tag_str .= '#' . $main_tag->tag->name . ' ';
-                            $old_m_tag_count++;
-                        @endphp
-                        <input name="old_m_tag_ids[]" type="hidden" value="{{ $main_tag->tag->id }}">
-                    @endforeach
-                    <input name="old_m_tag_count" type="hidden" value="{{ $old_m_tag_count }}">
+                {{-- tags --}}
+                <div class="row">
                     <div class="col">
-                        <input name="m_tag_str" type="text" class="form-control" id="m_tag_str" value="{{ old('m_tag_str', $m_tag_str) }}" required>
+                        @php
+                            $main_count = count($main_tags);
+                            if($main_count == 1){
+                                $main_s = '';
+                            }else{
+                                $main_s = 's';
+                            }
+                        @endphp
+                        <label class="form-label">Your Main Tag{{$main_s}}</label>
+                    </div>
+                </div>
+                <div class="mb-1 row">
+                    <div class="col-10">
+                        @foreach ($main_tags as $main_tag)
+                            <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $main_tag->tag->name }}</span>
+                        @endforeach
+                    </div>
+                    <div class="col">
+                        <a href="{{ route('tags.edit', $user->id) }}" class="btn btn-orange mb-1 me-1 float-end">edit tags</a>
                     </div>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="fav_tag_string" class="form-label">Your Favorite Tags</label>
-                    @php
-                        $f_tag_str       = '';
-                        $old_f_tag_count = 0;
-                    @endphp
-                    @foreach ($fav_tags as $fav_tag)
-                        @php
-                            $f_tag_str .= '#' . $fav_tag->tag->name . ' ';
-                            $old_f_tag_count++;
-                        @endphp
-                        <input name="old_f_tag_ids[]" type="hidden" value="{{ $fav_tag->tag->id }}">
-                    @endforeach
+                <div class="row">
                     <div class="col">
-                        <textarea name="f_tag_str" class="form-control" id="f_tag_str" cols="30" rows="2">{{ old('f_tag_str', $f_tag_str) }}</textarea>
-                        <input name="old_f_tag_count" type="hidden" value="{{ $old_f_tag_count }}">
+                        @php
+                            $fav_count = count($fav_tags);
+                            if($fav_count == 1){
+                                $fav_s = '';
+                            }else{
+                                $fav_s = 's';
+                            }
+                        @endphp
+                        <label class="form-label">Your Favorite Tag{{$fav_s}}</label>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col">
+                        {{-- show 10 tags at most, push button to show more --}}
+                        @if($fav_count <= 10)
+                            @foreach ($fav_tags as $fav_tag)
+                                <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tag->tag->name }}</span>
+                            @endforeach
+                        @else
+                            @for ($i=0; $i<10; $i++)
+                                <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                            @endfor
+                            <span class="btn btn-sm btn-outline-secondary float-start mb-1" id="favshow" onclick="showFav()">show more</span>
+                            {{-- show after pushing button if more than 10 tags--}}
+                            <span id="favtags">
+                                @if ($fav_count <=25)
+                                    @for ($i=10; $i<$fav_count; $i++)
+                                        <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                                    @endfor
+                                    <span class="btn btn-sm btn-outline-secondary float-start mb-1" onclick="hideFav()">hide</span>
+                                @else
+                                    @for ($i=10; $i<25; $i++)
+                                        <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                                    @endfor
+                                    <span class="btn btn-sm btn-outline-secondary float-start mb-1" id="favshow2" onclick="showFav2()">show more</span>
+                                    <span id="favtags2">
+                                        @for ($i=25; $i<$fav_count; $i++)
+                                            <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                                        @endfor
+                                        <span class="btn btn-sm btn-outline-secondary float-start mb-1" onclick="hideFav2()">hide</span>
+                                    </span>
+                                @endif
+                            </span>
+                        @endif
                     </div>
                 </div>
 
+                {{-- password --}}
                 <div class="row">
                     <div class="col">
                         <label for="current_password" class="form-label">Current Password</label>
@@ -110,10 +149,11 @@
                     <div class="col"></div>
                 </div>
 
+                {{-- introduction --}}
                 <div class="mb-4 row">
                     <div class="col">
                         <label for="introduction" class="form-label">Introduction</label>
-                        <textarea name="introduction" class="form-control" id="introduction" cols="30" rows="2">{{ old('introduction', $user->introduction) }}</textarea>
+                        <textarea name="introduction" class="form-control" id="introduction" cols="30" rows="4">{{ old('introduction', $user->introduction) }}</textarea>
                         @error('introduction')
                             <p class="text-danger small">{{ $message }}</p>
                         @enderror
@@ -127,5 +167,26 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    document.getElementById("favtags").style.display = 'none';
+    function showFav(){
+        document.getElementById("favshow").style.display = 'none';
+        document.getElementById("favtags").style.display = 'inline';
+    }
+    function hideFav(){
+        document.getElementById("favshow").style.display = 'inline-block';
+        document.getElementById("favtags").style.display = 'none';
+    }
+    function showFav2(){
+        document.getElementById("favshow2").style.display = 'none';
+        document.getElementById("favtags2").style.display = 'inline';
+    }
+    function hideFav2(){
+        document.getElementById("favshow2").style.display = 'inline-block';
+        document.getElementById("favtags2").style.display = 'none';
+    }
+</script>
 
 @endsection

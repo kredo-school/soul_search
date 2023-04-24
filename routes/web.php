@@ -9,7 +9,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LikeController;
@@ -17,7 +16,6 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\FormController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +57,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);
     #Avatar
     Route::resource('/avatars', AvatarController::class, ['only' => ['edit', 'update', 'destroy']]);
+    #Tag
+    Route::resource('/tags', TagController::class, ['only' => ['edit', 'store', 'destroy']]);
     #Password
     Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
     #Follow

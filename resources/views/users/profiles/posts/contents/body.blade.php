@@ -4,9 +4,9 @@
 
         <div class="row mt-2">
             <div class="col-auto">
-                <a href="#">
+                <a href="{{route('profiles.show', $post->user_id)}}">
                     @if ($post->user->avatar)
-                        <img src="{{ asset('/storage/images/'. $post->user->avatar) }}" class="" alt="">
+                        <img src="{{ asset('/storage/avatars/'. $post->user->avatar) }}" class="avatar-sm rounded-circle" alt="">
                     @else
                         <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
                     @endif
@@ -56,9 +56,28 @@
             </div>
         </div>
 
-        <div class="mt-2 ms-3 hash-link">
-            {{ $post->text }}
+        <div class="mt-2 ms-3">
+            @php
+                $return = [];
+                $arr = explode('#', $post->text);
+                print_r($arr);
+                for ($i=1; $i < count($arr); $i++) {
+                    $str = $arr[$i];
+                    $buf = '';
+                    for ($j=0; $j < mb_strlen($str); $j++) {
+                        $chk = mb_substr($str, $j, 1);
+                        if (($chk <= " ")||$chk === " ") break;
+                        else $buf .= $chk;
+                    }
+                    if ($buf !== "") $return[] = $buf;
+                }
+                print_r($return);
+                $post_text = implode("\t", $return);
+
+            @endphp
+            {{$post_text}}
         </div>
+
         <div class="row">
             <div class="col-auto">
                 @if ($like = $post->like(Auth::id()))
@@ -92,13 +111,3 @@
 </ul>
 
 <hr>
-
-<script>
-const setHashtagLink= (selector)=>{
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(element =>{
-        element.innerHTML = element.innerHTML.replace(/#(\w+)/g, '<a href="#$1" class="text-decoration-none">#$1</a>');
-    });
-}
-setHashtagLink('.hash-link');
-</script>

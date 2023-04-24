@@ -104,19 +104,6 @@
             <hr class="dropdown-divider">
         @endcan
 
-        @guest
-            @if (Route::has('login'))
-                <li class="ps-3">
-                    <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-            @endif
-
-@if (Route::has('register'))
-    <li class="dropdown-item">
-        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-    </li>
-@endif
-@else
         <li class="dropdown-item dropdown">
             <div class="fw-bold">
                 {{ Auth::user()->username }}

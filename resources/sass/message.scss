@@ -84,7 +84,7 @@
 
 /* width of message list*/
 @media screen and (min-width: 992px) {
-    .message-list {
+    .message-list, .message-list-fix {
         width: 265px;
         .message-selected {
             background-color: #F4F7FC;
@@ -92,7 +92,7 @@
     }
 }
 @media screen and (max-width: 991px) {
-	.message-list {
+	.message-list, .message-list-fix {
 		width: 65px;
         .message-selected {
             background-color: #F4F7FC;
@@ -100,21 +100,15 @@
 	}
 }
 
-/* hide when the display width is < 992px */
-@media screen and (min-width: 992px) {
-	.hide-992 {
-		display: inline;
-	}
-}
-@media screen and (max-width: 991px) {
-	.hide-992 {
-		display: none;
-	}
+.message-list-fix {
+    position: fixed;
+    height: 100vh;
+    background-color: white;
 }
 
 /* image preview position */
 .image-preview {
-    position: absolute;
+    position: fixed;
     right: 10px;
     bottom: 40px;
 }

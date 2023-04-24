@@ -75,9 +75,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class, ['only' => ['store', 'destroy']]);
 
     #Message
-    Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
-    #Message show
-    Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
+    Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['show', 'store', 'update', 'destroy']]);
 
     #Search
     Route::resource('/search', SearchController::class, ['only' => ['index']]);

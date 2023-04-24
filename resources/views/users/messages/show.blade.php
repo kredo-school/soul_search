@@ -31,7 +31,7 @@
                                 @endif
                             </div>
                             <div class="col hide-992">
-                                <a href="{{ route('messages.show', ['user' => $a_user->id]) }}" class="text-decoration-none">
+                                <a href="{{ route('messages.show', ['user' => $a_user->id, 'message' => 1]) }}" class="text-decoration-none">
                                     @if($a_user->id == $user->id)
                                         <div class="text-dark fw-bold">
                                     @else

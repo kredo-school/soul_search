@@ -41,14 +41,14 @@
     {{-- orange icon, bold text, gray backcround @ message page --}}
     @if ( request()->is('*message*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
-            <a href="{{ route('messages.show', ['user' => Auth::id()]) }}" class="flex-fill nav-link link-dark">
+            <a href="{{ route('messages.show', ['user' => Auth::id(), 'message' => 1]) }}" class="flex-fill nav-link link-dark">
                 <i class="fa-solid fa-comment-dots text-orange"></i>
                 <span class="text-dark ms-2 d-none d-lg-inline">Message</span>
             </a>
         </li>
     @else
         <li class="nav-item py-2">
-            <a href="{{ route('messages.show', ['user' => Auth::id()]) }}" class="flex-fill nav-link link-dark" title="Message">
+            <a href="{{ route('messages.show', ['user' => Auth::id(), 'message' => 1]) }}" class="flex-fill nav-link link-dark" title="Message">
                 <i class="fa-solid fa-comment-dots"></i>
                 <span class="text-dark ms-2 d-none d-lg-inline">Message</span>
             </a>

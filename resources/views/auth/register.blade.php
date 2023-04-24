@@ -13,7 +13,7 @@
 @section('content')
 <div class="ss-sidebar p-0 m-0">
     <div class="sidebar-contents m-0 p-0">
-        <a href="{{ route('login') }}" class="text-decoration-none ms-2">
+        <a href="{{ route('register') }}" class="text-decoration-none ms-2">
             <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 d-none d-lg-inline">
         </a>
     </div>
@@ -32,8 +32,8 @@
                     <div class="form-section" id="first-form">
                         <div class="row justify-content-center">
                             <div class="col-8 mb-3 rounded-box btn-orange">
-                                <span class="col-5 text-center text-orange rounded-box btn-white ">Profile</span>
-                                <span class="col-5 text-end text-white rounded-box">Tags</span>
+                                <span class="col-5 text-center text-orange rounded-box btn-white fw-bold h4 mt-2 ms-2">Profile</span>
+                                <span class="col-5 text-end text-white rounded-box fw-bold h4 mt-2 me-1">Tags</span>
                             </div>
                         </div>
 
@@ -108,8 +108,8 @@
                             <div class="form-section" style="display: none" id="second-form">
                                 <div class="row justify-content-center">
                                     <div class="col-8 mb-3 rounded-box btn-orange">
-                                        <span class="col-md-5 text-center text-white rounded-box">Profile</span>
-                                        <span class="col-md-5 box-right text-center text-orange rounded-box btn-white ">Tags</span>
+                                        <span class="col-md-5 text-center text-white rounded-box fw-bold h4 mt-2">Profile</span>
+                                        <span class="col-md-5 box-right text-center text-orange rounded-box btn-white fw-bold h4 mt-2">Tags</span>
                                     </div>
                                 </div>
                                 <h2 class="text-center fw-bold mt-2">Choose Tags</h2>

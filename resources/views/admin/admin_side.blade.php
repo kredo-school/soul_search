@@ -19,19 +19,29 @@
 
 <div class="dropdown login-icon">
     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-unlock hide-700"></i>
+        <i class="fa-solid fa-unlock d-none d-lg-inline"></i>
     </button>
     <ul class="dropdown-menu">
-        <li class="dropdown-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->name }}
+
+        <!-- Admin Controls -->
+        @can('admin')
+            <a href="{{ route('admin.users') }}" class="dropdown-item">
+                <i class="fa-solid fa-user-gear"></i> Admin
             </a>
+            <hr class="dropdown-divider">
+        @endcan
+
+        <li class="dropdown-item dropdown">
+            <div class="fw-bold">
+                {{ Auth::user()->username }}
+            </div>
+
             <a class="" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
+                document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>

@@ -1,5 +1,5 @@
-<a href="{{ route('index') }}" class="text-decoration-none ms-3">
-    <img src="{{ asset('images/logo.svg')}}" class="m-3 hide-700">
+<a href="{{ route('index') }}" class="text-decoration-none ms-2">
+    <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 hide-700">
 </a>
 
 <ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">

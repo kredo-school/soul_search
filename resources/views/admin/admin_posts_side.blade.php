@@ -1,5 +1,5 @@
-<a href="{{ route('index') }}" class="text-decoration-none ms-3">
-    <img src="{{ asset('images/logo.svg')}}" class="m-3 hide-700">
+<a href="{{ route('index') }}" class="text-decoration-none ms-2">
+    <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 hide-700">
 </a>
 
 <ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
@@ -10,7 +10,7 @@
     </li>
     <li class="nav-item py-2 sidebar-selected fw-bold">
         <a href="#" class="nav-link link-dark">
-            <i class="fa-regular fa-file"></i>
+            <i class="fa-regular fa-file text-orange"></i>
                 <span class="text-dark hide-800">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posts
         </a>

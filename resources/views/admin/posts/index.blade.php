@@ -30,9 +30,10 @@
                             <thead class="small bg-orange">
                                 <tr>
                                     <th></th>
+                                    <th></th>
                                     <th class="ps-5">Tag / Text</th>
-                                    <th class="cell-padding">Username</th>
-                                    <th class="cell-padding">Created at</th>
+                                    <th class="cell-padding-sm">Username</th>
+                                    <th class="cell-padding-sm pe-5">Created at</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -41,6 +42,9 @@
                                 @forelse ($all_posts as $post)
                                 <tr>
                                     <td>
+                                        {{ $post->id }}
+                                    </td>
+                                    <td>
                                         <a href="{{ route('posts.show', $post->id) }}">
                                             <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->image }}" class="d-block mx-auto avatar-md">
                                         </a>
@@ -48,10 +52,10 @@
                                     <td class="ps-5">
                                         <span class="hash-link">{{ $post->text }}</span>
                                     </td>
-                                    <td class="cell-padding">
+                                    <td class="cell-padding-sm">
                                         {{ $post->user->username }}
                                     </td>
-                                    <td class="cell-padding">
+                                    <td class="cell-padding-sm pe-5">
                                         {{ $post->created_at }}
                                     </td>
                                     <td>

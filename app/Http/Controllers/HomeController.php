@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -41,8 +44,6 @@ class HomeController extends Controller
             ->with('main_tags', $main_tags)
             ->with('fav_tags', $fav_tags);
     }
-<<<<<<< Updated upstream
-=======
 
     public function getCloseUsers(){
         $user = Auth::user();
@@ -58,5 +59,4 @@ class HomeController extends Controller
 
         return $close_users;
     }
->>>>>>> Stashed changes
 }

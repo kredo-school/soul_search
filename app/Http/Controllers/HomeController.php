@@ -25,6 +25,14 @@ class HomeController extends Controller
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+        $close_users = $this->getCloseUsers();
+>>>>>>> Stashed changes
+=======
+        $close_users = $this->getCloseUsers();
+>>>>>>> Stashed changes
 
         // Need to fix to reflect the update of migrations
         foreach($tagged_chats as $chat){
@@ -40,4 +48,22 @@ class HomeController extends Controller
             ->with('main_tags', $main_tags)
             ->with('fav_tags', $fav_tags);
     }
+<<<<<<< Updated upstream
+=======
+
+    public function getCloseUsers(){
+        $user = Auth::user();
+
+        $close_users = collect($user->messagesSent)->merge($user->messagesReceived)->sortBy('pivot.created_at')
+        ->filter(function($a) use($user){
+            return $a->pivot->sender_id == $user->id || $a->pivot->receiver_id == $user->id;
+        });
+
+        $all_users = User::latest()->where('id', '!=', $user->id)->get();
+
+        $close_users = $close_users->merge($all_users)->unique('id')->take(7);
+
+        return $close_users;
+    }
+>>>>>>> Stashed changes
 }

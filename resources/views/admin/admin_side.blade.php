@@ -9,7 +9,7 @@
         </a>
     </li>
     <li class="my-1">
-        <a href="#" class="nav-link link-dark">
+        <a href="{{ route('admin.posts') }}" class="nav-link link-dark">
             <i class="fa-regular fa-file"></i>
                 <span class="text-dark hide-800">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posts

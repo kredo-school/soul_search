@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col pt-0 ps-2 mb-2">
-        <a class="shadow-none text-decoration-none me-2 float-{{$position}}" type="button" id="dropdownMenuButtonMsg{{$id}}" data-bs-toggle="dropdown">
+        <a class="shadow-none text-decoration-none float-{{$position}}" type="button" id="dropdownMenuButtonMsg{{$id}}" data-bs-toggle="dropdown">
             <span class="btn btn-sm btn-{{$color}} px-3 message-text">{{$text}}</span>
             @if($user_message->text_edited)
                 <div>
@@ -10,7 +10,7 @@
         </a>
         <span class="text-vsm text-muted float-{{$position}} {{$margin}}">{{$user_message->created_at->diffForHumans()}}</span>
         @if($auth)
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}">
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonMsg{{$id}}">
                 {{-- edit --}}
                 <li>
                     <a href="" class="dropdown-item text-dark" title="Edit" data-bs-toggle="modal" data-bs-target="#editMsgModal{{$id}}">

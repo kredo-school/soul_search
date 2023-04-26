@@ -10,8 +10,8 @@ class UserTag extends Model
     use HasFactory;
     protected $table='user_tags';
     protected $fillable = ['user_id','tag_id','tag_category','last_access'];
-    public $timestamps = false;
-    const CREATED_AT = 'last_access';
+    // public $timestamps = false;
+    const UPDATED_AT = 'last_access';
 
     public function user()
     {

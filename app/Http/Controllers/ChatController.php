@@ -14,8 +14,6 @@ class ChatController extends Controller
 {
     const LOCAL_STORAGE_FOLDER = 'public/images/';
 
-    private $user_tag;
-
     public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|min:1|max:255',
@@ -57,6 +55,8 @@ class ChatController extends Controller
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
+        $user_tag->user_id = Auth::id();
+        $user_tag->tag_id = $tag->id;
         $user_tag->last_access = \Carbon\Carbon::now();
         $user_tag->save();
 

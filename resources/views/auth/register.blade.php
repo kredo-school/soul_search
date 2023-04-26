@@ -159,9 +159,9 @@
                             <div class="row mb-0 ">
                                 <div class="col-md-7 button-adjust">
                                     <div class="form-navigation">
-                                        <button type="button" class="previous btn btn-primary text-white mb-3 float-start button-right" style="display: none" id="previousbtn" onclick="previous()">&lt; Previous</button>
-                                        <button type="button" class="next btn btn-orange text-white mb-3 float-end" id="nextbtn" onclick="next()">Next &gt;</button>
-                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end" id="submitbtn" style="display: none">
+                                        <button type="button" class="previous btn btn-primary text-white mb-3 float-start button-right fw-bold" style="display: none" id="previousbtn" onclick="previous()">&lt; Previous</button>
+                                        <button type="button" class="next btn btn-orange text-white mb-3 float-end fw-bold" id="nextbtn" onclick="next()">Next &gt;</button>
+                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end fw-bold" id="submitbtn" style="display: none">
                                             {{ __('Save') }}
                                         </button>
                                     </div>

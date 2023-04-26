@@ -19,6 +19,9 @@ use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FormController;
 
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\PostsController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,7 +75,9 @@ Route::group(['middleware' => 'auth'], function(){
     #Comment
     Route::resource('/posts/{post}/comments', CommentController::class, ['only' => ['store', 'destroy']]);
     #CommentLike
-    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class, ['only' => ['store', 'destroy']]);
+    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
+    #CONTACT
+    Route::resource('/contact', ContactController::class);
 
     #Message
     Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
@@ -89,4 +94,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/reports', ReportController::class, ['only' => ['store']]);
 });
 
-
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
+    #USERS
+    Route::get('/users', [UsersController::class, 'index'])->name('users');
+    Route::delete('/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('users.deactivate');
+    Route::patch('/users/{id}/activate', [UsersController::class, 'activate'])->name('users.activate');
+    Route::get('/posts', [PostsController::class, 'index'])->name('posts');
+    Route::delete('/posts/{post}/hide', [PostsController::class, 'hide'])->name('posts.hide');
+    Route::patch('/posts/{id}/unhide', [PostsController::class, 'unhide'])->name('posts.unhide');
+});

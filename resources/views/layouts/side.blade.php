@@ -96,6 +96,14 @@
     </button>
     <ul class="dropdown-menu">
 
+        <!-- Admin Controls -->
+        @can('admin')
+            <a href="{{ route('admin.users') }}" class="dropdown-item">
+                <i class="fa-solid fa-user-gear"></i> Admin
+            </a>
+            <hr class="dropdown-divider">
+        @endcan
+
         <li class="dropdown-item dropdown">
             <div class="fw-bold">
                 {{ Auth::user()->username }}

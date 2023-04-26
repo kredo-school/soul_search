@@ -34,8 +34,7 @@
                     </a>
                 </li>
             </ul>
-            @include('users.messages.modal.report')
-
         </div>
     </div>
 </div>
+@include('users.messages.modal.report')

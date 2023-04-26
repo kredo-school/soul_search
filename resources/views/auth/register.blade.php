@@ -11,12 +11,17 @@
 @section('title','Create Account')
 
 @section('content')
+<div class="ss-sidebar p-0 m-0">
+    <div class="sidebar-contents m-0 p-0">
+        <a href="{{ route('register') }}" class="text-decoration-none ms-2">
+            <img src="{{ asset('images/logo.svg')}}" class="m-3 ms-2 d-none d-lg-inline">
+        </a>
+    </div>
+</div>
 
-    <img src="{{ asset('images/logo.svg')}}" class="float-left mt-2 ms-4 icon-md">
-
-    <h1 class="text-center fw-bold">
-        Create Your Account
-    </h1>
+<h1 class="text-center fw-bold top-sp">
+    Create Your Account
+</h1>
 
 {{--  Card body  --}}
 <div class="container">
@@ -27,8 +32,8 @@
                     <div class="form-section" id="first-form">
                         <div class="row justify-content-center">
                             <div class="col-8 mb-3 rounded-box btn-orange">
-                                <span class="col-5 text-center text-orange rounded-box btn-white ">Profile</span>
-                                <span class="col-5 text-end text-white rounded-box">Tags</span>
+                                <span class="col-5 text-center text-orange rounded-box btn-white fw-bold h4 mt-2 ms-2">Profile</span>
+                                <span class="col-5 text-end text-white rounded-box fw-bold h4 mt-2 me-1">Tags</span>
                             </div>
                         </div>
 
@@ -103,8 +108,8 @@
                             <div class="form-section" style="display: none" id="second-form">
                                 <div class="row justify-content-center">
                                     <div class="col-8 mb-3 rounded-box btn-orange">
-                                        <span class="col-md-5 text-center text-white rounded-box">Profile</span>
-                                        <span class="col-md-5 box-right text-center text-orange rounded-box btn-white ">Tags</span>
+                                        <span class="col-md-5 text-center text-white rounded-box fw-bold h4 mt-2">Profile</span>
+                                        <span class="col-md-5 box-right text-center text-orange rounded-box btn-white fw-bold h4 mt-2">Tags</span>
                                     </div>
                                 </div>
                                 <h2 class="text-center fw-bold mt-2">Choose Tags</h2>
@@ -115,7 +120,7 @@
                                         <label for="tag_name" class="text-position">Tag1</label>
                                     </div>
                                     <div class="col-7">
-                                        <input type="text" name="tag_name[]" id="tag_name1" class="form-control" required="required">
+                                        <input type="text" name="tag_name[]" id="tag_name1" class="form-control" required="required" placeholder="e.g. Music">
                                         @error('tag_name')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -129,7 +134,7 @@
                                         <label for="tag_name" class="text-position">Tag2</label>
                                     </div>
                                     <div class="col-7">
-                                        <input type="text" name="tag_name[]" id="tag_name2" class="form-control" required="required">
+                                        <input type="text" name="tag_name[]" id="tag_name2" class="form-control" required="required" placeholder="e.g. Travel">
                                         @error('tag_name')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -142,7 +147,7 @@
                                         <label for="tag_name" class="text-position">Tag3</label>
                                     </div>
                                     <div class="col-7">
-                                        <input type="text" name="tag_name[]" id="tag_name3" class="form-control" required="required">
+                                        <input type="text" name="tag_name[]" id="tag_name3" class="form-control" required="required" placeholder="e.g. Game">
                                         @error('tag_name')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -154,9 +159,9 @@
                             <div class="row mb-0 ">
                                 <div class="col-md-7 button-adjust">
                                     <div class="form-navigation">
-                                        <button type="button" class="previous btn btn-primary text-white mb-3 float-start button-right" style="display: none" id="previousbtn" onclick="previous()">&lt; Previous</button>
-                                        <button type="button" class="next btn btn-orange text-white mb-3 float-end" id="nextbtn" onclick="next()">Next &gt;</button>
-                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end" id="submitbtn" style="display: none">
+                                        <button type="button" class="previous btn btn-primary text-white mb-3 float-start button-right fw-bold" style="display: none" id="previousbtn" onclick="previous()">&lt; Previous</button>
+                                        <button type="button" class="next btn btn-orange text-white mb-3 float-end fw-bold" id="nextbtn" onclick="next()">Next &gt;</button>
+                                        <button type="submit" class="btn btn-orange text-white mb-3 float-end fw-bold" id="submitbtn" style="display: none">
                                             {{ __('Save') }}
                                         </button>
                                     </div>

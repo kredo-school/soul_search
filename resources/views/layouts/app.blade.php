@@ -32,7 +32,7 @@
 <body>
 
     {{-- not showing in login, register, or post pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*reset*') ||  request()->is('*post*'))
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*reset*') ||  request()->is('*post*')|  request()->is('*admin*'))
     @else
     <div class="ss-container">
         <div class="row ss-row">

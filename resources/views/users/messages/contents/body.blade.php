@@ -2,7 +2,7 @@
 
 <div class="row mt-2 p-0">
     <div class="col ms-0 p-0">
-        <div class="message-container p-0">
+        <div class="message-container p-0 mb-5">
             @foreach ($pivot_items as $item)
                 @php
                     $user_message = $item->pivot;

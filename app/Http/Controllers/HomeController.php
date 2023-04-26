@@ -25,14 +25,7 @@ class HomeController extends Controller
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-        $close_users = $this->getCloseUsers();
->>>>>>> Stashed changes
-=======
-        $close_users = $this->getCloseUsers();
->>>>>>> Stashed changes
+        $close_users = $this->showCloseUsers();
 
         // Need to fix to reflect the update of migrations
         foreach($tagged_chats as $chat){

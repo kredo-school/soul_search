@@ -1,46 +1,51 @@
+.display-user {
+    width: 80%;
+}
 
-/* sidebar display settings */
+.cell-padding {
+    padding-left:100px !important;
+}
+
+.avatar-md{
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit:cover;
+  }
+
+  .icon-md{
+    font-size:3.5rem;
+  }
+
+.user-table {
+    width: 300px;
+}
+
+.text-heigt {
+    height: 10%;
+}
+
 .ss-container {
 	display: flex;
 	width: 100%;
     height: 100vh;
 }
-
-.ss-row {
-    height: 100%;
-}
-
 .ss-sidebar {
+	width: 100%;
     height: 100%;
-}
-@media screen and (min-width: 992px) {
-	.ss-sidebar {
-        width: 150px;
-	}
-}
-@media screen and (max-width: 991px) {
-	.ss-sidebar {
-        width: 50px;
-	}
-}
-
-.sidebar-fix {
-    position: fixed;
-    top: 0;
-    left: 0;
-	width: inherit;
-    height: 100vh;
     background-color: white;
 }
 
 .ss-main {
 	width: 100%;
-    height: 100%;
 	margin:0;
 }
-
 .sidebar-selected {
     background-color: #F4F7FC;
+}
+@media screen and (max-width: 800px) {
+	.sidebar-selected {
+        background-color: white;
+	}
 }
 
 /* remove auto margin and padding */
@@ -64,13 +69,9 @@ html, body, .container-fluid, .row {
 .login-icon {
     position: absolute;
     bottom: 20px;
+    left: 20px;
 }
-@media screen and (min-width: 992px) {
-	.login-icon {
-		left: 20px;
-	}
-}
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 800px) {
 	.login-icon {
 		left: 5px;
 	}
@@ -79,8 +80,7 @@ html, body, .container-fluid, .row {
 /* remove the left space of ul list */
 ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding-left: 0
 }
 
 /* colors */
@@ -103,15 +103,4 @@ ul {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #FFB84D;
   --bs-btn-disabled-border-color: #FFB84D;
-}
-
-@media screen and (min-width: 992px) {
-	li a i {
-		font-size: 0.9rem;
-	}
-}
-@media screen and (max-width: 991px) {
-	li a i {
-		font-size: 1rem;
-	}
 }

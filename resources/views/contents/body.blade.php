@@ -2,7 +2,7 @@
     <div class="row justify-content-center" style="height: 1.5rem;">
         <!-- Username and Date -->
         <div class="col pt-0 ps-0">
-            <a href="{{ route('profiles.index') }}" class="h5 text-decoration-none fw-bold text-dark tag-name">{{ $chat->user->username }}</a>
+            <a href="{{ route('profiles.show', $chat->user->id) }}" class="h5 text-decoration-none fw-bold text-dark tag-name">{{ $chat->user->username }}</a>
             &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->

@@ -66,6 +66,8 @@
 .user-avatar {
     width: 4em;
     height: 4em;
+    object-fit: cover;
+    position: absolute;
 }
 
 .chat-text {
@@ -98,10 +100,6 @@
     &:hover {
         background-color: #eef3fc;
     }
-}
-
-.user-avatar {
-    position: absolute;
 }
 
 .chat-content {

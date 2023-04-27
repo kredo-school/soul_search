@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use App\Models\Chat;
-use App\Models\User;
 use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,23 +49,16 @@ class ChatController extends Controller
         }
     }
 
-    public function show(Tag $tag, User $user, UserTag $user_tag){
+    public function show(Tag $tag){
         $user = Auth::user();
-        $recent_tags = getRecentTags();
-        $main_tags = getMainTags();
-        $fav_tags = getFavTags();
-        // $user_tag->user_id = Auth::id();
-        // $user_tag->tag_id = $tag->id;
-        // $user_tag->last_access = \Carbon\Carbon::now();
-        // $user_tag->save();
 
         $tagged_chats = Chat::where('tag_id',$tag->id)->get()->filter(function($chat){
             return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
         });
 
 
-        $user_tag = $tag->userTag()->where('user_id', $user->id)->first();
-        // dd($user_tag, $user->id, $tag->name);
+        $user_tag = $tag->userTag()->where('user_id', Auth::id())->first();
+
         if ($user_tag) {
             $user_tag->updateLastAccess();
         } else {
@@ -77,6 +69,10 @@ class ChatController extends Controller
             ]);
             $user_tag->save();
         }
+
+        $recent_tags = getRecentTags();
+        $main_tags = getMainTags();
+        $fav_tags = getFavTags();
 
         return view('show')
             ->with('tag', $tag)

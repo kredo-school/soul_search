@@ -64,8 +64,9 @@ class ChatController extends Controller
             return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
         });
 
-        $user_tag = UserTag::where('user_id', $user->id)->where('tag_id', $tag->id)->first();
 
+        $user_tag = $tag->userTag()->where('user_id', $user->id)->first();
+        // dd($user_tag, $user->id, $tag->name);
         if ($user_tag) {
             $user_tag->updateLastAccess();
         } else {

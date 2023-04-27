@@ -42,14 +42,16 @@
                                 @foreach ($all_users as $user)
                                     <tr>
                                         <td>
+                                            <a href="{{ route('profiles.show', $user->id) }}" class="text-decoration-none">
                                             @if ($user->avatar)
                                                 <img src="{{ asset('/storage/avatars/' . $user->avatar) }}" alt="{{ $user->avatar }}" class="rounded-circle d-block mx-auto avatar-md">
                                             @else
                                                 <i class="fa-solid fa-circle-user text-secondary d-block text-center icon-md"></i>
                                             @endif
+                                            </a>
                                         </td>
                                         <td class="ps-5">
-                                            <a href="#" class="text-decoration-none text-dark">{{ $user->username }}</a>
+                                            {{ $user->username }}
                                         </td>
                                         <td class="cell-padding">
                                             {{ $user->email }}

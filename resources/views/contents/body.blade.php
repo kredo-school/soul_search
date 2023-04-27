@@ -1,8 +1,8 @@
 <div class="container ps-3 pt-2">
     <div class="row justify-content-center" style="height: 1.5rem;">
         <!-- Username and Date -->
-        <div class="col pt-0 ps-2">
-            <a href="{{ route('profiles.index') }}" class="text-decoration-none fw-bold text-dark tag-name">{{ $chat->user->username }}</a>
+        <div class="col pt-0 ps-0">
+            <a href="{{ route('profiles.index') }}" class="h5 text-decoration-none fw-bold text-dark tag-name">{{ $chat->user->username }}</a>
             &nbsp;&nbsp;<span class="text-muted fw-light small tag-name">{{ date('m/d/Y H:i', strtotime($chat->created_at)) }}</span>
         </div>
         <!-- A Heart Button and Number of Likes -->
@@ -46,9 +46,9 @@
     </div>
     <!-- Body -->
     @if ($chat->image)
-        <p class="chat-text fw-light ms-2 w-75">{{ $chat->chat }}</p>
+        <p class="chat-text fw-light ms-0 w-75 pt-1">{{ $chat->chat }}</p>
         <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image mb-4">
     @else
-        <p class="chat-text fw-light ms-2 w-75 pb-1">{{ $chat->chat }}</p>
+        <p class="chat-text fw-light ms-0 w-75 py-1">{{ $chat->chat }}</p>
     @endif
 </div>

@@ -8,6 +8,8 @@
     "/css/side.css": "/css/side.css",
     "/css/register.css": "/css/register.css",
     "/css/contact.css": "/css/contact.css",
+    "/css/admin_posts.css": "/css/admin_posts.css",
+    "/css/admin_users.css": "/css/admin_users.css",
     "/css/search.css": "/css/search.css",
     "/css/message.css": "/css/message.css",
     "/css/post.css": "/css/post.css"

@@ -29,7 +29,6 @@ class HomeController extends Controller
         $main_tags = getMainTags();
         $fav_tags = getFavTags();
 
-        // Need to fix to reflect the update of migrations
         foreach($tagged_chats as $chat){
             if($chat->main_tag->isMain() || $chat->fav_tag->isFav() || $chat->recent_tag->isRecent()){
                 $tagged_chats[] = $chat;

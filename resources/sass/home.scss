@@ -16,6 +16,12 @@
     color: #505050;
 }
 
+.tag-selected {
+    &:hover {
+    background-color: #F4F7FC;
+    }
+}
+
 .logo-center {
     text-align: center;
 }

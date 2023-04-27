@@ -17,7 +17,7 @@ function getRecentTags(){
 function getMainTags(){
     $user = Auth::user();
 
-    return $user->userTag()->where('tag_category', 'main')->with('tag')->get();
+    return $user->userTag()->where('tag_category', 'main')->with('tag')->take(3)->get();
 }
 
 function getFavTags(){

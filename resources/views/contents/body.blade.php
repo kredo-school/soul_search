@@ -30,17 +30,29 @@
         <!-- A Ellipsis button for Report Chat and Follow/Unfollow -->
         @if (Auth::user()->id !== $chat->user->id)
             <div class="col-auto text-end me-5">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
-                        <i class="fa-solid fa-ellipsis"></i>
+                <button type="button" class="btn btn-sm shadow-none" data-bs-toggle="dropdown">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportChatModal">
+                        <i class="fa-solid fa-circle-exclamation"></i> Report
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportChatModal">
-                            <i class="fa-solid fa-circle-exclamation"></i> Report
-                        </button>
+                    <div>
+                        @if ($chat->user->followedBy(Auth::user()))
+                            <form action="{{ route('follows.destroy', $chat->user->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item text-danger">Unfollow</button>
+                            </form>
+                        @else
+                            <form action="{{ route('follows.store', $chat->user->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-primary">Follow</button>
+                            </form>
+                        @endif
                     </div>
-                    @include('contents.modals.report')
                 </div>
+                @include('contents.modals.report')
             </div>
         @endif
     </div>

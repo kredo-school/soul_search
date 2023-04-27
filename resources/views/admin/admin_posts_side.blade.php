@@ -4,12 +4,12 @@
 
 <ul class="nav nav-pills flex-column ms-0 mb-auto mt-4">
     <li class="my-1">
-        <a href="#" class="flex-fill nav-link link-dark" aria-current="page">
+        <a href="{{ route('admin.users') }}" class="flex-fill nav-link link-dark" aria-current="page">
             <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Users
         </a>
     </li>
     <li class="nav-item py-2 sidebar-selected fw-bold">
-        <a href="#" class="nav-link link-dark">
+        <a href="{{ route('admin.posts') }}" class="nav-link link-dark">
             <i class="fa-regular fa-file text-orange"></i>
                 <span class="text-dark hide-800">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posts
@@ -22,6 +22,14 @@
         <i class="fa-solid fa-unlock d-none d-lg-inline"></i>
     </button>
     <ul class="dropdown-menu">
+
+        <!-- Admin Controls -->
+        @can('admin')
+            <a href="{{ route('admin.users') }}" class="dropdown-item">
+                <i class="fa-solid fa-user-gear"></i> Admin
+            </a>
+            <hr class="dropdown-divider">
+        @endcan
 
         <li class="dropdown-item dropdown">
             <div class="fw-bold">

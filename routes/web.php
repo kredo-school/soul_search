@@ -61,9 +61,11 @@ Route::group(['middleware' => 'auth'], function(){
     #Profile(User)
     Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);
     #Avatar
-    Route::resource('/avatars', AvatarController::class, ['only' => ['edit', 'update', 'destroy']]);
+    Route::get('/users/{user}/avatars', [AvatarController::class, 'edit'])->name('avatars.edit');
+    Route::patch('/users/{user}/avatars', [AvatarController::class, 'update'])->name('avatars.update');
     #Password
-    Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
+    Route::get('/users/{user}/passwords', [ChangePasswordController::class, 'edit'])->name('passwords.edit');
+    Route::patch('/users/{user}/passwords', [ChangePasswordController::class, 'update'])->name('passwords.update');
     #Follow
     Route::resource('/users/{user}/follows', FollowController::class, ['only' => ['store', 'destroy']]);
 

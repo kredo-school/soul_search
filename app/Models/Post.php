@@ -34,6 +34,6 @@ class Post extends Model
 
     public function postTags()
     {
-        return $this->hasMany(PostTag::class)->latest();
+        return $this->hasMany(PostTag::class);
     }
 }

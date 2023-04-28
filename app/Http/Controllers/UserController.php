@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::where('id', Auth::id())->first();
+        $user = Auth::user();
         $main_tags = getMainTags(); // from helpers.php
         $fav_tags  = getFavTags(); // from helpers.php
         return view('users.profiles.show', compact('user', 'main_tags', 'fav_tags'));
@@ -50,12 +50,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::where('id', $id)->first();
         $all_user_tags = UserTag::all();
-        $main_tags = UserTag::where('user_id', $id)->where('tag_category', 'main')->latest()->get();
-        $fav_tags = UserTag::where('user_id', $id)->where('tag_category', 'favorite')->latest()->get();
+        $main_tags = UserTag::where('user_id', $user->id)->where('tag_category', 'main')->latest()->get();
+        $fav_tags = UserTag::where('user_id', $user->id)->where('tag_category', 'favorite')->latest()->get();
 
         return view('users.profiles.show', compact('user', 'main_tags', 'fav_tags'));
     }

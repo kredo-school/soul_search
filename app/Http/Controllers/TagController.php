@@ -25,15 +25,15 @@ class TagController extends Controller
         $tag_name = $request->name;
         $category = $request->category;
 
-        $db_tags = Tag::get();
+        $tags = Tag::get();
         $is_new = true;
-        foreach($db_tags as $db_tag){
-            if($db_tag->name == $tag_name){
+        foreach($tags as $tag){
+            if($tag->name == $tag_name){
                 $is_new = false;
                 // create UserTag
                 UserTag::create([
                     'user_id'      => Auth::id(),
-                    'tag_id'       => $db_tag->id,
+                    'tag_id'       => $tag->id,
                     'tag_category' => $category,
                 ]);
             }

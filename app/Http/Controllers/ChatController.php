@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use App\Models\Tag;
+use App\Models\UserTag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -23,6 +24,10 @@ class ChatController extends Controller
         if(isset($request->image)){
             $image = $this->saveImage($request);
         }
+
+        $user_tag = UserTag::where('tag_id', $tag->id)->first();
+        $user_tag->last_access = date("Y-m-d H:i:s");
+        $user_tag->save();
 
         $tag->chats()->create([
             'user_id' => Auth::id(),
@@ -49,6 +54,7 @@ class ChatController extends Controller
     }
 
     public function show(Tag $tag){
+
         $recent_tags = getRecentTags();
         $main_tags = getMainTags();
         $fav_tags = getFavTags();

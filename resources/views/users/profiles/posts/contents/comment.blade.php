@@ -15,7 +15,7 @@
         <li class="list-group-item border-0 p-0 mb-2">
             <div class="row">
                 <div class="col-auto">
-                    <a href="#">
+                    <a href="{{ route('profiles.show', $comment->user->id) }}">
                         @if ($comment->user->avatar)
                             <img src="{{ asset('/storage/avatars/'. $comment->user->avatar) }}" class="avatar-sm rounded-circle" alt="">
                         @else

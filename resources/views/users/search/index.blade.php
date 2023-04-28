@@ -73,30 +73,29 @@
     </div>
 </div>
 
+<script>
+    function searchUserTag() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('userInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("searchUl");
+        li = ul.getElementsByTagName('li');
 
-    <script>
-        function searchUserTag() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('userInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("searchUl");
-            li = ul.getElementsByTagName('li');
-
-            // show items matching the search query
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("span")[0];
-                txtValue = a.textContent || a.innerText;
-                if (filter == ''){
-                    li[i].style.display = "none";
+        // show items matching the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("span")[0];
+            txtValue = a.textContent || a.innerText;
+            if (filter == ''){
+                li[i].style.display = "none";
+            } else {
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
                 } else {
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                    } else {
-                        li[i].style.display = "none";
-                    }
+                    li[i].style.display = "none";
                 }
             }
         }
-    </script>
+    }
+</script>
 
 @endsection

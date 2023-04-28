@@ -3,28 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class TagController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/images/';
-    private $tag;
+    public function edit($id)
+    {
+        $user           = Auth::user();
+        $main_tags      = getMainTags(); // from helpers
+        $fav_tags       = getFavTags(); // from helpers
 
-    public function __construct(Tag $tag){
-        $this->tag = $tag;
+        return view('users.profiles.tags.edit', compact('user', 'main_tags', 'fav_tags'));
     }
 
     public function store(Request $request){
         $request->validate([
-            'tag' => 'required|max:255'
+            'name' => 'required|regex:/^[a-zA-Z0-9]+$/|max:255'
         ]);
+        $tag_name = $request->name;
+        $category = $request->category;
 
-        $this->tag->name = $request->tag;
-        $this->tag->user_id = Auth::user()->id;
-        $this->save();
+        $tags = Tag::get();
+        $is_new = true;
+        foreach($tags as $tag){
+            if($tag->name == $tag_name){
+                $is_new = false;
+                // create UserTag
+                UserTag::create([
+                    'user_id'      => Auth::id(),
+                    'tag_id'       => $tag->id,
+                    'tag_category' => $category,
+                ]);
+            }
+        }
+        if($is_new){
+            // create new Tag
+            $new_tag = new Tag;
+            $new_tag->name = $tag_name;
+            $new_tag->save();
 
+            $new_tag_id = $new_tag->id;
+
+            // create UserTag
+            UserTag::create([
+                'user_id'      => Auth::id(),
+                'tag_id'       => $new_tag_id,
+                'tag_category' => $category,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function destroy(Request $request){
+        // delete UserTag
+        foreach($request->usertag_ids as $id){
+            UserTag::where('id', $id)->delete();
+        }
         return redirect()->back();
     }
 }

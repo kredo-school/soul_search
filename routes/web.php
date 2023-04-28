@@ -9,7 +9,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LikeController;
@@ -17,7 +16,6 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\FormController;
 
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
@@ -63,6 +61,8 @@ Route::group(['middleware' => 'auth'], function(){
     #Avatar
     Route::get('/users/{user}/avatars', [AvatarController::class, 'edit'])->name('avatars.edit');
     Route::patch('/users/{user}/avatars', [AvatarController::class, 'update'])->name('avatars.update');
+    #Tag
+    Route::resource('/tags', TagController::class, ['only' => ['edit', 'store', 'destroy']]);
     #Password
     Route::get('/users/{user}/passwords', [ChangePasswordController::class, 'edit'])->name('passwords.edit');
     Route::patch('/users/{user}/passwords', [ChangePasswordController::class, 'update'])->name('passwords.update');

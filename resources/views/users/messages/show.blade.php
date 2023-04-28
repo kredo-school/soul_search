@@ -93,6 +93,9 @@
 
                 <!-- Body -->
                 @include('users.messages.contents.body')
+            @else
+                <div class="bg-white p-2 mb-0 message-footer" id="footer">
+                </div>
             @endif
         </div>
     </div>

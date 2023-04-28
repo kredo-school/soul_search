@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Tag;
 use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,8 +53,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        $main_tags = getMainTags(); // from helpers
-        $fav_tags  = getFavTags(); // from helpers
+        $all_user_tags = UserTag::all();
+        $main_tags = UserTag::where('user_id', $id)->where('tag_category', 'main')->latest()->get();
+        $fav_tags = UserTag::where('user_id', $id)->where('tag_category', 'favorite')->latest()->get();
 
         return view('users.profiles.show', compact('user', 'main_tags', 'fav_tags'));
     }

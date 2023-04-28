@@ -45,15 +45,23 @@
                 @endforeach
                 @foreach ($tags as $tag)
                     <li class="mt-3 ms-2" style="display: none;">
-                        {{-- need link to chat --}}
-                        <a href="#" class="text-decoration-none">
+                        <a href="{{ route('chats.show', $tag->id) }}" class="text-decoration-none">
                             <div class="row">
                                 <div class="col-sm-auto">
                                     <i class="fa-solid fa-hashtag text-secondary icon-srch"></i>
                                 </div>
                                 <div class="col-sm">
                                     <div><span class="text-dark">{{$tag->name}}</span></div>
-                                    <div class="text-muted">400 chats{{-- count chat numbers --}}</div>
+                                    @php
+                                        $chat_count = $tag->chats->count();
+                                    @endphp
+                                    <div class="text-muted">
+                                        @if ($chat_count > 1)
+                                            {{$chat_count}}&nbsp;chats
+                                        @else
+                                            {{$chat_count}}&nbsp;chat
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </a>

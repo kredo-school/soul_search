@@ -18,7 +18,7 @@
             @else
                 <form action="{{ route('chat.like.store', $chat->id) }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-sm shadow-none">
+                    <button type="submit" title="Like this chat" class="btn btn-sm shadow-none">
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </form>
@@ -34,23 +34,23 @@
                     <i class="fa-solid fa-ellipsis"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportChatModal">
-                        <i class="fa-solid fa-circle-exclamation"></i> Report
-                    </button>
                     <div>
-                        @if ($chat->user->followedBy(Auth::user()))
-                            <form action="{{ route('follows.destroy', $chat->user->id) }}" method="post">
+                        @if ($chat->user->followedBy(Auth::id()))
+                            <form action="{{ route('follows.destroy', ['user' => $chat->user->id, 'follow' => $chat->user->follows()->where('following_id', Auth::id())->first()->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="dropdown-item text-danger">Unfollow</button>
+                                <button type="submit" class="btn dropdown-item text-danger"><i class="fa-solid fa-user-minus text-danger pe-1"></i>Unfollow</button>
                             </form>
                         @else
-                            <form action="{{ route('follows.store', $chat->user->id) }}" method="post">
+                            <form action="{{ route('follows.store', ['user' => $chat->user->id]) }}" method="post">
                                 @csrf
-                                <button type="submit" class="dropdown-item text-primary">Follow</button>
+                                <button type="submit" class="btn dropdown-item text-primary"><i class="fa-solid fa-user-plus text-primary pe-1"></i>Follow</button>
                             </form>
                         @endif
                     </div>
+                    <button class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportChatModal">
+                        <i class="fa-solid fa-circle-exclamation pe-1"></i>Report
+                    </button>
                 </div>
                 @include('contents.modals.report')
             </div>

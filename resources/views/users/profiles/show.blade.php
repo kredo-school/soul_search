@@ -62,7 +62,7 @@
                                 </ul>
                                 @include('users.profiles.modal.report')
                                 {{-- send message --}}
-                                <a href="{{ route('messages.show', ['user' => $user]) }}" class="btn btn-orange float-end ms-2 mt-2">
+                                <a href="{{ route('messages.show', ['user' => $user]) }}" class="btn btn-orange btn-sm float-end ms-2 mt-2">
                                     send message
                                 </a>
                                 {{-- if followed --}}
@@ -70,7 +70,7 @@
                                     <form action="{{ route('follows.destroy', ['user' => $user->id, 'follow' => $user->follows()->where('following_id', Auth::id())->first()->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger float-end mt-2" type="submit">
+                                        <button class="btn btn-danger btn-sm float-end mt-2" type="submit">
                                         <span class="px-2">unfollow</span>
                                         </button>
                                     </form>
@@ -78,7 +78,7 @@
                                 @else
                                     <form action="{{ route('follows.store', ['user' => $user->id]) }}" method="post">
                                         @csrf
-                                        <button class="btn btn-secondary float-end mt-2" type="submit">
+                                        <button class="btn btn-secondary btn-sm float-end mt-2" type="submit">
                                         <span class="px-2">follow</span>
                                         </button>
                                     </form>

@@ -56,9 +56,8 @@
             </div>
         </div>
 
-        <div class="mt-2 ms-3 hash-link">
-            {{ $post->text }}
-        </div>
+        <div class="mt-2 ms-3" id="hash-link"></div>
+
         <div class="row">
             <div class="col-auto">
                 @if ($like = $post->like(Auth::id()))
@@ -94,11 +93,26 @@
 <hr>
 
 <script>
-const setHashtagLink= (selector)=>{
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(element =>{
-        element.innerHTML = element.innerHTML.replace(/#(\w+)/g, '<a href="#$1" class="text-decoration-none">#$1</a>');
+    let string = "{{$post->text}}";
+    let pattern = /#(\w+)/g; // tags
+
+    let matches = string.match(pattern); // get the matched words
+
+    // set links to the matched words
+    let links = {};
+    @foreach ($post->postTags as $post_tag)
+        var name = '#{{$post_tag->tag->name}}';
+        links[name] = "{{route('chats.show',$post_tag->tag_id)}}";
+    @endforeach
+
+    let result = string.replace(pattern, function(match) {
+      // replace the matched word with a link
+      return '<a href="' + links[match] + '" class="text-decoration-none">' + match + '</a>';
     });
-}
-setHashtagLink('.hash-link');
+    console.log(result);
+
+    // set the HTML content of an element with the result
+    let hashLink = document.getElementById("hash-link");
+    hashLink.innerHTML = result;
+
 </script>

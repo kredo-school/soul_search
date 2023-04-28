@@ -17,6 +17,9 @@ use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\Auth\RegisterController;
 
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\PostsController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,11 +59,17 @@ Route::group(['middleware' => 'auth'], function(){
     #Profile(User)
     Route::resource('/profiles', UserController::class, ['only' => ['index', 'show', 'edit', 'update']]);
     #Avatar
+<<<<<<< HEAD
     Route::resource('/avatars', AvatarController::class, ['only' => ['edit', 'update', 'destroy']]);
     #Tag
     Route::resource('/tags', TagController::class, ['only' => ['edit', 'store', 'destroy']]);
+=======
+    Route::get('/users/{user}/avatars', [AvatarController::class, 'edit'])->name('avatars.edit');
+    Route::patch('/users/{user}/avatars', [AvatarController::class, 'update'])->name('avatars.update');
+>>>>>>> main
     #Password
-    Route::resource('/passwords', ChangePasswordController::class, ['only' => ['edit', 'update']]);
+    Route::get('/users/{user}/passwords', [ChangePasswordController::class, 'edit'])->name('passwords.edit');
+    Route::patch('/users/{user}/passwords', [ChangePasswordController::class, 'update'])->name('passwords.update');
     #Follow
     Route::resource('/users/{user}/follows', FollowController::class, ['only' => ['store', 'destroy']]);
 
@@ -72,7 +81,9 @@ Route::group(['middleware' => 'auth'], function(){
     #Comment
     Route::resource('/posts/{post}/comments', CommentController::class, ['only' => ['store', 'destroy']]);
     #CommentLike
-    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class, ['only' => ['store', 'destroy']]);
+    Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
+    #CONTACT
+    Route::resource('/contact', ContactController::class);
 
     #Message
     Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
@@ -89,4 +100,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/reports', ReportController::class, ['only' => ['store']]);
 });
 
-
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
+    #USERS
+    Route::get('/users', [UsersController::class, 'index'])->name('users');
+    Route::delete('/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('users.deactivate');
+    Route::patch('/users/{id}/activate', [UsersController::class, 'activate'])->name('users.activate');
+    Route::get('/posts', [PostsController::class, 'index'])->name('posts');
+    Route::delete('/posts/{post}/hide', [PostsController::class, 'hide'])->name('posts.hide');
+    Route::patch('/posts/{id}/unhide', [PostsController::class, 'unhide'])->name('posts.unhide');
+});

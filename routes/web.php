@@ -78,13 +78,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/posts/{post}/comments', CommentController::class, ['only' => ['store', 'destroy']]);
     #CommentLike
     Route::resource('/posts/{post}/comments/{comment}/reactions', CommentLikeController::class);
-    #CONTACT
-    Route::resource('/contact', ContactController::class);
 
     #Message
     Route::resource('/users/{user}/messages', MessageController::class,  ['only' => ['store', 'update', 'destroy']]);
     #Message show
-    Route::get('/users/{user}/messages/', [MessageController::class, 'show'])->name('messages.show');
+    Route::get('/users/{user}/messages', [MessageController::class, 'show'])->name('messages.show');
 
     #Search
     Route::resource('/search', SearchController::class, ['only' => ['index']]);

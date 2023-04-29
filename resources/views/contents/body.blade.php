@@ -58,9 +58,9 @@
     </div>
     <!-- Body -->
     @if ($chat->image)
-        <p class="chat-text ms-0 w-75 pt-1 mb-2">{{ $chat->chat }}</p>
+        <p class="chat-text ms-0 w-75 pt-1 mb-2" style="white-space:pre-wrap;">{{ $chat->chat }}</p>
         <img src="{{ asset('/storage/images/' . $chat->image) }}" alt="{{ $chat->image }}" class="img-fluid chat-image mb-4">
     @else
-        <p class="chat-text ms-0 w-75 py-1">{{ $chat->chat }}</p>
+        <p class="chat-text ms-0 w-75 py-1" style="white-space:pre-wrap;">{{ $chat->chat }}</p>
     @endif
 </div>

@@ -7,7 +7,7 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}{{$modal}}">
             <li>
                 <a href="" class="dropdown-item text-warning" title="Image" data-bs-toggle="modal" data-bs-target="#msgImageModal{{$id}}">
-                    <i class="fa-solid fa-magnifying-glass"></i> Zoom
+                    <i class="fa-solid fa-magnifying-glass"></i> Zoom up
                 </a>
             </li>
             @if ($auth)

@@ -102,6 +102,8 @@
 
 .message-list-fix {
     position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
     height: 100vh;
     background-color: white;
 }

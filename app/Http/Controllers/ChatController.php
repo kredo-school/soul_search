@@ -65,6 +65,7 @@ class ChatController extends Controller
             $user_tag = new UserTag([
                 'user_id' => $user->id,
                 'tag_id' => $tag->id,
+                'tag_category' => 'favorite',
                 'last_access' => now(),
             ]);
             $user_tag->save();

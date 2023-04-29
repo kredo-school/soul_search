@@ -50,9 +50,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        $all_user_tags = UserTag::all();
+        $user = User::find($id);
         $main_tags = UserTag::where('user_id', $user->id)->where('tag_category', 'main')->latest()->get();
         $fav_tags = UserTag::where('user_id', $user->id)->where('tag_category', 'favorite')->latest()->get();
 

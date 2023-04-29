@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chat;
 use App\Models\Tag;
+use App\Models\Chat;
+use App\Models\UserTag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
@@ -49,13 +50,30 @@ class ChatController extends Controller
     }
 
     public function show(Tag $tag){
-        $recent_tags = getRecentTags();
-        $main_tags = getMainTags();
-        $fav_tags = getFavTags();
+        $user = Auth::user();
 
         $tagged_chats = Chat::where('tag_id',$tag->id)->get()->filter(function($chat){
             return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
         });
+
+
+        $user_tag = $tag->userTag()->where('user_id', Auth::id())->first();
+
+        if ($user_tag) {
+            $user_tag->updateLastAccess();
+        } else {
+            $user_tag = new UserTag([
+                'user_id' => $user->id,
+                'tag_id' => $tag->id,
+                'tag_category' => 'favorite',
+                'last_access' => now(),
+            ]);
+            $user_tag->save();
+        }
+
+        $recent_tags = getRecentTags();
+        $main_tags = getMainTags();
+        $fav_tags = getFavTags();
 
         return view('show')
             ->with('tag', $tag)

@@ -16,6 +16,12 @@
     color: #505050;
 }
 
+.tag-selected {
+    &:hover {
+    background-color: #F4F7FC;
+    }
+}
+
 .logo-center {
     text-align: center;
 }
@@ -60,6 +66,8 @@
 .user-avatar {
     width: 4em;
     height: 4em;
+    object-fit: cover;
+    position: absolute;
 }
 
 .chat-text {
@@ -92,10 +100,6 @@
     &:hover {
         background-color: #eef3fc;
     }
-}
-
-.user-avatar {
-    position: absolute;
 }
 
 .chat-content {

@@ -12,12 +12,16 @@
     <div class="message-list bg-white">
         <ul>
             <div class="message-list-fix border-start border-end">
-                @foreach($all_users as $a_user)
+                @php
+                    $auth_id = Auth::id();
+                @endphp
+                @foreach($all_users_array as $user_array)
                     @php
-                        $message_to = $a_user->messageTo(Auth::id());
-                        $message_from = $a_user->messageFrom(Auth::id());
+                        $a_user       = $user_array['user'];
+                        $message_to   = $a_user->messageTo($auth_id);
+                        $message_from = $a_user->messageFrom($auth_id);
                     @endphp
-                    @if($message_to || $message_from || $a_user->followedBy(Auth::id()))
+                    @if($message_to || $message_from || $a_user->followedBy($auth_id))
                         <a href="{{ route('messages.show', ['user' => $a_user->id]) }}" class="text-decoration-none">
                             @if($a_user->id == $user->id)
                                 <li class="nav-item p-2 message-selected">
@@ -85,9 +89,9 @@
     </div>
 
     <!-- Messages -->
-    <div class="col">
+    <div class="col message-scroll">
         <div class="message-box" id="message-box">
-            @if($user->id !== Auth::id())
+            @if($user->id !== $auth_id)
                 <!-- Head -->
                 @include('users.messages.contents.head')
 

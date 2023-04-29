@@ -56,18 +56,46 @@ class MessageController extends Controller
 
     public function show(User $user)
     {
-        $all_users = User::latest()->get();
-
+        $users = User::latest()->get();
+        $authUser = Auth::user();
         $media = Media::latest()->get();
 
-        $authUser = Auth::user();
+        $all_users_array = [];
+        foreach($users as $a_user){
+            $message_from = $authUser->messageFrom($a_user->id);
+            $message_to   = $authUser->messageTo($a_user->id);
+            if($message_from){
+                $from_id = $message_from->pivot->id;
+            }else{
+                $from_id = 0;
+            }
+            if($message_to){
+                $to_id = $message_to->pivot->id;
+            }else{
+                $to_id = 0;
+            }
+            // get the latest id
+            if($from_id > $to_id){
+                $latest_id = $from_id;
+            }else{
+                $latest_id = $to_id;
+            }
+            $all_users_array[] = [
+                'user'      => $a_user,
+                'latest_id' => $latest_id,
+            ];
+        }
+        foreach($all_users_array as $key => $value){
+            $sort_keys[$key] = $value['latest_id'];
+        }
+        array_multisort($sort_keys, SORT_DESC, $all_users_array);
 
-        $pivot_items = collect($authUser->messagesSent)->merge($authUser->messagesReceived)->sortBy('pivot.created_at')
+        $pivot_messages = collect($authUser->messagesSent)->merge($authUser->messagesReceived)->sortBy('pivot.created_at')
         ->filter(function($a) use($user){
             return $a->pivot->sender_id == $user->id || $a->pivot->receiver_id == $user->id;
         });
 
-        return view('users.messages.show', compact('user', 'all_users', 'media', 'pivot_items'));
+        return view('users.messages.show', compact('user', 'all_users_array', 'media', 'pivot_messages'));
     }
 
     public function update(Request $request, User $user)

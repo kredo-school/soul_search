@@ -45,15 +45,23 @@
                 @endforeach
                 @foreach ($tags as $tag)
                     <li class="mt-3 ms-2" style="display: none;">
-                        {{-- need link to chat --}}
-                        <a href="#" class="text-decoration-none">
+                        <a href="{{ route('chats.show', $tag->id) }}" class="text-decoration-none">
                             <div class="row">
                                 <div class="col-sm-auto">
                                     <i class="fa-solid fa-hashtag text-secondary icon-srch"></i>
                                 </div>
                                 <div class="col-sm">
                                     <div><span class="text-dark">{{$tag->name}}</span></div>
-                                    <div class="text-muted">400 chats{{-- count chat numbers --}}</div>
+                                    @php
+                                        $chat_count = $tag->chats->count();
+                                    @endphp
+                                    <div class="text-muted">
+                                        @if ($chat_count > 1)
+                                            {{$chat_count}}&nbsp;chats
+                                        @else
+                                            {{$chat_count}}&nbsp;chat
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -65,30 +73,29 @@
     </div>
 </div>
 
+<script>
+    function searchUserTag() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('userInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("searchUl");
+        li = ul.getElementsByTagName('li');
 
-    <script>
-        function searchUserTag() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('userInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("searchUl");
-            li = ul.getElementsByTagName('li');
-
-            // show items matching the search query
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("span")[0];
-                txtValue = a.textContent || a.innerText;
-                if (filter == ''){
-                    li[i].style.display = "none";
+        // show items matching the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("span")[0];
+            txtValue = a.textContent || a.innerText;
+            if (filter == ''){
+                li[i].style.display = "none";
+            } else {
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
                 } else {
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                    } else {
-                        li[i].style.display = "none";
-                    }
+                    li[i].style.display = "none";
                 }
             }
         }
-    </script>
+    }
+</script>
 
 @endsection

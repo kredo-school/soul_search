@@ -1,172 +1,195 @@
 @extends('layouts.app')
 
-@section('title', 'Profile')
-
 @section('styles')
-    <link href="{{ mix('css/profile.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/home.css') }}" rel="stylesheet">
 @endsection
 
+@section('title', 'Home')
+
 @section('content')
-<div class="profile-container mx-auto">
-    <div class="card border-0 shadow" id="profile-box">
-        <div class="card-body">
-            <div class="row justify-content-center">
-                <div class="col-auto mt-1">
-
-                    {{-- avatar --}}
-                    @if ($user->avatar)
-                        <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
-                    @else
-                        <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
-                    @endif
+<div class="d-flex justify-content-start p-0">
+    @if(Auth::user()->userTag()->exists())
+        @auth
+        <!-- Tags' bar -->
+        <div class="col-2 ps-1 bg-white tag-bar border">
+            <div class="mt-5">
+                <p class="text-dark fw-bolder mb-1 ms-3 tag-name">Recent</p>
+                <ul class="nav nav-pills flex-column px-0">
+                    @foreach ($recent_tags as $recent_tag)
+                        <li class="nav-item mb-1">
+                            <a href="{{ route('chats.show', $recent_tag->tag->id) }}" class="flex-fill nav-link">
+                                <i class="fa-regular fa-hashtag"></i>
+                                <span class="text-dark tag-name">{{ $recent_tag->tag->name }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="mt-5">
+                <p class="text-dark fw-bolder mb-1 ms-3 tag-name">Main</p>
+                <ul class="nav nav-pills flex-column px-0">
+                    @foreach ($main_tags as $main_tag)
+                        <li class="nav-item mb-1">
+                            <a href="{{ route('chats.show', $main_tag->tag->id) }}" class="flex-fill nav-link">
+                                <i class="fa-regular fa-hashtag"></i>
+                                <span class="text-dark tag-name">{{ $main_tag->tag->name }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="mt-5">
+                <p class="text-dark fw-bolder mb-1 ms-3 tag-name">Fav</p>
+                <ul class="nav nav-pills flex-column px-0">
+                    @foreach ($fav_tags as $fav_tag)
+                        <li class="nav-item mb-1">
+                            <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="flex-fill nav-link">
+                                <i class="fa-regular fa-hashtag"></i>
+                                <span class="text-dark tag-name">{{ $fav_tag->tag->name }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        @endauth
+        <!-- Chats -->
+        <div class="col p-0" style="height: 96%">
+            @if (isset($fav_tag))
+                <!-- Header -->
+                <div class="bg-white py-3 border border-top-0">
+                    <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
+                    <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold tag-name">{{ $tag->name }}</a>
                 </div>
-                <div class="col">
-                    {{-- username --}}
-                    <div class="row">
-                        <div class="col">
-                            <span class="fw-bold">{{ $user->username}}</span>
-                        </div>
-
-                        {{-- 'create post' and 'edit' / 'follow/unfollow' and 'send message' buttons --}}
-                        <div class="col">
-                            {{-- check if the login user's profile or not --}}
-                            @if($user->id === Auth::id())
-                                {{-- edit profile --}}
-                                <a href="{{ route('profiles.edit', $user->id) }}" class="btn btn-orange float-end ms-2 mt-2 px-4">
-                                    Edit
-                                </a>
-                                <!-- create post modal-->
-                                <button class="btn btn-outline-secondary float-end mt-2" type="button"  data-bs-toggle="modal" data-bs-target="#createPostModal">
-                                    create post
-                                </button>
-
-                                @include('users.profiles.posts.create')
-                                {{-- error message from create modal --}}
-                                @error('image')
-                                    <p class="text-danger small">{{ $message }}</p>
-                                @enderror
-                                @error('text')
-                                    <p class="text-danger small">{{ $message }}</p>
-                                @enderror
-                            @else
-                                {{-- report --}}
-                                <button class="btn float-end shadow-none ms-2 mt-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <a href="#" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportUserModal">
-                                            <i class="fa-solid fa-exclamation"></i> Report
-                                        </a>
-                                    </li>
-                                </ul>
-                                @include('users.profiles.modal.report')
-                                {{-- send message --}}
-                                <a href="{{ route('messages.show', ['user' => $user]) }}" class="btn btn-orange btn-sm float-end ms-2 mt-2">
-                                    send message
-                                </a>
-                                {{-- if followed --}}
-                                @if ($user->followedBy(Auth::id()))
-                                    <form action="{{ route('follows.destroy', ['user' => $user->id, 'follow' => $user->follows()->where('following_id', Auth::id())->first()->id]) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btn-sm float-end mt-2" type="submit">
-                                        <span class="px-2">unfollow</span>
-                                        </button>
-                                    </form>
-                                {{-- if NOT followed --}}
-                                @else
-                                    <form action="{{ route('follows.store', ['user' => $user->id]) }}" method="post">
-                                        @csrf
-                                        <button class="btn btn-secondary btn-sm float-end mt-2" type="submit">
-                                        <span class="px-2">follow</span>
-                                        </button>
-                                    </form>
-                                @endif
-                            @endif
-                        </div>
-                    </div>
-
-                    {{-- main tags --}}
-                    <div>
-                        main tags:
-                    </div>
-                    <div>
-                        @forelse($main_tags as $main_tag)
-                            <a href="{{ route('chats.show', $main_tag->tag->id) }}" class="text-decoration-none">
-                                #{{ $main_tag->tag->name }}
-                            </a>
-                            &nbsp;
-                        @empty
-                            no main tag
-                        @endforelse
-                    </div>
-
-                    {{-- favorite tags --}}
-                    <div>
-                        favorite tags:
-                    </div>
-                    <div>
-                        @foreach($fav_tags as $fav_tag)
-                            <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="text-decoration-none">
-                                #{{ $fav_tag->tag->name }}
-                            </a>
-                            &nbsp;
+                <!-- Body (Need to update to show chats a tag has) -->
+                    <div class="row pt-0 chat-body">
+                        @foreach ($tagged_chats as $chat)
+                            <div class="chat-element">
+                                <div class="user-avatar">
+                                    @include('contents.title')
+                                </div>
+                                <div class="chat-content">
+                                    @include('contents.body')
+                                </div>
+                            </div>
                         @endforeach
                     </div>
-
-                    {{-- introduction --}}
-                    <div class="my-3">
-                        {{ $user->introduction }}
-                    </div>
-
+                <!-- Form -->
+                <div class="pt-2 pb-0 align-bottom">
+                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0 pt-1" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row gx-2">
+                            <div class="col-sm">
+                                <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $tag->name }}"></textarea>
+                                @error('chat')
+                                <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-1">
+                                <label for="image" title="add image" class="form-label col-sm-1"><i class="fa-solid fa-circle-plus fa-2x text-secondary"></i></label>
+                                <input type="file" name="image" id="image" class="form-image">
+                                @error('image')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-1 ps-0">
+                                <button type="submit" class="btn btn-orange btn-send">Send</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-
-        </div>
-    </div>
-
-    {{-- user posts --}}
-    <div class="mx-auto mt-4 profile-post-container">
-        @php
-            $count = 0;
-            $posts = $user->posts;
-        @endphp
-        @foreach ($posts as $post)
-            @if ($count % 4 == 0)
-        <div class="row mt-1">
+            @elseif ($main_tag->isMain())
+                <!-- Header -->
+                <div class="bg-white mt-3 mb-0 py-1 border border-top-0">
+                    <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
+                    <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold tag-name">{{ $tag->name }}</a>
+                </div>
+                <!-- Body (Need to update to show chats a tag has) -->
+                <div class="row pt-3 chat-body">
+                    @foreach ($tagged_chats as $chat)
+                    <div class="chat-element">
+                        <div class="user-avatar">
+                            @include('contents.title')
+                        </div>
+                        <div class="chat-content">
+                            @include('contents.body')
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <!-- Form -->
+                <div class="bg-white mt-3 mb-0">
+                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0 pt-1" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row gx-2">
+                            <div class="col-sm">
+                                <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $tag->name }}"></textarea>
+                                @error('chat')
+                                <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-1">
+                                <label for="image" title="add image" class="form-label col-sm-1"><i class="fa-solid fa-circle-plus fa-2x text-secondary"></i></label>
+                                <input type="file" name="image" id="image" class="form-image">
+                                @error('image')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-1 ps-0">
+                                <button type="submit" class="btn btn-orange btn-send">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            @else
+                <!-- Header -->
+                <div class="bg-white mt-3 mb-0 py-1 border border-top-0">
+                    <i class="fa-regular fa-hashtag fa-2x ps-5"></i>
+                    <a href="{{ route('chats.show', $tag->id) }}" class="h2 ps-1 text-decoration-none fw-bold tag-name">{{ $tag->name }}</a>
+                </div>
+                <!-- Body (Need to update to show chats a tag has) -->
+                <div class="row pt-3 chat-body">
+                    @foreach ($tagged_chats as $chat)
+                    <div class="chat-element">
+                        <div class="user-avatar">
+                            @include('contents.title')
+                        </div>
+                        <div class="chat-content">
+                            @include('contents.body')
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <!-- Form -->
+                <div class="bg-white mt-3 mb-0">
+                    <form action="{{ route('chats.store', $tag->id) }}" method="post" class="ms-0 ps-0 pt-1" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row gx-2">
+                            <div class="col-sm">
+                                <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm" placeholder="Type your message #{{ $tag->name }}"></textarea>
+                                @error('chat')
+                                <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-1">
+                                <label for="image" title="add image" class="form-label col-sm-1"><i class="fa-solid fa-circle-plus fa-2x text-secondary"></i></label>
+                                <input type="file" name="image" id="image" class="form-image">
+                                @error('image')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-1 ps-0">
+                                <button type="submit" class="btn btn-orange btn-send">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             @endif
-            <div class="col-3">
-                <a href="{{ route('posts.show', $post->id) }}" class="text-decoration-none">
-                    <img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" class="profile-post" id="post-img{{$count}}">
-                </a>
-            </div>
-            @if ($count % 4 == 3 or $post == end($posts))
         </div>
-            @endif
-            @php
-                $count++;
-            @endphp
-        @endforeach
-    </div>
+    @else
+        <div class="text-center">
+            <p class="text-muted" style="transform: translateY(40vh)">You don't have any tags yet.</p>
+        </div>
+    @endif
 </div>
-
-{{-- javascript to set 'send message bar' width --}}
-<script>
-    let profile_w = document.getElementById('profile-box').clientWidth;
-    if(profile_w < 816){
-        @for ($i=0; $i<$count; $i++)
-            window.document.getElementById('post-img{{$i}}').style.height = profile_w / 4 + 'px';
-        @endfor
-    }
-    window.addEventListener('resize', function(){
-        profile_w = document.getElementById('profile-box').clientWidth;
-        if(profile_w < 816){
-            @for ($i=0; $i<$count; $i++)
-                window.document.getElementById('post-img{{$i}}').style.height = profile_w / 4 + 'px';
-            @endfor
-        }
-    })
-</script>
-
 @endsection

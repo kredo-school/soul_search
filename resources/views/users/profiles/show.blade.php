@@ -24,7 +24,7 @@
                     {{-- username --}}
                     <div class="row">
                         <div class="col">
-                            <span class="fw-bold">{{ $user->username}}</span>
+                            <span class="fw-bold">{{ $user->username }}</span>
                         </div>
 
                         {{-- 'create post' and 'edit' / 'follow/unfollow' and 'send message' buttons --}}
@@ -62,7 +62,7 @@
                                 </ul>
                                 @include('users.profiles.modal.report')
                                 {{-- send message --}}
-                                <a href="{{ route('messages.show', ['user' => $user]) }}" class="btn btn-orange btn-sm float-end ms-2 mt-2">
+                                <a href="{{ route('messages.show', ['user' => $user->id]) }}" class="btn btn-orange btn-sm float-end ms-2 mt-2">
                                     send message
                                 </a>
                                 {{-- if followed --}}

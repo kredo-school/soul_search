@@ -116,7 +116,9 @@
                     @endif
                 </div>
                 <div class="col">
-                    <a href="" class="btn btn-sm btn-outline-danger mb-1 float-end" data-bs-toggle="modal" data-bs-target="#removeFavModal">remove</a>
+                    @if ($fav_count > 1)
+                        <a href="" class="btn btn-sm btn-outline-danger mb-1 float-end" data-bs-toggle="modal" data-bs-target="#removeFavModal">remove</a>
+                    @endif
                     <a href="" class="btn btn-sm btn-orange mb-1 me-1 float-end" data-bs-toggle="modal" data-bs-target="#addFavModal">add</a>
                 </div>
                 @include('users.profiles.tags.modal.fav.remove')

@@ -3,9 +3,9 @@
 <div class="row mt-2 p-0">
     <div class="col ms-0 p-0">
         <div class="message-container p-0 mb-5">
-            @foreach ($pivot_items as $item)
+            @foreach ($pivot_messages as $pivot_message)
                 @php
-                    $user_message = $item->pivot;
+                    $user_message = $pivot_message->pivot;
                     $text         = $user_message->text;
                     $media_id     = $user_message->media_id;
                     $image        = null;

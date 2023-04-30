@@ -9,6 +9,16 @@
     height: 100%;
 }
 
+.message-scroll{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+.message-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
 .icon-sm{
     font-size: 3rem;
 }
@@ -106,6 +116,11 @@
     overflow-y: scroll;
     height: 100vh;
     background-color: white;
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+.message-list-fix::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
 }
 
 /* image preview position */

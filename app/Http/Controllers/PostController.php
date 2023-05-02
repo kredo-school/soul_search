@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\PostTag;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -69,7 +70,10 @@ class PostController extends Controller
         $image_name = time() . "." . $request->image->extension();
 
         // Save the image inside the storage/app/public/images
-        $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
+
+        Storage::disk('public')->putFileAs('images', $request->image, $image_name);
+        // Storage::disk('public')->($image_name, $request)
+        // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
 
         return $image_name;
     }

@@ -21,7 +21,7 @@
                             <div class="row">
                                 <div class="col-sm-auto">
                                     @if ($user->avatar)
-                                        <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-srch rounded-circle" alt="">
+                                        <img src="{{ $user->avatar }}" class="avatar-srch rounded-circle" alt="">
                                     @else
                                         <i class="fa-solid fa-circle-user text-secondary icon-srch"></i>
                                     @endif

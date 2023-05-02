@@ -41,14 +41,14 @@ class MessageController extends Controller
 
     private function saveImage($request){
         // Change the name of the image to Current Time to avoid overwriting.
-        $image_name = time() . "msg." . $request->image->extension();
+        // $image_name = time() . "msg." . $request->image->extension();
 
         // Save the image inside the storage/app/public/images
-        $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
+        // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
 
         // Save the path in the media table
         $media = new Media();
-        $media->path = $image_name;
+        $media->path = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
         $media->save();
 
         return $media->id;
@@ -106,7 +106,6 @@ class MessageController extends Controller
                     'text' => null,
                 ]);
             }else{
-                $this->deleteImage($request->image);
                 $user->messagesReceived()->wherePivot('id', $request->message)->updateExistingPivot(Auth::id(), [
                     'media_id' => null,
                     'updated_at' => $user->messagesReceived()->wherePivot('id', $request->message)->first()->pivot->created_at,
@@ -126,14 +125,14 @@ class MessageController extends Controller
         return redirect()->route('messages.show', $user->id);
     }
 
-    private function deleteImage($image_name)
-    {
-        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
+    // private function deleteImage($image_name)
+    // {
+    //     $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
 
-        if(Storage::disk('local')->exists($image_path)){
-            Storage::disk('local')->delete($image_path);
-        }
-    }
+    //     if(Storage::disk('local')->exists($image_path)){
+    //         Storage::disk('local')->delete($image_path);
+    //     }
+    // }
 
     public function destroy(Request $request, User $user)
     {

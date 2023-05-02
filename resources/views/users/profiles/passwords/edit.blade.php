@@ -22,7 +22,7 @@
                         <button class="btn shadow-none" type="button">
                             {{-- avatar --}}
                             @if ($user->avatar)
-                                <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
+                                <img src="{{ $user->avatar }}" class="avatar-lg rounded-circle" alt="">
                             @else
                                 <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
                             @endif

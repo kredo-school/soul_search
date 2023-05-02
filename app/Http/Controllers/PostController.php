@@ -65,17 +65,17 @@ class PostController extends Controller
         return redirect()->route('profiles.index');
     }
 
-    // private function saveImage($request){
-    //     // Change the name of the image to Current Time to avoid overwriting.
-    //     $image_name = time() . "." . $request->image->extension();
+    private function saveImage($request){
+        // Change the name of the image to Current Time to avoid overwriting.
+        $image_name = time() . "." . $request->image->extension();
 
-    //     // Save the image inside the storage/app/public/images
+        // Save the image inside the storage/app/public/images
 
-        // Storage::disk('public')->putFileAs('images', $request->image, $image_name);
+        Storage::disk('public')->putFileAs('images', $request->image, $image_name);
         // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
 
-    //     return $image_name;
-    // }
+        return $image_name;
+    }
 
     private function storePostTag($id, $tag_name, $new_tag_id){
         $db_tags = Tag::get();

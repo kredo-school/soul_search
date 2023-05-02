@@ -22,7 +22,7 @@ class ChatController extends Controller
         #Check if the chat has an image
         $image = NULL;
         if(isset($request->image)){
-            $image = $this->saveImage($request);
+            $image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
         }
 
         $tag->chats()->create([
@@ -34,20 +34,20 @@ class ChatController extends Controller
         return redirect()->back();
     }
 
-    public function saveImage($request){
-        $image_name = time() . "." . $request->image->extension();
+    // public function saveImage($request){
+    //     $image_name = time() . "." . $request->image->extension();
 
-        $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
-        return $image_name;
-    }
+    //     $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
+    //     return $image_name;
+    // }
 
-    public function deleteImage($image_name){
-        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
+    // public function deleteImage($image_name){
+    //     $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
 
-        if(Storage::disk('local')->exists($image_path)){
-            Storage::disk('local')->delete($image_path);
-        }
-    }
+    //     if(Storage::disk('local')->exists($image_path)){
+    //         Storage::disk('local')->delete($image_path);
+    //     }
+    // }
 
     public function show(Tag $tag){
         $user = Auth::user();
@@ -83,8 +83,8 @@ class ChatController extends Controller
             ->with('fav_tags', $fav_tags);
     }
 
-    public function destroy(Chat $chat){
-        $this->deleteImage($chat->image);
+    public function destroy(Chat $chat, Request $request){
+        $chat->image = 'data:image/' . $request->image->extension() . 'base64,' . base64_encode(file_get_contents($request->image));
         $chat->forceDelete();
         return redirect()->route('show');
     }

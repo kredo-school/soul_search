@@ -27,41 +27,41 @@ class AvatarController extends Controller
         $user = User::find(Auth::id());
 
         // delete the previous file from the local storage
-        $this->delete($user->avatar);
+        // $this->delete($user->avatar);
 
         // save data to user table and store avatar file
-        User::where('id', Auth::id())
-        ->update([
-            'avatar'   => $this->save($request),
-        ]);
+        $user->avatar = 'data:image/' . $request->avatar->extension() . ';base64,' . base64_encode(file_get_contents($request->avatar));
+        $user->save();
+
+        // User::where('id', Auth::id())
+        // ->update([
+        //     'avatar'   => $this->save($request),
+        // ]);
 
         return redirect()->route('profiles.edit', Auth::id());
     }
 
-    private function save($request){
-        // Change the name of the avatar to Current Time to avoid overwriting.
-        $avatar_name = time() . "." . $request->avatar->extension();
+    // private function save($request){
+    //     // Change the name of the avatar to Current Time to avoid overwriting.
+    //     $avatar_name = time() . "." . $request->avatar->extension();
 
-        // Save the avatar inside the storage/app/public/avatars
-        $request->avatar->storeAs(self::LOCAL_STORAGE_FOLDER, $avatar_name);
+    //     // Save the avatar inside the storage/app/public/avatars
+    //     $request->avatar->storeAs(self::LOCAL_STORAGE_FOLDER, $avatar_name);
 
-        return $avatar_name;
-    }
+    //     return $avatar_name;
+    // }
 
-    private function delete($avatar_name)
-    {
-        $avatar_path = self::LOCAL_STORAGE_FOLDER . $avatar_name;
+    // private function delete($avatar_name)
+    // {
+    //     $avatar_path = self::LOCAL_STORAGE_FOLDER . $avatar_name;
 
-        if(Storage::disk('local')->exists($avatar_path)){
-            Storage::disk('local')->delete($avatar_path);
-        }
-    }
+    //     if(Storage::disk('local')->exists($avatar_path)){
+    //         Storage::disk('local')->delete($avatar_path);
+    //     }
+    // }
 
     public function destroy($id)
     {
-        $user = User::find(Auth::id());
-        $this->delete($user->avatar);
-
         User::where('id', Auth::id())
             ->update([
                 'avatar' => NULL,
@@ -69,5 +69,4 @@ class AvatarController extends Controller
 
         return redirect()->route('index');
     }
-
 }

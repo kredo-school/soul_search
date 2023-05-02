@@ -15,7 +15,7 @@
 
                     {{-- avatar --}}
                     @if ($user->avatar)
-                        <img src="{{ asset('/storage/avatars/'. $user->avatar) }}" class="avatar-lg rounded-circle" alt="">
+                        <img src="{{ $user->avatar }}" class="avatar-lg rounded-circle" alt="">
                     @else
                         <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
                     @endif
@@ -138,7 +138,7 @@
             @endif
             <div class="col-3">
                 <a href="{{ route('posts.show', $post->id) }}" class="text-decoration-none">
-                    <img src="{{ asset('/storage/images/' . $post->image) }}" alt="Post Image" class="profile-post" id="post-img{{$count}}">
+                    <img src="{{ $post->image }}" alt="Post Image" class="profile-post" id="post-img{{$count}}">
                 </a>
             </div>
             @if ($count % 4 == 3 or $post == end($posts))

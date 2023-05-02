@@ -51,7 +51,7 @@ class PostController extends Controller
         Post::create([
             'text'    => $request->text,
             'user_id' => Auth::id(),
-            'image'   => $this->saveImage($request),
+            'image'   => $this->saveImage($request),//'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image)),
         ]);
 
         // store Tag and PostTag
@@ -65,17 +65,17 @@ class PostController extends Controller
         return redirect()->route('profiles.index');
     }
 
-    private function saveImage($request){
-        // Change the name of the image to Current Time to avoid overwriting.
-        $image_name = time() . "." . $request->image->extension();
+    // private function saveImage($request){
+    //     // Change the name of the image to Current Time to avoid overwriting.
+    //     $image_name = time() . "." . $request->image->extension();
 
-        // Save the image inside the storage/app/public/images
+    //     // Save the image inside the storage/app/public/images
 
-        Storage::disk('public')->putFileAs('images', $request->image, $image_name);
+        // Storage::disk('public')->putFileAs('images', $request->image, $image_name);
         // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
 
-        return $image_name;
-    }
+    //     return $image_name;
+    // }
 
     private function storePostTag($id, $tag_name, $new_tag_id){
         $db_tags = Tag::get();
@@ -158,11 +158,7 @@ class PostController extends Controller
 
         // If there is a new image
         if($request->image){
-            // Delete the previous file from the local storage
-            $this->deleteImage($post->image);
-
-            // save data to post table and store image file
-            $post->image = $this->saveImage($request);
+            $post->image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
         }
 
         $post->save();

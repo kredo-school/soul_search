@@ -72,7 +72,6 @@ class PostController extends Controller
         // Save the image inside the storage/app/public/images
 
         Storage::disk('public')->putFileAs('images', $request->image, $image_name);
-        // Storage::disk('public')->($image_name, $request)
         // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
 
         return $image_name;

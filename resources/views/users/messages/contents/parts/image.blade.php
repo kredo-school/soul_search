@@ -4,24 +4,27 @@
             <img src="{{ asset('/storage/images/'. $image) }}" class="image-msg mb-2" alt="">
         </a>
         <span class="text-vsm text-muted float-{{$position}} {{$margin}}">{{$user_message->created_at->diffForHumans()}}</span>
-        @if ($auth)
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}{{$modal}}">
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}{{$modal}}">
+            <li>
+                <a href="" class="dropdown-item text-warning" title="Image" data-bs-toggle="modal" data-bs-target="#msgImageModal{{$id}}">
+                    <i class="fa-solid fa-magnifying-glass"></i> Zoom up
+                </a>
+            </li>
+            @if ($auth)
                 {{-- delete --}}
                 <li>
                     <a href="" class="dropdown-item text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteMsgModal{{$id}}{{$modal}}">
                         <i class="fa-regular fa-trash-can"></i> Delete
                     </a>
                 </li>
-            </ul>
-        @else
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}{{$modal}}">
+            @else
                 {{-- report --}}
                 <li>
                     <a href="" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportMsgModal{{$id}}{{$modal}}">
-                        <i class="fa-solid fa-exclamation"></i> Report
+                        <i class="fa-solid fa-circle-exclamation"></i> Report
                     </a>
                 </li>
-            </ul>
-        @endif
+            @endif
+        </ul>
     </div>
 </div>

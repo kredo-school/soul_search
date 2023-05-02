@@ -58,6 +58,8 @@
 
                     {{-- message image --}}
                     @include('users.messages.contents.parts.image')
+                    {{-- image modal --}}
+                    @include('users.messages.modal.image')
 
                 {{-- data has only text --}}
                 @elseif($text)
@@ -78,6 +80,8 @@
                     @endphp
                     {{-- message image --}}
                     @include('users.messages.contents.parts.image')
+                    {{-- image modal --}}
+                    @include('users.messages.modal.image')
 
                 {{-- no data --}}
                 @else

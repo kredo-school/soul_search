@@ -29,7 +29,7 @@
                 {{-- report --}}
                 <li>
                     <a href="" class="dropdown-item text-danger" title="Report" data-bs-toggle="modal" data-bs-target="#reportMsgModal{{$id}}">
-                        <i class="fa-solid fa-exclamation"></i> Report
+                        <i class="fa-solid fa-circle-exclamation"></i> Report
                     </a>
                 </li>
             </ul>

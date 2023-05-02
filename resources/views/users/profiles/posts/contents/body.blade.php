@@ -6,7 +6,7 @@
             <div class="col-auto">
                 <a href="{{ route('profiles.show', $post->user->id) }}">
                     @if ($post->user->avatar)
-                        <img src="{{ asset('/storage/avatars/'. $post->user->avatar) }}" class="avatar-sm rounded-circle" alt="">
+                        <img src="{{ $post->user->avatar }}" class="avatar-sm rounded-circle" alt="">
                     @else
                         <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
                     @endif

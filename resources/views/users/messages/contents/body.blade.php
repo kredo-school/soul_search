@@ -142,14 +142,14 @@
     </form>
 </div>
 
-
+{{-- javascript for image preview --}}
 <script>
     function main () {
         const input = document.querySelector('#image')
         const figure = document.querySelector('#figure')
         const figureImage = document.querySelector('#figureImage')
 
-        input.addEventListener('change', (event) => { // <1>
+        input.addEventListener('change', (event) => {
             const [file] = event.target.files
 
             if (file) {

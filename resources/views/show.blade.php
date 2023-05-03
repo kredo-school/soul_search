@@ -117,5 +117,11 @@
             document.getElementById('chbody').style.height = ch-h-100+"px"
         })
     })
+    window.addEventListener('resize', function(){
+        let h = e.srcElement.scrollHeight
+        let ch = document.documentElement.clientHeight
+        document.getElementById('chbody').style.height = ch-h-100+"px"
+    })
 </script>
+
 @endsection

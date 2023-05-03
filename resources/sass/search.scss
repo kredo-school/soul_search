@@ -23,6 +23,12 @@
     padding-left: 0;
 }
 
+.search-selected {
+    &:hover {
+    background-color: #F4F7FC;
+    }
+}
+
 .icon-srch{
     font-size: 2.5rem;
 }

@@ -101,11 +101,6 @@
     border-radius: 10px;
 }
 
-.btn-send {
-    width: 5em;
-    transform: translate(-30px, -3px);
-}
-
 .d-flex {
     height: 100vh;
 }
@@ -128,4 +123,8 @@
 
 .likes-count {
     width: 1em;
+}
+
+.chat-form {
+    background-color: white;
 }

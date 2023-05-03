@@ -104,6 +104,8 @@
         </div>
     @endif
 </div>
+
+{{-- javascript to resize textarea --}}
 <script>
     document.querySelectorAll(".auto-adjust").forEach(function(){
         this.addEventListener('keydown',function(e){

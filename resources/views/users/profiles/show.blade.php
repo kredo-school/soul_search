@@ -138,7 +138,7 @@
             @endif
             <div class="col-3">
                 <a href="{{ route('posts.show', $post->id) }}" class="text-decoration-none">
-                    <img src="{{ $post->image }}" alt="Post Image" class="profile-post" id="post-img{{$count}}">
+                    <img src="/images/posts/{{ $post->image }}" alt="Post Image" class="profile-post" id="post-img{{$count}}">
                 </a>
             </div>
             @if ($count % 4 == 3 or $post == end($posts))

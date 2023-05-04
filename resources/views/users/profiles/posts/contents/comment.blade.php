@@ -2,7 +2,7 @@
     {{-- submit comment --}}
     <form action="{{ route('comments.store', $post->id) }}" method="post">
     @csrf
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 px-3">
         <input type="text" class="form-control" id="comment" name="comment" placeholder="comment here">
         <button type="submit" class="input-group-text border-secondary">send</button>
     </div>
@@ -14,56 +14,30 @@
         @foreach ($post->comments as $comment)
         <li class="list-group-item border-0 p-0 mb-2">
             <div class="row">
-                <div class="col-auto">
+                <div class="col-auto ms-4">
                     <a href="{{ route('profiles.show', $comment->user->id) }}">
                         @if ($comment->user->avatar)
-                            <img src="{{ $comment->user->avatar }}" class="avatar-sm rounded-circle" alt="">
+                            <img src="/uploads/avatars/{{ $comment->user->avatar }}" class="avatar-sm rounded-circle" alt="">
                         @else
                             <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
                         @endif
                     </a>
                 </div>
-                <div class="col">
+                <div class="col ms-3">
                     <span class="fw-bold">
                         {{ $comment->user->username }}
                     </span>
                     <span class="text-muted small">
                         {{ $comment->created_at->diffForHumans() }}
                     </span>
-                    <div>
-                        {{ $comment->comment }}
-                    </div>
-                    <div class="row">
-                        <div class="col-auto">
-                            @if ($like = $comment->like(Auth::id()))
-                                <form action="{{ route('reactions.destroy', ['post' => $post->id, 'comment' => $comment->id, 'reaction' => $like->pivot->id]) }}" method="post" class="mt-1 ms-1">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm shadow-none p-0" type="submit">
-                                        <i class="fa-solid fa-heart text-danger"></i>
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('reactions.store', ['post' => $post->id, 'comment' => $comment->id]) }}" method="post" class="mt-1 ms-1">
-                                    @csrf
-                                    <input type="hidden" value="{{ $comment->id }}" name="comment_id">
-                                    <button class="btn btn-sm shadow-none p-0" type="submit">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </form>
-                            @endif
-                        </div>
+                    <div class="row d-flex align-items-center">
                         <div class="col">
-                            @if ($comment->likes->count() <= 1)
-                                <span class="fw-bold">{{ $comment->likes->count() }}</span> Like
-                            @else
-                                <span class="fw-bold">{{ $comment->likes->count() }}</span> Likes
-                            @endif
-
+                            {{ $comment->comment }}
                         </div>
                     </div>
                 </div>
-                <div class="col-auto">
+
+                <div class="col-auto me-2">
                     <button class="btn shadow-none" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-ellipsis"></i>
                     </button>
@@ -87,6 +61,30 @@
                         </ul>
                         @include('users.profiles.posts.contents.modal.report')
                     @endif
+                    <div class="row d-flex align-items-center">
+                        <div class="col-auto">
+                            @if ($like = $comment->like(Auth::id()))
+                                <form action="{{ route('reactions.destroy', ['post' => $post->id, 'comment' => $comment->id, 'reaction' => $like->pivot->id]) }}" method="post" class="mt-1 ms-1">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm shadow-none p-0 float-start" type="submit">
+                                        <i class="fa-solid fa-heart text-danger"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('reactions.store', ['post' => $post->id, 'comment' => $comment->id]) }}" method="post" class="mt-1 ms-1">
+                                    @csrf
+                                    <input type="hidden" value="{{ $comment->id }}" name="comment_id">
+                                    <button class="btn btn-sm shadow-none p-0 float-start" type="submit">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
+                        <div class="col-auto ms-1">
+                                <span class="fw-bold float-start">{{ $comment->likes->count() }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </li>

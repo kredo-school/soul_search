@@ -11,18 +11,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ChatController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/images/';
+    const LOCAL_STORAGE_FOLDER = 'chats/';
 
     public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|min:1|max:255',
-            'image' => 'mimes:jpg,jpeg,png,gif|max:1048'
+            'image' => 'mimes:jpg,jpeg,png,gif|max:10240'
         ]);
 
         #Check if the chat has an image
         $image = NULL;
         if(isset($request->image)){
-            $image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+            $image = $this->saveImage($request);
         }
 
         $tag->chats()->create([
@@ -34,20 +34,20 @@ class ChatController extends Controller
         return redirect()->back();
     }
 
-    // public function saveImage($request){
-    //     $image_name = time() . "." . $request->image->extension();
+    public function saveImage($request){
+        $image_name = time() . "." . $request->image->extension();
+        Storage::disk('public')->putFileAs(self::LOCAL_STORAGE_FOLDER, $request->image, $image_name);
 
-    //     $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
-    //     return $image_name;
-    // }
+        return $image_name;
+    }
 
-    // public function deleteImage($image_name){
-    //     $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
+    public function deleteImage($image_name){
+        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
 
-    //     if(Storage::disk('local')->exists($image_path)){
-    //         Storage::disk('local')->delete($image_path);
-    //     }
-    // }
+        if(Storage::disk('public')->exists($image_path)){
+            Storage::disk('public')->delete($image_path);
+        }
+    }
 
     public function show(Tag $tag){
         $user = Auth::user();
@@ -85,7 +85,7 @@ class ChatController extends Controller
 
     public function destroy(Chat $chat){
         $this->deleteImage($chat->image);
-        $chat->forceDelete();
-        return redirect()->route('show');
+        $chat->delete();
+        return redirect()->back();
     }
 }

@@ -5,53 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\PostTag;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'images/posts/';
+    const LOCAL_STORAGE_FOLDER = 'posts/';
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('users.profiles.posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'text'  => 'required|max:10000',
-            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
+            'text'  => 'required|max:10240',
+            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         // create data in posts table
         Post::create([
             'text'    => $request->text,
             'user_id' => Auth::id(),
-            'image'   => $this->saveImage($request),//'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image)),
+            'image'   => $this->saveImage($request),
         ]);
 
         // store Tag and PostTag
@@ -66,15 +44,8 @@ class PostController extends Controller
     }
 
     private function saveImage($request){
-        // Change the name of the image to Current Time to avoid overwriting.
         $image_name = time() . "." . $request->image->extension();
-
-        // Save the image inside the storage/app/public/images
-
         Storage::disk('public')->putFileAs(self::LOCAL_STORAGE_FOLDER, $request->image, $image_name);
-
-        // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
-
         return $image_name;
     }
 
@@ -105,12 +76,6 @@ class PostController extends Controller
         return $new_tag_id;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
         $post->view_count += 1;
@@ -119,12 +84,6 @@ class PostController extends Controller
         return view('users.profiles.posts.show', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         $post_tags = PostTag::where('post_id', $post->id)->get();
@@ -141,25 +100,19 @@ class PostController extends Controller
         return view('users.profiles.posts.edit', compact('post', 'old_tag_ids'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'text'  => 'min:1|max:10000',
-            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
+            'text'  => 'min:1|max:10240',
+            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         $post->text = $request->text;
 
         // If there is a new image
         if($request->image){
-            $post->image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+            $this->deleteImage($post->image);
+            $post->image = $this->saveImage($request);
         }
 
         $post->save();
@@ -203,26 +156,20 @@ class PostController extends Controller
         return redirect()->route('posts.show', $post_id);
     }
 
-    private function deleteImage($image_name)
-    {
-        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
-
-        if(Storage::disk('local')->exists($image_path)){
-            Storage::disk('local')->delete($image_path);
-        }
-    }
-
     private function deletePostTag($request, $count, $post_id){
         // delete old PostTag
         PostTag::where('tag_id', $request->old_tag_ids[$count])->where('post_id', $post_id)->delete();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    private function deleteImage($image_name)
+    {
+        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
+
+        if(Storage::disk('public')->exists($image_path)){
+            Storage::disk('public')->delete($image_path);
+        }
+    }
+
     public function destroy(Post $post)
     {
         $this->deleteImage($post->image);

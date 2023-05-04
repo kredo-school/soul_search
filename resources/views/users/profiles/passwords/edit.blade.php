@@ -22,7 +22,7 @@
                         <button class="btn shadow-none" type="button">
                             {{-- avatar --}}
                             @if ($user->avatar)
-                                <img src="{{ $user->avatar }}" class="avatar-lg rounded-circle" alt="">
+                                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar-lg rounded-circle" alt="">
                             @else
                                 <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
                             @endif
@@ -162,6 +162,7 @@
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
+    {{-- hide/show more than 10 favorite tags --}}
     <script>
         document.getElementById("favtags").style.display = 'none';
         function showFav(){

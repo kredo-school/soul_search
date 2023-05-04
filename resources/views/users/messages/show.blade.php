@@ -31,7 +31,7 @@
                                 <div class="row">
                                     <div class="col-auto me-2">
                                         @if ($a_user->avatar)
-                                            <img src="{{ $a_user->avatar }}" class="avatar-sm rounded-circle" alt="">
+                                            <img src="/uploads/avatars/{{ $a_user->avatar }}" class="avatar-sm rounded-circle" alt="">
                                         @else
                                             <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
                                         @endif

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/images/';
+    const LOCAL_STORAGE_FOLDER = 'posts/';
 
     /**
      * Display a listing of the resource.
@@ -43,15 +43,15 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'text'  => 'required|max:10000',
-            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
+            'text'  => 'required|max:10240',
+            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         // create data in posts table
         Post::create([
             'text'    => $request->text,
             'user_id' => Auth::id(),
-            'image'   => 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image)),
+            'image'   => $this->saveImage($request),
         ]);
 
         // store Tag and PostTag
@@ -65,17 +65,12 @@ class PostController extends Controller
         return redirect()->route('profiles.index');
     }
 
-    // private function saveImage($request){
-    //     // Change the name of the image to Current Time to avoid overwriting.
-    //     $image_name = time() . "." . $request->image->extension();
+    private function saveImage($request){
+        $image_name = time() . "." . $request->image->extension();
+        Storage::disk('public')->putFileAs(self::LOCAL_STORAGE_FOLDER, $request->image, $image_name);
 
-    //     // Save the image inside the storage/app/public/images
-
-    //     Storage::disk('public')->putFileAs('images', $request->image, $image_name);
-    //     // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
-
-    //     return $image_name;
-    // }
+        return $image_name;
+    }
 
     private function storePostTag($id, $tag_name, $new_tag_id){
         $db_tags = Tag::get();
@@ -150,15 +145,16 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'text'  => 'min:1|max:10000',
-            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000',
+            'text'  => 'min:1|max:10240',
+            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         $post->text = $request->text;
 
         // If there is a new image
         if($request->image){
-            $post->image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+            $this->deleteImage($post->image);
+            $post->image = $this->saveImage($request);
         }
 
         $post->save();
@@ -202,18 +198,18 @@ class PostController extends Controller
         return redirect()->route('posts.show', $post_id);
     }
 
+    private function deletePostTag($request, $count, $post_id){
+        // delete old PostTag
+        PostTag::where('tag_id', $request->old_tag_ids[$count])->where('post_id', $post_id)->delete();
+    }
+
     private function deleteImage($image_name)
     {
         $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
 
-        if(Storage::disk('local')->exists($image_path)){
-            Storage::disk('local')->delete($image_path);
+        if(Storage::disk('public')->exists($image_path)){
+            Storage::disk('public')->delete($image_path);
         }
-    }
-
-    private function deletePostTag($request, $count, $post_id){
-        // delete old PostTag
-        PostTag::where('tag_id', $request->old_tag_ids[$count])->where('post_id', $post_id)->delete();
     }
 
     /**

@@ -13,7 +13,7 @@
                         <label for="image" class="form-label">Photo</label>
                         <input type="file" accept=".jpeg, .jpg, .png, .gif" class="form-control" id="image" name="image" aria-describedby="image-info" required>
                         <div class="text-muted text-sm">Acceptable formats: jpeg, jpg, png, gif</div>
-                        <div class="text-muted text-sm">Max file size is 1048kb</div>
+                        <div class="text-muted text-sm">Max file size is 10MB</div>
                     </div>
 
                     <div class="mb-3">

@@ -11,7 +11,7 @@ use Ramsey\Uuid\Codec\TimestampLastCombCodec;
 
 class MessageController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/images';
+    const LOCAL_STORAGE_FOLDER = 'messages/';
 
     public function index()
     {
@@ -22,13 +22,17 @@ class MessageController extends Controller
     {
         $request->validate([
             'text'  => 'required_if:image,=,null|nullable|string',
-            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10000'
+            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10240'
         ]);
 
         $text = $request->text;
         $media_id = null;
         if($request->image) {
-            $media_id = $this->saveImage($request);
+            $image_name = $this->saveImage($request);
+            $media = new Media();
+            $media->path = $image_name;
+            $media->save();
+            $media_id = $media->id;
         }
 
         $user->messagesReceived()->attach(Auth::id(), [
@@ -40,18 +44,10 @@ class MessageController extends Controller
     }
 
     private function saveImage($request){
-        // Change the name of the image to Current Time to avoid overwriting.
-        // $image_name = time() . "msg." . $request->image->extension();
+        $image_name = time() . '.' . $request->image->extension();
+        Storage::disk('public')->putFileAs(self::LOCAL_STORAGE_FOLDER, $request->image, $image_name);
 
-        // Save the image inside the storage/app/public/images
-        // $request->image->storeAs(self::LOCAL_STORAGE_FOLDER, $image_name);
-
-        // Save the path in the media table
-        $media = new Media();
-        $media->path = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
-        $media->save();
-
-        return $media->id;
+        return $image_name;
     }
 
     public function show(User $user)
@@ -125,14 +121,14 @@ class MessageController extends Controller
         return redirect()->route('messages.show', $user->id);
     }
 
-    // private function deleteImage($image_name)
-    // {
-    //     $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
+    private function deleteImage($image_name)
+    {
+        $image_path = self::LOCAL_STORAGE_FOLDER . $image_name;
 
-    //     if(Storage::disk('local')->exists($image_path)){
-    //         Storage::disk('local')->delete($image_path);
-    //     }
-    // }
+        if(Storage::disk('public')->exists($image_path)){
+            Storage::disk('public')->delete($image_path);
+        }
+    }
 
     public function destroy(Request $request, User $user)
     {

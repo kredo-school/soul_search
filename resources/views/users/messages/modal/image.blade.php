@@ -4,7 +4,7 @@
         <div class="modal-content modal-menu">
             <div class="modal-body">
                 <div class="d-flex align-items-center justify-content-center">
-                    <img src="{{ $image }}" class="msg-modal-image align-middle">
+                    <img src="/uploads/messages/{{ $image }}" class="msg-modal-image align-middle">
                 </div>
             </div>
         </div>

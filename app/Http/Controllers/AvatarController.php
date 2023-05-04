@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AvatarController extends Controller
 {
-    const LOCAL_STORAGE_FOLDER = 'public/avatars/';
+    const LOCAL_STORAGE_FOLDER = 'avatars/';
 
     public function edit($id)
     {
@@ -21,44 +21,36 @@ class AvatarController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'avatar' => 'required|file|mimes:jpg,jpeg,png,gif|max:10000',
+            'avatar' => 'required|file|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         $user = User::find(Auth::id());
 
-        // delete the previous file from the local storage
-        // $this->delete($user->avatar);
+        if($user->avatar){
+            $this->deleteAvatar($user->avatar);
+        }
 
-        // save data to user table and store avatar file
-        $user->avatar = 'data:image/' . $request->avatar->extension() . ';base64,' . base64_encode(file_get_contents($request->avatar));
+        $user->avatar = $this->saveAvatar($request);
         $user->save();
-
-        // User::where('id', Auth::id())
-        // ->update([
-        //     'avatar'   => $this->save($request),
-        // ]);
 
         return redirect()->route('profiles.edit', Auth::id());
     }
 
-    // private function save($request){
-    //     // Change the name of the avatar to Current Time to avoid overwriting.
-    //     $avatar_name = time() . "." . $request->avatar->extension();
+    private function saveAvatar($request){
+        $avatar_name = time() . "." . $request->avatar->extension();
+        Storage::disk('public')->putFileAs(self::LOCAL_STORAGE_FOLDER, $request->avatar, $avatar_name);
 
-    //     // Save the avatar inside the storage/app/public/avatars
-    //     $request->avatar->storeAs(self::LOCAL_STORAGE_FOLDER, $avatar_name);
+        return $avatar_name;
+    }
 
-    //     return $avatar_name;
-    // }
+    private function deleteAvatar($avatar_name)
+    {
+        $avatar_path = self::LOCAL_STORAGE_FOLDER . $avatar_name;
 
-    // private function delete($avatar_name)
-    // {
-    //     $avatar_path = self::LOCAL_STORAGE_FOLDER . $avatar_name;
-
-    //     if(Storage::disk('local')->exists($avatar_path)){
-    //         Storage::disk('local')->delete($avatar_path);
-    //     }
-    // }
+        if(Storage::disk('public')->exists($avatar_path)){
+            Storage::disk('public')->delete($avatar_path);
+        }
+    }
 
     public function destroy($id)
     {

@@ -17,7 +17,7 @@
                 <div class="col-auto">
                     <a href="{{ route('profiles.show', $comment->user->id) }}">
                         @if ($comment->user->avatar)
-                            <img src="{{ $comment->user->avatar }}" class="avatar-sm rounded-circle" alt="">
+                            <img src="/uploads/avatars/{{ $comment->user->avatar }}" class="avatar-sm rounded-circle" alt="">
                         @else
                             <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
                         @endif

@@ -12,13 +12,13 @@
     <div class="search-header pt-3 pb-1">
         <h2 class="float-start"><i class="fa-solid fa-magnifying-glass me-3"></i>Search</h2>
 
-        <button class="btn btn-sm btn-outline-secondary float-end ms-1 mb-1" id="dropdownMenuButtonSearch" data-bs-toggle="dropdown"><span id="resultDisp">Search: Users and Tags</span></button>
+        <button class="btn btn-outline-secondary float-end ms-1 mb-1" id="dropdownMenuButtonSearch" data-bs-toggle="dropdown"><span id="resultDisp"><i class="fa-solid fa-magnifying-glass"></i> Users and Tags</span></button>
         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonSearch">
             <li>
-                <a class="dropdown-item text-decoration-none" onclick="chngDisp1()" id="drpDwn1">Users</a>
+                <a class="dropdown-item text-decoration-none" onclick="chngDisp1()" id="drpDwn1"><i class="fa-solid fa-magnifying-glass"></i> Users</a>
             </li>
             <li>
-                <a class="dropdown-item text-decoration-none" onclick="chngDisp2()" id="drpDwn2">Tags</a>
+                <a class="dropdown-item text-decoration-none" onclick="chngDisp2()" id="drpDwn2"><i class="fa-solid fa-magnifying-glass"></i> Tags</a>
             </li>
         </ul>
 
@@ -120,31 +120,31 @@
     function chngDisp1() {
         if(result == 'both'){
             showUsers();
-            resultDisp.innerHTML = 'Search: Users';
+            resultDisp.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users';
             result = 'users';
-            drpDwn1.innerHTML = 'Users and Tags';
-            drpDwn2.innerHTML = 'Tag';
+            drpDwn1.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users and Tags';
+            drpDwn2.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Tag';
         }else{
             showBoth();
-            resultDisp.innerHTML = 'Search: Users and Tags';
+            resultDisp.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users and Tags';
             result = 'both';
-            drpDwn1.innerHTML = 'Users';
-            drpDwn2.innerHTML = 'Tags';
+            drpDwn1.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users';
+            drpDwn2.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Tags';
         }
     }
     function chngDisp2() {
         if(result == 'tags'){
             showUsers();
-            resultDisp.innerHTML = 'Search: Users';
+            resultDisp.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users';
             result = 'users';
-            drpDwn1.innerHTML = 'Users and Tags';
-            drpDwn2.innerHTML = 'Tags';
+            drpDwn1.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users and Tags';
+            drpDwn2.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Tags';
         }else{
             showTags();
-            resultDisp.innerHTML = 'Search: Tags';
+            resultDisp.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Tags';
             result = 'tags';
-            drpDwn1.innerHTML = 'Users and Tags';
-            drpDwn2.innerHTML = 'Users';
+            drpDwn1.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users and Tags';
+            drpDwn2.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Users';
         }
     }
 

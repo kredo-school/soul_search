@@ -14,8 +14,13 @@
             @include('contents.tagbar')
 
             <!-- Home for a specific user -->
-            <div class="col text-center">
-                <p class="text-muted h5" style="transform: translateY(40vh)">Hello {{ Auth::user()->username }}!</p>
+            <div class="row d-flex align-items-center">
+                <div class="col text-center px-5">
+                    <p class="text-muted h5">Hello {{ Auth::user()->username }}!</p>
+                    <p class="text-muted h6">Soul Search is an App to talk about what you wanna talk about and find your soul friend.</p>
+                    <p class="text-muted h6">You can start discussions by clicking the tags on the left side.</p>
+                    <p class="text-muted h6 mb-5">If you need more topics to talk about, you can create in <a href="{{ route('tags.edit', Auth::id()) }}">Edit Tags</a> page.</p>
+                </div>
             </div>
         @else
             <div class="col text-center">

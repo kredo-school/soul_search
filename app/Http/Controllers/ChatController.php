@@ -13,6 +13,19 @@ class ChatController extends Controller
 {
     const LOCAL_STORAGE_FOLDER = 'chats/';
 
+    public function index(Tag $tag){
+
+        $recent_tags = getRecentTags();
+        $main_tags = getMainTags();
+        $fav_tags = getFavTags();
+
+        return view('home')
+            ->with('tag', $tag)
+            ->with('recent_tags', $recent_tags)
+            ->with('main_tags', $main_tags)
+            ->with('fav_tags', $fav_tags);
+    }
+
     public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|max:255',
@@ -52,10 +65,7 @@ class ChatController extends Controller
     public function show(Tag $tag){
         $user = Auth::user();
 
-        $tagged_chats = Chat::where('tag_id',$tag->id)->get()->filter(function($chat){
-            return $chat->tag->isMain() || $chat->tag->isFav() || $chat->tag->isRecent();
-        });
-
+        $tagged_chats = Chat::where('tag_id', $tag->id)->latest()->get();
 
         $user_tag = $tag->userTag()->where('user_id', Auth::id())->first();
 

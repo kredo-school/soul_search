@@ -3,7 +3,7 @@
     <li class="list-group-item border-0 p-0">
 
         <div class="row mt-2">
-            <div class="col-auto">
+            <div class="col-auto ms-2">
                 <a href="{{ route('profiles.show', $post->user->id) }}">
                     @if ($post->user->avatar)
                         <img src="/uploads/avatars/{{ $post->user->avatar }}" class="avatar-sm rounded-circle" alt="">
@@ -13,7 +13,7 @@
                 </a>
 
             </div>
-            <div class="col">
+            <div class="col ms-3">
                 <span class="fw-bold">{{ $post->user->username }}</span>
                 <div>
                     {{ $post->created_at->diffForHumans() }} -
@@ -24,7 +24,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col-auto">
+            <div class="col-auto me-2">
                 <button class="btn shadow-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                     <i class="fa-solid fa-ellipsis"></i>
                 </button>
@@ -56,15 +56,14 @@
             </div>
         </div>
 
-        <div class="mt-2 ms-3" id="hash-link"></div>
-
-        <div class="row">
-            <div class="col-auto">
+        <div class="row d-flex align-items-center">
+            <div class="col mt-2 ms-3" id="hash-link"></div>{{-- text from javascript --}}
+            <div class="col-auto ms-3">
                 @if ($like = $post->like(Auth::id()))
                     <form action="{{ route('responses.destroy', ['post' => $post->id, 'response' => $like->pivot->id]) }}" method="post" class="mt-1 ms-1">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-sm shadow-none p-0" type="submit">
+                        <button class="btn btn-sm shadow-none p-0 float-start" type="submit">
                             <i class="fa-solid fa-heart text-danger"></i>
                         </button>
                     </form>
@@ -72,19 +71,14 @@
                     <form action="{{ route('responses.store', ['post' => $post->id]) }}" method="post" class="mt-1 ms-1">
                         @csrf
                         <input type="hidden" value="{{ $post->id }}" name="post_id">
-                        <button class="btn btn-sm shadow-none p-0" type="submit">
+                        <button class="btn btn-sm shadow-none p-0 float-start" type="submit">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                     </form>
                 @endif
             </div>
-            <div class="col">
-                @if ($post->likes->count() <= 1)
-                    <span class="fw-bold">{{ $post->likes->count() }}</span> Like
-                @else
-                    <span class="fw-bold">{{ $post->likes->count() }}</span> Likes
-                @endif
-
+            <div class="col-auto ms-1 me-3">
+                <span class="fw-bold float-start">{{ $post->likes->count() }}</span>
             </div>
         </div>
     </li>

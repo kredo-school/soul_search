@@ -2,7 +2,7 @@
 
 <div class="row mt-2 p-0">
     <div class="col ms-0 p-0">
-        <div class="message-container p-0 mb-5">
+        <div class="message-container p-0 mb-5" id="scrollerInner">
             @foreach ($pivot_messages as $pivot_message)
                 @php
                     $user_message = $pivot_message->pivot;
@@ -142,8 +142,8 @@
     </form>
 </div>
 
-{{-- javascript for image preview --}}
 <script>
+    // image preview
     function main () {
         const input = document.querySelector('#image')
         const figure = document.querySelector('#figure')
@@ -161,4 +161,7 @@
         })
     }
     main()
+
+    // scroll to the bottom (to show the latest message)
+    document.getElementById("scrollerInner").scrollIntoView({block: "end", inline: "nearest"})
 </script>

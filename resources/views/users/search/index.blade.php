@@ -9,7 +9,7 @@
 @section('content')
 <div class="search-container mx-auto mt-0">
 
-    <div class="search-header pt-3 pb-1">
+    <div class="search-header pt-3 pb-1 px-4">
         <h2 class="float-start"><i class="fa-solid fa-magnifying-glass me-3"></i>Search</h2>
 
         <button class="btn btn-outline-secondary float-end ms-1 mb-1" id="dropdownMenuButtonSearch" data-bs-toggle="dropdown"><span id="resultDisp"><i class="fa-solid fa-magnifying-glass"></i> Users and Tags</span></button>
@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-auto">
                                     @if ($user->avatar)
-                                        <img src="{{ $user->avatar }}" class="avatar-srch rounded-circle" alt="">
+                                        <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar-srch rounded-circle" alt="">
                                     @else
                                         <i class="fa-solid fa-circle-user text-secondary icon-srch"></i>
                                     @endif

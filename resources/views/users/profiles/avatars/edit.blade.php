@@ -29,7 +29,7 @@
                 <div class="mb-3">
                     <input type="file" class="form-control" id="avatar" name="avatar" aria-describedby="image-info" accept="image/*" required>
                     <div class="text-muted text-sm">Acceptable formats: jpeg, jpg, png, gif</div>
-                    <div class="text-muted text-sm">Max file size is 10MB</div>
+                    <div class="text-muted text-sm">Max file size is 2MB</div>
                     @error('avatar')
                         <p class="text-danger small">{{ $message }}</p>
                     @enderror

@@ -19,7 +19,7 @@
                     <div class="dropdown">
                         <button class="btn shadow-none" type="button">
                             @if ($user->avatar)
-                                <img src="{{ $user->avatar }}" class="avatar-lg rounded-circle" alt="">
+                                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar-lg rounded-circle" alt="">
                             @else
                                 <i class="fa-solid fa-circle-user text-secondary icon-lg"></i>
                             @endif

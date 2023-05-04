@@ -15,8 +15,8 @@ class ChatController extends Controller
 
     public function store(Tag $tag, Request $request){
         $request->validate([
-            'chat' =>'required|min:1|max:255',
-            'image' => 'mimes:jpg,jpeg,png,gif|max:10240'
+            'chat' =>'required|max:255',
+            'image' => 'mimes:jpg,jpeg,png,gif|max:2048'
         ]);
 
         #Check if the chat has an image

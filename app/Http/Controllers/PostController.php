@@ -22,7 +22,7 @@ class PostController extends Controller
     {
         $request->validate([
             'text'  => 'required|max:10240',
-            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10240',
+            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
         // create data in posts table

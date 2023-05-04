@@ -40,18 +40,16 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-
 Route::get('/register',[RegisterController::class, 'index'])->name('register');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-
-    #CHAT
+    #Chat(Home)
+    Route::get('/home', [ChatController::class, 'index'])->name('home');
+    Route::get('/', [ChatController::class, 'index'])->name('index');
     Route::get('/chats/{tag}/show', [ChatController::class, 'show'])->name('chats.show');
     Route::post('chats/{tag}/store', [ChatController::class, 'store'])->name('chats.store');
 
-    #LIKE
+    #Like(Chat Like)
     Route::get('/like/{chat}/store', [LikeController::class, 'store'])->name('chat.like.store');
     Route::post('/like/{chat}/store', [LikeController::class, 'store'])->name('chat.like.store');
     Route::delete('/like/{chat}/destroy', [LikeController::class, 'destroy'])->name('chat.like.destroy');
@@ -95,10 +93,11 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
-    #USERS
+    #Admin Users
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::delete('/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('users.deactivate');
     Route::patch('/users/{id}/activate', [UsersController::class, 'activate'])->name('users.activate');
+    #Admin Posts
     Route::get('/posts', [PostsController::class, 'index'])->name('posts');
     Route::delete('/posts/{post}/hide', [PostsController::class, 'hide'])->name('posts.hide');
     Route::patch('/posts/{id}/unhide', [PostsController::class, 'unhide'])->name('posts.unhide');

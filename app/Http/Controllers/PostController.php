@@ -68,7 +68,6 @@ class PostController extends Controller
     private function saveImage($request){
         $image_name = time() . "." . $request->image->extension();
         Storage::disk('public')->putFileAs(self::LOCAL_STORAGE_FOLDER, $request->image, $image_name);
-
         return $image_name;
     }
 

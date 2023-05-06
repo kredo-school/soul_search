@@ -105,14 +105,23 @@
     </div>
 </div>
 
-{{-- javascript to set 'send message bar' width --}}
 <script>
+    // scroll to the bottom (to show the latest message)
+    function scrollToBottom() {
+        document.getElementById("scrollerInner").scrollIntoView({block: "end", inline: "nearest"})
+    }
+    scrollToBottom();
+
+    // set message form width, also affects in 'users.messages.contents.body'
     let client_w = document.getElementById('message-box').clientWidth + 'px';
     window.document.getElementById('footer').style.width=client_w;
     window.addEventListener('resize', function(){
         client_w = document.getElementById('message-box').clientWidth + 'px';
         window.document.getElementById('footer').style.width = client_w;
+
+        scrollToBottom(); // scroll to the bottom
     })
+
 </script>
 
 @endsection

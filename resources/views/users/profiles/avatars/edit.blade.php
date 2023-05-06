@@ -8,9 +8,9 @@
 
 @section('content')
 
-<div class="container">
-    <div class="row mt-3">
-        <div class="col">
+<div class="profile-container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col mt-3">
             {{-- avatar --}}
             @if ($user->avatar)
                 <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar-ex-lg rounded-circle" alt="">
@@ -29,14 +29,14 @@
                 <div class="mb-3">
                     <input type="file" class="form-control" id="avatar" name="avatar" aria-describedby="image-info" accept="image/*" required>
                     <div class="text-muted text-sm">Acceptable formats: jpeg, jpg, png, gif</div>
-                    <div class="text-muted text-sm">Max file size is 2MB</div>
+                    <div class="text-muted text-sm">Max file size is 10MB</div>
                     @error('avatar')
                         <p class="text-danger small">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-sm btn-warning px-3">Update Image</button>
-                <a type="button" href="{{ route('profiles.edit', $user->id) }}" class="btn btn-sm btn-secondary px-3">Cancel</a>
+                <button type="submit" class="btn btn-orange px-3">Update Image</button>
+                <a type="button" href="{{ route('profiles.edit', $user->id) }}" class="btn btn-secondary px-3 ms-2">Cancel</a>
 
             </form>
 

@@ -76,14 +76,14 @@
     @if ( request()->is('*contact*'))
         <li class="nav-item py-2 sidebar-selected fw-bold">
             <a href="{{ route('contact.index') }}" class="text-dark flex-fill nav-link link-dark">
-                <i class="fa-solid fa-circle-question text-orange"></i>
+                <i class="fa-solid fa-envelope text-orange"></i>
                 <span class="ms-2 d-none d-lg-inline">Contact Us</span>
             </a>
         </li>
     @else
         <li class="nav-item py-2">
             <a href="{{ route('contact.index') }}" class="text-muted flex-fill nav-link link-dark" title="Contact Us">
-                <i class="fa-solid fa-circle-question"></i>
+                <i class="fa-solid fa-envelope"></i>
                 <span class="ms-2 d-none d-lg-inline">Contact Us</span>
             </a>
         </li>

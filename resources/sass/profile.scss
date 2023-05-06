@@ -41,7 +41,17 @@
 	}
 }
 
-.col-3{
+.col {
+    margin: 0;
+    padding: 0;
+}
+
+.col-3 {
     margin: 10;
+    padding: 0;
+}
+
+.col-10 {
+    margin: 0;
     padding: 0;
 }

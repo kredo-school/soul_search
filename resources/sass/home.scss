@@ -1,15 +1,15 @@
-.fa-hashtag {
+.hashtag-icon {
     color: #6A9DFF;
 }
 
-.tag-header {
-    opacity: .8;
-    color: #505050;
+.home-text {
+    word-break: break-word;
 }
 
 .tag-bar {
     overflow-x: hidden;
     overflow-y: scroll;
+    max-width: 220px;
     height: 100vh;
     -ms-overflow-style: none; /* IE, Edge */
     scrollbar-width: none;    /* Firefox */
@@ -23,10 +23,18 @@
     color: #505050;
 }
 
-.tag-selected {
+.tag-date {
+    word-break: break-word;
+}
+
+.tag-item {
     &:hover {
     background-color: #F4F7FC;
     }
+}
+
+.tag-selected {
+    background-color: #F4F7FC;
 }
 
 .logo-center {
@@ -37,35 +45,18 @@
     resize: none;
 }
 
-/* hide when the display width is <= 700px */
-@media screen and (max-width: 700px) {
-	.hide-700 {
-		display: none;
-	}
-}
-
-/* show when the display width is <= 700px */
-.show-700 {
-    display: none;
-}
-@media screen and (max-width: 700px) {
-	.show-700 {
-		display: block;
-	}
-}
-
-.text-orange {
-    color: #FFB84D;
-}
-
 .chat-view {
-    height: 96%;
+    height: 100vh;
+}
+
+.chat-header {
+    height: 48px;
+    word-break: break-all;
 }
 
 .chat-body {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 88%;
     background-color: #f4f7fc;
     -ms-overflow-style: none; /* IE, Edge */
     scrollbar-width: none;    /* Firefox */
@@ -83,11 +74,17 @@
     width: 4em;
     height: 4em;
     object-fit: cover;
-    position: absolute;
+}
+
+.user-avatar-sm {
+    width: 3em;
+    height: 3em;
+    object-fit: cover;
 }
 
 .chat-text {
     color: #505050;
+    word-break: break-word;
 }
 
 /* Hide input:file for image */
@@ -97,34 +94,33 @@
 
 .chat-image {
     width: 30%;
-    height: 20%;
+    height: auto;
     border-radius: 10px;
 }
 
-.d-flex {
-    height: 100vh;
-}
-
 .chat-element {
-    position: relative;
-
     &:hover {
         background-color: #eef3fc;
     }
 }
 
-.chat-content {
-    margin-left: 3.5rem;
-}
-
-.chat-likes {
-    width: 3.5em;
-}
-
-.likes-count {
-    width: 1em;
-}
-
 .chat-form {
     background-color: white;
+    height: 55px;
+}
+
+/* image preview position */
+.image-preview {
+    position: fixed;
+    right: 10px;
+    bottom: 40px;
+}
+
+.row, .col, .col-2, .col-auto {
+    margin: 0;
+    padding: 0;
+}
+
+.right {
+    right: 0;
 }

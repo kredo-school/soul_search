@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/uploads
 /public/css
 /public/js
 /public/mix-manifest.json
@@ -16,4 +17,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/uploads

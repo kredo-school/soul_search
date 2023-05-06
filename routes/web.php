@@ -1,20 +1,21 @@
 <?php
 
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ChatController;
-use App\Http\Controllers\TagController;
-use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\PostLikeController;
-use App\Http\Controllers\CommentLikeController;
+
 use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\Admin\UsersController;
@@ -48,6 +49,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [ChatController::class, 'index'])->name('index');
     Route::get('/chats/{tag}/show', [ChatController::class, 'show'])->name('chats.show');
     Route::post('chats/{tag}/store', [ChatController::class, 'store'])->name('chats.store');
+    Route::delete('chats/{chat}/destroy', [ChatController::class, 'destroy'])->name('chats.destroy');
 
     #Like(Chat Like)
     Route::get('/like/{chat}/store', [LikeController::class, 'store'])->name('chat.like.store');
@@ -90,15 +92,17 @@ Route::group(['middleware' => 'auth'], function(){
 
     #Report
     Route::resource('/reports', ReportController::class, ['only' => ['store']]);
-});
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
-    #Admin Users
-    Route::get('/users', [UsersController::class, 'index'])->name('users');
-    Route::delete('/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('users.deactivate');
-    Route::patch('/users/{id}/activate', [UsersController::class, 'activate'])->name('users.activate');
-    #Admin Posts
-    Route::get('/posts', [PostsController::class, 'index'])->name('posts');
-    Route::delete('/posts/{post}/hide', [PostsController::class, 'hide'])->name('posts.hide');
-    Route::patch('/posts/{id}/unhide', [PostsController::class, 'unhide'])->name('posts.unhide');
+    #Admin
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
+        #Admin Users
+        Route::get('/users', [UsersController::class, 'index'])->name('users');
+        Route::delete('/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('users.deactivate');
+        Route::patch('/users/{id}/activate', [UsersController::class, 'activate'])->name('users.activate');
+        #Admin Posts
+        Route::get('/posts', [PostsController::class, 'index'])->name('posts');
+        Route::delete('/posts/{post}/hide', [PostsController::class, 'hide'])->name('posts.hide');
+        Route::patch('/posts/{id}/unhide', [PostsController::class, 'unhide'])->name('posts.unhide');
+    });
+
 });

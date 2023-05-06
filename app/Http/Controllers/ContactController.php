@@ -15,11 +15,14 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
+        $text = $request->message;
         Contact::create([
-            'message' => $request->message,
+            'message' => $text,
             'user_id' => Auth::id(),
         ]);
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('flash_message', 'Thank you for the message!')
+            ->with('text', $text);
     }
 }

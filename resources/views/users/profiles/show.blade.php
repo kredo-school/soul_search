@@ -62,7 +62,7 @@
                                 </ul>
                                 @include('users.profiles.modal.report')
                                 {{-- send message --}}
-                                <a href="{{ route('messages.show', ['user' => $user->id]) }}" class="btn btn-orange btn-sm float-end ms-2 mt-2">
+                                <a href="{{ route('messages.show', ['user' => $user->id]) }}" class="btn btn-orange float-end ms-2 mt-2">
                                     send message
                                 </a>
                                 {{-- if followed --}}
@@ -70,7 +70,7 @@
                                     <form action="{{ route('follows.destroy', ['user' => $user->id, 'follow' => $user->follows()->where('following_id', Auth::id())->first()->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm float-end mt-2" type="submit">
+                                        <button class="btn btn-danger float-end mt-2" type="submit">
                                         <span class="px-2">unfollow</span>
                                         </button>
                                     </form>
@@ -78,7 +78,7 @@
                                 @else
                                     <form action="{{ route('follows.store', ['user' => $user->id]) }}" method="post">
                                         @csrf
-                                        <button class="btn btn-secondary btn-sm float-end mt-2" type="submit">
+                                        <button class="btn btn-secondary float-end mt-2" type="submit">
                                         <span class="px-2">follow</span>
                                         </button>
                                     </form>
@@ -103,17 +103,19 @@
                     </div>
 
                     {{-- favorite tags --}}
-                    <div>
-                        favorite tags:
-                    </div>
-                    <div>
-                        @foreach($fav_tags as $fav_tag)
-                            <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="text-decoration-none">
-                                #{{ $fav_tag->tag->name }}
-                            </a>
-                            &nbsp;
-                        @endforeach
-                    </div>
+                    @if($fav_tags->count() != 0)
+                        <div>
+                            favorite tags:
+                        </div>
+                        <div>
+                            @foreach($fav_tags as $fav_tag)
+                                <a href="{{ route('chats.show', $fav_tag->tag->id) }}" class="text-decoration-none">
+                                    #{{ $fav_tag->tag->name }}
+                                </a>
+                                &nbsp;
+                            @endforeach
+                        </div>
+                    @endif
 
                     {{-- introduction --}}
                     <div class="my-3">
@@ -151,17 +153,17 @@
     </div>
 </div>
 
-{{-- javascript to set 'send message bar' width --}}
+{{-- change post image width --}}
 <script>
     let profile_w = document.getElementById('profile-box').clientWidth;
-    if(profile_w < 816){
+    if(profile_w < 991){
         @for ($i=0; $i<$count; $i++)
             window.document.getElementById('post-img{{$i}}').style.height = profile_w / 4 + 'px';
         @endfor
     }
     window.addEventListener('resize', function(){
         profile_w = document.getElementById('profile-box').clientWidth;
-        if(profile_w < 816){
+        if(profile_w < 991){
             @for ($i=0; $i<$count; $i++)
                 window.document.getElementById('post-img{{$i}}').style.height = profile_w / 4 + 'px';
             @endfor

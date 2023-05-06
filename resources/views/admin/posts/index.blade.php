@@ -3,103 +3,97 @@
 @section('title', 'Admin: Posts')
 
 @section('styles')
-<link href="{{ mix('css/admin_posts.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/admin.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-<div class="ss-container p-0">
-    <div class="row" style="height: 100%">
-        <div class="col-2 p-0 bg-white">
+<div class="ss-container">
+    <div class="row">
         {{-- side bar --}}
-            <div class="ss-sidebar">
-                @include('admin.admin_posts_side')
+        <div class="ss-sidebar">
+            <div class="sidebar-fix m-0 p-0">
+                @include('admin.admin_side')
             </div>
         </div>
-        <div class="col-9 p-0" style="height: 100%">
-            <div class="ss-main" style="height: 100%">
-                <div class="container-fluid p-0 display-user" style="height: 100%">
-                    <div class="row ps-5 mt-5">
-                        @auth
-                        <h1 class="mb-3 p-0 mt-5 text-heigt d-flex align-items-end">Posts</h1>
 
-                            <form action="{{ route('admin.posts') }}">
-                            </form>
+        <div class="col p-0">
+            <div class="ss-main">
+                <div class="mx-4 admin-container">
+                    <h2 class="mb-3 p-0 mt-4">Posts</h2>
 
-                        @endauth
-                        <table class="table table-hover bg-white border cell-padding text-heigt">
-                            <thead class="small bg-orange">
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th class="ps-5">Tag / Text</th>
-                                    <th class="cell-padding-sm">Username</th>
-                                    <th class="cell-padding-sm pe-5">Created at</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($all_posts as $post)
-                                <tr>
-                                    <td>
-                                        {{ $post->id }}
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('posts.show', $post->id) }}">
-                                            <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->image }}" class="d-block mx-auto avatar-md">
-                                        </a>
-                                    </td>
-                                    <td class="ps-5">
-                                        <span class="hash-link">{{ $post->text }}</span>
-                                    </td>
-                                    <td class="cell-padding-sm">
-                                        {{ $post->user->username }}
-                                    </td>
-                                    <td class="cell-padding-sm pe-5">
-                                        {{ $post->created_at }}
-                                    </td>
-                                    <td>
+                    <table class="table table-hover bg-white border">
+                        <thead class="small bg-orange">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Tag / Text</th>
+                                <th>Username</th>
+                                <th>Created at</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($all_posts as $post)
+                            <tr>
+                                <td>
+                                    {{ $post->id }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('posts.show', $post->id) }}">
+                                        <img src="/uploads/posts/{{ $post->image }}" alt="{{ $post->image }}" class="d-block mx-auto avatar-md">
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="hash-link">{{ $post->text }}</span>
+                                </td>
+                                <td>
+                                    {{ $post->user->username }}
+                                </td>
+                                <td>
+                                    {{ $post->created_at }}
+                                </td>
+                                <td>
+                                    @if ($post->trashed())
+                                    <i class="fa-solid fa-circle-minus text-secondary"></i>&nbsp; Hidden
+                                    @else
+                                    <i class="fa-solid fa-circle text-primary"></i>&nbsp; Visible
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm" data-bs-toggle="dropdown">
+                                            <i class="fa-solid fa-ellipsis"></i>
+                                        </button>
                                         @if ($post->trashed())
-                                        <i class="fa-solid fa-circle-minus text-secondary"></i>&nbsp; Hidden
-                                        @else
-                                        <i class="fa-solid fa-circle text-primary"></i>&nbsp; Visible
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm" data-bs-toggle="dropdown">
-                                                <i class="fa-solid fa-ellipsis"></i>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#unhide-post-{{ $post->id }}">
+                                                <i class="fa-solid fa-eye"></i> Unhide Post {{ $post->id }}
                                             </button>
-                                            @if ($post->trashed())
-                                            <div class="dropdown-menu">
-                                                <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#unhide-post-{{ $post->id }}">
-                                                    <i class="fa-solid fa-eye"></i> Unhide Post {{ $post->id }}
-                                                </button>
-                                            </div>
-                                            @else
-                                            <div class="dropdown-menu">
-                                                <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#hide-post-{{ $post->id }}">
-                                                    <i class="fa-solid fa-eye-slash"></i> Hide Post {{ $post->id }}
-                                                </button>
-                                            </div>
-                                            @endif
                                         </div>
-                                    </td>
-                                </tr>
-                                @include('admin.posts.modal.status')
+                                        @else
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#hide-post-{{ $post->id }}">
+                                                <i class="fa-solid fa-eye-slash"></i> Hide Post {{ $post->id }}
+                                            </button>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                            @include('admin.posts.modal.status')
 
-                                {{--  No Posts  --}}
-                                @empty
-                                <tr>
-                                <td colspan="7" class="lead text-muted text-center">No posts found.</td>
-                                </tr>
+                            {{--  No Posts  --}}
+                            @empty
+                            <tr>
+                            <td colspan="7" class="lead text-muted text-center">No posts found.</td>
+                            </tr>
 
-                                @endforelse
-                            </tbody>
-                        </table>
-                        <div class="p-0">
-                            {{ $all_posts->appends(request()->query())->links() }}
-                        </div>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="p-0">
+                        {{ $all_posts->appends(request()->query())->links() }}
                     </div>
                 </div>
             </div>

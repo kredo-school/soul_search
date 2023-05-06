@@ -1,0 +1,20 @@
+.avatar-md{
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit:cover;
+}
+
+.icon-md{
+    font-size:3.5rem;
+}
+
+.admin-container {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100vh;
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+.admin-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}

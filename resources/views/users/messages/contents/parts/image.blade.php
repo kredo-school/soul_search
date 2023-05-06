@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col pt-0 ps-2">
         <a class="shadow-none text-decoration-none float-{{$position}}" type="button" id="dropdownMenuButtonMsg{{$id}}{{$modal}}" data-bs-toggle="dropdown">
-            <img src="/uploads/messages/{{ $image }}" class="image-msg mb-2" alt="">
+            <img src="/uploads/messages/{{ $image }}" class="image-msg mb-2 me-2" alt="">
         </a>
         <span class="text-vsm text-muted float-{{$position}} {{$margin}}">{{$user_message->created_at->diffForHumans()}}</span>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMsg{{$id}}{{$modal}}">

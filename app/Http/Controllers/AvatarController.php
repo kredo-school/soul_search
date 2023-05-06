@@ -21,7 +21,7 @@ class AvatarController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'avatar' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048',
+            'avatar' => 'required|file|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         $user = User::find(Auth::id());

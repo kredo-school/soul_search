@@ -98,6 +98,11 @@
     border-radius: 10px;
 }
 
+.chat-modal-image {
+    max-width: 90vw;
+    object-fit: cover;
+}
+
 .chat-element {
     &:hover {
         background-color: #eef3fc;
@@ -123,4 +128,8 @@
 
 .right {
     right: 0;
+}
+
+.modal-bg {
+    background-color: #202020;
 }

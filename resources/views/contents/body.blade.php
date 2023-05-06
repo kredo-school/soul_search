@@ -105,7 +105,9 @@
             <!-- chat -->
             @if ($chat->image)
                 <p class="chat-text ms-0 w-75 pt-1 ms-3 mb-2" style="white-space:pre-wrap;">{{ $chat->chat }}</p>
-                <img src="/uploads/chats/{{ $chat->image }}" alt="{{ $chat->image }}" class="chat-image mb-4">
+                <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#chatImageModal{{$chat->id}}">
+                    <img src="/uploads/chats/{{ $chat->image }}" alt="{{ $chat->image }}" class="chat-image mb-4">
+                </a>
             @else
                 <p class="chat-text ms-0 w-75 py-1 ms-3" style="white-space:pre-wrap;">{{ $chat->chat }}</p>
             @endif
@@ -113,4 +115,5 @@
     </div>
     @include('contents.modals.delete')
     @include('contents.modals.report')
+    @include('contents.modals.image')
 @endforeach

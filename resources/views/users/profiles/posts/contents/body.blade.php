@@ -86,6 +86,7 @@
 
 <hr>
 
+{{-- create links to chat pages from hashtags --}}
 <script>
     let string = "{{$post->text}}";
     let pattern = /#(\w+)/g; // tags

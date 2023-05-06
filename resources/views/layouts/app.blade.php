@@ -32,30 +32,25 @@
 <body>
 
     {{-- not showing in login, register, or post pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*reset*') || request()->is('*password*') ||  request()->is('*post*') ||  request()->is('*admin*'))
-
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*reset*') || request()->is('*email*') ||  request()->is('*post*') ||  request()->is('*admin*'))
     @else
     <div class="ss-container">
-        <div class="row ss-row">
+        <div class="row">
             {{-- side bar --}}
             <div class="ss-sidebar p-0 m-0">
                 <div class="sidebar-fix m-0 p-0">
                     @include('layouts.side')
                 </div>
             </div>
-            <div class="col p-0" style="height: 100%">
+            <div class="col p-0">
                 <div class="ss-main">
     @endif
 
                     {{-- content --}}
-                        <div class="container-fluid p-0" style="height: 100%">
-                            <div class="row" style="height: 100%">
-                                @yield('content')
-                            </div>
-                        </div>
+                    @yield('content')
 
     {{-- not showing in login, register, or post pages --}}
-    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*reset*') ||  request()->is('*post*'))
+    @if ( request()->is('*login*') || request()->is('*register*') || request()->is('*verify*') || request()->is('*reset*') || request()->is('*email*') ||  request()->is('*post*') ||  request()->is('*admin*'))
     @else
                 </div>
             </div>

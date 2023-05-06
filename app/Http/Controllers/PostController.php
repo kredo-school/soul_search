@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\PostTag;
+use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,7 @@ class PostController extends Controller
     {
         $request->validate([
             'text'  => 'required|max:10240',
-            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048',
+            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         // create data in posts table
@@ -37,7 +38,7 @@ class PostController extends Controller
         $new_tag_id    = $latest_tag_id + 1;
         preg_match_all("/#(\\w+)/", $request->text, $hashtags);
         foreach($hashtags[1] as $tag_name){
-            $new_tag_id = $this->storePostTag(Post::latest()->first()->id, $tag_name, $new_tag_id);
+            $new_tag_id = $this->storeTag(Post::latest()->first()->id, $tag_name, $new_tag_id);
         }
 
         return redirect()->route('profiles.index');
@@ -49,26 +50,38 @@ class PostController extends Controller
         return $image_name;
     }
 
-    private function storePostTag($id, $tag_name, $new_tag_id){
+    private function storeTag($post_id, $tag_name, $new_tag_id){
         $db_tags = Tag::get();
         //check if tag is new
         $is_new = true;
         foreach($db_tags as $db_tag){
             if($db_tag->name == $tag_name){
                 $is_new = false;
+                // create only PostTag and UserTag
                 PostTag::create([
-                    'post_id' => $id,
+                    'post_id' => $post_id,
                     'tag_id'  => $db_tag->id,
+                ]);
+                UserTag::create([
+                    'user_id'      => Auth::id(),
+                    'tag_id'       => $db_tag->id,
+                    'tag_category' => 'favorite',
                 ]);
             }
         }
         if($is_new){
+            // Create Tag, PostTag, and UserTag
             Tag::create([
                 'name' => $tag_name,
             ]);
             PostTag::create([
-                'post_id' => $id,
+                'post_id' => $post_id,
                 'tag_id'  => $new_tag_id,
+            ]);
+            UserTag::create([
+                'user_id'      => Auth::id(),
+                'tag_id'       => $new_tag_id,
+                'tag_category' => 'favorite',
             ]);
             $new_tag_id++;
         }
@@ -134,7 +147,7 @@ class PostController extends Controller
             if(Tag::where('id', $request->old_tag_ids[$i])->first()->name !== $hashtags[1][$i]){
                 // delete old and store new
                 $this->deletePostTag($request, $i, $post_id);
-                $new_tag_id = $this->storePostTag($post_id, $hashtags[1][$i], $new_tag_id);
+                $new_tag_id = $this->storeTag($post_id, $hashtags[1][$i], $new_tag_id);
             }
             $count++;
         }
@@ -149,7 +162,7 @@ class PostController extends Controller
         // when more new tags
         if($number_of_old_tags < $number_of_new_tags){
             for($i = $count; $i < $number_of_new_tags; $i++){
-                $new_tag_id = $this->storePostTag($post_id, $hashtags[1][$i], $new_tag_id);
+                $new_tag_id = $this->storeTag($post_id, $hashtags[1][$i], $new_tag_id);
             }
         }
 

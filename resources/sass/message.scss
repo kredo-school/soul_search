@@ -40,7 +40,7 @@
 }
 
 .image-msg{
-    height: 100px;
+    height: 180px;
 }
 
 .message-header {
@@ -55,13 +55,14 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    height: 50px;
+    height: 55px;
 }
 
 .message-text {
     border-radius: 1rem;
     max-width: 500px;
     text-align: left;
+    word-break: break-all;
 }
 
 .msg-modal-image {
@@ -101,7 +102,7 @@
 /* width of message list*/
 @media screen and (min-width: 992px) {
     .message-list, .message-list-fix {
-        width: 265px;
+        width: 250px;
         .message-selected {
             background-color: #F4F7FC;
         }
@@ -117,7 +118,6 @@
 }
 
 .message-list-fix {
-    position: fixed;
     overflow-x: hidden;
     overflow-y: scroll;
     height: 100vh;
@@ -134,4 +134,10 @@
     position: fixed;
     right: 10px;
     bottom: 40px;
+}
+
+.message-error {
+    position: fixed;
+    right: 10px;
+    bottom: 1px;
 }

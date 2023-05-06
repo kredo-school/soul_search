@@ -100,18 +100,6 @@
 
             @endforeach
 
-            {{-- Larvel error messages from "send message" below --}}
-            @error('text')
-                <div class="text-danger small position-absolute bottom-0 end-0">
-                    <span class="me-4 pb-3">{{ $message }}</span>
-                </div>
-            @enderror
-            @error('image')
-                <div class="text-danger small position-absolute bottom-0 end-0">
-                    <span class="me-4 pb-3">{{ $message }}</span>
-                </div>
-            @enderror
-
             {{-- image preview from "send message" below --}}
             <figure id="figure" style="display: none" class="image-preview">
                 <figcaption>Image Preview</figcaption>
@@ -124,7 +112,7 @@
 
 
 {{-- send message --}}
-<div class="bg-white p-2 mb-0 message-footer" id="footer">
+<div class="bg-white px-2 pt-2 mb-0 message-footer" id="footer">
     <form action="{{ route('messages.store', ['user' => $user]) }}" method="post" class="ms-0 ps-0" enctype="multipart/form-data" runat="server">
         @csrf
         <div class="row gx-2">
@@ -140,6 +128,17 @@
             </div>
         </div>
     </form>
+    {{-- Larvel error messages --}}
+    @error('text')
+        <div class="text-danger small message-error">
+            <span class="me-4 pb-3">{{ $message }}</span>
+        </div>
+    @enderror
+    @error('image')
+        <div class="text-danger small message-error">
+            <span class="me-4 pb-3">{{ $message }}</span>
+        </div>
+    @enderror
 </div>
 
 <script>
@@ -161,7 +160,4 @@
         })
     }
     main()
-
-    // scroll to the bottom (to show the latest message)
-    document.getElementById("scrollerInner").scrollIntoView({block: "end", inline: "nearest"})
 </script>

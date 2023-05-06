@@ -15,10 +15,8 @@
                 {{ $user->username }}
             </div>
             <div>
-                @if ($user->is_active)
-                    online
-                @else
-                    offline
+                @if ($user->is_active == 1)
+                    the account is deleted
                 @endif
             </div>
 

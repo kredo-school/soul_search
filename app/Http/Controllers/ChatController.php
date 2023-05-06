@@ -29,7 +29,7 @@ class ChatController extends Controller
     public function store(Tag $tag, Request $request){
         $request->validate([
             'chat' =>'required|max:255',
-            'image' => 'mimes:jpg,jpeg,png,gif|max:2048'
+            'image' => 'mimes:jpg,jpeg,png,gif|max:10240'
         ]);
 
         #Check if the chat has an image
@@ -94,7 +94,9 @@ class ChatController extends Controller
     }
 
     public function destroy(Chat $chat){
-        $this->deleteImage($chat->image);
+        if($chat->image){
+            $this->deleteImage($chat->image);
+        }
         $chat->delete();
         return redirect()->back();
     }

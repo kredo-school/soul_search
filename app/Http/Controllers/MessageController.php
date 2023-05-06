@@ -22,7 +22,7 @@ class MessageController extends Controller
     {
         $request->validate([
             'text'  => 'required_if:image,=,null|nullable|string',
-            'image' => 'file|mimes:jpg,jpeg,png,gif|max:2048'
+            'image' => 'file|mimes:jpg,jpeg,png,gif|max:10240'
         ]);
 
         $text = $request->text;

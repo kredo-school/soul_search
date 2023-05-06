@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
 <div class="profile-container mx-auto">
     <div class="row justify-content-center">
         <div class="col-md">
@@ -28,7 +29,7 @@
                             @endif
                         </button>
                     </div>
-                    <div class="col">
+                    <div class="col me-2">
                         <label for="username" class="form-label">Username</label>
                         <input tyoe="text" name="username" class="form-control" id="username" value="{{ old('username', $user->username) }}" disabled>
                     </div>
@@ -54,7 +55,7 @@
                 <div class="mb-2 row">
                     <div class="col">
                         @foreach ($main_tags as $main_tag)
-                            <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $main_tag->tag->name }}</span>
+                            <span class="btn btn-secondary float-start me-1 mb-1">#{{ $main_tag->tag->name }}</span>
                         @endforeach
                     </div>
                 </div>
@@ -77,30 +78,30 @@
                         {{-- show 10 tags at most, push button to show more --}}
                         @if($fav_count <= 10)
                             @foreach ($fav_tags as $fav_tag)
-                                <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tag->tag->name }}</span>
+                                <span class="btn btn-secondary float-start me-1 mb-1">#{{ $fav_tag->tag->name }}</span>
                             @endforeach
                         @else
                             @for ($i=0; $i<10; $i++)
-                                <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                                <span class="btn btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
                             @endfor
-                            <span class="btn btn-sm btn-outline-secondary float-start mb-1" id="favshow" onclick="showFav()">show more</span>
+                            <span class="btn btn-outline-secondary float-start mb-1" id="favshow" onclick="showFav()">show more</span>
                             {{-- show after pushing button if more than 10 tags--}}
                             <span id="favtags">
                                 @if ($fav_count <=25)
                                     @for ($i=10; $i<$fav_count; $i++)
-                                        <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                                        <span class="btn btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
                                     @endfor
-                                    <span class="btn btn-sm btn-outline-secondary float-start mb-1" onclick="hideFav()">hide</span>
+                                    <span class="btn btn-outline-secondary float-start mb-1" onclick="hideFav()">hide</span>
                                 @else
                                     @for ($i=10; $i<25; $i++)
-                                        <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                                        <span class="btn btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
                                     @endfor
-                                    <span class="btn btn-sm btn-outline-secondary float-start mb-1" id="favshow2" onclick="showFav2()">show more</span>
+                                    <span class="btn btn-outline-secondary float-start mb-1" id="favshow2" onclick="showFav2()">show more</span>
                                     <span id="favtags2">
                                         @for ($i=25; $i<$fav_count; $i++)
-                                            <span class="btn btn-sm btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
+                                            <span class="btn btn-secondary float-start me-1 mb-1">#{{ $fav_tags[$i]->tag->name }}</span>
                                         @endfor
-                                        <span class="btn btn-sm btn-outline-secondary float-start mb-1" onclick="hideFav2()">hide</span>
+                                        <span class="btn btn-outline-secondary float-start mb-1" onclick="hideFav2()">hide</span>
                                     </span>
                                 @endif
                             </span>
@@ -133,10 +134,10 @@
                         @endphp
                         @endif
                     </div>
-                    <div class="col">
+                    <div class="col ms-2">
                         <input type="password" name="new_password" class="form-control" required autofocus>
                     </div>
-                    <div class="col">
+                    <div class="col ms-2">
                         <input type="password" name="new_password_confirmation" class="form-control" required>
                     </div>
                 </div>

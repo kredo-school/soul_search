@@ -44,16 +44,18 @@
                     <div class="row gx-2">
                         <div class="col">
                             <textarea name="chat" id="chat" rows="1" class="form-control form-control-sm col-sm auto-adjust" placeholder="Type your message #{{ $tag->name }}"></textarea>
-                            @error('chat')
-                                <span class="text-danger small">{{ $message }}</span>
-                            @enderror
-                            @error('image')
-                                <span class="text-danger small">{{ $message }}</span>
-                            @enderror
+                            <span class="chat-error">
+                                @error('chat')
+                                    <span class="text-danger small">{{ $message }}</span>
+                                @enderror
+                                @error('image')
+                                    <span class="text-danger small">{{ $message }}</span>
+                                @enderror
+                            </span>
                         </div>
                         <div class="col-auto">
                             <label for="image" title="add image" class="form-label col-sm-1"><i class="fa-solid fa-circle-plus fa-2x text-secondary mx-1"></i></label>
-                            <input type="file" name="image" id="image" class="form-image">
+                            <input type="file" name="image" id="image" accept="image/*" class="form-image">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-orange btn-sm btn-send me-2">Send</button>
